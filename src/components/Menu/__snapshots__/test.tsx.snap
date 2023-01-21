@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Menu /> should match a snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #0A1128;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: all 350ms ease-in;
+  transition: all 350ms ease-in;
+}
+
+.c1:hover {
+  color: #dc143c;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.c0 > ul {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.c0 ul > li {
+  list-style: none;
+  -webkit-animation: navbarLinkLoad;
+  animation: navbarLinkLoad;
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
+  -webkit-animation-delay: 450ms;
+  animation-delay: 450ms;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.c0 ul > li:first-child {
+  -webkit-animation-name: navbarLinkLoad_first;
+  animation-name: navbarLinkLoad_first;
+  -webkit-transform: translateX(-1000%);
+  -ms-transform: translateX(-1000%);
+  transform: translateX(-1000%);
+}
+
+.c0 ul > li:last-child {
+  -webkit-animation-name: navbarLinkLoad_last;
+  animation-name: navbarLinkLoad_last;
+  -webkit-transform: translateX(1000%);
+  -ms-transform: translateX(1000%);
+  transform: translateX(1000%);
+}
+
+<div>
+  <nav
+    class="c0"
+  >
+    <ul>
+      <li>
+        <a
+          class="c1"
+          href="/"
+          rel="external"
+          target="_self"
+        >
+          home
+        </a>
+      </li>
+      <li>
+        <a
+          class="c1"
+          href="/sobre"
+          rel="external"
+          target="_self"
+        >
+          sobre
+        </a>
+      </li>
+      <li>
+        <a
+          class="c1"
+          href="/habilidades"
+          rel="external"
+          target="_self"
+        >
+          habilidades
+        </a>
+      </li>
+      <li>
+        <a
+          class="c1"
+          href="/projetos"
+          rel="external"
+          target="_self"
+        >
+          projetos
+        </a>
+      </li>
+      <li>
+        <a
+          class="c1"
+          href="/curriculo"
+          rel="external"
+          target="_self"
+        >
+          curriculo
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
