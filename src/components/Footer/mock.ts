@@ -1,4 +1,4 @@
-import { SocialMediaProps } from ".";
+import { FooterProps } from ".";
 
 export default {
 	instaURL: "https://www.instagram.com/tício/",
@@ -9,4 +9,6 @@ export default {
 	tiktokURL: "https://www.tiktok.com/@tício",
 	youtubeURL: "https://www.youtube.com/@tício",
 	homepageURL: "https://www.ticio.blog.com/",
-} as SocialMediaProps;
+	ownerName: "Tício",
+	year: "2023",
+} as FooterProps;

@@ -1,6 +1,6 @@
 // icons
 import { FacebookCircle, Github, InstagramAlt, Linkedin, Tiktok, Twitter, Youtube } from "@styled-icons/boxicons-logos";
-import { Person3, Person4, PersonPin } from "@styled-icons/material-outlined"
+import { PersonPin } from "@styled-icons/material-outlined"
 // styles
 import * as Styled from './styles';
 

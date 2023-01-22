@@ -187,7 +187,7 @@ exports[`<SocialMedia /> should match a snapshot 1`] = `
     <a
       aria-label="personal blog"
       class="c1"
-      href="https://www.emvalenca.blog.com/"
+      href="https://www.ticio.blog.com/"
       rel="external"
       target="_blank"
     >

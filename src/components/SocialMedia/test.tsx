@@ -9,7 +9,6 @@ import SocialMedia from '.';
 
 // mock
 import mock from "./mock";
-import { ThemeProvider } from 'styled-components';
 
 describe('<SocialMedia />', () => {
 	it("should render all social media in SocialMedia component", () => {
