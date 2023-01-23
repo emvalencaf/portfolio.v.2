@@ -87,7 +87,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
         <a
           class="c1"
           href="/"
-          rel="external"
+          rel="internal"
           target="_self"
         >
           home
@@ -97,7 +97,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
         <a
           class="c1"
           href="/sobre"
-          rel="external"
+          rel="internal"
           target="_self"
         >
           sobre
@@ -107,7 +107,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
         <a
           class="c1"
           href="/habilidades"
-          rel="external"
+          rel="internal"
           target="_self"
         >
           habilidades
@@ -117,7 +117,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
         <a
           class="c1"
           href="/projetos"
-          rel="external"
+          rel="internal"
           target="_self"
         >
           projetos
@@ -127,7 +127,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
         <a
           class="c1"
           href="/curriculo"
-          rel="external"
+          rel="internal"
           target="_self"
         >
           curriculo

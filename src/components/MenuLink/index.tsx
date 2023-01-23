@@ -12,7 +12,7 @@ export type MenuLinkProps = {
 const MenuLink = ({ children, link, newTab = false }: MenuLinkProps) => {
 	const target = newTab ? "_blank" : "_self";
 	const hostname = location.hostname;
-	const rel = link.includes(hostname) ? "internal" : "external";
+	const rel = link.includes(hostname) || link.match(/^[\/#]/) ? "internal" : "external";
 	const nextLink = link.match(/^\//) ? true : false;
 
 	if (nextLink) return (

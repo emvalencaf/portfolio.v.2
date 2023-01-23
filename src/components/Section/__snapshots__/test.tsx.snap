@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MenuLink /> should match a snapshot 1`] = `
+exports[`<Section /> should match snapshot 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -17,28 +17,18 @@ exports[`<MenuLink /> should match a snapshot 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  color: #0A1128;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  -webkit-transition: all 350ms ease-in;
-  transition: all 350ms ease-in;
-}
-
-.c0:hover {
-  color: #dc143c;
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
+  height: 500px;
+  max-height: 500px;
+  padding: 0px 2.5rem;
 }
 
 <div>
-  <a
+  <div
     class="c0"
-    href="#"
-    rel="internal"
-    target="_self"
   >
-    Home
-  </a>
+    <h1>
+      Olá
+    </h1>
+  </div>
 </div>
 `;

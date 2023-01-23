@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfilePhoto /> should match a snapshot 1`] = `
+<div>
+  <div
+    class=""
+  >
+    <img
+      alt="website owner"
+      src="assets/images/profile.png"
+    />
+  </div>
+</div>
+`;
