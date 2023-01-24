@@ -1,6 +1,14 @@
-// styles
-import Link from 'next/link';
+// hooks
+import { useState } from "react";
+
+// icons
+import { Menu as MenuIcon } from "@styled-icons/material-outlined";
+import { Close as CloseIcon } from "@styled-icons/material-outlined";
+
+// components
 import MenuLink, { MenuLinkProps } from '../MenuLink';
+
+// styles
 import * as Styled from './styles';
 
 // types
@@ -9,22 +17,37 @@ export type MenuProps = {
 };
 
 const Menu = ({ menuLinks = [] }: MenuProps) => {
+	const [visible, setVisible] = useState(false);
+
 	return (
-		<Styled.Nav>
-			<ul>
-				{menuLinks.length >= 1 ? menuLinks.map((link) => (
-					<li key={link.link}>
-						<MenuLink link={link.link} newTab={link.newTab}>{link.children}</MenuLink>
-					</li>
-				)) : (
-					<li>
-						<MenuLink link="/">
-							Home
-						</MenuLink>
-					</li>
+		<>
+			<Styled.Button
+				onClick={() => setVisible(true)}
+				visible={visible}
+				aria-label="Open/Close menu"
+			>
+				{visible ? (
+					<CloseIcon aria-label="Close menu" />
+					) : (
+					<MenuIcon aria-label="Open menu" />
 				)}
-			</ul>
-		</Styled.Nav>
+			</Styled.Button>
+			<Styled.Nav onClick={() => setVisible(false)} visible={visible}>
+				<ul>
+					{menuLinks.length >= 1 ? menuLinks.map((link) => (
+						<li key={link.link}>
+							<MenuLink link={link.link} newTab={link.newTab}>{link.children}</MenuLink>
+						</li>
+					)) : (
+						<li>
+							<MenuLink link="#">
+								Home
+							</MenuLink>
+						</li>
+					)}
+				</ul>
+			</Styled.Nav>
+		</>
 	);
 };
 

@@ -1,7 +1,40 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 
-export const Nav = styled.nav`
-	${({ theme }) => css`
+type MenuStyled = {
+	theme?: DefaultTheme;
+	visible: boolean;
+};
+
+const menuVisible = () => css`
+	visibility: visible;
+	opacity: 1;
+`;
+
+export const Nav = styled.nav<MenuStyled>`
+	${({ theme, visible }) => css`
+		@media ${theme.media.lteMedium} {
+			position: fixed;
+			height: 100%;
+			width: 100%;
+			visibility: hidden;
+			opacity: 0;
+			z-index: 5;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: ${theme.colors.white};
+			transition: all 350ms ease-in-out;
+			${visible && menuVisible()}
+
+			> ul {
+				height: 100vh;
+				flex-flow: column wrap;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+
 		@keyframes navbarLinkLoad {
     		0%{
         		transform: scale(0);
@@ -70,3 +103,33 @@ export const Nav = styled.nav`
 	`}
 `;
 
+export const Button = styled.button<MenuStyled>`
+	${({ theme, visible }) => css`
+		@media ${theme.media.lteMedium} {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid ${theme.colors.primaryColor};
+			border-radius: 0.4rem;
+			appearance: auto;
+			opacity: 1;
+		}
+
+		display: none;
+		appearance: none;
+		opacity: 0;
+		position: fixed;
+		top: 2rem;
+		right: 2rem;
+		background-color: ${theme.colors.primaryColor};
+		color: ${theme.colors.white};
+		border: none;
+		z-index: 6;
+		pointer-events: ${visible ? "none": "all"};
+
+		> svg {
+			width: ${theme.font.sizes.medium};
+			height: ${theme.font.sizes.medium};
+		}
+	`}
+`;
