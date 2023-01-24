@@ -1,6 +1,9 @@
 // components
 import Link from 'next/link';
 
+// config
+import config from '../../config';
+
 // styles
 import * as Styled from './styles';
 
@@ -15,7 +18,7 @@ export type LogoLinkProps = {
 const LogoLink = ({ link, srcImg = "", altText, newTab = false }: LogoLinkProps) => {
 
 	const target = newTab ? "_blank" : "_self";
-	const hostname = location.hostname;
+	const { hostname } = config;
 	const rel = link.includes(hostname) || link.match(/^[\/\#]/) ? "internal" : "external";
 	const nextLink = link.match(/^\//) ? true : false;
 
