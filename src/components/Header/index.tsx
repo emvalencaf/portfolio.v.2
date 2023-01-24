@@ -8,12 +8,12 @@ import * as Styled from './styles';
 // types
 export type HeaderProps = MenuProps & {
 	logo: LogoLinkProps;
-	visibility: boolean;
+	visible?: boolean;
 };
 
-const Header = ({ menuLinks = [], logo, visibility }: HeaderProps) => {
+const Header = ({ menuLinks = [], logo, visible = true }: HeaderProps) => {
 	return (
-		<Styled.Wrapper visibility={visibility}>
+		<Styled.Wrapper visible={visible}>
 			<LogoLink {...logo} />
 			<Menu menuLinks={menuLinks} />
 		</Styled.Wrapper>

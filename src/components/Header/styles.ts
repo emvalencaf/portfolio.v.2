@@ -5,7 +5,7 @@ import { Link as LogoLinkContainer } from "../LogoLink/styles";
 
 // types
 type ContainerProps = {
-	visibility: boolean;
+	visible: boolean;
 }
 
 // function
@@ -16,8 +16,8 @@ const visibileMenu = () => css`
 	appearance: none;
 `;
 
-export const Wrapper = styled.div<ContainerProps>`
-	${({ theme, visibility }) => css`
+export const Wrapper = styled.header<ContainerProps>`
+	${({ theme, visible }) => css`
 		@media ${theme.media.lteMedium} {
 			display: block;
 			background-color: transparent;
@@ -42,11 +42,10 @@ export const Wrapper = styled.div<ContainerProps>`
 		border-bottom-left-radius: ${theme.font.sizes.small};
 		border-bottom-right-radius: ${theme.font.sizes.small};
 		opacity: 1;
-		{}
 		& ul {
 			padding: 0;
 		}
 
-		${!visibility && visibileMenu()}
+		${!visible && visibileMenu()}
 	`}
 `;

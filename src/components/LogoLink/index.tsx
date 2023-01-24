@@ -28,7 +28,7 @@ const LogoLink = ({ link, srcImg = "", altText, newTab = false }: LogoLinkProps)
 	);
 
 	return (
-		<Styled.Link target={target} rel={rel}>
+		<Styled.Link target={target} rel={rel} aria-label="logo link">
 			{srcImg ? <img src={srcImg} alt={altText} /> : altText}
 		</Styled.Link>
 	);

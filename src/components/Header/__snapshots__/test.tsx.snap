@@ -1,13 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Menu /> should match a snapshot 1`] = `
-.c1 {
+exports[`<Header /> should match snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+.c2 > img {
+  width: 6.4rem;
+  height: 6.4rem;
+  cursor: pointer;
+}
+
+.c4 {
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
 }
 
-.c3 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -30,14 +50,14 @@ exports[`<Menu /> should match a snapshot 1`] = `
   transition: all 350ms ease-in;
 }
 
-.c3:hover {
+.c6:hover {
   color: #dc143c;
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
 
-.c2 > ul {
+.c5 > ul {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -53,7 +73,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
   gap: 1.6rem;
 }
 
-.c2 ul > li {
+.c5 ul > li {
   list-style: none;
   -webkit-animation: navbarLinkLoad;
   animation: navbarLinkLoad;
@@ -68,7 +88,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
   transform: scale(0);
 }
 
-.c2 ul > li:first-child {
+.c5 ul > li:first-child {
   -webkit-animation-name: navbarLinkLoad_first;
   animation-name: navbarLinkLoad_first;
   -webkit-transform: translateX(-1000%);
@@ -76,7 +96,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
   transform: translateX(-1000%);
 }
 
-.c2 ul > li:last-child {
+.c5 ul > li:last-child {
   -webkit-animation-name: navbarLinkLoad_last;
   animation-name: navbarLinkLoad_last;
   -webkit-transform: translateX(1000%);
@@ -84,7 +104,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
   transform: translateX(1000%);
 }
 
-.c0 {
+.c3 {
   display: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -100,13 +120,42 @@ exports[`<Menu /> should match a snapshot 1`] = `
   pointer-events: all;
 }
 
-.c0 > svg {
+.c3 > svg {
   width: 2.4rem;
   height: 2.4rem;
 }
 
+.c0 {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  background-color: #DDDDDD;
+  border: 1px solid #DDDDDD;
+  border-bottom-left-radius: 1.6rem;
+  border-bottom-right-radius: 1.6rem;
+  opacity: 1;
+}
+
+.c0 ul {
+  padding: 0;
+}
+
 @media (max-width:768px) {
-  .c2 {
+  .c5 {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -122,7 +171,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
     transition: all 350ms ease-in-out;
   }
 
-  .c2 > ul {
+  .c5 > ul {
     height: 100vh;
     -webkit-flex-flow: column wrap;
     -ms-flex-flow: column wrap;
@@ -139,7 +188,7 @@ exports[`<Menu /> should match a snapshot 1`] = `
 }
 
 @media (max-width:768px) {
-  .c0 {
+  .c3 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -161,80 +210,111 @@ exports[`<Menu /> should match a snapshot 1`] = `
   }
 }
 
+@media (max-width:768px) {
+  .c0 {
+    display: block;
+    background-color: transparent;
+    border: none;
+  }
+
+  .c0 .c1 {
+    display: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    opacity: 0;
+  }
+}
+
 <div>
-  <button
-    aria-label="Open/Close menu"
+  <header
     class="c0"
   >
-    <svg
-      aria-hidden="true"
-      aria-label="Open menu"
-      class="c1"
-      fill="currentColor"
-      focusable="false"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
+    <a
+      aria-label="logo link"
+      class="c1 c2"
+      rel="internal"
+      target="_self"
     >
-      <path
-        d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+      <img
+        alt="logo"
+        src="assets/images/logo.png"
       />
-    </svg>
-  </button>
-  <nav
-    class="c2"
-  >
-    <ul>
-      <li>
-        <a
-          class="c3"
-          href="/"
-          rel="internal"
-          target="_self"
-        >
-          home
-        </a>
-      </li>
-      <li>
-        <a
-          class="c3"
-          href="/sobre"
-          rel="internal"
-          target="_self"
-        >
-          sobre
-        </a>
-      </li>
-      <li>
-        <a
-          class="c3"
-          href="/habilidades"
-          rel="internal"
-          target="_self"
-        >
-          habilidades
-        </a>
-      </li>
-      <li>
-        <a
-          class="c3"
-          href="/projetos"
-          rel="internal"
-          target="_self"
-        >
-          projetos
-        </a>
-      </li>
-      <li>
-        <a
-          class="c3"
-          href="/curriculo"
-          rel="internal"
-          target="_self"
-        >
-          curriculo
-        </a>
-      </li>
-    </ul>
-  </nav>
+    </a>
+    <button
+      aria-label="Open/Close menu"
+      class="c3"
+    >
+      <svg
+        aria-hidden="true"
+        aria-label="Open menu"
+        class="c4"
+        fill="currentColor"
+        focusable="false"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+        />
+      </svg>
+    </button>
+    <nav
+      class="c5"
+    >
+      <ul>
+        <li>
+          <a
+            class="c6"
+            href="/"
+            rel="internal"
+            target="_self"
+          >
+            home
+          </a>
+        </li>
+        <li>
+          <a
+            class="c6"
+            href="/sobre"
+            rel="internal"
+            target="_self"
+          >
+            sobre
+          </a>
+        </li>
+        <li>
+          <a
+            class="c6"
+            href="/habilidades"
+            rel="internal"
+            target="_self"
+          >
+            habilidades
+          </a>
+        </li>
+        <li>
+          <a
+            class="c6"
+            href="/projetos"
+            rel="internal"
+            target="_self"
+          >
+            projetos
+          </a>
+        </li>
+        <li>
+          <a
+            class="c6"
+            href="/curriculo"
+            rel="internal"
+            target="_self"
+          >
+            curriculo
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 </div>
 `;

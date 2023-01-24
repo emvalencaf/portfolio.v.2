@@ -1,6 +1,9 @@
-
+// types and component
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { useState } from 'react';
 import Header, { HeaderProps } from '.';
+
+// mock
 import mock from './mock';
 
 export default {
@@ -13,9 +16,24 @@ export default {
 } as Meta<HeaderProps>;
 
 export const Template: Story<HeaderProps> = (args) => {
+	// states
+	const [lastScrollYCoord, setLastScrollYCoord] = useState(window.scrollY);
+	const [visible, setVisible] = useState(true);
+
+	// handler functions
+	const handleScroll = () => {
+
+		lastScrollYCoord < window.scrollY ? setVisible(true) : setVisible(false);
+
+		setLastScrollYCoord(window.scrollY);
+	}
+
+	// set handler functiion
+	window.addEventListener("scroll", handleScroll);
+
 	return (
 		<div>
-			<Header {...args} />
+			<Header {...args} visible={visible} />
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Et cumque ut totam adipisci optio fugit veritatis, excepturi deleniti autem perferendis harum eius aliquam esse, magnam eligendi sapiente fuga ea eaque.
 			</p>

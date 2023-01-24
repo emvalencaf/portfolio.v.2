@@ -23,6 +23,7 @@ exports[`<LogoLink /> should match snapshot 1`] = `
 
 <div>
   <a
+    aria-label="logo link"
     class="c0"
     rel="internal"
     target="_self"
