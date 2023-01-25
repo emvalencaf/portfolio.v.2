@@ -19,7 +19,7 @@ const logoSizes = {
 export const Wrapper = styled.div<SocialMediaProps>`
 	${({ theme, sizes }) => css`
 		& svg, & a {
-			color: ${theme.colors.primaryColor};
+			color: ${theme.colors.primary};
 			${logoSizes[sizes](theme)}
 			transition: all 350ms ease-in-out;
 		}
@@ -33,6 +33,6 @@ export const Wrapper = styled.div<SocialMediaProps>`
 
 export const SocialMediaLink = styled.a`
 	${( {theme} ) => css`
-		color: ${theme.colors.primaryColor};
+		color: ${theme.colors.primary};
 	`}
 `;

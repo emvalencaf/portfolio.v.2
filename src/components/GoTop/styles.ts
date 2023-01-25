@@ -20,7 +20,7 @@ const goTopSizes = {
 export const Container = styled.a<GoTopProps>`
 	${({ theme, sizes}) => css`
 		position: fixed;
-		background: ${theme.colors.primaryColor};
+		background: ${theme.colors.primary};
 		color: ${theme.colors.white};
 		display: flex;
 		align-items: center;

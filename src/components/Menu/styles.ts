@@ -109,7 +109,7 @@ export const Button = styled.button<MenuStyled>`
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			border: 1px solid ${theme.colors.primaryColor};
+			border: 1px solid ${theme.colors.primary};
 			border-radius: 0.4rem;
 			appearance: auto;
 			opacity: 1;
@@ -121,7 +121,7 @@ export const Button = styled.button<MenuStyled>`
 		position: fixed;
 		top: 2rem;
 		right: 2rem;
-		background-color: ${theme.colors.primaryColor};
+		background-color: ${theme.colors.primary};
 		color: ${theme.colors.white};
 		border: none;
 		z-index: 6;

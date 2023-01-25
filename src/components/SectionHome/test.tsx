@@ -8,9 +8,9 @@ import SectionHome from '.';
 import mock from './mock';
 
 describe('<SectionHome />', () => {
-	it('should render component it props default values', () => {
-		renderTheme(<SectionHome {...mock} />);
+	it('should render match a snapshot', () => {
+		const { container } = renderTheme(<SectionHome {...mock} />);
 
-		expect(screen.getByRole('heading', { name: 'Oi' })).toBeInTheDocument();
+		expect(container).toMatchSnapshot();
 	});
 });

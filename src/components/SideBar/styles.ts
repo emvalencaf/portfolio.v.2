@@ -37,7 +37,7 @@ export const Wrapper = styled.div`
 `;
 export const SocialMediaLink = styled.a<SideBarProps>`
 	${({ theme, sizes }) => css`
-		color: ${theme.colors.primaryColor};
+		color: ${theme.colors.primary};
 
 		& svg, & {
 			color: inherit;
@@ -57,7 +57,7 @@ export const VerticalLine = styled.div`
 		content: "";
 		width: 1px;
 		height: 100px;
-		border: 1px solid ${theme.colors.primaryColor};
+		border: 1px solid ${theme.colors.primary};
 		margin: 20px;
 		display: inline-block;
 	`}

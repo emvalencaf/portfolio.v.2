@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Wrapper as SocialMediaContainer } from "../SocialMedia/styles";
 
 export const Wrapper = styled.footer`

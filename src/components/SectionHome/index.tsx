@@ -7,16 +7,29 @@ import * as Styled from './styles';
 
 // types
 export type SectionHomeProps = {
-	children: React.ReactNode;
 	ownerName: string;
+	ocupation: string;
+	mainStack: string[];
 };
 
-const SectionHome = ({ children, ownerName }: SectionHomeProps) => {
+const SectionHome = ({ ownerName, ocupation, mainStack = [] }: SectionHomeProps) => {
 	return (
 		<Styled.Wrapper id="#">
 			<Section>
-				<Heading size="small" as="h1">Olá, meu nome é <span>{ownerName}</span></Heading>
-				<Heading size="big">Desenvolvedor WEB Júnior</Heading>
+				<p>
+					Olá, seja bem-vindo ao meu portfólio.
+				</p>
+				<Heading as="h1" size="big">
+					{ownerName}.
+				</Heading>
+				<Heading as="h2" size="big">
+					{ocupation}.
+				</Heading>
+				{mainStack.length > 0 && (
+					<Heading as="h2" size="medium">
+						{mainStack.join(" | ")}
+					</Heading>
+				)}
 			</Section>
 		</Styled.Wrapper>
 	);
