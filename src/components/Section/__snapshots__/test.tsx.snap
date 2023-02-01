@@ -2,24 +2,17 @@
 
 exports[`<Section /> should match snapshot 1`] = `
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   height: 500px;
   max-height: 500px;
-  padding: 0px 2.5rem;
+  width: 100%;
+  padding: 0px 6.4rem;
+  margin: calc(6.4rem + 5.6rem) auto;
+}
+
+@media (max-width:360px) {
+  .c0 {
+    padding: 0px 1.6rem;
+  }
 }
 
 <div>

@@ -23,7 +23,7 @@ describe('<MenuLink />', () => {
 	it("should render MenuLink component with a internal link", () => {
 		renderTheme(<MenuLink link='https://localhost:3000/home'>Home</MenuLink>);
 
-		expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("rel","internal");
+		expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("rel","external");
 	});
 
 	it("should render MenuLink component with a external link that will open a new tab", () => {

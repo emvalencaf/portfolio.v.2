@@ -10,38 +10,60 @@ export default {
 		menuLinks: [
 			{
 				children: "home",
-				link: "/",
+				link: "#",
 				newTab: false,
 			},
 			{
 				children: "sobre",
-				link: "/sobre",
+				link: "#about",
 				newTab: false,
 			},
 			{
 				children: "habilidades",
-				link: "/habilidades",
+				link: "#skills",
 				newTab: false,
 			},
 			{
 				children: "projetos",
-				link: "/projetos",
+				link: "#projects",
 				newTab: false,
 			},
 			{
 				children: "curriculo",
-				link: "/curriculo",
+				link: "#curriculum",
 				newTab: false,
 			}
 		],
 	},
 	main: {
 		sections: {
-
+			home: {
+				id: "#",
+				ownerName: "Tício da Silva",
+				ocupation: "fullstack developer jr.",
+				mainStack: [
+					"javascript",
+					"typescript",
+					"nodjs",
+					"c#"
+				]
+			},
+			about: {
+				id: "#about",
+				profilePhoto: {
+					srcImg:"/imagem.jpg",
+					altText:"profileImage",
+				},
+				bios: `
+				<p>
+					Olá mundo
+				</p>
+				`,
+			}
 		},
 		sideBar: {
 			githubURL:"https://www.github.com/tício",
-			
+
 		},
 	}
 } as HomeProps;

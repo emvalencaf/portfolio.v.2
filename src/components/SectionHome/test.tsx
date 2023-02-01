@@ -8,6 +8,17 @@ import SectionHome from '.';
 import mock from './mock';
 
 describe('<SectionHome />', () => {
+	it("should render SectionHome with stack language", () => {
+		renderTheme(<SectionHome {...mock} />);
+
+		expect(screen.getByRole("heading", { name: mock.mainStack.join(" | ")})).toBeInTheDocument();
+
+	});
+	it("should render a SectionHome without stack language", () => {
+		renderTheme(<SectionHome id={mock.id} />);
+
+		expect(screen.queryByRole("heading", { name: mock.mainStack.join(" | ")})).not.toBeInTheDocument();
+	});
 	it('should render match a snapshot', () => {
 		const { container } = renderTheme(<SectionHome {...mock} />);
 

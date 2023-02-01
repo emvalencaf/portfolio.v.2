@@ -5,6 +5,8 @@ import Mock from "../../components/Mock";
 import Header from "../../components/Header";
 import Section from "../../components/Section";
 import SideBar, { SideBarProps } from "../../components/SideBar";
+import SectionHome, { SectionHomeProps } from "../../components/SectionHome";
+import SectionAbout, { SectionAboutProps } from "../../components/SectionAbout";
 
 // type
 import { LogoLinkProps } from "../../components/LogoLink";
@@ -16,7 +18,8 @@ export type HomeProps = {
 	main: {
 		sections: {
 			home: SectionHomeProps;
-		},
+			about: SectionAboutProps;
+		}
 		sideBar: SideBarProps;
 	}
 }
@@ -24,13 +27,14 @@ export type HomeProps = {
 // mock
 import mock from "./mock";
 import { MenuLinkProps } from "../../components/MenuLink";
-import SectionHome, { SectionHomeProps } from "../../components/SectionHome";
 
-const Home = ({ header }) => {
+const Home = () => {
   return (
     <Styled.Wrapper>
       <Header {...mock.header} />
-	  <SideBar />
+	  <SideBar {...mock.main.sideBar} />
+	  <SectionHome {...mock.main.sections.home} />
+	  <SectionAbout {...mock.main.sections.about} />
     </Styled.Wrapper>
   );
 };

@@ -10,11 +10,12 @@ import * as Styled from './styles';
 // types
 export type MenuLinkProps = {
 	children: React.ReactNode;
+	icon?: React.ReactNode;
 	link: string;
 	newTab?: boolean;
 };
 
-const MenuLink = ({ children, link, newTab = false }: MenuLinkProps) => {
+const MenuLink = ({ children, link, icon, newTab = false }: MenuLinkProps) => {
 	const target = newTab ? "_blank" : "_self";
 	const { hostname } = config;
 	const rel = link.includes(hostname) || link.match(/^[\/#]/) ? "internal" : "external";
@@ -23,6 +24,7 @@ const MenuLink = ({ children, link, newTab = false }: MenuLinkProps) => {
 	if (nextLink) return (
 		<Link href={link} legacyBehavior passHref>
 			<Styled.Link target={target} rel={rel}>
+				{icon}
 				{children}
 			</Styled.Link>
 		</Link>

@@ -44,7 +44,6 @@ describe('<LogoLink />', () => {
 
 	it('should match snapshot', () => {
 		const { container } = renderTheme(<LogoLink {...mock} />);
-		logDOM(container);
 		expect(container).toMatchSnapshot();
 	});
 });
