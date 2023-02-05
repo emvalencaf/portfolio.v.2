@@ -9,9 +9,9 @@ export type ProfilePhotoProps = {
 
 const ProfilePhoto = ({ srcImg, altText }: ProfilePhotoProps) => {
 	return (
-		<Styled.Wrapper>
+		<Styled.Picture>
 			<img src={srcImg} alt={altText} />
-		</Styled.Wrapper>
+		</Styled.Picture>
 	);
 };
 

@@ -13,14 +13,3 @@ export const Wrapper = styled.div`
 		}
 	`}
 `;
-
-export const ProfilePhotoContainer = styled.figure`
-	${({theme}) => css`
-		& img  {
-			width: ${theme.frameSizes.smallMedium};
-			height: ${theme.frameSizes.smallMedium};
-			border-radius: 20px;
-			box-shadow: 20px 14px 20px 4px;
-		}
-	`}
-`;

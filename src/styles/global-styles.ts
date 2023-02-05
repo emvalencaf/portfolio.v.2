@@ -12,10 +12,10 @@ export const GlobalStyles = createGlobalStyle`
   }
   body {
     font-size: 1.6rem;
-    font-family: ${({ theme }) => theme.font.family.default};
+    font-family: ${({ theme }) => theme.fonts.family.default};
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: ${({ theme }) => theme.font.family.secondary};
+    font-family: ${({ theme }) => theme.fonts.family.secondary};
     margin: ${({ theme }) => theme.spacings.large} 0;
   }
   p {
@@ -26,7 +26,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: ${({ theme }) => theme.spacings.medium};
   }
   a {
-    color: ${({ theme }) => theme.colors.secondaryColor};
+    color: ${({ theme }) => theme.colors.secondary};
   }
   .table {
     width: 100%;

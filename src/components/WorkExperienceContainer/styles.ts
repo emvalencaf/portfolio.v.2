@@ -5,9 +5,3 @@ export const Wrapper = styled.div`
 
 	`}
 `;
-
-export const WorkContainer = styled.li`
-	${({ theme }) => css`
-
-	`}
-`;

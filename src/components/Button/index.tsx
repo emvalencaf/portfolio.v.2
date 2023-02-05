@@ -16,6 +16,7 @@ const Button = ({
 	disabled = false,
 	color = "primary",
 	onClick,
+	icon,
 }: ButtonProps) => {
 	const handleClick = () => {
 		if (onClick) onClick();
@@ -28,7 +29,8 @@ const Button = ({
 			color={color}
 			onClick={handleClick}
 		>
-
+			{icon}
+			{children}
 		</Styled.Button>
 	);
 };

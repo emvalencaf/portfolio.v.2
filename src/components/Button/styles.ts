@@ -34,6 +34,7 @@ export const Button = styled.button<Pick<ButtonProps, "color">>`
 			width: 2rem;
 			height: 2rem;
 			margin-left: 1rem;
+			margin-right:1rem;
 		}
 	`}
 `;

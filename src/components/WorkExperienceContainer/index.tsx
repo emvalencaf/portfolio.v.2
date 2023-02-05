@@ -1,29 +1,25 @@
+// components
+import { useState } from "react";
+import WorkExperience, { WorkExperienceProps } from "../WorkExperience";
+
 // styles
 import * as Styled from "./styles";
 
 // types
-type Work = {
-	ocupation: string;
-	employer: string;
-	description: string;
-	date: string;
-};
 export type WorkExperienceContainerProps = {
-	workExperiences?: Work[];
+	workExperiences?: WorkExperienceProps[];
 };
 
 const WorkExperienceContainer = ({ workExperiences = [] }: WorkExperienceContainerProps) => {
+
+	// order by date DESC
+	workExperiences.sort((a,b) => Number(a.startIn) - Number(b.startIn));
+
 	return (
 		<Styled.Wrapper>
 			{ workExperiences.length > 0 && (
 				<ul>
-					{workExperiences.map((work) => <Styled.WorkContainer>
-						<span>{work.ocupation} em {work.employer}</span>
-						<span>
-							{work.description}
-						</span>
-						<span>{work.date}</span>
-					</Styled.WorkContainer>)}
+					{workExperiences.map((work, i) => <WorkExperience key={`${i}-JOB-${work.startIn}/${work.endIn}`} {...work} showData={false} />)}
 				</ul>
 			)}
 		</Styled.Wrapper>
