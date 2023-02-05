@@ -1,5 +1,6 @@
+// hooks
+import { useRef } from "react";
 // components
-import { useState } from "react";
 import WorkExperience, { WorkExperienceProps } from "../WorkExperience";
 
 // styles
@@ -20,8 +21,8 @@ const WorkExperienceContainer = ({ workExperiences = [] }: WorkExperienceContain
 			{workExperiences.length > 0 && (
 				<ul>
 					{workExperiences.map((work, i) => (
-						<li>
-							<WorkExperience key={`${i}-JOB-${work.startIn}/${work.endIn}`} {...work} showData={false} />
+						<li key={`${i}-JOB-${work.startIn}/${work.endIn}`}>
+							<WorkExperience {...work} showData={false} />
 						</li>
 					))}
 				</ul>

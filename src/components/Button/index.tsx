@@ -5,7 +5,7 @@ import * as Styled from './styles';
 import { ButtonHTMLAttributes } from 'react';
 export type ButtonProps = {
 	icon?: React.ReactNode;
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	disabled?: boolean;
 	onClick?: () => void;
 	color?: "primary" | "secondary"
@@ -30,9 +30,11 @@ const Button = ({
 			onClick={handleClick}
 		>
 			{icon}
-			<Styled.ButtonLabel>
-				{children}
-			</Styled.ButtonLabel>
+			{!!children && (
+				<Styled.ButtonLabel>
+					{children}
+				</Styled.ButtonLabel>
+			)}
 		</Styled.Button>
 	);
 };
