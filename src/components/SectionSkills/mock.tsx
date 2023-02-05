@@ -9,50 +9,66 @@ export default {
 		{
 			techName: "JavaScript",
 			icon: <Javascript />,
-			techDescription: "javascript é sajoaskamm",
+			techDescription: `
+				Uso JavaScript no dia à dia para desenvolver tanto o front-end quanto o back-end (por meio do NodeJS) dos projetos.
+			`,
 			showTechDescription: false,
 		},
 		{
 			techName: "NodeJS",
 			icon: <Nodejs />,
-			techDescription: "javascript é sajoaskamm",
+			techDescription: `
+				Uso o NodeJS para desenvolver o back-end das minhas aplicações.
+			`,
 			showTechDescription: false,
 		},
 		{
 			techName: "TypeScript",
 			icon: <Typescript />,
-			techDescription: "javascript é sajoaskamm",
+			techDescription: `
+				Uso o TypeScript para auxiliar o desenvolvimento de projetos mais complexos adicionando tipagem estática aos meus projetos javascript - tanto no back-end quanto no front-end
+			`,
 			showTechDescription: false,
 		},
 		{
 			techName: "CSS",
 			icon: <Css3 />,
-			techDescription: "reactjs é sajoaskamm",
+			techDescription: `
+				Uso o CSS3 para desenvolver os estilos dos meu projetos
+			`,
 			showTechDescription: false,
 		},
 		{
 			techName: "HTML",
 			icon: <Html5 />,
-			techDescription: "javascript é sajoaskamm",
+			techDescription: `
+				Uso o HTML5 para desenvolver a estrutura dos meus projetos no front-end
+			`,
 			showTechDescription: false,
 		},
 		{
 			techName: "ReactJS",
 			icon: <ReactLogo />,
-			techDescription: "javascript é sajoaskamm",
+			techDescription: `
+				Uso o ReactJS para tornar mais escaláveis meus projetos, por meio da componentização de trechos de códigos reutilizávies.
+			`,
 			showTechDescription: false,
 		},
 		{
 			techName: "Git",
 			icon: <Git />,
-			techDescription: "javascript é sajoaskamm",
+			techDescription: `
+				Uso o Git para versionar meus projetos tornando-os mais fáceis de gerenciar e compartilhar.
+			`,
 			showTechDescription: false,
 		},
 		{
 			techName: "MongoDB",
 			icon: <Mongodb />,
-			techDescription: "javascript é sajoaskamm",
+			techDescription: `
+				Uso o MongoDB como banco de dado não-relacional para o back-end das minhas aplicações.
+			`,
 			showTechDescription: false,
-		}
+		},
 	]
 } as SectionSkillsProps;

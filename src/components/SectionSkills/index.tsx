@@ -38,7 +38,6 @@ const SectionSkills = ({ id, techs = []
 								{...tech}
 								key={`skills-${tech.techName}-${index}`}
 								onClick={() => {
-									console.log(tech.techName);
 									setStateTechs((state) => state.map((stateTech) => {
 										stateTech.techName === tech.techName ? stateTech.showTechDescription = true : stateTech.showTechDescription = false;
 										return stateTech;

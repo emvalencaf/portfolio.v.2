@@ -13,16 +13,17 @@ import { Person3, WorkHistory, LibraryBooks } from '@styled-icons/material-outli
 
 // styles
 import * as Styled from './styles';
+import AcademicHistory, { AcademicHistoryProps } from '../AcademicHistory';
 
 // types
 export type SectionAboutProps = {
 	id: string;
 	bios: BiosProps;
 	workExperiences: WorkExperienceContainerProps;
-	urlCurriculumDownload: string;
-};
+	urlDownload: string;
+} & AcademicHistoryProps;
 
-const SectionAbout = ({ bios, id, urlCurriculumDownload, workExperiences }: SectionAboutProps) => {
+const SectionAbout = ({ bios, id, urlDownload, workExperiences, academicData }: SectionAboutProps) => {
 	// states
 	const [inBios, setInBios] = useState(true);
 	const [inWorkExperiences, setInWorkExperiences] = useState(false);
@@ -45,7 +46,7 @@ const SectionAbout = ({ bios, id, urlCurriculumDownload, workExperiences }: Sect
 		setInAcademics(true);
 	};
 	const handleClickDownloadButton = () => {
-		window.open(urlCurriculumDownload);
+		window.open(urlDownload);
 	}
 	return (
 		<Section id={id}>
@@ -81,6 +82,9 @@ const SectionAbout = ({ bios, id, urlCurriculumDownload, workExperiences }: Sect
 				}
 				{inWorkExperiences &&
 					<WorkExperienceContainer {...workExperiences} />
+				}
+				{inAcademics &&
+					<AcademicHistory academicData={academicData} />
 				}
 				<Button type="submit" onClick={handleClickDownloadButton}>Download Curriculum</Button>
 			</Styled.Wrapper>
