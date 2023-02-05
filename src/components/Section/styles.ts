@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components';
 import { Title as HeadingContainer } from '../Heading/styles';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
 	${({ theme }) => css`
-		@media ${theme.media.lteSmall} {
-			padding: 0px ${theme.spacings.small};
+		@media ${theme.media.lteMedium} {
+			padding: 0px 0px;
+
+			& > ${HeadingContainer}::after {
+				max-width: 100px;
+			}
 		}
 
 		height: 500px;

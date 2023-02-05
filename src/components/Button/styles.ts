@@ -3,7 +3,7 @@ import { ButtonProps } from '.';
 
 export const Button = styled.button<Pick<ButtonProps, "color">>`
 	${({ theme, color }) => css`
-	background: ${theme.colors[color]};
+		background: ${theme.colors[color]};
 		border: none;
 		color: ${theme.colors.white};
 		font-size: ${theme.fonts.sizes.normal};
@@ -36,5 +36,10 @@ export const Button = styled.button<Pick<ButtonProps, "color">>`
 			margin-left: 1rem;
 			margin-right:1rem;
 		}
+	`}
+`;
+
+export const ButtonLabel = styled.span`
+	${({ theme }) => css`
 	`}
 `;

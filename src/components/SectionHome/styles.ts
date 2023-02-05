@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Title as HeadingContainer } from '../Heading/styles';
-export const Wrapper = styled.section`
+export const Wrapper = styled.div`
 	${({ theme }) => css`
 		display: flex;
 		flex-direction: column;

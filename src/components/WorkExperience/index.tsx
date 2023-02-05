@@ -31,9 +31,6 @@ const WorkExperience = ({ employer, ocupation, jobDescription, startIn, endIn, s
 				<Heading as="h3" size="medium">
 					{employer}
 				</Heading>
-				<Heading as="h4" size="small">
-					{ocupation}
-				</Heading>
 				<Styled.DateStringContainer>
 					<span>
 						{DateStringFormating.getMonthAndFullYear(startIn)}
@@ -46,6 +43,9 @@ const WorkExperience = ({ employer, ocupation, jobDescription, startIn, endIn, s
 			</Styled.WorkExperienceHeader>
 			{stateShowData &&
 				<Styled.WorkExperienceBody>
+					<Heading as="h4" size="small">
+						{ocupation}
+					</Heading>
 					<Styled.JobDescription>
 						<p>
 							{jobDescription}

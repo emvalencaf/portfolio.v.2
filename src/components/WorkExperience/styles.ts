@@ -26,8 +26,13 @@ export const WorkExperienceHeader = styled.div`
 
 export const DateStringContainer = styled.div`
 	${({ theme }) => css`
+		@media ${theme.media.lteMedium} {
+			font-size: ${theme.fonts.sizes.xxsmall};
+			max-width: ${theme.frameSizes.xsmall};
+		}
 		display: flex;
 		flex-direction: row;
+		align-items: center;
 		width: ${theme.frameSizes.small};
 		border: 1px solid ${theme.colors.primary};
 		padding: ${theme.spacings.xxsmall};

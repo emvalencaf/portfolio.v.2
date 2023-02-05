@@ -48,11 +48,11 @@ const SectionAbout = ({ bios, id, urlCurriculumDownload, workExperiences }: Sect
 		window.open(urlCurriculumDownload);
 	}
 	return (
-		<Styled.Wrapper id={id}>
-			<Section>
-				<Heading as='h2' size='big'>
-					Sobre
-				</Heading>
+		<Section id={id}>
+			<Heading as='h2' size='big'>
+				Sobre
+			</Heading>
+			<Styled.Wrapper>
 				<Styled.SectionInnerMenu>
 					<Button
 						icon={<Person3 />}
@@ -62,7 +62,7 @@ const SectionAbout = ({ bios, id, urlCurriculumDownload, workExperiences }: Sect
 						Bios
 					</Button>
 					<Button
-						icon={<WorkHistory/>}
+						icon={<WorkHistory />}
 						disabled={inWorkExperiences}
 						onClick={handleClickInWorkExperiences}
 					>
@@ -77,14 +77,14 @@ const SectionAbout = ({ bios, id, urlCurriculumDownload, workExperiences }: Sect
 					</Button>
 				</Styled.SectionInnerMenu>
 				{inBios &&
-					<Bios  {...bios}/>
+					<Bios  {...bios} />
 				}
 				{inWorkExperiences &&
-					<WorkExperienceContainer {...workExperiences}  />
+					<WorkExperienceContainer {...workExperiences} />
 				}
 				<Button type="submit" onClick={handleClickDownloadButton}>Download Curriculum</Button>
-			</Section>
-		</Styled.Wrapper>
+			</Styled.Wrapper>
+		</Section>
 	);
 };
 

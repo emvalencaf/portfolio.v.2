@@ -30,7 +30,9 @@ const Button = ({
 			onClick={handleClick}
 		>
 			{icon}
-			{children}
+			<Styled.ButtonLabel>
+				{children}
+			</Styled.ButtonLabel>
 		</Styled.Button>
 	);
 };

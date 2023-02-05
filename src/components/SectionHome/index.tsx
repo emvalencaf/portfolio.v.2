@@ -15,8 +15,8 @@ export type SectionHomeProps = {
 
 const SectionHome = ({ id, ownerName, ocupation, mainStack = [] }: SectionHomeProps) => {
 	return (
-		<Styled.Wrapper id={id}>
-			<Section>
+		<Section id={id}>
+			<Styled.Wrapper>
 				<p>
 					Olá, seja bem-vindo ao meu portfólio.
 				</p>
@@ -35,8 +35,8 @@ const SectionHome = ({ id, ownerName, ocupation, mainStack = [] }: SectionHomePr
 						{mainStack.join(" | ")}
 					</Heading>
 				)}
-			</Section>
-		</Styled.Wrapper>
+			</Styled.Wrapper>
+		</Section>
 	);
 };
 

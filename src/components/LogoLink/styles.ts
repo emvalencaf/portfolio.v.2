@@ -7,8 +7,8 @@ export const Link = styled.a`
 		text-decoration: none;
 		color: inherit;
 		> img {
-			width: ${theme.font.sizes.xhuge};
-			height: ${theme.font.sizes.xhuge};
+			width: ${theme.fonts.sizes.xhuge};
+			height: ${theme.fonts.sizes.xhuge};
 			cursor: pointer;
 		}
 	`}

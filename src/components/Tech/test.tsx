@@ -2,15 +2,15 @@ import { screen } from '@testing-library/react';
 import { renderTheme } from '../../styles/render-theme';
 
 // react component to be test
-import Bios from '.';
+import Tech from '.';
 
 // mock
-import mock from "./mock";
+import mock from './mock';
 
-describe('<Bios />', () => {
+describe('<Tech />', () => {
 	it('should match a snapshot', () => {
-		const { container } = renderTheme(<Bios {...mock} />);
+		const { container } = renderTheme(<Tech {...mock} />);
 
-		expect(container).toMatchSnapshot();
+		expect((container)).toMatchSnapshot();
 	});
 });

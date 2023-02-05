@@ -1,6 +1,7 @@
 import { SectionAboutProps } from ".";
 
 export default {
+	id: "#about",
 	bios: {
 		bios: `
 			<p>
@@ -33,5 +34,5 @@ export default {
 				showData: true,
 			},
 		]
-	}
+	},
 } as SectionAboutProps;
