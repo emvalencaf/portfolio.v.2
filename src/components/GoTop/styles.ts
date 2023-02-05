@@ -4,16 +4,16 @@ import { GoTopProps } from ".";
 
 const goTopSizes = {
 	small: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.large};
-		width: ${theme.font.sizes.large};
+		height: ${theme.fonts.sizes.large};
+		width: ${theme.fonts.sizes.large};
 	`,
 	medium: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.xlarge};
-		width: ${theme.font.sizes.xlarge};
+		height: ${theme.fonts.sizes.xlarge};
+		width: ${theme.fonts.sizes.xlarge};
 	`,
 	big: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.huge};
-		width: ${theme.font.sizes.huge};
+		height: ${theme.fonts.sizes.huge};
+		width: ${theme.fonts.sizes.huge};
 	`,
 };
 
@@ -30,7 +30,7 @@ export const Container = styled.a<GoTopProps>`
 		bottom: 2rem;
 		right: 2rem;
 		border-radius: 100%;
-		z-index: 6;
+		z-index: ${theme.layers.layer6};
 
 		svg {
 			transition: all 350ms ease-in-out;

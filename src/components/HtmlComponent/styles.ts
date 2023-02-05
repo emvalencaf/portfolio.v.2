@@ -12,7 +12,7 @@ export const Container = styled.div`
 			}
 		}
 
-		font-size: calc(${theme.font.sizes.small} + 0.2rem);
+		font-size: calc(${theme.fonts.sizes.small} + 0.2rem);
 		line-height: 1.5;
 
 		iframe[src*="ads"] {
@@ -28,7 +28,7 @@ export const Container = styled.div`
 		a:link {
 			color: ${theme.colors.secondary};
 			text-decoration: none;
-			transition: all 350ms ease-in-out;
+			transition: all ${theme.transitions.fast} ease-in-out;
 		}
 
 		a:hover {
@@ -38,14 +38,14 @@ export const Container = styled.div`
 	code {
 		font-family: monospace;
 		color: ${theme.colors.secondary};
-		font-size: ${theme.font.sizes.small};
-		background-color: ${theme.colors.mediumGray};
+		font-size: ${theme.fonts.sizes.small};
+		background-color: ${theme.colors.gray5};
 		padding: 0.2rem;
 		margin: 0.2rem;
 	}
 
     pre {
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.fonts.sizes.small};
       background-color: ${theme.colors.primary};
       padding: ${theme.spacings.medium};
       font-family: monospace;
@@ -53,7 +53,7 @@ export const Container = styled.div`
       margin: ${theme.spacings.medium} 0;
       width: 100%;
       overflow-x: auto;
-	  font-size: ${theme.font.sizes.small};
+	  font-size: ${theme.fonts.sizes.small};
     }
 
 	pre code {
@@ -66,13 +66,13 @@ export const Container = styled.div`
 		}
 
 		.image {
-			background: ${theme.colors.mediumGray};
+			background: ${theme.colors.gray5};
 			line-height: 0;
 			margin: ${theme.spacings.medium} 0;
 		}
 
 		.image figcaption {
-			font-size: ${theme.font.sizes.small};
+			font-size: ${theme.fonts.sizes.small};
 			padding: ${theme.spacings.small};
 			text-align: center;
 			line-height: 1.3;
@@ -86,7 +86,7 @@ export const Container = styled.div`
 
 		hr {
 			border: none;
-			border-bottom: 0.1rem solid $ ${theme.colors.mediumGray};
+			border-bottom: 0.1rem solid $ ${theme.colors.gray5};
 		}
 
 		ul,
@@ -109,12 +109,12 @@ export const Container = styled.div`
 		.table td,
 		.table th {
 			padding: ${theme.spacings.small};
-			border: 0.1rem solid ${theme.colors.mediumGray};
+			border: 0.1rem solid ${theme.colors.gray5};
 		}
 
 		blockquote {
 			border-left: 0.5rem solid ${theme.colors.secondary};
-			color: ${theme.colors.darkerGray};
+			color: ${theme.colors.gray12};
 			filter: brightness(80%);
 			padding-left: ${theme.spacings.medium};
 			font-style: italic;

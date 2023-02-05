@@ -3,19 +3,19 @@ import { HeadingProps } from ".";
 
 const titleSize = {
 	small: (theme: DefaultTheme, size: string) => css`
-		font-size: ${theme.font.sizes.medium};
+		font-size: ${theme.fonts.sizes.medium};
 		${mediaFont(theme, size)};
 	`,
 	medium: (theme: DefaultTheme, size: string) => css`
-		font-size: ${theme.font.sizes.large};
+		font-size: ${theme.fonts.sizes.large};
 		${mediaFont(theme, size)};
 	`,
 	big: (theme: DefaultTheme, size: string) => css`
-		font-size: ${theme.font.sizes.xlarge};
+		font-size: ${theme.fonts.sizes.xlarge};
 		${mediaFont(theme, size)};
 	`,
 	huge: (theme: DefaultTheme, size: string) => css`
-		font-size: ${theme.font.sizes.xhuge};
+		font-size: ${theme.fonts.sizes.xhuge};
 		${mediaFont(theme, size)};
 	`,
 };
@@ -23,16 +23,16 @@ const titleSize = {
 const mediaFont = (theme: DefaultTheme, size: string) => {
 	const fontSize = {
 		lteSmall: {
-			huge: theme.font.sizes.large,
-			big: theme.font.sizes.medium,
-			medium: theme.font.sizes.small,
-			small: theme.font.sizes.xsmall,
+			huge: theme.fonts.sizes.large,
+			big: theme.fonts.sizes.medium,
+			medium: theme.fonts.sizes.small,
+			small: theme.fonts.sizes.xsmall,
 		},
 		lteMedium: {
-			huge: theme.font.sizes.xlarge,
-			big: theme.font.sizes.large,
-			medium: theme.font.sizes.medium,
-			small: theme.font.sizes.small,
+			huge: theme.fonts.sizes.xlarge,
+			big: theme.fonts.sizes.large,
+			medium: theme.fonts.sizes.medium,
+			small: theme.fonts.sizes.small,
 		},
 	}
 	return css`

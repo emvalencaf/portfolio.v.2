@@ -3,16 +3,16 @@ import { SocialMediaProps } from '.';
 
 const logoSizes = {
 	small: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.medium};
-		width: ${theme.font.sizes.medium};
+		height: ${theme.fonts.sizes.medium};
+		width: ${theme.fonts.sizes.medium};
 	`,
 	medium: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.large};
-		width: ${theme.font.sizes.large};
+		height: ${theme.fonts.sizes.large};
+		width: ${theme.fonts.sizes.large};
 	`,
 	big: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.xlarge};
-		width: ${theme.font.sizes.xlarge};
+		height: ${theme.fonts.sizes.xlarge};
+		width: ${theme.fonts.sizes.xlarge};
 	`,
 };
 
@@ -21,7 +21,7 @@ export const Wrapper = styled.div<SocialMediaProps>`
 		& svg, & a {
 			color: ${theme.colors.primary};
 			${logoSizes[sizes](theme)}
-			transition: all 350ms ease-in-out;
+			transition: all ${theme.transitions.fast} ease-in-out;
 		}
 
 		&  svg:hover {

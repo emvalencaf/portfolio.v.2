@@ -37,10 +37,10 @@ export const Wrapper = styled.header<ContainerProps>`
 		justify-content: space-between;
 		padding-left: ${theme.spacings.medium};
 		padding-right: ${theme.spacings.medium};
-		background-color: ${theme.colors.mediumGray};
-		border: 1px solid ${theme.colors.mediumGray};
-		border-bottom-left-radius: ${theme.font.sizes.small};
-		border-bottom-right-radius: ${theme.font.sizes.small};
+		background-color: ${theme.colors.gray5};
+		border: 1px solid ${theme.colors.gray5};
+		border-bottom-left-radius: ${theme.fonts.sizes.small};
+		border-bottom-right-radius: ${theme.fonts.sizes.small};
 		opacity: 1;
 		& ul {
 			padding: 0;

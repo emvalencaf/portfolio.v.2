@@ -36,7 +36,7 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 				<ul>
 					{menuLinks.length >= 1 ? menuLinks.map((link) => (
 						<li key={link.link}>
-							<MenuLink link={link.link} newTab={link.newTab}>{link.children}</MenuLink>
+							<MenuLink link={link.link} newTab={link.newTab} icon={link.icon}>{link.children}</MenuLink>
 						</li>
 					)) : (
 						<li>

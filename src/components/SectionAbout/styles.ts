@@ -10,9 +10,3 @@ export const Wrapper = styled.section`
 		margin: 0 auto;
 	`}
 `;
-
-export const ProfilePhotoContainer = styled.figure`
-	${({theme}) => css`
-
-	`}
-`;

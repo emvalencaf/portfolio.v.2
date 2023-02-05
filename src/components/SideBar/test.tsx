@@ -15,8 +15,8 @@ describe('<SideBar />', () => {
 		renderTheme(<SideBar githubURL={mock.githubURL} />);
 
 		expect(screen.getByRole('link', { name: 'github profile' })).toHaveStyle({
-			height: theme.font.sizes.large,
-			width: theme.font.sizes.large,
+			height: theme.fonts.sizes.large,
+			width: theme.fonts.sizes.large,
 		});
 		expect(screen.queryByRole('link', { name: 'linkedin profile' })).not.toBeInTheDocument();
 		expect(screen.getByLabelText("vertical division line")).toBeInTheDocument();
@@ -26,8 +26,8 @@ describe('<SideBar />', () => {
 		renderTheme(<SideBar githubURL={mock.githubURL} sizes="big" />);
 
 		expect(screen.getByRole("link", { name: "github profile" })).toHaveStyle({
-			height: theme.font.sizes.xlarge,
-			width: theme.font.sizes.xlarge,
+			height: theme.fonts.sizes.xlarge,
+			width: theme.fonts.sizes.xlarge,
 		});
 	});
 
@@ -35,8 +35,8 @@ describe('<SideBar />', () => {
 		renderTheme(<SideBar githubURL={mock.githubURL} sizes="small" />);
 
 		expect(screen.getByRole("link", { name: "github profile" })).toHaveStyle({
-			height: theme.font.sizes.medium,
-			width: theme.font.sizes.medium,
+			height: theme.fonts.sizes.medium,
+			width: theme.fonts.sizes.medium,
 		});
 	});
 

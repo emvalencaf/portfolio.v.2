@@ -13,12 +13,15 @@ export const Wrapper = styled.section`
 			margin: ${theme.spacings.small};
 			padding: 0;
 			width: 100%;
-			font-size: ${theme.font.sizes.medium};
+			font-size: ${theme.fonts.sizes.medium};
 		}
 		& ${HeadingContainer} {
 			margin: ${theme.spacings.small};
 			padding: 0;
 			width: 100%;
+		}
+		& ${HeadingContainer}::after {
+			content: none;
 		}
 	`}
 `;

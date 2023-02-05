@@ -9,11 +9,16 @@ export const Link = styled.a`
 
 		color: ${theme.colors.primary};
 		text-decoration: none;
-		transition: all 350ms ease-in;
+		transition: all ${theme.transitions.fast} ease-in;
 
 		&:hover {
 			color: ${theme.colors.secondary};
 			transform: scale(1.1);
+		}
+
+		> svg {
+			width: ${theme.fonts.sizes.medium};
+			height: ${theme.fonts.sizes.medium};
 		}
 	`}
 `;

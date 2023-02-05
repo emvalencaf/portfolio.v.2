@@ -6,8 +6,8 @@ export const Wrapper = styled.footer`
 		@media ${theme.media.lteSmall} {
 			& ${SocialMediaContainer} {
 				& svg, & a {
-					height: ${theme.font.sizes.medium};
-					width: ${theme.font.sizes.medium};
+					height: ${theme.fonts.sizes.medium};
+					width: ${theme.fonts.sizes.medium};
 				}
 			}
 		}

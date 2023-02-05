@@ -3,16 +3,16 @@ import { SideBarProps } from '.';
 
 const logoSizes = {
 	small: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.medium};
-		width: ${theme.font.sizes.medium};
+		height: ${theme.fonts.sizes.medium};
+		width: ${theme.fonts.sizes.medium};
 	`,
 	medium: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.large};
-		width: ${theme.font.sizes.large};
+		height: ${theme.fonts.sizes.large};
+		width: ${theme.fonts.sizes.large};
 	`,
 	big: (theme: DefaultTheme) => css`
-		height: ${theme.font.sizes.xlarge};
-		width: ${theme.font.sizes.xlarge};
+		height: ${theme.fonts.sizes.xlarge};
+		width: ${theme.fonts.sizes.xlarge};
 	`,
 };
 
@@ -32,7 +32,7 @@ export const Wrapper = styled.div`
 		justify-content: center;
 		bottom: 25rem;
 		left: 2rem;
-		z-index: 6;
+		z-index: ${theme.layers.layer6};
 	`}
 `;
 export const SocialMediaLink = styled.a<SideBarProps>`
@@ -42,7 +42,7 @@ export const SocialMediaLink = styled.a<SideBarProps>`
 		& svg, & {
 			color: inherit;
 			${logoSizes[sizes](theme)}
-			transition: all 350ms ease-in-out;
+			transition: all ${theme.transitions.fast} ease-in-out;
 		}
 
 		&  svg:hover {

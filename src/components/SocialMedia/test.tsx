@@ -28,24 +28,24 @@ describe('<SocialMedia />', () => {
 		renderTheme(<SocialMedia githubURL={mock.githubURL} sizes="small" />);
 
 		expect(screen.getByLabelText("github profile")).toHaveStyle({
-			width: theme.font.sizes.medium,
-			height: theme.font.sizes.medium,
+			width: theme.fonts.sizes.medium,
+			height: theme.fonts.sizes.medium,
 		});
 	});
 
 	it("should rend SocialMedia component with size medium", () => {
 		renderTheme(<SocialMedia githubURL={mock.githubURL} sizes="medium" />);
 		expect(screen.getByLabelText("github profile")).toHaveStyle({
-			width: theme.font.sizes.large,
-			height: theme.font.sizes.large,
+			width: theme.fonts.sizes.large,
+			height: theme.fonts.sizes.large,
 		});
 	});
 
 	it("should rend SocialMedia component with size big", () => {
 		renderTheme(<SocialMedia githubURL={mock.githubURL} sizes="big" />);
 		expect(screen.getByLabelText("github profile")).toHaveStyle({
-			width: theme.font.sizes.xlarge,
-			height: theme.font.sizes.xlarge,
+			width: theme.fonts.sizes.xlarge,
+			height: theme.fonts.sizes.xlarge,
 		});
 	});
 

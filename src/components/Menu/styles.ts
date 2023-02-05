@@ -18,13 +18,13 @@ export const Nav = styled.nav<MenuStyled>`
 			width: 100%;
 			visibility: hidden;
 			opacity: 0;
-			z-index: 5;
+			z-index: ${theme.layers.layer5};
 			top: 0;
 			left: 0;
 			right: 0;
 			bottom: 0;
 			background-color: ${theme.colors.white};
-			transition: all 350ms ease-in-out;
+			transition: all ${theme.transitions.fast} ease-in-out;
 			${visible && menuVisible()}
 
 			> ul {
@@ -75,6 +75,18 @@ export const Nav = styled.nav<MenuStyled>`
     		}
 		}
 
+		@keyframes navbarLinkLoadIcon {
+			0% {
+				transform: scale(0);
+			}
+			50% {
+				transform: scale(1.3);
+			}
+			100% {
+				transform: scale(1);
+			}
+		}
+
 		& > ul {
 			display: flex;
 			justify-content: center;
@@ -86,7 +98,7 @@ export const Nav = styled.nav<MenuStyled>`
 			list-style: none;
 			animation: navbarLinkLoad;
 			animation-duration: 1000ms;
-			animation-delay: 450ms;
+			animation-delay: ${theme.transitions.normal};
 			animation-fill-mode: forwards;
 			transform: scale(0);
 		}
@@ -99,6 +111,12 @@ export const Nav = styled.nav<MenuStyled>`
 		& ul > li:last-child {
 			animation-name: navbarLinkLoad_last;
     		transform: translateX(1000%);
+		}
+
+		& svg {
+			animation: navbarLinkLoadIcon ${theme.transitions.slower} ease-in ${theme.transitions.slowest};
+			transform: scale(0);
+			animation-fill-mode: forwards;
 		}
 	`}
 `;
@@ -124,12 +142,12 @@ export const Button = styled.button<MenuStyled>`
 		background-color: ${theme.colors.primary};
 		color: ${theme.colors.white};
 		border: none;
-		z-index: 6;
+		z-index: ${theme.layers.layer6};
 		pointer-events: ${visible ? "none": "all"};
 
 		> svg {
-			width: ${theme.font.sizes.medium};
-			height: ${theme.font.sizes.medium};
+			width: ${theme.fonts.sizes.medium};
+			height: ${theme.fonts.sizes.medium};
 		}
 	`}
 `;

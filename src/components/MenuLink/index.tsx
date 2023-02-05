@@ -24,7 +24,7 @@ const MenuLink = ({ children, link, icon, newTab = false }: MenuLinkProps) => {
 	if (nextLink) return (
 		<Link href={link} legacyBehavior passHref>
 			<Styled.Link target={target} rel={rel}>
-				{icon}
+				{!!icon && icon}
 				{children}
 			</Styled.Link>
 		</Link>
@@ -32,6 +32,7 @@ const MenuLink = ({ children, link, icon, newTab = false }: MenuLinkProps) => {
 
 	return (
 		<Styled.Link href={link} target={target} rel={rel}>
+			{!!icon && icon}
 			{children}
 		</Styled.Link>
 	)
