@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components';
 import { Title as HeadingContainer } from '../Heading/styles';
 
 type WrapperAcademicCertificateProps = {
-	theme: DefaultTheme;
+	theme?: DefaultTheme;
 	showDetails: boolean;
 }
 
@@ -12,12 +12,15 @@ const changeCursor = () => css`
 
 export const Wrapper = styled.div<WrapperAcademicCertificateProps>`
 	${({ theme, showDetails }) => css`
-	padding: 2rem;
-	${!showDetails && changeCursor()}
+		padding: ${theme.spacings.xsmall}};
 
-	& ${HeadingContainer} {
-		margin: 0px;
-	}
+		${!showDetails && changeCursor()}
+
+		& ${HeadingContainer} {
+			margin: 0px;
+		}
+
+		margin: ${theme.spacings.xsmall} auto;
 	`}
 `;
 

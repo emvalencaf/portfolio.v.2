@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
 		border-radius: 20px;
 		padding: 0px ${theme.spacings.small};
 		cursor: pointer;
+		margin: ${theme.spacings.small};
 		& ${HeadingContainer} {
 			align-self: center;
 			margin: 0px;

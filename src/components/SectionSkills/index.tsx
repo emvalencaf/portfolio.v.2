@@ -1,6 +1,7 @@
-// components
+// hooks
 import { useEffect, useState } from 'react';
-import Button from '../Button';
+
+// components
 import Heading from '../Heading';
 import Section from '../Section';
 import TechButton, { TechButtonProps } from '../TechButton';

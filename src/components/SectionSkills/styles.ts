@@ -22,5 +22,10 @@ export const TechButtonContainer = styled.div`
 `;
 
 export const TechDescriptionContainer = styled.div`
-	${({ theme }) => css``}
+	${({ theme }) => css`
+		text-align: justify;
+		margin: ${theme.spacings.xxlarge} auto;
+		padding-left: ${theme.spacings.mediumSmall};
+		padding-right: ${theme.spacings.mediumSmall};
+	`}
 `;
