@@ -1,44 +1,88 @@
+// hooks
+import { useContext, useState } from 'react';
+
 // components
 import Heading from '../Heading';
 import Button from '../Button';
 
 // icons
-import { Github } from '@styled-icons/boxicons-logos';
+import { Github, Javascript, Typescript, Html5, Css3 } from '@styled-icons/boxicons-logos';
+import { Movie, SwapHorizontalCircle } from '@styled-icons/material-outlined';
 // styles
 import * as Styled from './styles';
+import Link from 'next/link';
 
 // types
 export type CardProjectProps = {
-	title?: string;
+	title: string;
+	mainLang: "javascript" | "typescript" | "html" | "css"
+	description: string;
 	srcImg?: string;
-	altImg?: string;
-	icon?: React.ReactNode;
+	urlDemo: string;
+	urlRepository: string;
 };
 
+// data
+const langIcons = {
+	javascript: <Javascript />,
+	typescript: <Typescript />,
+	css: <Css3 />,
+	html: <Html5 />,
+}
+
 const CardProject = ({
-	title = "",
+	title,
+	mainLang = "javascript",
 	srcImg = "",
-	icon
+	description = "",
+	urlDemo,
+	urlRepository,
 }: CardProjectProps) => {
+	// states
+	const [ showDescription, setShowDescription ] = useState(false);
+	// handle click events
+	const handleClick = () => {
+		setShowDescription((s) => !s);
+	};
+
 	return (
 		<Styled.Wrapper>
 			<Styled.HeaderCardContainer>
-				<Heading as="h3" size="medium" uppercase={true}>
+				{
+					langIcons[`${mainLang}`]
+				}
+				<Heading as="h3" size="small" uppercase={true}>
 					{title}
 				</Heading>
+				<span>
+					<SwapHorizontalCircle onClick={handleClick} />
+				</span>
 			</Styled.HeaderCardContainer>
-			<Styled.PictureContainer>
-				{!!srcImg &&
-					<img alt={`project picture ${title}`} src={srcImg} />
-				}
-			</Styled.PictureContainer>
+			{ showDescription ? (
+				<Styled.ContentContainer>
+					{description}
+				</Styled.ContentContainer>
+			): (
+				<Styled.PictureContainer>
+					{!!srcImg &&
+						<img alt={`project picture ${title}`} src={srcImg} />
+					}
+				</Styled.PictureContainer>
+
+			)}
 			<Styled.ButtonsContainer>
-				<Button icon={!!icon && icon}>
-					Demo
-				</Button>
-				<Button icon={<Github />}>
-					GitHub
-				</Button>
+				<Link href={urlDemo} legacyBehavior passHref>
+					<a rel="external" target="_blank">
+						<Movie />
+						Demo
+					</a>
+				</Link>
+				<Link href={urlRepository} legacyBehavior passHref>
+					<a rel="external" target="_blank">
+						<Github />
+						GitHub
+					</a>
+				</Link>
 			</Styled.ButtonsContainer>
 		</Styled.Wrapper>
 	);

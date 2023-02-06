@@ -12,7 +12,7 @@ export default {
 
 export const Template: Story<CardProjectProps> = (args) => {
 	return (
-		<div>
+		<div style={{ display: "flex", width: "100%", height: "100%", alignContent: "center", justifyContent: "center", margin: "2rem" }}>
 			<CardProject {...args} />
 		</div>
 	);

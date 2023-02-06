@@ -1,16 +1,27 @@
+// components
+import Heading from '../Heading';
+import Section from '../Section';
+import CardProject, { CardProjectProps } from '../CardProject';
+
 // styles
 import * as Styled from './styles';
 
 // types
 export type SectionProjectProps = {
-	title?: string;
+	id: string;
+	projects?: CardProjectProps[];
 };
 
-const SectionProject = ({ title = '' }: SectionProjectProps) => {
+const SectionProject = ({ id, projects = [] }: SectionProjectProps) => {
 	return (
-		<Styled.Wrapper>
-			<h1> {title} </h1>
-		</Styled.Wrapper>
+		<Section id={id}>
+			<Heading as='h2' size='big'>
+				Projetos
+			</Heading>
+			<Styled.Wrapper>
+				{projects.length >= 1 && projects.map((project) => <CardProject {...project} />)}
+			</Styled.Wrapper>
+		</Section>
 	);
 };
 
