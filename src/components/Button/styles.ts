@@ -10,7 +10,7 @@ export const Button = styled.button<Pick<ButtonProps, "color">>`
 		padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
 		cursor: pointer;
 		border-radius: ${theme.spacings.tiny};
-		transition: ${theme.transitions.fast};
+		transition: all ${theme.transitions.fast} ease-in-out;
 		display: flex;
 		align-items: center;
 		justify-content: center;

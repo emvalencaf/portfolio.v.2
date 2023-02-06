@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 
-import { Button as ButtonContainer } from '../Button/styles';
 export const Wrapper = styled.div`
 	${({ theme }) => css`
 		display: flex;
