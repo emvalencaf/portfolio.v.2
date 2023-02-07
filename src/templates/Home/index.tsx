@@ -1,15 +1,17 @@
 import * as Styled from "./styles";
 
 // components
-import Mock from "../../components/Mock";
 import Header from "../../components/Header";
-import Section from "../../components/Section";
 import SideBar, { SideBarProps } from "../../components/SideBar";
 import SectionHome, { SectionHomeProps } from "../../components/SectionHome";
+import GoTop from "../../components/GoTop";
 import SectionAbout, { SectionAboutProps } from "../../components/SectionAbout";
+import SectionSkills, { SectionSkillsProps } from "../../components/SectionSkills";
+import SectionProject, { SectionProjectProps } from "../../components/SectionProjects";
 
 // type
 import { LogoLinkProps } from "../../components/LogoLink";
+import { MenuLinkProps } from "../../components/MenuLink";
 export type HomeProps = {
 	header: {
 		logo: LogoLinkProps;
@@ -19,22 +21,26 @@ export type HomeProps = {
 		sections: {
 			home: SectionHomeProps;
 			about: SectionAboutProps;
-		}
+			skills: SectionSkillsProps;
+			projects: SectionProjectProps;
+		};
 		sideBar: SideBarProps;
 	}
 }
 
 // mock
 import mock from "./mock";
-import { MenuLinkProps } from "../../components/MenuLink";
 
 const Home = () => {
   return (
     <Styled.Wrapper>
-      <Header {...mock.header} />
-	  <SideBar {...mock.main.sideBar} />
-	  <SectionHome {...mock.main.sections.home} />
-	  <SectionAbout {...mock.main.sections.about} />
+		<GoTop />
+    	<Header {...mock.header} />
+		<SideBar {...mock.main.sideBar} sizes="big" />
+		<SectionHome {...mock.main.sections.home} />
+		<SectionAbout {...mock.main.sections.about} />
+		<SectionSkills {...mock.main.sections.skills} />
+		<SectionProject {...mock.main.sections.projects} />
     </Styled.Wrapper>
   );
 };

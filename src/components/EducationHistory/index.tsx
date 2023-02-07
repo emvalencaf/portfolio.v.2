@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // components
-import AcademicCertificate, { AcademicCertificateProps } from '../AcademicCertificate';
+import AcademicCertificate, { AcademicCertificateProps } from '../EducationCard';
 
 // styles
 import * as Styled from './styles';
@@ -22,7 +22,7 @@ const AcademicHistory = ({ academicData = [] }: AcademicHistoryProps) => {
 		<Styled.Wrapper>
 			<ul>
 				{stateAcademicData.length >= 1 && stateAcademicData.map((certificate) => (
-					<li>
+					<li key={`${certificate.courseTitle} - ${certificate.startIn}`}>
 						<AcademicCertificate {...certificate} onClick={() => {
 							setStateAcademicData((previousState) => previousState.map((state) => {
 								if (state === certificate) return {

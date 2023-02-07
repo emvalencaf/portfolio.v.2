@@ -17,3 +17,10 @@ export const Wrapper = styled.div`
 		}
 	`}
 `;
+
+export const ContentContainer = styled.div`
+	${({ theme }) => css`
+		max-height: 350px;
+		overflow-y: scroll;
+	`}
+`;

@@ -17,7 +17,9 @@ export type BiosProps = {
 const Bios = ({ bios, profilePhoto }: BiosProps) => {
 	return (
 		<Styled.Wrapper>
-			<HtmlComponent html={bios} />
+			<Styled.ContentContainer>
+				<HtmlComponent html={bios} />
+			</Styled.ContentContainer>
 			{profilePhoto && (
 				<ProfilePhoto {...profilePhoto} />
 			)}

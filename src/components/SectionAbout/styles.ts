@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 
 		& ${Button} {
 			width: 100%;
-			margin-top: ${theme.spacings.medium};
+			margin-top: ${theme.spacings.small};
 		}
 	`}
 `;

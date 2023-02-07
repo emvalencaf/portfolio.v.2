@@ -3,10 +3,10 @@ import { useContext, useState } from 'react';
 
 // components
 import Heading from '../Heading';
-import Button from '../Button';
 
 // icons
-import { Github, Javascript, Typescript, Html5, Css3 } from '@styled-icons/boxicons-logos';
+import { Github, Javascript, Typescript, Html5, Css3, Python, Java, CPlusPlus, Php } from '@styled-icons/boxicons-logos';
+import { Csharp }  from "@styled-icons/simple-icons";
 import { Movie, SwapHorizontalCircle } from '@styled-icons/material-outlined';
 // styles
 import * as Styled from './styles';
@@ -15,7 +15,7 @@ import Link from 'next/link';
 // types
 export type CardProjectProps = {
 	title: string;
-	mainLang: "javascript" | "typescript" | "html" | "css"
+	mainLang: "javascript" | "typescript" | "html" | "css" | "python" | "java" | "cplus" | "csharp" | "php";
 	description: string;
 	srcImg?: string;
 	urlDemo: string;
@@ -28,7 +28,12 @@ const langIcons = {
 	typescript: <Typescript />,
 	css: <Css3 />,
 	html: <Html5 />,
-}
+	python: <Python />,
+	java: <Java />,
+	cplus: <CPlusPlus />,
+	csharp: <Csharp />,
+	php: <Php />,
+};
 
 const CardProject = ({
 	title,

@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 		padding: ${theme.spacings.small};
 		background-color: ${theme.colors.gray1};
 		transition: ${theme.transitions.normal};
+		z-index: ${theme.layers.layer1};
 		opacity: 0.4;
 		&:focus,
 		&:hover {

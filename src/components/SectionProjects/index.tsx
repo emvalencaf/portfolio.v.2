@@ -19,7 +19,7 @@ const SectionProject = ({ id, projects = [] }: SectionProjectProps) => {
 				Projetos
 			</Heading>
 			<Styled.Wrapper>
-				{projects.length >= 1 && projects.map((project) => <CardProject {...project} />)}
+				{projects.length >= 1 && projects.map((project, index) => <CardProject key={`${index} -${project.title} - ${project.mainLang}`} {...project} />)}
 			</Styled.Wrapper>
 		</Section>
 	);

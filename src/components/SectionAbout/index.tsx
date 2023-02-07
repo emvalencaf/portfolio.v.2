@@ -13,7 +13,7 @@ import { Person3, WorkHistory, LibraryBooks } from '@styled-icons/material-outli
 
 // styles
 import * as Styled from './styles';
-import AcademicHistory, { AcademicHistoryProps } from '../AcademicHistory';
+import AcademicHistory, { AcademicHistoryProps } from '../EducationHistory';
 
 // types
 export type SectionAboutProps = {

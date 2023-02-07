@@ -7,32 +7,32 @@ export default {
 	menuLinks: [
 		{
 			children: "home",
-			link: "/",
+			link: "#",
 			icon: <Home />,
 			newTab: false,
 		},
 		{
 			children: "sobre",
-			link: "/sobre",
+			link: "#sobre",
 			icon: <Person3 />,
 			newTab: false,
 		},
 		{
 			children: "habilidades",
 			icon: <Code />,
-			link: "/habilidades",
+			link: "#habilidades",
 			newTab: false,
 		},
 		{
 			children: "projetos",
 			icon: <Cases />,
-			link: "/projetos",
+			link: "#projetos",
 			newTab: false,
 		},
 		{
 			children: "curriculo",
 			icon: <Portrait />,
-			link: "/curriculo",
+			link: "#curriculo",
 			newTab: false,
 		}
 	]

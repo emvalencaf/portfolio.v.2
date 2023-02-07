@@ -18,7 +18,7 @@ export const Nav = styled.nav<MenuStyled>`
 			width: 100%;
 			visibility: hidden;
 			opacity: 0;
-			z-index: ${theme.layers.layer5};
+			z-index: ${theme.layers.layer6};
 			top: 0;
 			left: 0;
 			right: 0;
@@ -142,7 +142,7 @@ export const Button = styled.button<MenuStyled>`
 		background-color: ${theme.colors.primary};
 		color: ${theme.colors.white};
 		border: none;
-		z-index: ${theme.layers.layer6};
+		z-index: ${theme.layers.layer7};
 		pointer-events: ${visible ? "none": "all"};
 
 		> svg {
