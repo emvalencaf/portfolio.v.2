@@ -5,25 +5,33 @@ import { useState } from 'react';
 import Bios, { BiosProps } from '../Bios';
 import Button from '../Button';
 import Heading from '../Heading';
-import Section from '../Section';
-import WorkExperienceContainer, { WorkExperienceContainerProps } from '../WorkExperienceContainer';
+import Section, { SectionProps } from '../Section';
+import Education, { EducationProps } from '../Education';
+import WorkExperience, { WorkExperienceProps } from '../WorkExperience';
 
 // icons
 import { Person3, WorkHistory, LibraryBooks } from '@styled-icons/material-outlined';
 
 // styles
 import * as Styled from './styles';
-import AcademicHistory, { AcademicHistoryProps } from '../EducationHistory';
 
 // types
 export type SectionAboutProps = {
-	id: string;
-	bios: BiosProps;
-	workExperiences: WorkExperienceContainerProps;
+	biosData: BiosProps;
+	workData: WorkExperienceProps;
 	urlDownload: string;
-} & AcademicHistoryProps;
+	educationData: EducationProps;
+} & SectionProps;
 
-const SectionAbout = ({ bios, id, urlDownload, workExperiences, academicData }: SectionAboutProps) => {
+const SectionAbout = ({
+		id,
+		biosData,
+		urlDownload,
+		workData,
+		educationData,
+		background,
+		color
+	}: SectionAboutProps) => {
 	// states
 	const [inBios, setInBios] = useState(true);
 	const [inWorkExperiences, setInWorkExperiences] = useState(false);
@@ -49,7 +57,7 @@ const SectionAbout = ({ bios, id, urlDownload, workExperiences, academicData }: 
 		window.open(urlDownload);
 	}
 	return (
-		<Section id={id}>
+		<Section id={id} background={background} color={color}>
 			<Heading as='h2' size='big'>
 				Sobre
 			</Heading>
@@ -78,13 +86,14 @@ const SectionAbout = ({ bios, id, urlDownload, workExperiences, academicData }: 
 					</Button>
 				</Styled.SectionInnerMenu>
 				{inBios &&
-					<Bios  {...bios} />
+					<Bios  {...biosData} />
 				}
 				{inWorkExperiences &&
-					<WorkExperienceContainer {...workExperiences} />
+					<WorkExperience {...workData} />
 				}
 				{inAcademics &&
-					<AcademicHistory academicData={academicData} />
+					//<AcademicHistory academicData={academicData} />
+					<Education {...educationData} />
 				}
 				<Button type="submit" onClick={handleClickDownloadButton}>Download Curriculum</Button>
 			</Styled.Wrapper>

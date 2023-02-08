@@ -1,6 +1,6 @@
 // components
 import Heading from '../Heading';
-import Section from '../Section';
+import Section, { SectionProps } from '../Section';
 import CardProject, { CardProjectProps } from '../CardProject';
 
 // styles
@@ -8,13 +8,17 @@ import * as Styled from './styles';
 
 // types
 export type SectionProjectProps = {
-	id: string;
 	projects?: CardProjectProps[];
-};
+} & SectionProps;
 
-const SectionProject = ({ id, projects = [] }: SectionProjectProps) => {
+const SectionProject = ({
+		id,
+		background,
+		color,
+		projects = [],
+	}: SectionProjectProps) => {
 	return (
-		<Section id={id}>
+		<Section id={id} background={background} color={color}>
 			<Heading as='h2' size='big'>
 				Projetos
 			</Heading>

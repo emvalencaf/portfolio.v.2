@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 // components
 import Heading from '../Heading';
-import Section from '../Section';
+import Section, { SectionProps } from '../Section';
 import TechButton, { TechButtonProps } from '../TechButton';
 
 // styles
@@ -14,12 +14,15 @@ type Tech = TechButtonProps & {
 	techDescription: string;
 }
 export type SectionSkillsProps = {
-	id: string;
 	techs?: Tech[];
-};
+} & SectionProps;
 
-const SectionSkills = ({ id, techs = []
-}: SectionSkillsProps) => {
+const SectionSkills = ({
+		id,
+		background,
+		color,
+		techs = [],
+	}: SectionSkillsProps) => {
 	const [stateTechs, setStateTechs] = useState(techs);
 	const [stateTechDescription, setStateTechDescription] = useState("");
 	useEffect(()=>{
@@ -28,7 +31,7 @@ const SectionSkills = ({ id, techs = []
 	}, [stateTechs]);
 
 	return (
-		<Section id={id}>
+		<Section id={id} background={background} color={color}>
 			<Heading as='h2' size='big'>
 				Habilidades
 			</Heading>

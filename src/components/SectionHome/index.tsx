@@ -1,21 +1,27 @@
 // components
 import Heading from '../Heading';
-import Section from '../Section';
+import Section, { SectionProps } from '../Section';
 
 // styles
 import * as Styled from './styles';
 
 // types
 export type SectionHomeProps = {
-	id: string;
 	ownerName?: string;
 	ocupation?: string;
 	mainStack?: string[];
-};
+} & SectionProps;
 
-const SectionHome = ({ id, ownerName, ocupation, mainStack = [] }: SectionHomeProps) => {
+const SectionHome = ({
+		id,
+		background,
+		color,
+		ownerName,
+		ocupation,
+		mainStack = []
+	}: SectionHomeProps) => {
 	return (
-		<Section id={id}>
+		<Section id={id} background={background} color={color}>
 			<Styled.Wrapper>
 				<p>
 					Olá, seja bem-vindo ao meu portfólio.

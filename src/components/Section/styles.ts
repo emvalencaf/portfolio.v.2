@@ -1,8 +1,18 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 import { Title as HeadingContainer } from '../Heading/styles';
 
-export const Wrapper = styled.section`
-	${({ theme }) => css`
+type WrapperProps = {
+	theme: DefaultTheme;
+	background: boolean;
+	color: string;
+}
+
+const setBackgroundColor = (color:string) => css`
+	background-color: ${color};
+`;
+
+export const Wrapper = styled.section<WrapperProps>`
+	${({ theme, background, color }) => css`
 		@media ${theme.media.lteMedium} {
 			padding: 0px ${theme.spacings.small};
 
@@ -11,9 +21,10 @@ export const Wrapper = styled.section`
 			}
 		}
 		width: 100%;
-		height: 500px;
+		height: 600px;
 		padding: 0px ${theme.spacings.xxhero};
 		margin: calc(${theme.spacings.xhuge} + ${theme.spacings.huge}) auto;
+		${background && setBackgroundColor(color)}
 		& > ${HeadingContainer}::after {
 			content: "";
     		display: inline-block;
