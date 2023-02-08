@@ -59,7 +59,7 @@ export default {
 				],
 			},
 			about: {
-				id: "#about",
+				id: "about",
 				biosData: {
 					bios: `
 						<p>

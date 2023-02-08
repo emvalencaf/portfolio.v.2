@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 // imported styled-components
 import { Link as LogoLinkContainer } from "../LogoLink/styles";
@@ -9,7 +9,13 @@ type ContainerProps = {
 }
 
 // function
-const visibileMenu = () => css`
+const visibileMenu = (theme: DefaultTheme) => css`
+	@media ${theme.media.lteMedium} {
+		opacity: 1;
+		visibility: visible;
+		appearance: inherit;
+		display: inherit;
+	}
 	opacity: 0;
 	visibility: hidden;
 	display: none;
@@ -41,11 +47,12 @@ export const Wrapper = styled.header<ContainerProps>`
 		border: 1px solid ${theme.colors.gray5};
 		border-bottom-left-radius: ${theme.fonts.sizes.small};
 		border-bottom-right-radius: ${theme.fonts.sizes.small};
+		z-index: ${theme.layers.layer6};
 		opacity: 1;
 		& ul {
 			padding: 0;
 		}
 
-		${!visible && visibileMenu()}
+		${!visible && visibileMenu(theme)}
 	`}
 `;

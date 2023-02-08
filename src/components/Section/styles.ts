@@ -21,8 +21,7 @@ export const Wrapper = styled.section<WrapperProps>`
 			}
 		}
 		width: 100%;
-		height: 600px;
-		padding: 0px ${theme.spacings.xxhero};
+		padding: 0px 15rem;
 		margin: calc(${theme.spacings.xhuge} + ${theme.spacings.huge}) auto;
 		${background && setBackgroundColor(color)}
 		& > ${HeadingContainer}::after {

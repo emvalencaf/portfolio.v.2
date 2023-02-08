@@ -1,4 +1,5 @@
-import * as Styled from "./styles";
+// hooks
+import { useState } from "react";
 
 // components
 import Header from "../../components/Header";
@@ -28,21 +29,39 @@ export type HomeProps = {
 	}
 }
 
+// styles
+import * as Styled from "./styles";
+
 // mock
 import mock from "./mock";
 
 const Home = () => {
-  return (
-    <Styled.Wrapper>
-		<GoTop />
-    	<Header {...mock.header} />
-		<SideBar {...mock.main.sideBar} sizes="big" />
-		<SectionHome {...mock.main.sections.home} />
-		<SectionAbout {...mock.main.sections.about} />
-		<SectionSkills {...mock.main.sections.skills} />
-		<SectionProject {...mock.main.sections.projects} />
-    </Styled.Wrapper>
-  );
+	// states
+	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(window.scrollY);
+	const [ visibleHeader, setVisibleHeader] = useState<boolean>(true);
+
+	// handle synthetic events
+	const handleHiddenHeader = () => {
+
+		lastScrollYCoords < window.scrollY?
+			setVisibleHeader(false): setVisibleHeader(true);
+
+		setLastScrollYCoords(window.scrollY);
+	};
+
+	window.addEventListener("scroll", handleHiddenHeader);
+
+	return (
+		<Styled.Wrapper>
+			<GoTop />
+			<Header {...mock.header} visible={visibleHeader} />
+			<SideBar {...mock.main.sideBar} sizes="big" />
+			<SectionHome {...mock.main.sections.home} />
+			<SectionAbout {...mock.main.sections.about} />
+			<SectionSkills {...mock.main.sections.skills} />
+			<SectionProject {...mock.main.sections.projects} />
+		</Styled.Wrapper>
+	);
 };
 
 export default Home;
