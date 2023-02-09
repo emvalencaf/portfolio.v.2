@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 // icons
-import { Home, Menu as MenuIcon } from "@styled-icons/material-outlined";
+import { Home, Login, Menu as MenuIcon, OutdoorGrill } from "@styled-icons/material-outlined";
 import { Close as CloseIcon } from "@styled-icons/material-outlined";
 import { Dashboard as Admin } from "@styled-icons/material-outlined";
 import { Edit as EditPage } from "@styled-icons/material-outlined";
@@ -79,9 +79,27 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 											editar portfólio
 										</MenuLink>
 									</li>
+									<li>
+										<MenuLink
+											icon={<OutdoorGrill />}
+											newTab={false}
+											link={`/admin/logout`}
+										>
+											logout
+										</MenuLink>
+									</li>
 								</>
 							)}
 						</>
+					)}
+					{router.pathname.match(/admin/) && (
+						<li>
+							<MenuLink
+								icon={<Login />}
+								newTab={false}
+								link={`/admin/login`}
+							>Login</MenuLink>
+						</li>
 					)}
 				</ul>
 			</Styled.Nav>

@@ -13,18 +13,21 @@ import SectionProject, { SectionProjectProps } from "../../components/SectionPro
 // type
 import { LogoLinkProps } from "../../components/LogoLink";
 import { MenuLinkProps } from "../../components/MenuLink";
+
+export type Sections = {
+	home: SectionHomeProps;
+	about: SectionAboutProps;
+	skills: SectionSkillsProps;
+	projects: SectionProjectProps;
+};
+
 export type HomeProps = {
 	header: {
 		logo: LogoLinkProps;
 		menuLinks: MenuLinkProps[];
 	},
 	main: {
-		sections: {
-			home: SectionHomeProps;
-			about: SectionAboutProps;
-			skills: SectionSkillsProps;
-			projects: SectionProjectProps;
-		};
+		sections: Sections;
 		sideBar: SideBarProps;
 	},
 	footer: FooterProps;

@@ -1,13 +1,8 @@
-import Menu from "../../components/Menu";
+// template
+import DashboardTemplate from "../../templates/Dashboard";
 
 export default function DashboardPage() {
 	return (
-		<>
-
-			<Menu />
-			<h1>
-				Olá
-			</h1>
-		</>
+		<DashboardTemplate />
 	);
 };

@@ -6,6 +6,7 @@ export type SectionProps = {
 	id: string;
 	children: React.ReactNode;
 	background?: boolean;
+	icon?: React.ReactNode;
 	color?: "primary" | "secondary" | "tertiary" | "quaternary" | "quinary" | "senary";
 };
 
