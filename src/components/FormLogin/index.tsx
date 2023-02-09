@@ -14,7 +14,7 @@ import * as Styled from './styles';
 // types
 export type FormLoginProps = {
 	errorMessage?: string;
-	handleLogin?: (username: string, password: string) => void;
+	handleLogin?: (username: string, password: string) => Promise<void>;
 };
 
 const FormLogin = ({
@@ -71,7 +71,11 @@ const FormLogin = ({
 							: <Login />
 					}
 				>
-					{loading? "Aguarde..." : "Entrar"}
+					{
+						loading?
+							"Aguarde..."
+							: "Entrar"
+					}
 				</Button>
 			</Styled.ButtonWrapper>
 

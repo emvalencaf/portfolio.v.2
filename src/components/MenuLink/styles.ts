@@ -2,6 +2,12 @@ import styled, { css } from 'styled-components';
 
 export const Link = styled.a`
 	${({ theme }) => css`
+		@media ${theme.media.lteMedium} {
+			& span {
+				display: none;
+			}
+		}
+
 		display: flex;
 		flex-direction: column;
 		align-items: center;

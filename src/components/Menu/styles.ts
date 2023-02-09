@@ -14,7 +14,7 @@ export const Nav = styled.nav<MenuStyled>`
 	${({ theme, visible }) => css`
 		@media ${theme.media.lteMedium} {
 			position: fixed;
-			height: 100%;
+//			height: 100%;
 			width: 100%;
 			visibility: hidden;
 			opacity: 0;
@@ -22,14 +22,15 @@ export const Nav = styled.nav<MenuStyled>`
 			top: 0;
 			left: 0;
 			right: 0;
-			bottom: 0;
-			background-color: ${theme.colors.primary};
+//			bottom: 0;
+			background-color: ${theme.colors.quaternary};
 			transition: all ${theme.transitions.fast} ease-in-out;
 			${visible && menuVisible()}
 
 			> ul {
-				height: 100vh;
-				flex-flow: column wrap;
+//				height: 100vh;
+//				flex-flow: column wrap;
+				flex-flow: row wrap;
 				align-items: center;
 				justify-content: center;
 			}

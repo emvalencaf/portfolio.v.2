@@ -1,10 +1,13 @@
 // hooks
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 // icons
-import { Menu as MenuIcon } from "@styled-icons/material-outlined";
+import { Home, Menu as MenuIcon } from "@styled-icons/material-outlined";
 import { Close as CloseIcon } from "@styled-icons/material-outlined";
-
+import { Dashboard as Admin } from "@styled-icons/material-outlined";
+import { Edit as EditPage } from "@styled-icons/material-outlined";
 // components
 import MenuLink, { MenuLinkProps } from '../MenuLink';
 
@@ -17,8 +20,13 @@ export type MenuProps = {
 };
 
 const Menu = ({ menuLinks = [] }: MenuProps) => {
-	const [visible, setVisible] = useState(false);
+	// router
+	const router = useRouter();
 
+	// states
+	const [visible, setVisible] = useState(false);
+	const { data: session } = useSession();
+	console.log(router.basePath);
 	return (
 		<>
 			<Styled.Button
@@ -28,7 +36,7 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 			>
 				{visible ? (
 					<CloseIcon aria-label="Close menu" />
-					) : (
+				) : (
 					<MenuIcon aria-label="Open menu" />
 				)}
 			</Styled.Button>
@@ -40,10 +48,40 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 						</li>
 					)) : (
 						<li>
-							<MenuLink link="#">
+							<MenuLink link={
+								router.pathname.match(/admin/) ?
+									"/"
+									: "#"
+							} icon={<Home />}>
 								Home
 							</MenuLink>
 						</li>
+					)}
+					{!!session && (
+						<>
+							<li>
+								<MenuLink
+									icon={<Admin />}
+									newTab={true}
+									link={`/admin/`}
+								>
+									dashboad
+								</MenuLink>
+							</li>
+							{router.pathname.match(/admin/) && (
+								<>
+									<li>
+										<MenuLink
+											icon={<EditPage />}
+											newTab={false}
+											link={`/admin/edit-portfolio`}
+										>
+											editar portfólio
+										</MenuLink>
+									</li>
+								</>
+							)}
+						</>
 					)}
 				</ul>
 			</Styled.Nav>

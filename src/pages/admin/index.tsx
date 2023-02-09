@@ -1,7 +1,13 @@
-
+import Menu from "../../components/Menu";
 
 export default function DashboardPage() {
-	return <h1>
-		Olá
-	</h1>;
+	return (
+		<>
+
+			<Menu />
+			<h1>
+				Olá
+			</h1>
+		</>
+	);
 };
