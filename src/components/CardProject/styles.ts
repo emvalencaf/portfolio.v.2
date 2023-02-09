@@ -56,7 +56,7 @@ export const PictureContainer = styled.picture`
 	`}
 `;
 
-export const ContentContainer = styled.p`
+export const ContentContainer = styled.div`
 	${({ theme }) => css`
 		@keyframes content {
 			0% {
@@ -73,6 +73,36 @@ export const ContentContainer = styled.p`
 		transition: all ${theme.transitions.normal} ease-in-out;
 		animation: content ${theme.transitions.slowest};
 		animation-fill-mode: forwards;
+		> a {
+			color: ${theme.colors.secondary};
+			text-decoration: none;
+			font-size: ${theme.fonts.sizes.small};
+			padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
+			cursor: pointer;
+			border-radius: ${theme.spacings.tiny};
+			transition: all ${theme.transitions.fast} ease-in-out;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			background-color: ${theme.colors.primary};
+			> svg {
+				width: 2rem;
+				height: 2rem;
+				margin-left: 1rem;
+				margin-right:1rem;
+			}
+
+			&:focus {
+				outline: none;
+				box-shadow: 0 0 ${theme.spacings.tiny} ${theme.colors.primary};
+				filter: brightness(110%);
+			}
+
+			&:hover {
+				filter: brightness(90%);
+			}
+		}
 	`}
 `;
 

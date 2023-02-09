@@ -1,26 +1,23 @@
 // hooks
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 // components
 import Heading from '../Heading';
+import Link from 'next/link';
 
 // icons
 import { Github, Javascript, Typescript, Html5, Css3, Python, Java, CPlusPlus, Php } from '@styled-icons/boxicons-logos';
-import { Csharp }  from "@styled-icons/simple-icons";
+import { Csharp } from "@styled-icons/simple-icons";
 import { Movie, SwapHorizontalCircle } from '@styled-icons/material-outlined';
+import { Link as LinkIcon } from "@styled-icons/material-outlined";
+
 // styles
 import * as Styled from './styles';
-import Link from 'next/link';
+
 
 // types
-export type CardProjectProps = {
-	title: string;
-	mainLang: "javascript" | "typescript" | "html" | "css" | "python" | "java" | "cplus" | "csharp" | "php";
-	description: string;
-	srcImg?: string;
-	urlDemo: string;
-	urlRepository: string;
-};
+import { Project } from '../../shared-types/project';
+export type CardProjectProps = Project;
 
 // data
 const langIcons = {
@@ -36,18 +33,19 @@ const langIcons = {
 };
 
 const CardProject = ({
+	id,
 	title,
 	mainLang = "javascript",
 	srcImg = "",
-	description = "",
+	resume = "",
 	urlDemo,
 	urlRepository,
 }: CardProjectProps) => {
 	// states
-	const [ showDescription, setShowDescription ] = useState(false);
+	const [showResume, setShowResume] = useState(false);
 	// handle click events
 	const handleClick = () => {
-		setShowDescription((s) => !s);
+		setShowResume((s) => !s);
 	};
 
 	return (
@@ -63,11 +61,19 @@ const CardProject = ({
 					<SwapHorizontalCircle onClick={handleClick} />
 				</span>
 			</Styled.HeaderCardContainer>
-			{ showDescription ? (
+			{showResume ? (
 				<Styled.ContentContainer>
-					{description}
+					<p>
+						{resume}
+					</p>
+					<Link href={`/project/${id}`} passHref legacyBehavior>
+						<a target="_self" rel="internal">
+							<LinkIcon />
+							Veja os detalhes
+						</a>
+					</Link>
 				</Styled.ContentContainer>
-			): (
+			) : (
 				<Styled.PictureContainer>
 					{!!srcImg &&
 						<img alt={`project picture ${title}`} src={srcImg} />
