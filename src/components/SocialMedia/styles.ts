@@ -26,6 +26,7 @@ export const Wrapper = styled.div<SocialMediaProps>`
 
 		&  svg:hover {
 			transform: scale(1.2);
+			color:${theme.colors.deepWhite};
 			opacity: 0.8;
 		}
 	`}

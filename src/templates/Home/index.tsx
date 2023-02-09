@@ -26,7 +26,8 @@ export type HomeProps = {
 			projects: SectionProjectProps;
 		};
 		sideBar: SideBarProps;
-	}
+	},
+	footer: FooterProps;
 }
 
 // styles
@@ -34,8 +35,9 @@ import * as Styled from "./styles";
 
 // mock
 import mock from "./mock";
+import Footer, { FooterProps } from "../../components/Footer";
 
-const Home = () => {
+const HomeTemplate = () => {
 	// states
 	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(0);
 	const [ visibleHeader, setVisibleHeader] = useState<boolean>(true);
@@ -68,8 +70,9 @@ const Home = () => {
 			<SectionAbout {...mock.main.sections.about} />
 			<SectionSkills {...mock.main.sections.skills} />
 			<SectionProject {...mock.main.sections.projects} />
+			<Footer {...mock.footer} />
 		</Styled.Wrapper>
 	);
 };
 
-export default Home;
+export default HomeTemplate;

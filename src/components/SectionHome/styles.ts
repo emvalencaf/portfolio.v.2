@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 		justify-content: center;
 		height: 600px;
 		width: 100%;
-		margin: 0 auto;
+		margin: 0px auto;
 
 		& p {
 			margin: ${theme.spacings.small};

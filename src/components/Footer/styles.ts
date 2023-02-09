@@ -17,6 +17,8 @@ export const Wrapper = styled.footer`
 		justify-content: center;
 		gap: ${theme.spacings.xsmall};
 		margin-top: ${theme.spacings.medium};
+		background-color: ${theme.colors.quaternary};
+		padding: ${theme.spacings.medium};
 		& p {
 			margin: 0;
 			padding: 0;

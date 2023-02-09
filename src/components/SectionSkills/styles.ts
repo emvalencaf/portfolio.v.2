@@ -34,9 +34,17 @@ export const TechDescriptionContainer = styled.div`
 		padding-right: ${theme.spacings.mediumSmall};
 		max-width: 700px;
 		height: 300px;
-
+		border: 2px solid ${theme.colors.quaternary};
+		border-radius: 0rem 0rem 2rem;
+		box-shadow: 0px 0px 8px 8px ${theme.colors.tertiary};
+		opacity: 0.4;
 		p {
 			width: 100%;
+		}
+
+		&:hover {
+			filter: brightness(110%);
+			opacity: 1;
 		}
 	`}
 `;

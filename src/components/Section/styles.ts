@@ -22,8 +22,7 @@ export const Wrapper = styled.section<WrapperProps>`
 		}
 		width: 100%;
 		color: ${theme.colors[color]};
-		padding: 0px 15rem;
-		margin: calc(${theme.spacings.xhuge} + ${theme.spacings.huge}) auto;
+		padding: calc(${theme.spacings.xhuge} + ${theme.spacings.huge}) 15rem;
 		${background && setBackgroundColor(color)}
 		& > ${HeadingContainer}::after {
 			content: "";
