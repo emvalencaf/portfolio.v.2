@@ -4,13 +4,18 @@ import { Title as HeadingContainer } from "../Heading/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+		@media ${theme.media.lteMedium} {
+			display: flex;
+			flex-direction: column;
+			gap: ${theme.spacings.tiny};
+		}
+
+		display: grid;
+		grid-template-columns: 1fr 3fr;
 		align-items: center;
 		width: 100%;
-		justify-content: space-evenly;
-		gap: ${theme.spacings.mediumLarge};
+		border: 5px solid ${theme.colors.quaternary};
+		border-radius: 0rem 2rem;
 	`}
 `;
 
@@ -24,6 +29,7 @@ export const OrderList = styled.ol`
 			max-width: 100%;
 			background-color: transparent;
 			gap: ${theme.spacings.small};
+			border-radius: 0%;
 			& ${HeadingContainer} {
 				color: ${theme.colors.deepWhite};
 				margin: 0 ${theme.spacings.small};
@@ -33,17 +39,16 @@ export const OrderList = styled.ol`
 				display: flex;
 				align-items: center;
 				justify-content: space-evenly;
-				background-color: ${theme.colors.primary};
+				background-color: ${theme.colors.quaternary};
 				width: 100%;
-				border-radius: 2rem;
+				border-radius: 0rem 0rem 2rem;
 
 				> ol {
 					display: inline-flex;
 					flex-wrap: nowrap;
-					background-color: white;
+					background-color: ${theme.colors.primary};
 					overflow-x: auto;
 					height: ${theme.spacings.hero};
-
 					gap: unset;
 					> li {
 						border-radius: 0%;
@@ -61,20 +66,10 @@ export const OrderList = styled.ol`
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		height: 350px;
+		height: 400px;
 		max-height: 400px;
-		&::-webkit-scrollbar {
-			width: ${theme.spacings.xxtiny};
-			height: ${theme.spacings.tiny};
-
-			background-color: ${theme.colors.gray0};
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background-color: ${theme.colors.gray10};
-			border-radius: 5px;
-		}
-
+		background-color: ${theme.colors.quaternary};
+		border-radius: 0rem 0rem 2rem;
 		> li {
 			padding: 0px ${theme.spacings.mediumSmall};
 			max-height: 200px;
@@ -82,12 +77,14 @@ export const OrderList = styled.ol`
 
 		> li > ol {
 			overflow-y: auto;
-			max-height: 150px;
+			max-height: 250px;
+			background-color: ${theme.colors.primary};
 		}
 
 
 		> li:has(> button:disabled) {
-			background-color: ${theme.colors.gray4};
+			color: ${theme.colors.deepWhite};
+			background-color: ${theme.colors.tertiary};
 			border: none;
 			outline: none;
 
@@ -95,7 +92,7 @@ export const OrderList = styled.ol`
 		& ${Button} {
 			align-items: flex-start;
 			justify-content: flex-start;
-			color: ${theme.colors.primary};
+			color: ${theme.colors.secondary};
 			background-color: transparent;
 			font-size: ${theme.fonts.sizes.small};
 			text-align: justify;
@@ -125,9 +122,17 @@ export const Content = styled.div`
 		flex-direction: column;
 		align-items: center;
 		text-align: justify;
+		justify-self: center;
 		width: 300px;
 		max-width: 300px;
+		height: 400px;
 		max-height: 400px;
+		gap: ${theme.spacings.mediumLarge};
+
+		${HeadingContainer} {
+			margin: 0px;
+		}
+
 		${Button} {
 			width: 100%;
 		}

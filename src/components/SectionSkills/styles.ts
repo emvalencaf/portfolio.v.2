@@ -22,9 +22,21 @@ export const TechButtonContainer = styled.div`
 
 export const TechDescriptionContainer = styled.div`
 	${({ theme }) => css`
+		@media screen {
+			width: 100%;
+		}
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		text-align: justify;
 		margin: ${theme.spacings.xxlarge} auto;
 		padding-left: ${theme.spacings.mediumSmall};
 		padding-right: ${theme.spacings.mediumSmall};
+		max-width: 700px;
+		height: 300px;
+
+		p {
+			width: 100%;
+		}
 	`}
 `;

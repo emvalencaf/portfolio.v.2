@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 			opacity: 0;
 		}
 		& ${ButtonContainer} {
-			color: ${theme.colors.primary};
+			color: ${theme.colors.quaternary};
 			background-color: transparent;
 			padding: 0px;
 			margin: 0px;
@@ -25,16 +25,24 @@ export const Wrapper = styled.div`
 
 		}
 		& ${ButtonContainer}:focus,
-		& ${ButtonContainer}:hover,
-		& ${ButtonContainer}:disabled {
+		& ${ButtonContainer}:hover {
 			flex-direction: column;
-			box-shadow: none;
 			transform: scale(1.2);
+			color: ${theme.colors.tertiary};
+			filter: brightness(220%);
 
 			& ${ButtonLabel} {
 				display: inline-block;
 				opacity: 1;
 				appearance: inherit;
+			}
+		}
+
+		& ${ButtonContainer}:disabled {
+			color: ${theme.colors.tertiary} !important;
+			filter: brightness(220%) !important;
+			&:hover {
+				filter: brightness(220%) !important;
 			}
 		}
 

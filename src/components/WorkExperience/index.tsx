@@ -44,7 +44,6 @@ const WorkExperience = ({ workExperience = [] }: WorkExperienceProps) => {
 			};
 		}));
 	}, []);
-	console.log(content);
 	return (
 		<Styled.Wrapper>
 			<Styled.OrderList>

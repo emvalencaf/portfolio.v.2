@@ -21,6 +21,7 @@ export const Wrapper = styled.section<WrapperProps>`
 			}
 		}
 		width: 100%;
+		color: ${theme.colors[color]};
 		padding: 0px 15rem;
 		margin: calc(${theme.spacings.xhuge} + ${theme.spacings.huge}) auto;
 		${background && setBackgroundColor(color)}
@@ -29,8 +30,9 @@ export const Wrapper = styled.section<WrapperProps>`
     		display: inline-block;
 			height: 1px;
 			width: 250px;
-			background-color: ${theme.colors.primary};
-			border: 1px solid ${theme.colors.primary};
+			background-color: ${theme.colors[color]};
+			border: 1px solid ${theme.colors
+			[color]};
 			margin: auto 20px;
     		transform: translateY(-6px);
 			z-index: ${theme.layers.layer1};

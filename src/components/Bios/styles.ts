@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 		gap: ${theme.spacings.xhero};
 		& p {
 			text-align: justify;
+			padding: ${theme.spacings.small};
 			max-width: 550px;
 		}
 	`}

@@ -127,6 +127,7 @@ export default {
 							workTime: "",
 							startIn: 1,
 							endIn: 2,
+							resume: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates enim odit omnis perferendis fugiat laboriosam ipsum voluptatem itaque dolorem recusandae, consequuntur dicta voluptatibus saepe, aspernatur amet accusantium quo. Suscipit, blanditiis?",
 							urlDownload: "https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
 						},
 					],
@@ -214,6 +215,21 @@ export default {
 			projects: {
 				id: "projects",
 				projects: [
+					{
+						title: "projeto 1",
+						urlDemo: "http://localhost:3233",
+						urlRepository: "http://localhost:434343"
+					},
+					{
+						title: "projeto 2",
+						urlDemo: "http://localhost:3233",
+						urlRepository: "http://localhost:434343"
+					},
+					{
+						title: "projeto 3",
+						urlDemo: "http://localhost:3233",
+						urlRepository: "http://localhost:434343"
+					},
 					{
 						title: "projeto 1",
 						urlDemo: "http://localhost:3233",

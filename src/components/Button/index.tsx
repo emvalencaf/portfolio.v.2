@@ -8,13 +8,13 @@ export type ButtonProps = {
 	children?: React.ReactNode;
 	disabled?: boolean;
 	onClick?: () => void;
-	color?: "primary" | "secondary"
+	color?: "primary" | "secondary" | "tertiary" | "quaternary" | "quinary" | "senary";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
 	children,
 	disabled = false,
-	color = "primary",
+	color = "quaternary",
 	onClick,
 	icon,
 }: ButtonProps) => {

@@ -1,7 +1,11 @@
 export const theme = {
   colors: {
-	primary: "rgb(43, 38, 178)",
-	secondary: "rgb(247, 38, 115)",
+	primary: "hsl(180, 93%, 11%)",
+	secondary: "hsla(240, 100%, 99%, 0.4)",
+	tertiary: "hsl(139, 11%, 34%)",
+	quaternary: "hsl(180, 94%, 7%)",
+	quinary: "hsl(139, 11%, 34%)",
+	senary: "hsl(141, 43%, 56%)",
 	warning: "rgb(247, 38, 115)",
 	success: "rgb(172, 243, 157)",
 	info: "rgb(85, 193, 255)",

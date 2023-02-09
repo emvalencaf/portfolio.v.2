@@ -51,7 +51,12 @@ const SectionSkills = ({
 					)}
 				</Styled.TechButtonContainer>
 				<Styled.TechDescriptionContainer>
-					{!!stateTechDescription && stateTechDescription}
+					{!!stateTechDescription && (
+						<p>
+							{stateTechDescription}
+						</p>
+
+					)}
 				</Styled.TechDescriptionContainer>
 			</Styled.Wrapper>
 		</Section>

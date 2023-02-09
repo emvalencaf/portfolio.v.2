@@ -1,5 +1,5 @@
 // hooks
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // components
 import Header from "../../components/Header";
@@ -37,19 +37,27 @@ import mock from "./mock";
 
 const Home = () => {
 	// states
-	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(window.scrollY);
+	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(0);
 	const [ visibleHeader, setVisibleHeader] = useState<boolean>(true);
 
-	// handle synthetic events
-	const handleHiddenHeader = () => {
+	// useEffect
+	useEffect(() => {
 
-		lastScrollYCoords < window.scrollY?
-			setVisibleHeader(false): setVisibleHeader(true);
+		const handleHiddenHeader = () => {
+			lastScrollYCoords < window.scrollY ?
+				setVisibleHeader(false):
+				setVisibleHeader(true);
 
-		setLastScrollYCoords(window.scrollY);
-	};
+			setLastScrollYCoords(window.scrollY);
+		};
 
-	window.addEventListener("scroll", handleHiddenHeader);
+		window.addEventListener("scroll", handleHiddenHeader);
+
+		return () => {
+			window.removeEventListener("scroll", handleHiddenHeader);
+		};
+
+	}, [lastScrollYCoords]);
 
 	return (
 		<Styled.Wrapper>

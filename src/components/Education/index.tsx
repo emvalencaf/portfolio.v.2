@@ -16,6 +16,7 @@ type Education = {
 	title: string;
 	workTime: string | number;
 	institution: string;
+	resume?: string;
 	startIn: number;
 	endIn: number;
 	urlDownload: string;
@@ -152,6 +153,16 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 						<p>
 							Carga Horária: {content.workTime}
 						</p>
+						{!!content.resume && (
+							<>
+								<p>
+									Breve resumo do curso
+								</p>
+								<p>
+									{content.resume}
+								</p>
+							</>
+						)}
 						<Button
 							onClick={() => handleClick()}
 							disabled={!!content.urlDownload ? false : true}

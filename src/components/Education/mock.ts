@@ -23,6 +23,7 @@ export default {
 			workTime: "",
 			startIn: 30,
 			endIn: 35,
+			resume: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem odio impedit soluta recusandae corrupti eius officia quaerat, voluptate sequi quos eaque illum harum temporibus!",
 			urlDownload: "",
 		},
 		{

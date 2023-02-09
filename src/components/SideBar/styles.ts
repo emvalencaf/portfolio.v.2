@@ -37,15 +37,16 @@ export const Wrapper = styled.div`
 `;
 export const SocialMediaLink = styled.a<SideBarProps>`
 	${({ theme, sizes }) => css`
-		color: ${theme.colors.primary};
+		color: ${theme.colors.secondary};
 
 		& svg, & {
-			color: inherit;
+			color: ${theme.colors.secondary};
 			${logoSizes[sizes](theme)}
 			transition: all ${theme.transitions.fast} ease-in-out;
 		}
 
 		&  svg:hover {
+			color: ${theme.colors.deepWhite};
 			transform: scale(1.2);
 			opacity: 0.8;
 		}
@@ -57,7 +58,7 @@ export const VerticalLine = styled.div`
 		content: "";
 		width: 1px;
 		height: 100px;
-		border: 1px solid ${theme.colors.primary};
+		border: 1px solid ${theme.colors.secondary};
 		margin: 20px;
 		display: inline-block;
 	`}

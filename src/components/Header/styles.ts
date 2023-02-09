@@ -34,6 +34,7 @@ export const Wrapper = styled.header<ContainerProps>`
 				opacity: 0;
 			}
 		}
+		width: 100%;
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -41,12 +42,11 @@ export const Wrapper = styled.header<ContainerProps>`
 		display: flex;
 		align-self: center;
 		justify-content: space-between;
+		color: ${theme.colors.secondary};
 		padding-left: ${theme.spacings.medium};
 		padding-right: ${theme.spacings.medium};
-		background-color: ${theme.colors.gray5};
-		border: 1px solid ${theme.colors.gray5};
-		border-bottom-left-radius: ${theme.fonts.sizes.small};
-		border-bottom-right-radius: ${theme.fonts.sizes.small};
+		background-color: ${theme.colors.quaternary};
+		border: 1px solid ${theme.colors.primary};
 		z-index: ${theme.layers.layer6};
 		opacity: 1;
 		& ul {

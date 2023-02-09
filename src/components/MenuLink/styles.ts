@@ -7,12 +7,12 @@ export const Link = styled.a`
 		align-items: center;
 		justify-content: center;
 
-		color: ${theme.colors.primary};
+		color: inherit;
 		text-decoration: none;
 		transition: all ${theme.transitions.fast} ease-in;
 
 		&:hover {
-			color: ${theme.colors.secondary};
+			color: ${theme.colors.deepWhite};
 			transform: scale(1.1);
 		}
 

@@ -23,7 +23,7 @@ export const Nav = styled.nav<MenuStyled>`
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background-color: ${theme.colors.white};
+			background-color: ${theme.colors.primary};
 			transition: all ${theme.transitions.fast} ease-in-out;
 			${visible && menuVisible()}
 
@@ -127,7 +127,7 @@ export const Button = styled.button<MenuStyled>`
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			border: 1px solid ${theme.colors.primary};
+			border: 1px solid ${theme.colors.quaternary};
 			border-radius: 0.4rem;
 			appearance: auto;
 			opacity: 1;
@@ -139,7 +139,7 @@ export const Button = styled.button<MenuStyled>`
 		position: fixed;
 		top: 2rem;
 		right: 2rem;
-		background-color: ${theme.colors.primary};
+		background-color: ${theme.colors.quaternary};
 		color: ${theme.colors.white};
 		border: none;
 		z-index: ${theme.layers.layer7};

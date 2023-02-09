@@ -20,8 +20,8 @@ const goTopSizes = {
 export const Container = styled.a<GoTopProps>`
 	${({ theme, sizes}) => css`
 		position: fixed;
-		background: ${theme.colors.primary};
-		color: ${theme.colors.white};
+		background: ${theme.colors.quaternary};
+		color: ${theme.colors.secondary};
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -33,11 +33,13 @@ export const Container = styled.a<GoTopProps>`
 		z-index: ${theme.layers.layer6};
 
 		svg {
-			transition: all 350ms ease-in-out;
+			transition: all ${theme.transitions.normal} ease-in-out;
 		}
 
 		&:hover {
 			& svg {
+				color:${theme.colors.deepWhite};
+				filter: brightness(220%)
 				transform: scale(1.2);
 				opacity: 0.8;
 			}
