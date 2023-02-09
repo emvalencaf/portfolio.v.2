@@ -23,8 +23,22 @@ const SectionSkills = ({
 		color,
 		techs = [],
 	}: SectionSkillsProps) => {
-	const [stateTechs, setStateTechs] = useState(techs);
+
+	// states
+	const [stateTechs, setStateTechs] = useState<Tech[]>(techs);
 	const [stateTechDescription, setStateTechDescription] = useState("");
+
+	// Effects
+	// The first element of the array will have it's description showed
+	useEffect(()=> {
+		setStateTechs((prevState) => prevState.map((tech, index) => {
+			if (index === 0) tech.showTechDescription = true;
+
+			return tech;
+		}));
+
+	}, []);
+	// it will set the tech description into the description state of the tech related to the button clicked
 	useEffect(()=>{
 		const tech = stateTechs.find((tech) => tech.showTechDescription);
 		if (tech) setStateTechDescription(()=> tech.techDescription);
