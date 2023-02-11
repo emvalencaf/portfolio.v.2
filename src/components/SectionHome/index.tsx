@@ -18,16 +18,17 @@ const SectionHome = ({
 		color,
 		ownerName,
 		ocupation,
-		mainStack = []
+		mainStack = [],
+		backgroundImg = ""
 	}: SectionHomeProps) => {
 	return (
-		<Section id={id} background={background} color={color}>
+		<Section id={id} background={background} color={color} backgroundImg={backgroundImg}>
 			<Styled.Wrapper>
 				<p>
 					Olá, seja bem-vindo ao meu portfólio.
 				</p>
 				{ownerName && (
-					<Heading as="h1" size="big" color="quinary">
+					<Heading as="h1" size="big" color="secondary">
 						{ownerName}.
 					</Heading>
 				)}

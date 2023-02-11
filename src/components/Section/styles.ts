@@ -5,6 +5,7 @@ type WrapperProps = {
 	theme: DefaultTheme;
 	background: boolean;
 	color: string;
+	backgroundImg: string;
 }
 
 const setBackgroundColor = (color:string) => css`
@@ -12,7 +13,7 @@ const setBackgroundColor = (color:string) => css`
 `;
 
 export const Wrapper = styled.section<WrapperProps>`
-	${({ theme, background, color }) => css`
+	${({ theme, background, color, backgroundImg }) => css`
 		@media ${theme.media.lteMedium} {
 			padding: 0px ${theme.spacings.small};
 
@@ -35,6 +36,14 @@ export const Wrapper = styled.section<WrapperProps>`
 			margin: auto 20px;
     		transform: translateY(-6px);
 			z-index: ${theme.layers.layer1};
+		}
+
+		&[id="#"] {
+			background-image: linear-gradient(to right top, ${theme.colors.primary} 40%, transparent), repeating-linear-gradient(1deg, ${theme.colors.primary}, transparent ), url(${`${backgroundImg}`});
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+
 		}
 	`}
 `;

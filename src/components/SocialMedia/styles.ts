@@ -28,6 +28,7 @@ export const Wrapper = styled.div<SocialMediaProps>`
 			transform: scale(1.2);
 			color:${theme.colors.deepWhite};
 			opacity: 0.8;
+			filter: drop-shadow(0 0 0.75rem ${theme.colors.tertiary});
 		}
 	`}
 `;

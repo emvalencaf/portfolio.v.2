@@ -10,4 +10,5 @@ export default {
 		"NodeJS",
 		"React",
 	],
+	backgroundImg: "assets/images/background-home.jpg",
 } as SectionHomeProps;

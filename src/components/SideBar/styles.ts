@@ -48,7 +48,8 @@ export const SocialMediaLink = styled.a<SideBarProps>`
 		&  svg:hover {
 			color: ${theme.colors.deepWhite};
 			transform: scale(1.2);
-			opacity: 0.8;
+
+			filter: drop-shadow(0 0 0.75rem ${theme.colors.tertiary});
 		}
 	`}
 `;

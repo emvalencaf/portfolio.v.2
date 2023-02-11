@@ -2,11 +2,13 @@ import styled, { css } from 'styled-components';
 import { Button as ButtonContainer, ButtonLabel } from '../Button/styles';
 export const Wrapper = styled.div`
 	${({ theme }) => css`
+
 		& ${ButtonLabel} {
 			display: none;
 			appearance: none;
 			opacity: 0;
 		}
+
 		& ${ButtonContainer} {
 			color: ${theme.colors.quaternary};
 			background-color: transparent;
@@ -26,15 +28,17 @@ export const Wrapper = styled.div`
 		}
 		& ${ButtonContainer}:focus,
 		& ${ButtonContainer}:hover {
-			flex-direction: column;
-			transform: scale(1.2);
-			color: ${theme.colors.tertiary};
-			filter: brightness(220%);
+				flex-direction: column;
+				transform: scale(1.2);
+				color: ${theme.colors.tertiary};
+				filter: brightness(220%);
 
-			& ${ButtonLabel} {
-				display: inline-block;
-				opacity: 1;
-				appearance: inherit;
+				& ${ButtonLabel} {
+					display: inline-block;
+					opacity: 1;
+					appearance: inherit;
+				}
+
 			}
 		}
 
@@ -49,10 +53,10 @@ export const Wrapper = styled.div`
 		& ${ButtonContainer}:disabled {
 			cursor: not-allowed;
 			color: ${theme.colors.gray1};
+
+			> svg {
+				filter: drop-shadow(0 0 0.75rem ${theme.colors.tertiary});
+			}
 		}
 	`}
-`;
-
-export const TechDescriptionContainer = styled.div`
-	${({ theme }) => css``}
 `;

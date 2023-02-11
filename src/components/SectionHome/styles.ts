@@ -10,16 +10,27 @@ export const Wrapper = styled.div`
 		width: 100%;
 		margin: 0px auto;
 
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+
 		& p {
 			margin: ${theme.spacings.small};
 			padding: 0;
 			width: 100%;
 			font-size: ${theme.fonts.sizes.medium};
 		}
+
+		& ${HeadingContainer}:first-child {
+			text-shadow: 0px 0px 20px ${theme.colors.quaternary};
+
+		}
+
 		& ${HeadingContainer} {
 			margin: ${theme.spacings.small};
 			padding: 0;
 			width: 100%;
+			text-shadow: 0px 0px 20px ${theme.colors.senary};
 		}
 		& ${HeadingContainer}::after {
 			content: none;
