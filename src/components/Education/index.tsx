@@ -17,8 +17,8 @@ type Education = {
 	workTime: string | number;
 	institution: string;
 	resume?: string;
-	startIn: number;
-	endIn: number;
+	startIn: number | string | null;
+	endIn: number | string | null;
 	urlDownload: string;
 }
 export type EducationProps = {

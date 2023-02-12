@@ -14,7 +14,7 @@ type Work = {
 	ocupation: string;
 	jobDescription: string;
 	startIn: string | number;
-	endIn: string | number;
+	endIn: string | number | null;
 	showData?: boolean;
 };
 export type WorkExperienceProps = {
