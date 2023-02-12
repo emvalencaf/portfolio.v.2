@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components';
+import { Link as MenuLinkStyled } from '../MenuLink/styles';
 
 type MenuStyled = {
 	theme?: DefaultTheme;
@@ -152,3 +153,5 @@ export const Button = styled.button<MenuStyled>`
 		}
 	`}
 `;
+
+export const LogoutButton = MenuLinkStyled;

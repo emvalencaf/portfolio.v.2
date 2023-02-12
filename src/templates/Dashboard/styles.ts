@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Title as HeadingContainer} from '../../components/Heading/styles';
 import { Wrapper as SectionWrapper } from '../../components/Section/styles';
 
 export const Wrapper = styled.div`

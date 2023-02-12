@@ -31,6 +31,9 @@ const FormLogin = ({
 
 			event.preventDefault();
 			setLoading(true);
+			
+			console.log("username: ", username);
+			console.log("password: ", password);
 
 			if (handleLogin) await handleLogin(username, password);
 

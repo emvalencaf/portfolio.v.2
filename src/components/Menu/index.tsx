@@ -1,10 +1,10 @@
 // hooks
 import { useState } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 // icons
-import { Home, Login, Menu as MenuIcon, OutdoorGrill } from "@styled-icons/material-outlined";
+import { Home, Login, Menu as MenuIcon, DoorBack } from "@styled-icons/material-outlined";
 import { Close as CloseIcon } from "@styled-icons/material-outlined";
 import { Dashboard as Admin } from "@styled-icons/material-outlined";
 import { Edit as EditPage } from "@styled-icons/material-outlined";
@@ -27,6 +27,14 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 	const [visible, setVisible] = useState(false);
 	const { data: session } = useSession();
 	console.log(router.basePath);
+
+
+	// synthetic event handle
+	const handleLogout = (event: React.MouseEvent<HTMLAnchorElement>) => {
+		event.preventDefault();
+		signOut({ redirect: true });
+	};
+
 	return (
 		<>
 			<Styled.Button
@@ -50,7 +58,7 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 						<li>
 							<MenuLink link={
 								router.pathname.match(/admin/) ?
-									"/"
+									"/admin/"
 									: "#"
 							} icon={<Home />}>
 								Home
@@ -80,19 +88,18 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 										</MenuLink>
 									</li>
 									<li>
-										<MenuLink
-											icon={<OutdoorGrill />}
-											newTab={false}
-											link={`/admin/logout`}
-										>
-											logout
-										</MenuLink>
+										<Styled.LogoutButton onClick={handleLogout}>
+											<DoorBack />
+											<span>
+												logout
+											</span>
+										</Styled.LogoutButton>
 									</li>
 								</>
 							)}
 						</>
 					)}
-					{router.pathname.match(/admin/) && (
+					{(router.pathname.match(/admin/) && !!session === false) && (
 						<li>
 							<MenuLink
 								icon={<Login />}

@@ -51,15 +51,9 @@ export default NextAuth({
 			const isSignIn = !!user;
 
 			if (isSignIn) {
-				if (account && account?.provider === "google") {
-					const response = await fetch(
-						`${process.env.NEXT_PUBLIC_API_URL}/api/auth/${account.provider}/callback?access_token=${account?.access_token}`
-					);
-					const data = await response.json();
-					setToken(data, token);
-				} else {
+
 					setToken(user, token);
-				}
+
 			} else {
 				if (!token?.expiration) Promise.resolve({});
 
@@ -107,26 +101,40 @@ export default NextAuth({
 
 				try {
 
-					const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`).then((data) => data.json());
+					const body = {
+						email: credentials.username.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/) ? credentials.username : "",
+						name: credentials.username.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/) ? "" : credentials.username,
+						password: credentials.password,
+					}
 
-					const { login } = response;
+					console.log(body);
+
+					const login = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, {
+						method: "POST",
+						headers: {
+							"Content-Type" : "application/json",
+						},
+						body: JSON.stringify(body),
+					}).then((data) => data.json());
+
+					console.log(login);
 
 					if (!login) throw new Error("No login");
 
-					const { jwt, user } = login;
-					const { id, username, email } = user;
+					const { user, jwt } = login;
+					const { id, name, email } = user;
 
 					if (
 						!jwt ||
 						!id ||
-						!username ||
+						!name ||
 						!email
 					) return null;
 
 					return {
 						jwt,
 						id,
-						name: username,
+						name,
 						email,
 					};
 				} catch (e) {

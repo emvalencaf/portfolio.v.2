@@ -1,7 +1,7 @@
 // hooks
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // components
 import Heading from '../../components/Heading';
@@ -32,6 +32,10 @@ const DashboardTemplate = () => {
 
 	const btnArray: BtnArrSections = [];
 
+	useEffect(() => {
+		console.log("dashboard was rendered")
+	}, [])
+
 	if (Object.keys(sections).length >= 1) {
 
 		for (const prop in sections) {
@@ -41,6 +45,7 @@ const DashboardTemplate = () => {
 			});
 		}
 	}
+	
 	return (
 		<Styled.Wrapper>
 			<Menu />

@@ -53,7 +53,7 @@ const LoginTemplate = () => {
 					Bem-vindo à área administrativa, por favor, faça o login para acessar o dashboard.
 				</p>
 			</Styled.LoginHeader>
-			<FormLogin />
+			<FormLogin handleLogin={handleLogin} errorMessage={error} />
 		</Styled.Wrapper>
 	);
 };
