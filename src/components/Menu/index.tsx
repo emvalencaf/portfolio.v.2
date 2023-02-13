@@ -15,6 +15,7 @@ import MenuLink, { MenuLinkProps } from '../MenuLink';
 import * as Styled from './styles';
 
 // types
+import { Session } from "../../shared-types/session-nextauth";
 export type MenuProps = {
 	menuLinks?: MenuLinkProps[];
 };
@@ -25,9 +26,8 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 
 	// states
 	const [visible, setVisible] = useState(false);
-	const { data: session } = useSession();
-	console.log(router.basePath);
-
+	const { data } = useSession();
+	const session: Session = data;
 
 	// synthetic event handle
 	const handleLogout = (event: React.MouseEvent<HTMLAnchorElement>) => {

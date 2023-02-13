@@ -3,6 +3,7 @@ import { FormHTMLAttributes, MutableRefObject, SyntheticEvent, useRef, useState 
 
 // components
 import Button from '../Button';
+import Link from 'next/link';
 
 // icons
 import { Save, Timer } from "@styled-icons/material-outlined";
@@ -11,26 +12,29 @@ import { Save, Timer } from "@styled-icons/material-outlined";
 import * as Styled from './styles';
 
 // types
+import { SuccessState } from '../../shared-types/async-success-error';
 export type FormProps = {
 	children: React.ReactNode;
-	onSubmit?: (ref:MutableRefObject<HTMLFormElement>) => Promise<void>;
+	onSubmit?: (form:MutableRefObject<HTMLFormElement>) => Promise<void>;
+	errorMessage?: string;
+	successMessage?: SuccessState;
 	reference?: HTMLFormElement;
 };
 
 const Form = ({ children, onSubmit,
-	reference = null, }: FormProps) => {
+	reference = null, successMessage, errorMessage }: FormProps) => {
 
-	const formRef = useRef(reference);
+	const formRef = useRef<HTMLFormElement | null>(reference);
 
 	const [saving, setSaving] = useState(false);
 
 	// handle submit event
-	const handleSubmit = (event: SyntheticEvent) => {
+	const handleSubmit = async (event: SyntheticEvent) => {
 		event.preventDefault();
 
 		if (onSubmit) {
 			setSaving(true);
-			onSubmit(formRef);
+			await onSubmit(formRef);
 			setSaving(false);
 		}
 	};
@@ -39,6 +43,25 @@ const Form = ({ children, onSubmit,
 		<Styled.Form onSubmit={(event: SyntheticEvent) => handleSubmit(event)} ref={formRef}>
 			{children}
 			<Styled.ContainerButton>
+				{
+					!!successMessage && (
+						<span>
+							{successMessage.message}
+							<Link href={successMessage.link} legacyBehavior passHref>
+								<a>
+									right here
+								</a>
+							</Link>
+						</span>
+					)
+				}
+				{
+					!!errorMessage && (
+						<span>
+							{errorMessage}
+						</span>
+					)
+				}
 				<Button
 					icon={saving ? <Timer />: <Save />}
 					disabled={saving}

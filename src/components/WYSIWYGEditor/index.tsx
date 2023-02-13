@@ -1,24 +1,24 @@
 // hooks
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 // component
 import JoditEditor from 'jodit-react';
 
 // styles
 import * as Styled from './styles';
-import { placeholder } from 'jodit/types/plugins/placeholder/placeholder';
 
 // types
 export type WYSIWYGEditorProps = {
 	content: string;
 	placeholder?: string;
 	onChange: (content: string) => void;
+	reference?: unknown;
 };
 
 const WYSIWYGEditor = ({ content, placeholder, onChange }: WYSIWYGEditorProps) => {
 
 	// states
-	const editor = useRef(null);
+	const editorRef = useRef(null);
 
 	const config = useMemo( () => ({
 		readonly: false,
@@ -28,7 +28,7 @@ const WYSIWYGEditor = ({ content, placeholder, onChange }: WYSIWYGEditorProps) =
 
 	// handle synthetic event
 	const handleUpdate = () => {
-		const editorContent = editor.current.value
+		const editorContent = editorRef.current.value
 
 		if (onChange) onChange(editorContent);
 
@@ -37,7 +37,7 @@ const WYSIWYGEditor = ({ content, placeholder, onChange }: WYSIWYGEditorProps) =
 	return (
 		<Styled.Wrapper>
 			<JoditEditor
-				ref={editor}
+				ref={editorRef}
 				value={content}
 				config={config}
 				onBlur={() => handleUpdate()}

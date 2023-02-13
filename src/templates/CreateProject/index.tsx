@@ -1,10 +1,14 @@
+import dynamic from 'next/dynamic';
+
 // hooks
-import { ChangeEvent, MutableRefObject, useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 // components
-import Form from '../../components/Form';
+import Form, { FormProps } from '../../components/Form';
 import Header from '../../components/Header';
 import Heading from '../../components/Heading';
+import ImageInput from '../../components/ImageInput';
 import TextInput from '../../components/TextInput';
 const WYSIWYGEditor = dynamic(() => import('../../components/WYSIWYGEditor'), { ssr: false });
 
@@ -13,12 +17,20 @@ import { Cases, Code, Link, Movie, PhotoAlbum } from "@styled-icons/material-out
 
 // styles
 import * as Styled from './styles';
-import ImageInput from '../../components/ImageInput';
-import dynamic from 'next/dynamic';
+import { Session } from '../../shared-types/session-nextauth';
+
+// types
+import { SuccessState } from '../../shared-types/async-success-error';
+
 
 const CreateProjectTemplate = () => {
 
 	// states
+		// session data
+	const { data } = useSession();
+	const session: Session = data;
+
+		// formData
 	const [ projectTitle, setProjectTitle ] = useState("");
 	const [ urlRepository, setUrlRepository] = useState("");
 	const [ mainLang, setMainLang ] = useState("");
@@ -26,11 +38,23 @@ const CreateProjectTemplate = () => {
 	const [ resume, setResume ] = useState("");
 	const [ picture, setPicture ] = useState(null);
 	const [ description, setDescription ] = useState("");
-	// states
+
+		// for headear effect
 	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(0);
 	const [ visibleHeader, setVisibleHeader] = useState<boolean>(true);
 
-	// useEffect
+		// form
+	const [ errorMessage, setErrorMessage ] = useState("");
+	const [ successMessage, setSuccessMessage ] = useState<SuccessState>({
+		message: "",
+		link: "",
+	});
+
+	// refs
+	const formRef = useRef<HTMLFormElement | null>(null);
+	const WYSIWYGEditorRef = useRef(null);
+
+	// useEffect for showing header
 	useEffect(() => {
 
 		const handleHiddenHeader = () => {
@@ -60,19 +84,35 @@ const CreateProjectTemplate = () => {
 			picture,
 		};
 
-		console.log(projectData);
 		const formData = new FormData(ref.current);
-		console.log(formData.get("title"));
-		console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`)
-		const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, {
-			method: "POST",
-			headers: {
-				"Content-Type" : "multipart/form-data",
-			},
-			body: formData,
-		}).then((r) => r.json()).catch(e => console.log(e));
 
-		console.log(response);
+		try {
+
+			formData.forEach((entry, key) => {
+				console.log(key, " : ", entry);
+			});
+			const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, {
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${session.accessToken}`
+				},
+				body: formData,
+			})
+				.then((r) => r.json())
+				.then((response) => {
+					setSuccessMessage({
+						message: `${response.project.title} was successfuly created you can check the project `,
+						link: `/projects/${response.project._id}`,
+					});
+				})
+				.catch(err => {
+					console.log(err);
+					setErrorMessage(err.message);
+				});
+
+		} catch(err) {
+			console.log(err);
+		}
 	};
 
 	return (
@@ -94,7 +134,9 @@ const CreateProjectTemplate = () => {
 			</p>
 			<Form
 				onSubmit={handleCreateProject}
-
+				reference={formRef.current}
+				successMessage={successMessage}
+				errorMessage={errorMessage}
 			>
 				<TextInput
 					type="text"
@@ -103,7 +145,7 @@ const CreateProjectTemplate = () => {
 					onInputChange={(v) => setProjectTitle(v)}
 					value={projectTitle}
 					icon={<Cases />}
-					required={true}
+					required={false}
 				/>
 				<TextInput
 					type="text"
@@ -112,16 +154,16 @@ const CreateProjectTemplate = () => {
 					onInputChange={(v) => setUrlRepository(v)}
 					value={urlRepository}
 					icon={<Link />}
-					required={true}
+					required={false}
 				/>
 				<TextInput
 					type="text"
-					name="urlRepository"
+					name="urlDemo"
 					label="URL of the demonstration"
 					onInputChange={(v) => setUrlDemo(v)}
 					value={urlDemo}
 					icon={<Movie />}
-					required={true}
+					required={false}
 				/>
 				<TextInput
 					type="text"
@@ -130,7 +172,7 @@ const CreateProjectTemplate = () => {
 					onInputChange={(v) => setMainLang(v)}
 					value={mainLang}
 					icon={<Code />}
-					required={true}
+					required={false}
 				/>
 				<TextInput
 					name="resume"
@@ -138,7 +180,7 @@ const CreateProjectTemplate = () => {
 					as="textarea"
 					value={resume}
 					onInputChange={(v) => setResume(v)}
-					required={true}
+					required={false}
 				/>
 				<ImageInput
 					name="picture"
@@ -146,11 +188,19 @@ const CreateProjectTemplate = () => {
 					onInputFile={(v) => setPicture(v)}
 					value={picture}
 					icon={<PhotoAlbum />}
-					required={true}
+					required={false}
+				/>
+				<TextInput
+					name="description"
+					required={false}
+					label="Conteúdo"
+					value={description}
+					onInputChange={(v) => (v)}
 				/>
 				<WYSIWYGEditor
 					content={description}
 					onChange={(v) => setDescription(v)}
+					reference={WYSIWYGEditorRef}
 				/>
 			</Form>
 		</Styled.Wrapper>

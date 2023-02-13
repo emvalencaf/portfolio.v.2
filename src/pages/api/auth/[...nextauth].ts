@@ -174,4 +174,6 @@ const setToken = (data: SetTokenParams, token: Token) => {
 	token.name = data?.name || data?.user?.username;
 	token.email = data?.email || data?.user?.email;
 	token.expiration = Math.floor(actualDateInSeconds + tokenExpirationInSeconds);
+
+	console.log("token :", token);
 };
