@@ -1,5 +1,5 @@
 export type Project = {
-	id: string;
+	_id: string;
 	title: string;
 	resume: string;
 	description: React.ReactNode;
@@ -7,4 +7,8 @@ export type Project = {
 	srcImg?: string;
 	urlDemo: string;
 	urlRepository: string;
+};
+
+export type FetchResponseProject = {
+	project: Project;
 };

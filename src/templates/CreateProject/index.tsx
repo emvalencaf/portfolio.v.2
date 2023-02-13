@@ -45,10 +45,7 @@ const CreateProjectTemplate = () => {
 
 		// form
 	const [ errorMessage, setErrorMessage ] = useState("");
-	const [ successMessage, setSuccessMessage ] = useState<SuccessState>({
-		message: "",
-		link: "",
-	});
+	const [ successMessage, setSuccessMessage ] = useState<SuccessState>(null);
 
 	// refs
 	const formRef = useRef<HTMLFormElement | null>(null);
@@ -72,15 +69,17 @@ const CreateProjectTemplate = () => {
 		};
 
 	}, [lastScrollYCoords]);
-
+	console.log(picture);
 	// handle onSubmit
 	const handleCreateProject = async (ref:MutableRefObject<HTMLFormElement>) => {
+
 		const projectData = {
 			title: projectTitle,
 			urlDemo,
 			urlRepository,
 			resume,
 			description,
+			mainLang,
 			picture,
 		};
 
@@ -101,7 +100,7 @@ const CreateProjectTemplate = () => {
 				.then((r) => r.json())
 				.then((response) => {
 					setSuccessMessage({
-						message: `${response.project.title} was successfuly created you can check the project `,
+						message: `${response.project.title} was successfully created you can check the project `,
 						link: `/projects/${response.project._id}`,
 					});
 				})

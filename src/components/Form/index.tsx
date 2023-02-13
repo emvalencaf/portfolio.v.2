@@ -6,7 +6,7 @@ import Button from '../Button';
 import Link from 'next/link';
 
 // icons
-import { Save, Timer } from "@styled-icons/material-outlined";
+import { Close, Save, Timer } from "@styled-icons/material-outlined";
 
 // styles
 import * as Styled from './styles';
@@ -15,18 +15,21 @@ import * as Styled from './styles';
 import { SuccessState } from '../../shared-types/async-success-error';
 export type FormProps = {
 	children: React.ReactNode;
-	onSubmit?: (form:MutableRefObject<HTMLFormElement>) => Promise<void>;
+	onSubmit?: (form: MutableRefObject<HTMLFormElement>) => Promise<void>;
 	errorMessage?: string;
 	successMessage?: SuccessState;
 	reference?: HTMLFormElement;
 };
 
 const Form = ({ children, onSubmit,
-	reference = null, successMessage, errorMessage }: FormProps) => {
+	reference = null, successMessage = null, errorMessage }: FormProps) => {
 
+	// ref
 	const formRef = useRef<HTMLFormElement | null>(reference);
 
-	const [saving, setSaving] = useState(false);
+	// states
+	const [ saving, setSaving ] = useState(false);
+	const [ visible, setVisible ] = useState(!!successMessage);
 
 	// handle submit event
 	const handleSubmit = async (event: SyntheticEvent) => {
@@ -39,34 +42,41 @@ const Form = ({ children, onSubmit,
 		}
 	};
 
+
+
 	return (
 		<Styled.Form onSubmit={(event: SyntheticEvent) => handleSubmit(event)} ref={formRef}>
 			{children}
+			<Styled.Alert visible={visible} isSuccess={!!successMessage}>
+				{
+					<span>
+						{!!successMessage ?
+							(
+								<>
+								{successMessage.message}
+								<Link href={successMessage.link} passHref legacyBehavior>
+									<a rel="internal" target="_self">
+										click here
+									</a>
+								</Link>
+								</>
+							)
+							:(
+								!!errorMessage && errorMessage
+							)
+						}
+					</span>
+				}
+					<Button icon={<Close />} onClick={() => setVisible(false)}>
+
+					</Button>
+			</Styled.Alert>
 			<Styled.ContainerButton>
-				{
-					!!successMessage && (
-						<span>
-							{successMessage.message}
-							<Link href={successMessage.link} legacyBehavior passHref>
-								<a>
-									right here
-								</a>
-							</Link>
-						</span>
-					)
-				}
-				{
-					!!errorMessage && (
-						<span>
-							{errorMessage}
-						</span>
-					)
-				}
 				<Button
-					icon={saving ? <Timer />: <Save />}
+					icon={saving ? <Timer /> : <Save />}
 					disabled={saving}
 				>
-					{saving? "salvando...": "Salvar"}
+					{saving ? "salvando..." : "Salvar"}
 				</Button>
 			</Styled.ContainerButton>
 		</Styled.Form>
