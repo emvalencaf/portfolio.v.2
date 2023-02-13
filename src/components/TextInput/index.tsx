@@ -29,6 +29,7 @@ const TextInput = ({
 		icon,
 		as = "input",
 		reference = null,
+		required = false,
 	}: TextInputProps) => {
 		// states
 		const inputRef = useRef(reference);
@@ -55,6 +56,7 @@ const TextInput = ({
 					errorMessage={errorMessage}
 					as={as}
 					defaultValue={value}
+					required={required}
 				/>
 
 				<Styled.Label htmlFor={name} element={as}>
