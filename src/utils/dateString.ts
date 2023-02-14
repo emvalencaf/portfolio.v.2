@@ -7,6 +7,15 @@ class DateStringFormating {
 		const date = new Date(timestamp);
 		return date.getFullYear();
 	}
+	static getFullDateString(timestamp: string | number) {
+		const date = new Date(timestamp);
+		return date.toLocaleDateString("pt-br", {
+			weekday: "long",
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		})
+	}
 }
 
 export default DateStringFormating;

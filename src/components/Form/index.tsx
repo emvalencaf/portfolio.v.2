@@ -1,5 +1,5 @@
 // hooks
-import { FormHTMLAttributes, MutableRefObject, SyntheticEvent, useRef, useState } from 'react';
+import { FormHTMLAttributes, MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 // components
 import Button from '../Button';
@@ -31,6 +31,13 @@ const Form = ({ children, onSubmit,
 	const [ saving, setSaving ] = useState(false);
 	const [ visible, setVisible ] = useState(!!successMessage);
 
+	// useEffect
+	useEffect(() => {
+
+		setVisible((v) => !v);
+
+	}, [ successMessage, errorMessage]);
+
 	// handle submit event
 	const handleSubmit = async (event: SyntheticEvent) => {
 		event.preventDefault();
@@ -47,33 +54,32 @@ const Form = ({ children, onSubmit,
 	return (
 		<Styled.Form onSubmit={(event: SyntheticEvent) => handleSubmit(event)} ref={formRef}>
 			{children}
+			<Styled.ContainerButton>
 			<Styled.Alert visible={visible} isSuccess={!!successMessage}>
-				{
-					<span>
-						{!!successMessage ?
-							(
-								<>
-								{successMessage.message}
-								<Link href={successMessage.link} passHref legacyBehavior>
-									<a rel="internal" target="_self">
-										click here
-									</a>
-								</Link>
-								</>
-							)
-							:(
-								!!errorMessage && errorMessage
-							)
-						}
-					</span>
-				}
+					{
+						<span>
+							{!!successMessage ?
+								(
+									<>
+										{successMessage.message}
+										<Link href={successMessage.link} passHref legacyBehavior>
+											<a rel="internal" target="_self">
+												click here
+											</a>
+										</Link>
+									</>
+								)
+								: (
+									!!errorMessage && errorMessage
+								)
+							}
+						</span>
+					}
 					<Button icon={<Close />} onClick={() => setVisible(false)}>
 
 					</Button>
-			</Styled.Alert>
-			<Styled.ContainerButton>
+				</Styled.Alert>
 				<Button
-					icon={saving ? <Timer /> : <Save />}
 					disabled={saving}
 				>
 					{saving ? "salvando..." : "Salvar"}

@@ -11,9 +11,10 @@ import Heading from '../../components/Heading';
 import ImageInput from '../../components/ImageInput';
 import TextInput from '../../components/TextInput';
 const WYSIWYGEditor = dynamic(() => import('../../components/WYSIWYGEditor'), { ssr: false });
+import Link from 'next/link';
 
 // icons
-import { Cases, Code, Link, Movie, PhotoAlbum } from "@styled-icons/material-outlined";
+import { Cases, Close, Code, Link as LinkIcon, Movie, PhotoAlbum } from "@styled-icons/material-outlined";
 
 // styles
 import * as Styled from './styles';
@@ -21,31 +22,37 @@ import { Session } from '../../shared-types/session-nextauth';
 
 // types
 import { SuccessState } from '../../shared-types/async-success-error';
+import ProjectController from '../../api/controller/project';
+import React from 'react';
+import Button from '../../components/Button';
+type SetSuccessMessagesParams = {
+	message: string;
+	link: string;
+}
 
-
-const CreateProjectTemplate = () => {
+const CreateProjectTemplate = React.forwardRef(() => {
 
 	// states
-		// session data
+	// session data
 	const { data } = useSession();
 	const session: Session = data;
 
-		// formData
-	const [ projectTitle, setProjectTitle ] = useState("");
-	const [ urlRepository, setUrlRepository] = useState("");
-	const [ mainLang, setMainLang ] = useState("");
-	const [ urlDemo, setUrlDemo ] = useState("");
-	const [ resume, setResume ] = useState("");
-	const [ picture, setPicture ] = useState(null);
-	const [ description, setDescription ] = useState("");
+	// formData
+	const [projectTitle, setProjectTitle] = useState("");
+	const [urlRepository, setUrlRepository] = useState("");
+	const [mainLang, setMainLang] = useState("");
+	const [urlDemo, setUrlDemo] = useState("");
+	const [resume, setResume] = useState("");
+	const [picture, setPicture] = useState(null);
+	const [description, setDescription] = useState("");
 
-		// for headear effect
-	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(0);
-	const [ visibleHeader, setVisibleHeader] = useState<boolean>(true);
+	// for headear effect
+	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
+	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
 
-		// form
-	const [ errorMessage, setErrorMessage ] = useState("");
-	const [ successMessage, setSuccessMessage ] = useState<SuccessState>(null);
+	// form
+	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState<SuccessState>();
 
 	// refs
 	const formRef = useRef<HTMLFormElement | null>(null);
@@ -56,7 +63,7 @@ const CreateProjectTemplate = () => {
 
 		const handleHiddenHeader = () => {
 			lastScrollYCoords < window.scrollY ?
-				setVisibleHeader(false):
+				setVisibleHeader(false) :
 				setVisibleHeader(true);
 
 			setLastScrollYCoords(window.scrollY);
@@ -69,27 +76,49 @@ const CreateProjectTemplate = () => {
 		};
 
 	}, [lastScrollYCoords]);
-	console.log(picture);
+
 	// handle onSubmit
-	const handleCreateProject = async (ref:MutableRefObject<HTMLFormElement>) => {
+	const handleCreateProject = async (ref: MutableRefObject<HTMLFormElement>) => {
 
-		const projectData = {
-			title: projectTitle,
-			urlDemo,
-			urlRepository,
-			resume,
-			description,
-			mainLang,
-			picture,
-		};
 
-		const formData = new FormData(ref.current);
+		// check if there empety propeties
+		if (!projectTitle) return setErrorMessage("You must fill the title field");
 
+		if (!resume) return setErrorMessage("You must fill the resume field");
+
+		if (!description) return setErrorMessage("You must fill the description field");
+
+		if (!mainLang) return setErrorMessage("You must fill the main programming language field");
+
+		if (!urlDemo) return setErrorMessage("You must fill the url of the demonstration field");
+
+		if (!urlRepository) return setErrorMessage("You must fill the url of the repository field");
+
+		if (!picture) return setErrorMessage("You must upload an image for the cover of your project");
+
+		// validation of values
+		if (
+			mainLang !== "java" &&
+			mainLang !== "javascript" &&
+			mainLang !== "html" &&
+			mainLang !== "css" &&
+			mainLang !== "python" &&
+			mainLang !== "cplus" &&
+			mainLang !== "csharp" &&
+			mainLang !== "php"
+		) return setErrorMessage("Your project must be of one of the set pogramming languages");
+
+		const response = await ProjectController.create(
+			ref.current,
+			session?.accessToken,
+		);
+		setSuccessMessage(() => ({
+			message: `${response.project.title} was created successfully`,
+			link: `/projects/${response.project._id}`,
+		}))
+		console.log(response.project);
+		/*
 		try {
-
-			formData.forEach((entry, key) => {
-				console.log(key, " : ", entry);
-			});
 			const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, {
 				method: "POST",
 				headers: {
@@ -108,10 +137,10 @@ const CreateProjectTemplate = () => {
 					console.log(err);
 					setErrorMessage(err.message);
 				});
-
+			console.log(response);
 		} catch(err) {
 			console.log(err);
-		}
+		}*/
 	};
 
 	return (
@@ -152,7 +181,7 @@ const CreateProjectTemplate = () => {
 					label="URL of the repository"
 					onInputChange={(v) => setUrlRepository(v)}
 					value={urlRepository}
-					icon={<Link />}
+					icon={<LinkIcon />}
 					required={false}
 				/>
 				<TextInput
@@ -191,11 +220,12 @@ const CreateProjectTemplate = () => {
 				/>
 				<TextInput
 					name="description"
-					required={false}
-					label="Conteúdo"
+					label="Description"
 					value={description}
-					onInputChange={(v) => (v)}
+					onInputChange={(v) => setDescription(v)}
+					required={false}
 				/>
+
 				<WYSIWYGEditor
 					content={description}
 					onChange={(v) => setDescription(v)}
@@ -204,6 +234,6 @@ const CreateProjectTemplate = () => {
 			</Form>
 		</Styled.Wrapper>
 	);
-};
+});
 
 export default CreateProjectTemplate;
