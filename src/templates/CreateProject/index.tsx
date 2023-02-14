@@ -10,21 +10,20 @@ import Header from '../../components/Header';
 import Heading from '../../components/Heading';
 import ImageInput from '../../components/ImageInput';
 import TextInput from '../../components/TextInput';
+import Select from '../../components/Select';
 const WYSIWYGEditor = dynamic(() => import('../../components/WYSIWYGEditor'), { ssr: false });
-import Link from 'next/link';
+
 
 // icons
-import { Cases, Close, Code, Link as LinkIcon, Movie, PhotoAlbum } from "@styled-icons/material-outlined";
+import { Cases, Code, Link as LinkIcon, Movie, PhotoAlbum } from "@styled-icons/material-outlined";
 
 // styles
 import * as Styled from './styles';
 import { Session } from '../../shared-types/session-nextauth';
 
 // types
-import { SuccessState } from '../../shared-types/async-success-error';
 import ProjectController from '../../api/controller/project';
 import React from 'react';
-import Button from '../../components/Button';
 type SetSuccessMessagesParams = {
 	message: string;
 	link: string;
@@ -49,10 +48,6 @@ const CreateProjectTemplate = React.forwardRef(() => {
 	// for headear effect
 	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
 	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
-
-	// form
-	const [errorMessage, setErrorMessage] = useState("");
-	const [successMessage, setSuccessMessage] = useState<SuccessState>();
 
 	// refs
 	const formRef = useRef<HTMLFormElement | null>(null);
@@ -79,68 +74,27 @@ const CreateProjectTemplate = React.forwardRef(() => {
 
 	// handle onSubmit
 	const handleCreateProject = async (ref: MutableRefObject<HTMLFormElement>) => {
+		console.log("no onSubmit");
 
+		// if (WYSIWYGEditorRef.current === null ) return;
 
-		// check if there empety propeties
-		if (!projectTitle) return setErrorMessage("You must fill the title field");
+		const dataProject = {
+			title: projectTitle,
+			resume,
+			mainLang,
+			urlRepository,
+			urlDemo,
+			picture,
+			description
+		};
 
-		if (!resume) return setErrorMessage("You must fill the resume field");
+		console.log(dataProject);
 
-		if (!description) return setErrorMessage("You must fill the description field");
-
-		if (!mainLang) return setErrorMessage("You must fill the main programming language field");
-
-		if (!urlDemo) return setErrorMessage("You must fill the url of the demonstration field");
-
-		if (!urlRepository) return setErrorMessage("You must fill the url of the repository field");
-
-		if (!picture) return setErrorMessage("You must upload an image for the cover of your project");
-
-		// validation of values
-		if (
-			mainLang !== "java" &&
-			mainLang !== "javascript" &&
-			mainLang !== "html" &&
-			mainLang !== "css" &&
-			mainLang !== "python" &&
-			mainLang !== "cplus" &&
-			mainLang !== "csharp" &&
-			mainLang !== "php"
-		) return setErrorMessage("Your project must be of one of the set pogramming languages");
-
-		const response = await ProjectController.create(
+		return await ProjectController.create(
+			dataProject,
 			ref.current,
 			session?.accessToken,
 		);
-		setSuccessMessage(() => ({
-			message: `${response.project.title} was created successfully`,
-			link: `/projects/${response.project._id}`,
-		}))
-		console.log(response.project);
-		/*
-		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, {
-				method: "POST",
-				headers: {
-					Authorization: `Bearer ${session.accessToken}`
-				},
-				body: formData,
-			})
-				.then((r) => r.json())
-				.then((response) => {
-					setSuccessMessage({
-						message: `${response.project.title} was successfully created you can check the project `,
-						link: `/projects/${response.project._id}`,
-					});
-				})
-				.catch(err => {
-					console.log(err);
-					setErrorMessage(err.message);
-				});
-			console.log(response);
-		} catch(err) {
-			console.log(err);
-		}*/
 	};
 
 	return (
@@ -163,8 +117,6 @@ const CreateProjectTemplate = React.forwardRef(() => {
 			<Form
 				onSubmit={handleCreateProject}
 				reference={formRef.current}
-				successMessage={successMessage}
-				errorMessage={errorMessage}
 			>
 				<TextInput
 					type="text"
@@ -196,12 +148,49 @@ const CreateProjectTemplate = React.forwardRef(() => {
 				<TextInput
 					type="text"
 					name="mainLang"
-					label="Main programmer language"
+					label="Main programming or development language"
 					onInputChange={(v) => setMainLang(v)}
 					value={mainLang}
 					icon={<Code />}
 					required={false}
 				/>
+				<Select
+					name="mainLang"
+					onChange={(v) => setMainLang(v)}
+					placeholder="Main programming or development language"
+
+				>
+					<option value="javascript">
+						javascript
+					</option>
+					<option value="java">
+						java
+					</option>
+					<option value="typescript">
+						typescript
+					</option>
+					<option value="html">
+						html
+					</option>
+					<option value="css">
+						css
+					</option>
+					<option value="python">
+						python
+					</option>
+					<option value="java">
+						java
+					</option>
+					<option value="cplus">
+						cplus
+					</option>
+					<option value="charp">
+						csharp
+					</option>
+					<option value="php">
+						php
+					</option>
+				</Select>
 				<TextInput
 					name="resume"
 					label="Resume"

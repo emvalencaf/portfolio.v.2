@@ -1,21 +1,25 @@
 import { FormHTMLAttributes } from "react";
+import { FetchResponseProject } from "../../../shared-types/project";
+import CreateFetch from "../../../utils/createFetch";
+
+// config
+const url = `${process.env.NEXT_PUBLIC_API_URL}/api/projects`;
 
 export default class ProjectService{
-	static async create(formData: FormData, token: string){
-		formData.forEach((values, key) => {
-			console.log(key," : ", values);
-		})
-		console.log(token);
-		return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, {
+	static async create(formData: FormData, token: string): Promise<FetchResponseProject>{
+
+		const options = {
 			method: "POST",
 			headers: {
-				Authorization: `Bearer ${token}`
+				Authorization: `Bearer ${token}`,
 			},
 			body: formData,
-		}).then(response => response.json());
+		};
+
+		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/`, options);
 	}
 
-	static async getById(id: string) {
-		return  await fetch(`${process.env.NEXTAUTH_API_URL}/api/projects/${id}`).then((response) => response.json());
+	static async getById(id: string | string[]): Promise<FetchResponseProject> {
+		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/${id}`)
 	}
 }

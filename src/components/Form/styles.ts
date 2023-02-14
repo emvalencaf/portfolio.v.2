@@ -49,6 +49,11 @@ export const Alert = styled.div<AlertProps>`
 			color: ${theme.colors.quaternary};
 		}
 
+		> span {
+			display: flex;
+			gap: ${theme.spacings.xxsmall};
+		}
+
 		& ${Button} {
 			position: fixed;
 			align-self: flex-end;
@@ -60,6 +65,23 @@ export const Alert = styled.div<AlertProps>`
 				width: 2rem;
 				height: 2rem;
 			}
+		}
+	`}
+`;
+
+export const CloseButton = styled.span`
+	${({ theme }) => css`
+		position: fixed;
+		align-self: flex-end;
+		padding: 0px;
+		margin: 0px;
+		top: 0.2rem;
+		right: 0.2rem;
+		background-color: ${theme.colors.quaternary};
+		>svg {
+			width: 2rem;
+			height: 2rem;
+			color: ${theme.colors.secondary}
 		}
 	`}
 `;

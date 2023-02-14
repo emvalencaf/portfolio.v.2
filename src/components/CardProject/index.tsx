@@ -33,7 +33,7 @@ const langIcons = {
 };
 
 const CardProject = ({
-	id,
+	_id,
 	title,
 	mainLang = "javascript",
 	srcImg = "",
@@ -66,7 +66,7 @@ const CardProject = ({
 					<p>
 						{resume}
 					</p>
-					<Link href={`/project/${id}`} passHref legacyBehavior>
+					<Link href={`/project/${_id}`} passHref legacyBehavior>
 						<a target="_self" rel="internal">
 							<LinkIcon />
 							Veja os detalhes

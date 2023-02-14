@@ -28,6 +28,9 @@ const WYSIWYGEditor = ({ content, placeholder, onChange }: WYSIWYGEditorProps) =
 
 	// handle synthetic event
 	const handleUpdate = () => {
+
+		if (editorRef.current === null) return;
+
 		const editorContent = editorRef.current.value
 
 		if (onChange) onChange(editorContent);
