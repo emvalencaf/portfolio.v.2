@@ -14,68 +14,44 @@ import { Session } from '../../shared-types/session-nextauth';
 
 // icons
 import { Facebook, Github, Instagram, Linkedin, Tiktok, Twitter, Youtube } from '@styled-icons/boxicons-logos';
-import { Code, Home, HomeWork, LogoDev, Person3, PersonPin, Subtitles, Wallpaper, Web, Work } from '@styled-icons/material-outlined';
+import { LogoDev, PersonPin, Subtitles, Web } from '@styled-icons/material-outlined';
 
 // styles
 import * as Styled from './styles';
+import SettingsController from '../../api/controller/settings';
 
+// types
+export type SettingsCreationTemplateProps = {
+	title?: string;
+};
 
-
-const PortfolioCreationTemplate = () => {
-
+const SettingsCreationTemplate = () => {
 	// session
 	const { data } = useSession();
 	const session: Session = data;
 
 	// states
-	const [websiteName, setWebsiteName ] = useState("");
-	const [ logoImg, setLogoImg ] = useState(null);
-	const [ logoAlt, setLogoAlt ] = useState(null);
+	const [websiteName, setWebsiteName] = useState("");
+	const [logoImg, setLogoImg] = useState(null);
+	const [logoAlt, setLogoAlt] = useState(null);
 	// Social Media URL
-	const [ linkedInURL, setLinkedInURL ] = useState("");
-	const [ githubURL, setGithubURL ] = useState("");
-	const [ instaURL, setInstaURL ] = useState("");
-	const [ facebookURL, setFacebookURL ] = useState("");
-	const [ youtubeURL, setYoutubeURL ] = useState("");
-	const [ twitterURL, setTwitterURL ] = useState("");
-	const [ tiktokURL, setTiktokURL ] = useState("");
-	const [ homepageURL, setHomepageURL ] = useState("");
-	// Home Section
-	const [ ocupation, setOcupation ] = useState("");
-	const [ mainStack, setMainStack ] = useState("");
-	const [ homeBackgroundImg, setHomeBackgroundImg ] = useState(null);
-
-	// for headear effect
-	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(0);
-	const [ visibleHeader, setVisibleHeader ] = useState<boolean>(true);
-
+	const [linkedInURL, setLinkedInURL] = useState("");
+	const [githubURL, setGithubURL] = useState("");
+	const [instaURL, setInstaURL] = useState("");
+	const [facebookURL, setFacebookURL] = useState("");
+	const [youtubeURL, setYoutubeURL] = useState("");
+	const [twitterURL, setTwitterURL] = useState("");
+	const [tiktokURL, setTiktokURL] = useState("");
+	const [homepageURL, setHomepageURL] = useState("");
 	// refs
 	const formRef = useRef<HTMLFormElement | null>(null);
 
-	// useEffect for showing header
-	useEffect(() => {
-
-		const handleHiddenHeader = () => {
-			lastScrollYCoords < window.scrollY ?
-				setVisibleHeader(false) :
-				setVisibleHeader(true);
-
-			setLastScrollYCoords(window.scrollY);
-		};
-
-		window.addEventListener("scroll", handleHiddenHeader);
-
-		return () => {
-			window.removeEventListener("scroll", handleHiddenHeader);
-		};
-
-	}, [lastScrollYCoords]);
-
-	// handle Submit
-	const handleCreatePortfolio = async () => {
 
 
-		const portfolioData = {
+	// onSubmit
+	const handleSettingsCreation = async () => {
+
+		const data = {
 			websiteName,
 			logo: {
 				srcImg: logoImg,
@@ -83,54 +59,26 @@ const PortfolioCreationTemplate = () => {
 				link: "#",
 			},
 			socialMedia: {
-				githubURL,
-				facebookURL,
 				instaURL,
-				tiktokURL,
+				linkedInURL,
+				facebookURL,
+				githubURL,
 				homepageURL,
+				twitterURL,
+				tiktokURL,
 				youtubeURL,
-			}
+			},
 		};
 
-		const formData = new FormData(formRef.current);
+		const formData: FormData = new FormData(formRef.current);
 
-		return await PortfolioController.create(
-			portfolioData,
-			formData,
-			session?.accessToken,
-		);
-	}
+		return await SettingsController.create(data, formData, session?.accessToken);
+	};
 
 	return (
 		<Styled.Wrapper>
-			<Header menuLinks={[]} logo={{
-				altText: "dashboard",
-				link: "/admin/"
-			}} visible={visibleHeader} />
-			<Heading
-				as="h1"
-				size="big"
-				color="quaternary"
-				uppercase
-			>
-				Portfolio
-			</Heading>
-			<p>
-				Bem-vindo à seção para criar o seu portfólio.
-			</p>
-			<Link href="/portfolio-cration/section-creation" passHref legacyBehavior>
-				<a rel="internal">
-					crie uma nova seção
-				</a>
-			</Link>
-			<Link href="/portfolio-creation/settings-creation" passHref legacyBehavior>
-				<a rel="internal">
-					configure o seu portfólio
-				</a>
-			</Link>
-			{/*
 			<Form
-				onSubmit={() => handleCreatePortfolio}
+				onSubmit={handleSettingsCreation}
 				reference={formRef.current}
 			>
 				<Heading as="h2" size="medium" color="quaternary">
@@ -232,48 +180,9 @@ const PortfolioCreationTemplate = () => {
 					onInputChange={(v) => setTiktokURL(v)}
 					required={false}
 				/>
-				<Heading as="h2" size="medium" color="quaternary">
-					Portfolio content
-				</Heading>
-				<Styled.ContainerHeading>
-					<Heading as="h3" size="small" color="tertiary">
-						Home section
-					</Heading>
-					<Home />
-				</Styled.ContainerHeading>
-				<TextInput
-					name="ocupation"
-					label="what your ocupation"
-					icon={<Work />}
-					value={ocupation}
-					onInputChange={(v) => setOcupation(v)}
-					required={false}
-				/>
-				<TextInput
-					name="mainStack"
-					label="name your main code language, please space the names, ex: 'Javascript Typescript NodeJS'"
-					icon={<Code />}
-					value={mainStack}
-					onInputChange={(v) => setMainStack(v)}
-					required={false}
-				/>
-				<ImageInput
-					name="homeBackgroundImg"
-					label="you may upload a background image for your home section"
-					icon={<Wallpaper />}
-					value={homeBackgroundImg}
-					onInput={(v) => setHomeBackgroundImg(v)}
-					required={false}
-				/>
-				<Styled.ContainerHeading>
-					<Heading as="h3" size="small" color="tertiary">
-						About Section
-					</Heading>
-					<Person3 />
-				</Styled.ContainerHeading>
-			</Form>*/}
+			</Form>
 		</Styled.Wrapper>
 	);
 };
 
-export default PortfolioCreationTemplate;
+export default SettingsCreationTemplate;

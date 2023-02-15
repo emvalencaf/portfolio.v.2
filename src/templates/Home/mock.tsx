@@ -57,6 +57,7 @@ export default {
 					"NodeJS",
 					"React",
 				],
+				backgroundImg: "assets/images/background-home.jpg"
 			},
 			about: {
 				id: "about",

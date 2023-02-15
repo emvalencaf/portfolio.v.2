@@ -1,6 +1,6 @@
 // service
 import { SuccessState } from "../../../shared-types/async-success-error";
-import { FetchResponseProject, Project } from "../../../shared-types/project";
+import { FetchResponseProject, Project, ProjectControllerCreate } from "../../../shared-types/project";
 import ProjectService from "../../services/project";
 
 // type
@@ -14,13 +14,8 @@ type ProjectData = {
 	picture: Blob | MediaSource | File;
 };
 
-export type ProjectControllerCreate = {
-	data: Project;
-	successMessage: SuccessState;
-}
-
 export default class ProjectController {
-	static async create( dataProject: ProjectData,form: HTMLFormElement, token: string): Promise<ProjectControllerCreate> {
+	static async create( dataProject: ProjectData, formData: FormData, token: string): Promise<ProjectControllerCreate> {
 
 		const {
 			title,
@@ -31,9 +26,7 @@ export default class ProjectController {
 			urlRepository,
 			picture,
 		} = dataProject;
-		console.log("no controller")
-
-		const formData:FormData = new FormData(form);
+		console.log("no controller");
 
 		try {
 

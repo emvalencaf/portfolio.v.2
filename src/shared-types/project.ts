@@ -1,3 +1,4 @@
+import { SuccessState } from "./async-success-error";
 import { BackendUser } from "./user-backend";
 
 export type Project = {
@@ -17,3 +18,8 @@ export type Project = {
 export type FetchResponseProject = {
 	project: Project;
 };
+
+export type ProjectControllerCreate = {
+	data: Project;
+	successMessage: SuccessState;
+}

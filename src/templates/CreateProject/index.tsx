@@ -89,11 +89,11 @@ const CreateProjectTemplate = React.forwardRef(() => {
 			description
 		};
 
-		console.log(dataProject);
+		const formData: FormData = new FormData(formRef.current);
 
 		return await ProjectController.create(
 			dataProject,
-			ref.current,
+			formData,
 			session?.accessToken,
 		);
 	};

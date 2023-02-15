@@ -14,11 +14,12 @@ import * as Styled from './styles';
 // types
 import { SuccessState } from '../../shared-types/async-success-error';
 import { Portfolio } from '../../shared-types/portfolio';
-import { ProjectControllerCreate } from '../../api/controller/project';
+import { ProjectControllerCreate } from '../../shared-types/project';
+import { SettingsControllerCreate } from '../../api/controller/settings';
 
 export type FormProps = {
 	children: React.ReactNode;
-	onSubmit?: (form: MutableRefObject<HTMLFormElement>) => Promise<ProjectControllerCreate>;
+	onSubmit?: (form: MutableRefObject<HTMLFormElement>) => Promise<ProjectControllerCreate | SettingsControllerCreate>;
 	errorMessage?: string;
 	successMessage?: SuccessState;
 	reference?: HTMLFormElement;
