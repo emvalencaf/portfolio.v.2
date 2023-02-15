@@ -1,4 +1,5 @@
 // service
+import { SuccessState } from "../../../shared-types/async-success-error";
 import { FetchResponseProject, Project } from "../../../shared-types/project";
 import ProjectService from "../../services/project";
 
@@ -13,9 +14,13 @@ type ProjectData = {
 	picture: Blob | MediaSource | File;
 };
 
+export type ProjectControllerCreate = {
+	data: Project;
+	successMessage: SuccessState;
+}
 
 export default class ProjectController {
-	static async create( dataProject: ProjectData,form: HTMLFormElement, token: string): Promise<Project> {
+	static async create( dataProject: ProjectData,form: HTMLFormElement, token: string): Promise<ProjectControllerCreate> {
 
 		const {
 			title,
@@ -68,7 +73,13 @@ export default class ProjectController {
 
 			const { project } = response;
 
-			return project;
+			return {
+				data: project,
+				successMessage: {
+					message: `${project?.title} was successfully created`,
+					link:`/projects/${project?._id}`
+				}
+			};
 
 		} catch (err){
 

@@ -24,6 +24,7 @@ import { Session } from '../../shared-types/session-nextauth';
 // types
 import ProjectController from '../../api/controller/project';
 import React from 'react';
+import { Project } from '../../shared-types/project';
 type SetSuccessMessagesParams = {
 	message: string;
 	link: string;

@@ -13,10 +13,12 @@ import * as Styled from './styles';
 
 // types
 import { SuccessState } from '../../shared-types/async-success-error';
-import { FetchResponseProject, Project } from '../../shared-types/project';
+import { Portfolio } from '../../shared-types/portfolio';
+import { ProjectControllerCreate } from '../../api/controller/project';
+
 export type FormProps = {
 	children: React.ReactNode;
-	onSubmit?: (form: MutableRefObject<HTMLFormElement>) => Promise<Project>;
+	onSubmit?: (form: MutableRefObject<HTMLFormElement>) => Promise<ProjectControllerCreate>;
 	errorMessage?: string;
 	successMessage?: SuccessState;
 	reference?: HTMLFormElement;
@@ -44,12 +46,11 @@ const Form = ({ children, onSubmit,
 
 			try {
 				console.log("aqui")
-				const project = await onSubmit(formRef);
+				const response = await onSubmit(formRef);
 
-				if (project) setSuccessMessage({
-					message: `${project.title} was successfully created`,
-					link:`/projects/${project._id}`
-				});
+				const { data, successMessage } = response;
+
+				if (data) setSuccessMessage(successMessage);
 				setVisible(true);
 
 			} catch(err){
