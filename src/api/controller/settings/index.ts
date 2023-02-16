@@ -67,4 +67,8 @@ export default class SettingsController {
 			throw new Error(err.message);
 		}
 	}
+
+	static async getAll<FetchResponseSettings>(token: string){
+		return await SettingsService.getAll(token);
+	}
 }

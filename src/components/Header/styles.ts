@@ -41,14 +41,16 @@ export const Wrapper = styled.header<ContainerProps>`
 		right: 0;
 		display: flex;
 		align-self: center;
-		justify-content: space-between;
+		justify-content: space-around;
 		color: ${theme.colors.secondary};
 		padding-left: ${theme.spacings.medium};
 		padding-right: ${theme.spacings.medium};
-		background-color: ${theme.colors.quaternary};
+		//background-color: ${theme.colors.quaternary};
 		border: 1px solid ${theme.colors.primary};
 		z-index: ${theme.layers.layer6};
-		opacity: 1;
+		background-image: linear-gradient(to top, transparent 20%, ${theme.colors.quaternary});
+		border: none;
+		opacity: 0.6;
 		& ul {
 			padding: 0;
 		}

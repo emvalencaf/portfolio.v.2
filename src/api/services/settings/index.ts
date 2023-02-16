@@ -19,6 +19,17 @@ export default class SettingsService{
 			body: formData,
 		};
 
-		return CreateFetch.dispatch<FetchResponseSettings>(url, options);
+		return await CreateFetch.dispatch<FetchResponseSettings>(url, options);
+	}
+	static async getAll(token: string) {
+
+		const options = {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			}
+		}
+
+		return await CreateFetch.dispatch<FetchResponseSettings[]>(url, options);
 	}
 }

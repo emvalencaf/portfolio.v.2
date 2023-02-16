@@ -6,7 +6,8 @@ export type SectionCreationTemplateProps = {
 	title?: string;
 };
 
-const SectionCreationTemplate = () => {
+const SectionCreationTemplate = ({ session,  }) => {
+	console.log()
 	return (
 		<Styled.Wrapper>
 		</Styled.Wrapper>

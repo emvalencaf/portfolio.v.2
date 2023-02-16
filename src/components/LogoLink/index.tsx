@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 // styles
 import * as Styled from './styles';
+import { DoubleArrow } from '@styled-icons/material-outlined';
 
 // types
 export type LogoLinkProps = {
@@ -29,7 +30,13 @@ const LogoLink = ({ link, srcImg = "", altText, newTab = false }: LogoLinkProps)
 
 	return (
 		<Styled.Link target={target} rel={rel} aria-label="logo link">
-			{srcImg ? <img src={srcImg} alt={altText} /> : altText}
+			{srcImg ? <img src={srcImg} alt={altText} /> :
+			<Styled.Logo>
+				<DoubleArrow />
+				logo
+				<DoubleArrow />
+			</Styled.Logo>
+			}
 		</Styled.Link>
 	);
 };

@@ -17,8 +17,9 @@ export const Wrapper = styled.footer`
 		justify-content: center;
 		gap: ${theme.spacings.xsmall};
 		margin-top: ${theme.spacings.medium};
-		background-color: ${theme.colors.quaternary};
+		// background-color: ${theme.colors.quaternary};
 		padding: ${theme.spacings.medium};
+		background-image: linear-gradient(to bottom, transparent 5%, ${theme.colors.quaternary});
 		& p {
 			margin: 0;
 			padding: 0;

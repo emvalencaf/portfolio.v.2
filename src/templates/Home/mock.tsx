@@ -9,8 +9,8 @@ import { HomeProps } from ".";
 export default {
 	header: {
 		logo: {
-			srcImg: "assets/images/logo.png",
-			altText: "logo",
+			srcImg: "",
+			altText: "<<Logo>>",
 			link: "#"
 		},
 		menuLinks: [

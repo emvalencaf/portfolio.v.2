@@ -24,8 +24,9 @@ export const Nav = styled.nav<MenuStyled>`
 			left: 0;
 			right: 0;
 //			bottom: 0;
-			background-color: ${theme.colors.quaternary};
+			// background-color: ${theme.colors.quaternary};
 			transition: all ${theme.transitions.fast} ease-in-out;
+			background-image: linear-gradient(to top, transparent, ${theme.colors.quaternary} 90%);
 			${visible && menuVisible()}
 
 			> ul {
