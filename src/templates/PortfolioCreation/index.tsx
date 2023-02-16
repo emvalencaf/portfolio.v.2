@@ -118,7 +118,7 @@ const PortfolioCreationTemplate = () => {
 			<p>
 				Bem-vindo à seção para criar o seu portfólio.
 			</p>
-			<Link href="/admin/portfolio-cration/section-creation" passHref legacyBehavior>
+			<Link href="/admin/portfolio-creation/section-creation" passHref legacyBehavior>
 				<a rel="internal">
 					crie uma nova seção
 				</a>

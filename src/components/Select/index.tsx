@@ -1,4 +1,5 @@
 // styles
+import { Home } from '@styled-icons/material-outlined';
 import { SelectHTMLAttributes, useRef } from 'react';
 import * as Styled from './styles';
 
@@ -47,6 +48,9 @@ const Select = ({
 				required={required}
 				ref={selectRef}
 			>
+				<option value="">
+					{placeholder}
+				</option>
 				{children}
 			</Styled.Select>
 		</Styled.Wrapper>

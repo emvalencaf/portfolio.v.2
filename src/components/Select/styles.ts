@@ -19,5 +19,16 @@ export const Select = styled.select`
 		padding-right: 3.7rem;
 		border-radius: ${theme.spacings.tiny};
 		outline: none;
+
+		& svg {
+			position: absolute;
+			top: 50%;
+			transform: translate(0, -50%);
+			right: 1rem;
+			width: 2.5rem;
+			height: 2.5rem;
+			color: ${theme.colors.gray6};
+			z-index: ${theme.layers.layer1};
+		}
 	`}
 `;
