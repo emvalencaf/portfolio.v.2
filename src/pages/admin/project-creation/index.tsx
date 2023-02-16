@@ -2,7 +2,7 @@
 import PrivateComponent from "../../../components/PrivateComponent";
 
 // template
-import CreateProjectTemplate from "../../../templates/CreateProject";
+import CreateProjectTemplate from "../../../templates/ProjectCreation";
 
 // types
 import { privateServerSideProps } from "../../../utils/private-serverside-props";

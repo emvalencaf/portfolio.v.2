@@ -19,6 +19,6 @@ export default class SettingsService{
 			body: formData,
 		};
 
-		return CreateFetch.dispatch(url, options);
+		return CreateFetch.dispatch<FetchResponseSettings>(url, options);
 	}
 }

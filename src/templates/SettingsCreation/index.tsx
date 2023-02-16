@@ -1,7 +1,7 @@
 // hooks
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import PortfolioController from '../../api/controller/portfolio';
 
 // components
@@ -19,6 +19,7 @@ import { LogoDev, PersonPin, Subtitles, Web } from '@styled-icons/material-outli
 // styles
 import * as Styled from './styles';
 import SettingsController from '../../api/controller/settings';
+import { Icon } from '@styled-icons/simple-icons';
 
 // types
 export type SettingsCreationTemplateProps = {
@@ -33,7 +34,8 @@ const SettingsCreationTemplate = () => {
 	// states
 	const [websiteName, setWebsiteName] = useState("");
 	const [logoImg, setLogoImg] = useState(null);
-	const [logoAlt, setLogoAlt] = useState(null);
+	const [logoAlt, setLogoAlt] = useState("");
+	const [ favIcon, setFavIcon ] = useState(null);
 	// Social Media URL
 	const [linkedInURL, setLinkedInURL] = useState("");
 	const [githubURL, setGithubURL] = useState("");
@@ -49,12 +51,12 @@ const SettingsCreationTemplate = () => {
 
 
 	// onSubmit
-	const handleSettingsCreation = async () => {
+	const handleSettingsCreation = async (ref: MutableRefObject<HTMLFormElement>) => {
 
 		const data = {
 			websiteName,
 			logo: {
-				srcImg: logoImg,
+				srcImg: "",
 				altText: logoAlt,
 				link: "#",
 			},
@@ -68,9 +70,10 @@ const SettingsCreationTemplate = () => {
 				tiktokURL,
 				youtubeURL,
 			},
+			favIcon,
 		};
-
-		const formData: FormData = new FormData(formRef.current);
+		console.log(data);
+		const formData: FormData = new FormData(ref.current);
 
 		return await SettingsController.create(data, formData, session?.accessToken);
 	};
@@ -97,15 +100,15 @@ const SettingsCreationTemplate = () => {
 					label="you may upload a logo image"
 					icon={<LogoDev />}
 					value={logoImg}
-					onInput={(v) => setLogoImg(v)}
+					onInputFile={(v) => setLogoImg(v)}
 					required={false}
 				/>
-				<TextInput
-					name="logoAlt"
-					label="altenative text of the logo"
-					icon={<Subtitles />}
-					value={logoAlt}
-					onInputChange={(v) => setLogoAlt(v)}
+				<ImageInput
+					name="favIcon"
+					label="you may upload a fav icon"
+					icon={<Icon />}
+					value={favIcon}
+					onInputFile={(v) => setFavIcon(v)}
 					required={true}
 				/>
 				<TextInput

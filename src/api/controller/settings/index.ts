@@ -1,5 +1,7 @@
 // service
+import SocialMedia from "../../../components/SocialMedia";
 import { SuccessState } from "../../../shared-types/async-success-error";
+import { FetchResponseSettings } from "../../../shared-types/settings";
 import SettingsService from "../../services/settings";
 
 // type
@@ -31,12 +33,36 @@ type SettingsData = {
 
 
 export default class SettingsController {
-	static async create(data: SettingsData, formData: FormData, token: string){
+	static async create(data: SettingsData, formData: FormData, token: string): Promise<SettingsControllerCreate>{
 		try{
-			
-			if (!data.logo || !data.logo?.altText || !data.logo?.srcImg || !data.logo?.link ) throw new Error(`you fill the logo fields incorrectly`);
 
-			return await SettingsService.create(formData, token);
+			if (!data.logo || !data.logo?.altText || !data.logo?.link ) throw new Error(`you fill the logo fields incorrectly`);
+
+			formData.delete("logoAlt");
+			formData.delete("instaURL");
+			formData.delete("facebookURL");
+			formData.delete("youtubeURL");
+			formData.delete("twitterURL");
+			formData.delete("homepageURL");
+			formData.delete("githubURL");
+			formData.delete("tiktokURL");
+			formData.delete("linkedInURL");
+
+			formData.append("logo", JSON.stringify(data.logo));
+
+			if(data.socialMedia) formData.append("socialMedia", JSON.stringify(data.socialMedia));
+
+			const response =  await SettingsService.create(formData, token);
+
+			console.log(response);
+
+			return {
+				data: response,
+				successMessage: {
+					message: `settings was successfully created`,
+				}
+			};
+
 		} catch (err) {
 			throw new Error(err.message);
 		}

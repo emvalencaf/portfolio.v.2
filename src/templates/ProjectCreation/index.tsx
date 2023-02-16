@@ -24,7 +24,7 @@ import { Session } from '../../shared-types/session-nextauth';
 // types
 import ProjectController from '../../api/controller/project';
 import React from 'react';
-import { Project } from '../../shared-types/project';
+import { FetchResponseProject, Project } from '../../shared-types/project';
 type SetSuccessMessagesParams = {
 	message: string;
 	link: string;
@@ -75,7 +75,6 @@ const CreateProjectTemplate = React.forwardRef(() => {
 
 	// handle onSubmit
 	const handleCreateProject = async (ref: MutableRefObject<HTMLFormElement>) => {
-		console.log("no onSubmit");
 
 		// if (WYSIWYGEditorRef.current === null ) return;
 
@@ -89,7 +88,7 @@ const CreateProjectTemplate = React.forwardRef(() => {
 			description
 		};
 
-		const formData: FormData = new FormData(formRef.current);
+		const formData: FormData = new FormData(ref.current);
 
 		return await ProjectController.create(
 			dataProject,

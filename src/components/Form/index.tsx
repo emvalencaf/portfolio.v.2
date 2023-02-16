@@ -34,8 +34,8 @@ const Form = ({ children, onSubmit,
 	// states
 	const [errorMessage, setErrorMessage] = useState("");
 	const [successMessage, setSuccessMessage] = useState<SuccessState>();
-	const [ saving, setSaving ] = useState(false);
-	const [ visible, setVisible ] = useState(!!successMessage);
+	const [saving, setSaving] = useState(false);
+	const [visible, setVisible] = useState(!!successMessage);
 
 	// handle submit event
 	const handleSubmit = async (event: SyntheticEvent) => {
@@ -54,7 +54,7 @@ const Form = ({ children, onSubmit,
 				if (data) setSuccessMessage(successMessage);
 				setVisible(true);
 
-			} catch(err){
+			} catch (err) {
 				setErrorMessage(err.message);
 				setVisible(true);
 			}
@@ -66,18 +66,22 @@ const Form = ({ children, onSubmit,
 		<Styled.Form onSubmit={(event: SyntheticEvent) => handleSubmit(event)} ref={formRef}>
 			{children}
 			<Styled.ContainerButton>
-			<Styled.Alert visible={visible} isSuccess={!!successMessage}>
+				<Styled.Alert visible={visible} isSuccess={!!successMessage}>
 					{
 						<span>
 							{!!successMessage ?
 								(
 									<>
 										{successMessage.message}
-										<Link href={successMessage.link} passHref legacyBehavior>
-											<a rel="internal" target="_self">
-												click here
-											</a>
-										</Link>
+										{
+											successMessage.link && (
+												<Link href={successMessage.link} passHref legacyBehavior>
+													<a rel="internal" target="_self">
+														click here
+													</a>
+												</Link>
+											)
+										}
 									</>
 								)
 								: (
