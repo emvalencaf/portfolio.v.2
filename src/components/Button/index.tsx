@@ -17,6 +17,7 @@ const Button = ({
 	color = "quaternary",
 	onClick,
 	icon,
+	type = "submit",
 }: ButtonProps) => {
 	const handleClick = () => {
 		if (onClick) onClick();
@@ -28,6 +29,7 @@ const Button = ({
 			disabled={disabled}
 			color={color}
 			onClick={handleClick}
+			type={type}
 		>
 			{icon}
 			{!!children && (

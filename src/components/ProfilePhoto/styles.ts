@@ -7,6 +7,7 @@ export const Picture = styled.picture`
 			height: ${theme.frameSizes.smallMedium};
 			border-radius: 20px;
 			box-shadow: 20px 14px 20px 4px;
+
 		}
 	`}
 `;

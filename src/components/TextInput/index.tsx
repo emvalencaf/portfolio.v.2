@@ -28,6 +28,7 @@ const TextInput = ({
 		value = "",
 		icon,
 		as = "input",
+		maxLength = 524288,
 		reference = null,
 		required = false,
 	}: TextInputProps) => {
@@ -57,6 +58,7 @@ const TextInput = ({
 					as={as}
 					defaultValue={value}
 					required={required}
+					maxLength={maxLength ? maxLength : 524288}
 				/>
 
 				<Styled.Label htmlFor={name} element={as}>
