@@ -9,10 +9,10 @@ type UseFetchState<T> = {
 }
 
 // utils
-	// will check if object A's props values are equalas to object B's props values. That will be used to compare the url and options params to they refs
-const isObjectEqual = (objA: any, objB: any) => {
-	return JSON.stringify(objA) === JSON.stringify(objB);
-}
+import CreateFetch from '../../utils/createFetch';
+// will check if object A's props values are equalas to object B's props values. That will be used to compare the url and options params to they refs
+import CheckObj from '../../utils/checkObj';
+
 
 // hook
 export const useFetch = <T>(url: string, options?: RequestInit) => {
@@ -28,12 +28,12 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 	useEffect(() => {
 		let changed = false;
 
-		if (!isObjectEqual(url, urlRef.current)) {
+		if (!CheckObj.isObjectEqual(url, urlRef.current)) {
 			urlRef.current = url;
 			changed = true;
 		}
 
-		if (!isObjectEqual(options, optionsRef.current)) {
+		if (!CheckObj.isObjectEqual(options, optionsRef.current)) {
 			optionsRef.current = options;
 			changed = true;
 		}
@@ -61,18 +61,18 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 					state: "loading",
 				}));
 
-				const response = await fetch(url,{
+				const json = await CreateFetch.dispatch<T>(url,{
 					signal,
 					...options
 				});
-
+/*
 				if (!response.ok) return setFetchState({
 					data: null,
 					status: "error",
 					error: new Error(response.statusText),
-				});
+				});*/
 
-				const json = await response.json();
+				// const json = await response.json();
 
 				setFetchState({
 					data: json,

@@ -1,6 +1,7 @@
 // hooks
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useFetch } from '../../hooks/useFetch';
 
 // components
 import Select from '../../components/Select';
@@ -19,6 +20,7 @@ import { Settings } from '../../shared-types/settings';
 import { Session } from '../../shared-types/session-nextauth';
 import Button from '../../components/Button';
 import { CreateSectionData } from '../../shared-types/portfolio';
+import { FetchResponseProject } from '../../shared-types/project';
 
 export type SectionCreationTemplateProps = {
 	allSettings?: Settings[];
@@ -65,11 +67,17 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 	const [picture, setPicture] = useState(null);
 	const [educationData, setEducationData] = useState<EducationObject[]>([]);
 	const [workData, setWorkData] = useState<WorkObject[]>([]);
+	const [projects, setProjects] = useFetch<FetchResponseProject[]>(`${process.env.NEXTAUTH_API_URL}/api/projects/`,{
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${session.accessToken}`
+		},
+	});
 
 	// handleClick button
 	const handleClick = (typeData: string) => {
 
-	if (typeData === "educationData") setEducationData((prevState) => [...prevState, {
+		if (typeData === "educationData") setEducationData((prevState) => [...prevState, {
 			title: "",
 			institution: "",
 			workTime: "",
@@ -80,15 +88,15 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 			resume: "",
 		}]);
 
-	if (typeData === "workData") setWorkData((prevState) =>
-		[...prevState, {
-			startIn: "",
-			endIn: "",
-			jobDescription: "",
-			employer: "",
-			ocupation: "",
-		}]
-	)
+		if (typeData === "workData") setWorkData((prevState) =>
+			[...prevState, {
+				startIn: "",
+				endIn: "",
+				jobDescription: "",
+				employer: "",
+				ocupation: "",
+			}]
+		)
 	};
 
 	// handleSubmit
@@ -112,7 +120,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 
 		if (!newValue) return;
 
-		if(setState) setState((prevState) => prevState.map((element) => {
+		if (setState) setState((prevState) => prevState.map((element) => {
 			if (currentElement === element) {
 				console.log("was called")
 				element[elementProp] = newValue;
@@ -223,25 +231,25 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 								icon={<Photo />}
 								required={true}
 							/>
-							{ (educationData && educationData.length >= 1) && educationData.map((education, index) => (
-									<div key={`education${index}-key`}>
-										<Select
-											name={`education${index}`}
-											value={education.courseType}
-											placeholder={'choose a type of course'}
-											onChange={(v) => handleChangeElementInArray<EducationObject>(education, "courseType", v, setEducationData)}
-										>
-											<option value="higherEducation">
-												higher education
-											</option>
-											<option value="courses">
-												courses
-											</option>
-										</Select>
+							{(educationData && educationData.length >= 1) && educationData.map((education, index) => (
+								<div key={`education${index}-key`}>
+									<Select
+										name={`education${index}`}
+										value={education.courseType}
+										placeholder={'choose a type of course'}
+										onChange={(v) => handleChangeElementInArray<EducationObject>(education, "courseType", v, setEducationData)}
+									>
+										<option value="higherEducation">
+											higher education
+										</option>
+										<option value="courses">
+											courses
+										</option>
+									</Select>
 
-									</div>
+								</div>
 
-								))
+							))
 							}
 							<Button
 								type={"button"}
@@ -253,10 +261,40 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 								(workData && workData.length >= 1) && workData.map((work, index) => (
 									<div key={`work${index}-key`}>
 										<TextInput
-											name={`work${index}`}
+											name={`workEmployer${index}`}
 											value={work.employer}
 											label={`your employer name`}
 											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "employer", v, setWorkData)}
+											required={true}
+										/>
+										<TextInput
+											name={`workOcupation_${index}`}
+											value={work.ocupation}
+											label={`your ocupation at ${work.employer}'s job`}
+											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "employer", v, setWorkData)}
+											required={true}
+										/>
+										<TextInput
+											name={`workJobDescription_${index}`}
+											value={work.jobDescription}
+											label={`describe your job at ${work.employer}`}
+											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "jobDescription", v, setWorkData)}
+											required={true}
+										/>
+										<TextInput
+											name={`workStartIn_${index}`}
+											value={work.startIn}
+											type="date"
+											label={`inform the date when you've started working at ${work.employer}`}
+											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "startIn", v, setWorkData)}
+											required={true}
+										/>
+										<TextInput
+											name={`workEndIn_${index}`}
+											value={work.endIn}
+											type="date"
+											label={`inform the date when you've started working at ${work.employer}`}
+											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "startIn", v, setWorkData)}
 											required={true}
 										/>
 									</div>
@@ -269,6 +307,16 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 								Adicionar experiências de trabalho
 							</Button>
 						</>
+					)
+				}
+				{
+					typeSection === "skills" && (
+
+					)
+				}
+				{
+					typeSection === "projects" && (
+
 					)
 				}
 			</Form>
