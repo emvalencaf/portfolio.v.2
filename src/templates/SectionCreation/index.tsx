@@ -21,6 +21,7 @@ import { Session } from '../../shared-types/session-nextauth';
 import Button from '../../components/Button';
 import { CreateSectionData } from '../../shared-types/portfolio';
 import { FetchResponseProject } from '../../shared-types/project';
+import ProjectController from '../../api/controller/project';
 
 export type SectionCreationTemplateProps = {
 	allSettings?: Settings[];
@@ -67,12 +68,16 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 	const [picture, setPicture] = useState(null);
 	const [educationData, setEducationData] = useState<EducationObject[]>([]);
 	const [workData, setWorkData] = useState<WorkObject[]>([]);
-	const [projects, setProjects] = useFetch<FetchResponseProject[]>(`${process.env.NEXTAUTH_API_URL}/api/projects/`,{
+	const fetchData = useFetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, {
 		method: "GET",
 		headers: {
 			Authorization: `Bearer ${session.accessToken}`
 		},
 	});
+
+	if (fetchData.status === "loading") console.log(fetchData.status);
+	if (fetchData.status === "success") console.log(fetchData.data);
+	if (fetchData.error) console.log(fetchData.error);
 
 	// handleClick button
 	const handleClick = (typeData: string) => {
@@ -311,12 +316,19 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 				}
 				{
 					typeSection === "skills" && (
+						<TextInput
 
+						/>
 					)
 				}
 				{
 					typeSection === "projects" && (
-
+						<Select
+							name="projects"
+							placeholder='choose a project to add to your section'
+						>
+							{ dataProjectsFetch && dataProjectsFetch.map((project)) }
+						</Select>
 					)
 				}
 			</Form>

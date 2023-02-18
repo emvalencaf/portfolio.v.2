@@ -19,6 +19,17 @@ export default class ProjectService{
 		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/`, options);
 	}
 
+	static async getAll(token: string) {
+		const options = {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/`, options);
+	}
+
 	static async getById(id: string | string[]): Promise<FetchResponseProject> {
 		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/${id}`)
 	}

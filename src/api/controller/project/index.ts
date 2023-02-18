@@ -80,6 +80,12 @@ export default class ProjectController {
 		}
 	}
 
+	static async getAll(token: string) {
+		if (!token) return;
+
+		return await ProjectService.getAll(token);
+	}
+
 	static async getById(id: string | string[]):Promise<Project> {
 		if (!id) return ;
 
