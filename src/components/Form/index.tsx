@@ -25,6 +25,8 @@ export type FormProps = {
 	reference?: HTMLFormElement;
 };
 
+type handleSubmit = <T>(evnt: SyntheticEvent) => Promise<T>;
+
 const Form = ({ children, onSubmit,
 	reference = null }: FormProps) => {
 

@@ -15,6 +15,7 @@ type ProjectData = {
 };
 
 export default class ProjectController {
+	
 	static async create( dataProject: ProjectData, formData: FormData, token: string): Promise<ProjectControllerCreate> {
 
 		const {

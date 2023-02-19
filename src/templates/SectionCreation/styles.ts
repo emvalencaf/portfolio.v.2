@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 		flex-direction: column;
 		align-items: center;
 		background-color: ${theme.colors.tertiary};
-		transition: all 2000 ease-in-out;
+		transition: all ${theme.transitions.slowest} ease-in-out;
 	`}
 `;
 
