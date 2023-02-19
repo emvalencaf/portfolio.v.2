@@ -10,7 +10,7 @@ import Form from '../../components/Form';
 import ImageInput from '../../components/ImageInput';
 
 // icons
-import { Code, Person3, Photo, TextFields, Wallpaper, Work } from '@styled-icons/material-outlined';
+import { Close, Code, Person3, Photo, TextFields, Wallpaper, Work } from '@styled-icons/material-outlined';
 
 // styles
 import * as Styled from './styles';
@@ -46,6 +46,12 @@ export type WorkObject = {
 	jobDescription: string;
 }
 
+type TechObject = {
+	techName: string;
+	techDescription: string;
+	icon?: string;
+}
+
 type HandleChangeElementInArray = <T>(
 	currentElement: T,
 	elementProp: string,
@@ -63,21 +69,31 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 	const session: Session = data;
 
 	// states
-		// form states
+	// base states to control what type of form it'll be choose by the client
 	const [selectedSettings, setSelectedSettings] = useState("");
 	const [typeSection, setTypeSection] = useState<"home" | "about" | "skills" | "projects" | "other" | undefined>(undefined);
+
+	// form states
+	//home section
 	const [ocupation, setOcupation] = useState("");
 	const [mainStack, setMainStack] = useState("");
 	const [backgroundImg, setBackgroundImg] = useState(null);
-	const [urlDownload, setUrlDownload] = useState("");
+	// about section
 	const [bios, setBios] = useState("");
 	const [picture, setPicture] = useState(null);
+	const [urlDownload, setUrlDownload] = useState("");
+	// education data
 	const [educationData, setEducationData] = useState<EducationObject[]>([]);
+	// work experience data
 	const [workData, setWorkData] = useState<WorkObject[]>([]);
+	// project section
 	const [listSelectProjects, setListSelectProjects] = useState<Project[]>([]);
 	const [selectedProject, setSelectedProject] = useState<string>("");
 	const [projectsAttached, setProjectsAttched] = useState<ProjectAttached[]>([]);
-		// fetchedProjects states
+	// skills section
+	const [techData, setTechData] = useState<TechObject[]>([]);
+
+	// fetchedProjects states
 	const [fetchedProjects, setFetchedProjects] = useState<Project[]>([]);
 	const [loadingFetchedProjects, setLoadingFetchedProjects] = useState<boolean>(false);
 	const [errorMessageFetchedProjects, setErrorMessageFetchedProjects] = useState<string>("");
@@ -89,14 +105,14 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 		if (typeSection === "projects") handleGetAllProjects();
 
 	}, [typeSection]);
-		// it'll render the list of project into the select based on the fetched projects
+	// it'll render the list of project into the select based on the fetched projects
 	useEffect(() => {
 
 		setListSelectProjects((prevState) => [...fetchedProjects]);
 
 	}, [fetchedProjects]);
 
-		// it'll filter the list of the project into the select based on the selected projects
+	// it'll filter the list of the project into the select based on the selected projects
 	useEffect(() => {
 
 		setListSelectProjects((prevState) => prevState.filter((listProject) => {
@@ -118,10 +134,10 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 		if (fetchedProjects.length > 0) return;
 
 		setLoadingFetchedProjects(true);
-		try{
+		try {
 			const projects = await ProjectController.getAll(session.accessToken);
 			setFetchedProjects((prevState) => [...projects]);
-		} catch(err){
+		} catch (err) {
 			setErrorMessageFetchedProjects(err.message);
 		}
 		setLoadingFetchedProjects(false);
@@ -150,6 +166,11 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 				ocupation: "",
 			}]
 		)
+
+		if (typeData === "skills") setTechData((prevState) => [...prevState, {
+			techName: "",
+			techDescription: "",
+		}]);
 
 		if (typeData === "projects") {
 			if (errorMessageFetchedProjects) return;
@@ -241,7 +262,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 						>
 							<option value="home">home</option>
 							<option value="about">about</option>
-							<option value="sklls">skills</option>
+							<option value="skills">skills</option>
 							<option value="projects">projects</option>
 						</Select>
 					)
@@ -311,6 +332,21 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 							/>
 							{(educationData && educationData.length >= 1) && educationData.map((education, index) => (
 								<div key={`education${index}-key`}>
+									<div>
+										<Button
+											type='button'
+											onClick={() => {
+												setEducationData((prevState) => prevState.filter((educationToDelete) => {
+													let toDelete: boolean = true;
+
+													if (educationToDelete === education) toDelete = false;
+
+													return toDelete;
+												}))
+											}}
+											icon={<Close />}
+										/>
+									</div>
 									<Select
 										name={`education${index}`}
 										value={education.courseType}
@@ -324,7 +360,53 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 											courses
 										</option>
 									</Select>
-
+									<TextInput
+										name={`title${index}`}
+										value={education.title}
+										label="inform the title of the course"
+										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "title", v, setEducationData)}
+										maxLength={50}
+										required={true}
+									/>
+									<TextInput
+										name={`institution${index}`}
+										value={education.institution}
+										label="inform the institution"
+										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "institution", v, setEducationData)}
+										maxLength={50}
+										required={true}
+									/>
+									<TextInput
+										name={`resume${index}`}
+										value={education.resume}
+										label="inform a resume about the course"
+										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "title", v, setEducationData)}
+										as="textarea"
+										maxLength={250}
+										required={true}
+									/>
+									<TextInput
+										name={`startIn${index}`}
+										value={education.resume}
+										label="inform when the course start"
+										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "startIn", v, setEducationData)}
+										type="date"
+										required={true}
+									/>
+									<TextInput
+										name={`endIn${index}`}
+										value={education.endIn}
+										label="inform if the course ends"
+										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "endIn", v, setEducationData)}
+										type="date"
+										required={false}
+									/>
+									<TextInput
+										name={`educationUrlDownload${index}`}
+										label="inform the url of the certificate course"
+										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "urlDownload", v, setEducationData)}
+										required={false}
+									/>
 								</div>
 
 							))
@@ -338,6 +420,21 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 							{
 								(workData && workData.length >= 1) && workData.map((work, index) => (
 									<div key={`work${index}-key`}>
+										<div>
+											<Button
+												type='button'
+												onClick={() => {
+													setWorkData((prevState) => prevState.filter((workToDelete) => {
+														let toDelete: boolean = true;
+
+														if (workToDelete === work) toDelete = false;
+
+														return toDelete;
+													}))
+												}}
+												icon={<Close />}
+											/>
+										</div>
 										<TextInput
 											name={`workEmployer${index}`}
 											value={work.employer}
@@ -389,9 +486,50 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 				}
 				{
 					typeSection === "skills" && (
-						<TextInput
+						<>
+							<div>
+								{
+									techData.length >= 1 && techData.map((tech, index) => (
+										<div key={`div-tech-${index}`}>
+											<div>
+												<Button
+													type='button'
+													onClick={() => {
+														setTechData((prevState) => prevState.filter((techToDelete) => {
+															let toDelete: boolean = true;
 
-						/>
+															if (techToDelete === tech) toDelete = false;
+
+															return toDelete;
+														}))
+													}}
+													icon={<Close />}
+												/>
+											</div>
+											<TextInput
+												name={`techName${index}`}
+												value={tech.techName}
+												label={`name the tech`}
+												onInputChange={(v) => handleChangeElementInArray<TechObject>(tech, "techName", v, setTechData)}
+												required={true}
+											/>
+											<TextInput
+												name={`techDescription${index}`}
+												label={`describe the way you this tech`}
+												onInputChange={(v) => handleChangeElementInArray<TechObject>(tech, "techDescription", v, setTechData)}
+												required={true}
+											/>
+										</div>
+									))
+								}
+							</div>
+							<Button
+								type={"button"}
+								onClick={() => handleClick("skills")}
+							>
+								Adicionar tecnologia
+							</Button>
+						</>
 					)
 				}
 				{
@@ -402,6 +540,22 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 									{
 										projectsAttached.length >= 1 && projectsAttached.map((project) => (
 											<li key={`attached-${project._id}`}>
+												<div>
+													<Button
+														type='button'
+														onClick={() => {
+															setProjectsAttched((prevState) => prevState.filter((projectAttachedToDelete) => {
+																let toDelete: boolean = true;
+
+																if (projectAttachedToDelete === project) toDelete = false;
+
+																return toDelete;
+															}))
+															setListSelectProjects((prevState) => [...prevState, project])
+														}}
+														icon={<Close />}
+													/>
+												</div>
 												{project.title}
 											</li>
 										))
