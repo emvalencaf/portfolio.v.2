@@ -87,7 +87,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 	// work experience data
 	const [workData, setWorkData] = useState<WorkObject[]>([]);
 	// project section
-	const [listSelectProjects, setListSelectProjects] = useState<Project[]>([]);
+	const [listSelectProjects, setListSelectProjects] = useState<ProjectAttached[]>([]);
 	const [selectedProject, setSelectedProject] = useState<string>("");
 	const [projectsAttached, setProjectsAttched] = useState<ProjectAttached[]>([]);
 	// skills section
@@ -232,367 +232,370 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 
 	return (
 		<Styled.Wrapper>
-			<div>
-				<Select
-					name="selectedSettings"
-					placeholder='choose a portfolio'
-					value={selectedSettings}
-					onChange={(v) => setSelectedSettings(v)}
-				>
-					{allSettings.length >= 1 &&
-						allSettings.map((settings) => (
-							<option
-								value={settings.websiteName}
-								key={`${settings._id}`}
-							>
-								{settings.websiteName}
-							</option>
-						))
-					}
-				</Select>
-				{
-					selectedSettings && (
-						<Select
-							name="typeSection"
-							placeholder='choose a type of section'
-							value={typeSection}
-							onChange={(v) => {
-								setTypeSection(v)
-							}}
-						>
-							<option value="home">home</option>
-							<option value="about">about</option>
-							<option value="skills">skills</option>
-							<option value="projects">projects</option>
-						</Select>
-					)
-				}
-
-			</div>
-			<Form
-				onSubmit={handleSubmit}
-			>
-
-				{
-					typeSection === "home" && (
-						<>
-							<TextInput
-								name="ocupation"
-								label="fill your ocupation"
-								value={ocupation}
-								onInputChange={(v) => setOcupation(v)}
-								icon={<Work />}
-								required={true}
-							/>
-							<TextInput
-								name="mainStack"
-								label="fill your main stack if more than one serpate using space, ex: Javascript Python"
-								value={mainStack}
-								onInputChange={(v) => setMainStack(v)}
-								icon={<Code />}
-								required={true}
-							/>
-							<ImageInput
-								name="backgroundImg"
-								label="background picture"
-								onInputFile={(v) => setBackgroundImg(v)}
-								value={backgroundImg}
-								icon={<Wallpaper />}
-							/>
-						</>
-					)
-				}
-				{
-					typeSection === "about" && (
-						<>
-							<TextInput
-								name="urlDownload"
-								label="fill your url download"
-								value={urlDownload}
-								onInputChange={(v) => setUrlDownload(v)}
-								icon={<Person3 />}
-								required={true}
-							/>
-							<TextInput
-								name="bios"
-								label="give a little resume about yourself"
-								value={bios}
-								onInputChange={(v) => setBios(v)}
-								maxLength={1000}
-								required={true}
-								as="textarea"
-							/>
-							<ImageInput
-								name="picture"
-								label="upload a good picture of yourself"
-								value={picture}
-								onChange={(v) => setPicture(v)}
-								icon={<Photo />}
-								required={true}
-							/>
-							{(educationData && educationData.length >= 1) && educationData.map((education, index) => (
-								<div key={`education${index}-key`}>
-									<div>
-										<Button
-											type='button'
-											onClick={() => {
-												setEducationData((prevState) => prevState.filter((educationToDelete) => {
-													let toDelete: boolean = true;
-
-													if (educationToDelete === education) toDelete = false;
-
-													return toDelete;
-												}))
-											}}
-											icon={<Close />}
-										/>
-									</div>
-									<Select
-										name={`education${index}`}
-										value={education.courseType}
-										placeholder={'choose a type of course'}
-										onChange={(v) => handleChangeElementInArray<EducationObject>(education, "courseType", v, setEducationData)}
-									>
-										<option value="higherEducation">
-											higher education
-										</option>
-										<option value="courses">
-											courses
-										</option>
-									</Select>
-									<TextInput
-										name={`title${index}`}
-										value={education.title}
-										label="inform the title of the course"
-										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "title", v, setEducationData)}
-										maxLength={50}
-										required={true}
-									/>
-									<TextInput
-										name={`institution${index}`}
-										value={education.institution}
-										label="inform the institution"
-										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "institution", v, setEducationData)}
-										maxLength={50}
-										required={true}
-									/>
-									<TextInput
-										name={`resume${index}`}
-										value={education.resume}
-										label="inform a resume about the course"
-										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "title", v, setEducationData)}
-										as="textarea"
-										maxLength={250}
-										required={true}
-									/>
-									<TextInput
-										name={`startIn${index}`}
-										value={education.resume}
-										label="inform when the course start"
-										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "startIn", v, setEducationData)}
-										type="date"
-										required={true}
-									/>
-									<TextInput
-										name={`endIn${index}`}
-										value={education.endIn}
-										label="inform if the course ends"
-										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "endIn", v, setEducationData)}
-										type="date"
-										required={false}
-									/>
-									<TextInput
-										name={`educationUrlDownload${index}`}
-										label="inform the url of the certificate course"
-										onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "urlDownload", v, setEducationData)}
-										required={false}
-									/>
-								</div>
-
+			<Styled.ContainerSectionForm>
+				<Styled.ContainerSettingsForm>
+					<Select
+						name="selectedSettings"
+						placeholder='choose a portfolio'
+						value={selectedSettings}
+						onChange={(v) => setSelectedSettings(v)}
+					>
+						{allSettings.length >= 1 &&
+							allSettings.map((settings) => (
+								<option
+									value={settings.websiteName}
+									key={`${settings._id}`}
+								>
+									{settings.websiteName}
+								</option>
 							))
-							}
-							<Button
-								type={"button"}
-								onClick={() => handleClick("educationData")}
+						}
+					</Select>
+					{
+						selectedSettings && (
+							<Select
+								name="typeSection"
+								placeholder='choose a type of section'
+								value={typeSection}
+								onChange={(v) => {
+									setTypeSection(v)
+								}}
 							>
-								Adicionar formação acadêmica
-							</Button>
-							{
-								(workData && workData.length >= 1) && workData.map((work, index) => (
-									<div key={`work${index}-key`}>
-										<div>
+								<option value="home">home</option>
+								<option value="about">about</option>
+								<option value="skills">skills</option>
+								<option value="projects">projects</option>
+							</Select>
+						)
+					}
+				</Styled.ContainerSettingsForm>
+
+				<Form
+					onSubmit={handleSubmit}
+				>
+
+					{
+						typeSection === "home" && (
+							<>
+								<TextInput
+									name="ocupation"
+									label="fill your ocupation"
+									value={ocupation}
+									onInputChange={(v) => setOcupation(v)}
+									icon={<Work />}
+									required={true}
+								/>
+								<TextInput
+									name="mainStack"
+									label="fill your main stack if more than one serpate using space, ex: Javascript Python"
+									value={mainStack}
+									onInputChange={(v) => setMainStack(v)}
+									icon={<Code />}
+									required={true}
+								/>
+								<ImageInput
+									name="backgroundImg"
+									label="background picture"
+									onInputFile={(v) => setBackgroundImg(v)}
+									value={backgroundImg}
+									icon={<Wallpaper />}
+								/>
+							</>
+						)
+					}
+					{
+						typeSection === "about" && (
+							<>
+								<TextInput
+									name="urlDownload"
+									label="fill your url download"
+									value={urlDownload}
+									onInputChange={(v) => setUrlDownload(v)}
+									icon={<Person3 />}
+									required={true}
+								/>
+								<TextInput
+									name="bios"
+									label="give a little resume about yourself"
+									value={bios}
+									onInputChange={(v) => setBios(v)}
+									maxLength={1000}
+									required={true}
+									as="textarea"
+								/>
+								<ImageInput
+									name="picture"
+									label="upload a good picture of yourself"
+									value={picture}
+									onChange={(v) => setPicture(v)}
+									icon={<Photo />}
+									required={true}
+								/>
+								{(educationData && educationData.length >= 1) && educationData.map((education, index) => (
+									<Styled.ContainerDynamicInputSections key={`education${index}-key`}>
+										<Styled.ContainerButton>
 											<Button
 												type='button'
 												onClick={() => {
-													setWorkData((prevState) => prevState.filter((workToDelete) => {
+													setEducationData((prevState) => prevState.filter((educationToDelete) => {
 														let toDelete: boolean = true;
 
-														if (workToDelete === work) toDelete = false;
+														if (educationToDelete === education) toDelete = false;
 
 														return toDelete;
 													}))
 												}}
 												icon={<Close />}
 											/>
-										</div>
+										</Styled.ContainerButton>
+										<Select
+											name={`education${index}`}
+											value={education.courseType}
+											placeholder={'choose a type of course'}
+											onChange={(v) => handleChangeElementInArray<EducationObject>(education, "courseType", v, setEducationData)}
+										>
+											<option value="higherEducation">
+												higher education
+											</option>
+											<option value="courses">
+												courses
+											</option>
+										</Select>
 										<TextInput
-											name={`workEmployer${index}`}
-											value={work.employer}
-											label={`your employer name`}
-											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "employer", v, setWorkData)}
+											name={`title${index}`}
+											value={education.title}
+											label="inform the title of the course"
+											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "title", v, setEducationData)}
+											maxLength={50}
 											required={true}
 										/>
 										<TextInput
-											name={`workOcupation_${index}`}
-											value={work.ocupation}
-											label={`your ocupation at ${work.employer}'s job`}
-											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "employer", v, setWorkData)}
+											name={`institution${index}`}
+											value={education.institution}
+											label="inform the institution"
+											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "institution", v, setEducationData)}
+											maxLength={50}
 											required={true}
 										/>
 										<TextInput
-											name={`workJobDescription_${index}`}
-											value={work.jobDescription}
-											label={`describe your job at ${work.employer}`}
-											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "jobDescription", v, setWorkData)}
+											name={`resume${index}`}
+											value={education.resume}
+											label="inform a resume about the course"
+											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "title", v, setEducationData)}
+											as="textarea"
+											maxLength={250}
 											required={true}
 										/>
 										<TextInput
-											name={`workStartIn_${index}`}
-											value={work.startIn}
+											name={`startIn${index}`}
+											value={education.resume}
+											label="inform when the course start"
+											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "startIn", v, setEducationData)}
 											type="date"
-											label={`inform the date when you've started working at ${work.employer}`}
-											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "startIn", v, setWorkData)}
 											required={true}
 										/>
 										<TextInput
-											name={`workEndIn_${index}`}
-											value={work.endIn}
+											name={`endIn${index}`}
+											value={education.endIn}
+											label="inform if the course ends"
+											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "endIn", v, setEducationData)}
 											type="date"
-											label={`inform the date when you've started working at ${work.employer}`}
-											onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "startIn", v, setWorkData)}
-											required={true}
+											required={false}
 										/>
-									</div>
+										<TextInput
+											name={`educationUrlDownload${index}`}
+											label="inform the url of the certificate course"
+											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "urlDownload", v, setEducationData)}
+											required={false}
+										/>
+									</Styled.ContainerDynamicInputSections>
+
 								))
-							}
-							<Button
-								type={"button"}
-								onClick={() => handleClick("workData")}
-							>
-								Adicionar experiências de trabalho
-							</Button>
-						</>
-					)
-				}
-				{
-					typeSection === "skills" && (
-						<>
-							<div>
+								}
+								<Button
+									type={"button"}
+									onClick={() => handleClick("educationData")}
+								>
+									Adicionar formação acadêmica
+								</Button>
 								{
-									techData.length >= 1 && techData.map((tech, index) => (
-										<div key={`div-tech-${index}`}>
-											<div>
+									(workData && workData.length >= 1) && workData.map((work, index) => (
+										<Styled.ContainerDynamicInputSections key={`work${index}-key`}>
+											<Styled.ContainerButton>
 												<Button
 													type='button'
 													onClick={() => {
-														setTechData((prevState) => prevState.filter((techToDelete) => {
+														setWorkData((prevState) => prevState.filter((workToDelete) => {
 															let toDelete: boolean = true;
 
-															if (techToDelete === tech) toDelete = false;
+															if (workToDelete === work) toDelete = false;
 
 															return toDelete;
 														}))
 													}}
 													icon={<Close />}
 												/>
-											</div>
+											</Styled.ContainerButton>
 											<TextInput
-												name={`techName${index}`}
-												value={tech.techName}
-												label={`name the tech`}
-												onInputChange={(v) => handleChangeElementInArray<TechObject>(tech, "techName", v, setTechData)}
+												name={`workEmployer${index}`}
+												value={work.employer}
+												label={`your employer name`}
+												onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "employer", v, setWorkData)}
 												required={true}
 											/>
 											<TextInput
-												name={`techDescription${index}`}
-												label={`describe the way you this tech`}
-												onInputChange={(v) => handleChangeElementInArray<TechObject>(tech, "techDescription", v, setTechData)}
+												name={`workOcupation_${index}`}
+												value={work.ocupation}
+												label={`your ocupation at ${work.employer}'s job`}
+												onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "employer", v, setWorkData)}
 												required={true}
 											/>
-										</div>
+											<TextInput
+												name={`workJobDescription_${index}`}
+												value={work.jobDescription}
+												label={`describe your job at ${work.employer}`}
+												onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "jobDescription", v, setWorkData)}
+												required={true}
+											/>
+											<TextInput
+												name={`workStartIn_${index}`}
+												value={work.startIn}
+												type="date"
+												label={`inform the date when you've started working at ${work.employer}`}
+												onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "startIn", v, setWorkData)}
+												required={true}
+											/>
+											<TextInput
+												name={`workEndIn_${index}`}
+												value={work.endIn}
+												type="date"
+												label={`inform the date when you've started working at ${work.employer}`}
+												onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "startIn", v, setWorkData)}
+												required={true}
+											/>
+										</Styled.ContainerDynamicInputSections>
 									))
 								}
-							</div>
-							<Button
-								type={"button"}
-								onClick={() => handleClick("skills")}
-							>
-								Adicionar tecnologia
-							</Button>
-						</>
-					)
-				}
-				{
-					typeSection === "projects" && (
-						<div>
-							<div>
-								<ul>
+								<Button
+									type={"button"}
+									onClick={() => handleClick("workData")}
+								>
+									Adicionar experiências de trabalho
+								</Button>
+							</>
+						)
+					}
+					{
+						typeSection === "skills" && (
+							<>
+								<div>
 									{
-										projectsAttached.length >= 1 && projectsAttached.map((project) => (
-											<li key={`attached-${project._id}`}>
-												<div>
+										techData.length >= 1 && techData.map((tech, index) => (
+											<Styled.ContainerDynamicInputSections key={`div-tech-${index}`}>
+												<Styled.ContainerButton>
 													<Button
 														type='button'
 														onClick={() => {
-															setProjectsAttched((prevState) => prevState.filter((projectAttachedToDelete) => {
+															setTechData((prevState) => prevState.filter((techToDelete) => {
 																let toDelete: boolean = true;
 
-																if (projectAttachedToDelete === project) toDelete = false;
+																if (techToDelete === tech) toDelete = false;
 
 																return toDelete;
 															}))
-															setListSelectProjects((prevState) => [...prevState, project])
 														}}
 														icon={<Close />}
 													/>
-												</div>
-												{project.title}
-											</li>
+												</Styled.ContainerButton>
+												<TextInput
+													name={`techName${index}`}
+													value={tech.techName}
+													label={`name the tech`}
+													onInputChange={(v) => handleChangeElementInArray<TechObject>(tech, "techName", v, setTechData)}
+													required={true}
+												/>
+												<TextInput
+													name={`techDescription${index}`}
+													label={`describe the way you this tech`}
+													onInputChange={(v) => handleChangeElementInArray<TechObject>(tech, "techDescription", v, setTechData)}
+													required={true}
+												/>
+											</Styled.ContainerDynamicInputSections>
 										))
 									}
-								</ul>
-							</div>
-							{
-								fetchedProjects.length >= 1 && (
-									<Select
-										name="selectedProject"
-										placeholder='choose your project'
-										value={selectedProject}
-										onChange={(v) => setSelectedProject(v)}
-									>
+								</div>
+								<Button
+									type={"button"}
+									onClick={() => handleClick("skills")}
+								>
+									Adicionar tecnologia
+								</Button>
+							</>
+						)
+					}
+					{
+						typeSection === "projects" && (
+							<div>
+								<Styled.DisplayProjectSelection>
+									<ul>
 										{
-											listSelectProjects.map(fetchedProject => (
-												<option key={`${fetchedProject._id}`} value={JSON.stringify({
-													_id: fetchedProject._id,
-													title: fetchedProject.title,
-												})}>
-													{fetchedProject.title}
-												</option>
+											projectsAttached.length >= 1 && projectsAttached.map((project) => (
+												<li key={`attached-${project._id}`}>
+													{project.title}
+													<Styled.ContainerButton>
+														<Button
+															type='button'
+															onClick={() => {
+																setProjectsAttched((prevState) => prevState.filter((projectAttachedToDelete) => {
+																	let toDelete: boolean = true;
+
+																	if (projectAttachedToDelete === project) toDelete = false;
+
+																	return toDelete;
+																}))
+
+																setListSelectProjects((prevState) => [...prevState, project])
+															}}
+															icon={<Close />}
+														/>
+													</Styled.ContainerButton>
+												</li>
 											))
 										}
+									</ul>
+								</Styled.DisplayProjectSelection>
+								{
+									fetchedProjects.length >= 1 && (
+										<Select
+											name="selectedProject"
+											placeholder='choose your project'
+											value={selectedProject}
+											onChange={(v) => setSelectedProject(v)}
+										>
+											{
+												listSelectProjects.map(fetchedProject => (
+													<option key={`${fetchedProject._id}`} value={JSON.stringify({
+														_id: fetchedProject._id,
+														title: fetchedProject.title,
+													})}>
+														{fetchedProject.title}
+													</option>
+												))
+											}
 
-									</Select>
-								)
-							}
-							<Button
-								type="button"
-								onClick={() => handleClick(typeSection)}
-								disabled={loadingFetchedProjects}
-							>Selecionar projeto</Button>
-						</div>
-					)
-				}
-			</Form>
+										</Select>
+									)
+								}
+								<Button
+									type="button"
+									onClick={() => handleClick(typeSection)}
+									disabled={loadingFetchedProjects}
+								>Selecionar projeto</Button>
+							</div>
+						)
+					}
+				</Form>
+			</Styled.ContainerSectionForm>
 		</Styled.Wrapper>
 	);
 };
