@@ -20,7 +20,7 @@ import { Settings } from '../../shared-types/settings';
 import { Session } from '../../shared-types/session-nextauth';
 import Button from '../../components/Button';
 import { CreateSectionData } from '../../shared-types/portfolio';
-import { FetchResponseProject } from '../../shared-types/project';
+import { FetchResponseProject, Project } from '../../shared-types/project';
 import ProjectController from '../../api/controller/project';
 
 export type SectionCreationTemplateProps = {
@@ -53,11 +53,17 @@ type HandleChangeElementInArray = <T>(
 	setState: Dispatch<SetStateAction<T[]>>,
 ) => void;
 
+type ProjectAttached = {
+	_id: string;
+	title: string;
+}
+
 const SectionCreationTemplate = ({ allSettings = [] }) => {
 	const { data } = useSession();
 	const session: Session = data;
 
 	// states
+		// form states
 	const [selectedSettings, setSelectedSettings] = useState("");
 	const [typeSection, setTypeSection] = useState<"home" | "about" | "skills" | "projects" | "other" | undefined>(undefined);
 	const [ocupation, setOcupation] = useState("");
@@ -68,18 +74,60 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 	const [picture, setPicture] = useState(null);
 	const [educationData, setEducationData] = useState<EducationObject[]>([]);
 	const [workData, setWorkData] = useState<WorkObject[]>([]);
-	const fetchData = useFetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, {
-		method: "GET",
-		headers: {
-			Authorization: `Bearer ${session.accessToken}`
-		},
-	});
+	const [listSelectProjects, setListSelectProjects] = useState<Project[]>([]);
+	const [selectedProject, setSelectedProject] = useState<string>("");
+	const [projectsAttached, setProjectsAttched] = useState<ProjectAttached[]>([]);
+		// fetchedProjects states
+	const [fetchedProjects, setFetchedProjects] = useState<Project[]>([]);
+	const [loadingFetchedProjects, setLoadingFetchedProjects] = useState<boolean>(false);
+	const [errorMessageFetchedProjects, setErrorMessageFetchedProjects] = useState<string>("");
 
-	if (fetchData.status === "loading") console.log(fetchData.status);
-	if (fetchData.status === "success") console.log(fetchData.data);
-	if (fetchData.error) console.log(fetchData.error);
 
-	// handleClick button
+	// effects
+	useEffect(() => {
+
+		if (typeSection === "projects") handleGetAllProjects();
+
+	}, [typeSection]);
+		// it'll render the list of project into the select based on the fetched projects
+	useEffect(() => {
+
+		setListSelectProjects((prevState) => [...fetchedProjects]);
+
+	}, [fetchedProjects]);
+
+		// it'll filter the list of the project into the select based on the selected projects
+	useEffect(() => {
+
+		setListSelectProjects((prevState) => prevState.filter((listProject) => {
+			let projectSelected: boolean = true;
+
+			projectsAttached.forEach((projectAttached) => {
+				if (projectAttached._id === listProject._id) projectSelected = false;
+			});
+
+			return projectSelected;
+		}))
+
+	}, [projectsAttached]);
+
+
+	// handleGetAllProjects
+	const handleGetAllProjects = async () => {
+		// to avoid multiple request
+		if (fetchedProjects.length > 0) return;
+
+		setLoadingFetchedProjects(true);
+		try{
+			const projects = await ProjectController.getAll(session.accessToken);
+			setFetchedProjects((prevState) => [...projects]);
+		} catch(err){
+			setErrorMessageFetchedProjects(err.message);
+		}
+		setLoadingFetchedProjects(false);
+	};
+
+	// handleClick button education and work
 	const handleClick = (typeData: string) => {
 
 		if (typeData === "educationData") setEducationData((prevState) => [...prevState, {
@@ -102,6 +150,29 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 				ocupation: "",
 			}]
 		)
+
+		if (typeData === "projects") {
+			if (errorMessageFetchedProjects) return;
+
+			if (!selectedSettings) return;
+
+			setProjectsAttched((prevState) => [...prevState, JSON.parse(selectedProject)]);
+			/*
+			setProjectsAttched((prevState) => [...prevState, JSON.parse(selectedProject)]);
+			// filter the list of projects to exclude the project that already were selected
+			setFetchedProjects((prevState) => [...prevState.filter((fetchedProject) => {
+
+				let projectSelected: boolean;
+
+				projectsAttached.forEach((projectAttached) => {
+					if (projectAttached._id === fetchedProject._id) projectSelected = true;
+				});
+
+				if (projectSelected) console.log(`${fetchedProject.title} - ${fetchedProject._id} was exclude`);
+
+				return projectSelected? false: true;
+			})])*/
+		}
 	};
 
 	// handleSubmit
@@ -164,7 +235,9 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 							name="typeSection"
 							placeholder='choose a type of section'
 							value={typeSection}
-							onChange={(v) => setTypeSection(v)}
+							onChange={(v) => {
+								setTypeSection(v)
+							}}
 						>
 							<option value="home">home</option>
 							<option value="about">about</option>
@@ -323,12 +396,46 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 				}
 				{
 					typeSection === "projects" && (
-						<Select
-							name="projects"
-							placeholder='choose a project to add to your section'
-						>
-							{ dataProjectsFetch && dataProjectsFetch.map((project)) }
-						</Select>
+						<div>
+							<div>
+								<ul>
+									{
+										projectsAttached.length >= 1 && projectsAttached.map((project) => (
+											<li key={`attached-${project._id}`}>
+												{project.title}
+											</li>
+										))
+									}
+								</ul>
+							</div>
+							{
+								fetchedProjects.length >= 1 && (
+									<Select
+										name="selectedProject"
+										placeholder='choose your project'
+										value={selectedProject}
+										onChange={(v) => setSelectedProject(v)}
+									>
+										{
+											listSelectProjects.map(fetchedProject => (
+												<option key={`${fetchedProject._id}`} value={JSON.stringify({
+													_id: fetchedProject._id,
+													title: fetchedProject.title,
+												})}>
+													{fetchedProject.title}
+												</option>
+											))
+										}
+
+									</Select>
+								)
+							}
+							<Button
+								type="button"
+								onClick={() => handleClick(typeSection)}
+								disabled={loadingFetchedProjects}
+							>Selecionar projeto</Button>
+						</div>
 					)
 				}
 			</Form>

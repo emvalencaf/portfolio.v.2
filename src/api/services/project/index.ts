@@ -1,5 +1,5 @@
 import { FormHTMLAttributes } from "react";
-import { FetchResponseProject } from "../../../shared-types/project";
+import { FetchResponseProject, Project } from "../../../shared-types/project";
 import CreateFetch from "../../../utils/createFetch";
 
 // config
@@ -27,7 +27,7 @@ export default class ProjectService{
 			},
 		};
 
-		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/`, options);
+		return await CreateFetch.dispatch<Project[]>(`${url}/`, options);
 	}
 
 	static async getById(id: string | string[]): Promise<FetchResponseProject> {

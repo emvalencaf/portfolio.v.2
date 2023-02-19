@@ -12,7 +12,6 @@ type UseFetchState<T> = {
 import CreateFetch from '../../utils/createFetch';
 // will check if object A's props values are equalas to object B's props values. That will be used to compare the url and options params to they refs
 import CheckObj from '../../utils/checkObj';
-import { useCallback } from '@storybook/addons';
 
 
 // hook
@@ -26,7 +25,6 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 	const [ shouldLoad, setShouldLoad ] = useState<boolean>(false);
 
 	// refs
-	const cancelRequest = useRef<boolean>(false);
 	const urlRef = useRef(url);
 	const optionsRef = useRef(options);
 
@@ -113,5 +111,7 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 
 	}, [ shouldLoad ]);
 
-	return fetchState;
+	const { data, status, error } = fetchState;
+
+	return [data, status, error ];
 }
