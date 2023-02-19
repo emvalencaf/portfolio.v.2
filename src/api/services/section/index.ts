@@ -1,8 +1,11 @@
 // utils
 import CreateFetch from "../../../utils/createFetch";
 
+// configs
+const url = `${process.env.NEXT_PUBLIC_API_URL}/api/sections`;
+
 export default class SectionService{
-	static async create(formData: FormData, token: string) {
+	static async create(formData: FormData, token: string, typeSection: string) {
 
 		const options = {
 			method: "POST",
@@ -11,7 +14,7 @@ export default class SectionService{
 			},
 			body: formData,
 		};
-
-		return await CreateFetch.dispatch(``, options);
+		console.log(url + "/" + typeSection);
+		return await CreateFetch.dispatch(`${url}/${typeSection}`, options);
 	}
 }

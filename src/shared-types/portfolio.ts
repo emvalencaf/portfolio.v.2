@@ -21,7 +21,7 @@ export type CreateSectionData = Section & {
     biosData?: BiosData;
     workData?: WorkData;
     educationData?: EducationData;
-    projects?: Project[];
+    projects?: string[];
     urlDownload?: string;
 }
 
@@ -34,9 +34,9 @@ export interface Work {
     employer: string;
     ocupation: string;
     jobDescription: string;
-    startIn: Date;
-    endIn: Date;
-    showData: boolean;
+    startIn: Date | string;
+    endIn: Date | string;
+    showData?: boolean;
 }
 
 export interface WorkData {
@@ -48,8 +48,8 @@ export interface Education {
     workTime: string | number;
     institution: string;
     resume?: string;
-    startIn: Date;
-    endIn?: Date;
+    startIn: Date | string;
+    endIn?: Date | string;
     urlDownload?: string;
 }
 

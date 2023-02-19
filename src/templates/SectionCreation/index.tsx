@@ -1,7 +1,6 @@
 // hooks
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { useFetch } from '../../hooks/useFetch';
 
 // components
 import Select from '../../components/Select';
@@ -15,13 +14,16 @@ import { Close, Code, Person3, Photo, TextFields, Wallpaper, Work } from '@style
 // styles
 import * as Styled from './styles';
 
+// controllers
+import ProjectController from '../../api/controller/project';
+import SectionController from '../../api/controller/section';
+
 // types
 import { Settings } from '../../shared-types/settings';
 import { Session } from '../../shared-types/session-nextauth';
 import Button from '../../components/Button';
 import { CreateSectionData } from '../../shared-types/portfolio';
 import { FetchResponseProject, Project } from '../../shared-types/project';
-import ProjectController from '../../api/controller/project';
 
 export type SectionCreationTemplateProps = {
 	allSettings?: Settings[];
@@ -69,35 +71,37 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 	const session: Session = data;
 
 	// states
-	// base states to control what type of form it'll be choose by the client
+		// base states to control what type of form it'll be choose by the client
 	const [selectedSettings, setSelectedSettings] = useState("");
 	const [typeSection, setTypeSection] = useState<"home" | "about" | "skills" | "projects" | "other" | undefined>(undefined);
 
-	// form states
-	//home section
+		// form states
+			//home section
 	const [ocupation, setOcupation] = useState("");
 	const [mainStack, setMainStack] = useState("");
 	const [backgroundImg, setBackgroundImg] = useState(null);
-	// about section
+			// about section
 	const [bios, setBios] = useState("");
 	const [picture, setPicture] = useState(null);
 	const [urlDownload, setUrlDownload] = useState("");
-	// education data
+			// education data
 	const [educationData, setEducationData] = useState<EducationObject[]>([]);
-	// work experience data
+			// work experience data
 	const [workData, setWorkData] = useState<WorkObject[]>([]);
-	// project section
+			// project section
 	const [listSelectProjects, setListSelectProjects] = useState<ProjectAttached[]>([]);
 	const [selectedProject, setSelectedProject] = useState<string>("");
 	const [projectsAttached, setProjectsAttched] = useState<ProjectAttached[]>([]);
-	// skills section
+			// skills section
 	const [techData, setTechData] = useState<TechObject[]>([]);
 
-	// fetchedProjects states
+		// fetchedProjects states
 	const [fetchedProjects, setFetchedProjects] = useState<Project[]>([]);
 	const [loadingFetchedProjects, setLoadingFetchedProjects] = useState<boolean>(false);
 	const [errorMessageFetchedProjects, setErrorMessageFetchedProjects] = useState<string>("");
 
+	// ref
+	const formRef = useRef<HTMLFormElement | null>(null);
 
 	// effects
 	useEffect(() => {
@@ -197,15 +201,72 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 	};
 
 	// handleSubmit
-	const handleSubmit = () => {
+	const handleSubmit = async (ref: MutableRefObject<HTMLFormElement>) => {
 		const data: CreateSectionData = {
 			title: typeSection,
 			icon: typeSection,
 		}
 
+		if (typeSection === "home") {
+			data.ocupation = ocupation;
+			data.mainStack = mainStack.split(" ");
+		}
 
-		data.ocupation = ocupation;
-		data.mainStack = mainStack.split(" ");
+		if (typeSection === "about") {
+			data.biosData = {
+				bios: bios,
+				profilePhoto: {
+					srcImg: "",
+					altText: "profile picture",
+				},
+			}
+			data.educationData = {
+				higherEducation: educationData.filter((education) => {
+					if (education.courseType !== "higherEducation") return false;
+					const { title, workTime, startIn, endIn, institution, resume, urlDownload } = education;
+					return {
+						title,
+						workTime,
+						startIn: startIn,
+						endIn: endIn,
+						institution,
+						resume,
+						urlDownload,
+					}
+				}),
+				courses: educationData.filter((education) => {
+					if (education.courseType !== "courses") return false;
+					const { title, workTime, startIn, endIn, institution, resume, urlDownload } = education;
+					return {
+						title,
+						workTime,
+						startIn: startIn,
+						endIn: endIn,
+						institution,
+						resume,
+						urlDownload,
+					}
+				})
+			};
+			data.workData = {
+				workExperience: workData
+			};
+		}
+
+		if (typeSection === "skills") {
+			data.techs = techData;
+		}
+
+		if (typeSection === "projects") {
+			data.projects = [];
+			projectsAttached.forEach((project) => {
+				data.projects.push(project._id);
+			})
+		}
+
+		const formData = new FormData(ref.current);
+
+		return await SectionController.create(data, formData, session.accessToken, typeSection, selectedSettings);
 	}
 
 	// handleChange
@@ -243,7 +304,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 						{allSettings.length >= 1 &&
 							allSettings.map((settings) => (
 								<option
-									value={settings.websiteName}
+									value={settings._id}
 									key={`${settings._id}`}
 								>
 									{settings.websiteName}
@@ -272,6 +333,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 
 				<Form
 					onSubmit={handleSubmit}
+					reference={formRef.current}
 				>
 
 					{
@@ -308,7 +370,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 							<>
 								<TextInput
 									name="urlDownload"
-									label="fill your url download"
+									label="fill your curriculum url download"
 									value={urlDownload}
 									onInputChange={(v) => setUrlDownload(v)}
 									icon={<Person3 />}
