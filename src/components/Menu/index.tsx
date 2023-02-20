@@ -4,7 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 // icons
-import { Home, Login, Menu as MenuIcon, Logout } from "@styled-icons/material-outlined";
+import { Home, Login, Menu as MenuIcon, Logout, Cases } from "@styled-icons/material-outlined";
 import { Close as CloseIcon } from "@styled-icons/material-outlined";
 import { Dashboard as Admin } from "@styled-icons/material-outlined";
 import { Edit as EditPage } from "@styled-icons/material-outlined";
@@ -56,10 +56,7 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 						</li>
 					)) : (
 						<li>
-							<MenuLink link={
-								router.pathname.match(/admin/) ?
-									"/admin/"
-									: "#"
+							<MenuLink link={"/"
 							} icon={<Home />}>
 								Home
 							</MenuLink>
@@ -82,9 +79,18 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 										<MenuLink
 											icon={<EditPage />}
 											newTab={false}
-											link={`/admin/edit-portfolio`}
+											link={`/admin/portfolio-creation`}
 										>
-											editar portfólio
+											criar portfólio
+										</MenuLink>
+									</li>
+									<li>
+										<MenuLink
+											icon={<Cases />}
+											newTab={false}
+											link={`/admin/project-creation`}
+										>
+											adicionar projeto
 										</MenuLink>
 									</li>
 									<li>

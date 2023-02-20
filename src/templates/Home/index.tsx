@@ -40,10 +40,12 @@ import * as Styled from "./styles";
 import mock from "./mock";
 import Footer, { FooterProps } from "../../components/Footer";
 
-const HomeTemplate = () => {
+const HomeTemplate = ({ portfolio }) => {
 	// states
 	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(0);
 	const [ visibleHeader, setVisibleHeader] = useState<boolean>(true);
+
+	console.log(portfolio);
 
 	// useEffect
 	useEffect(() => {
