@@ -23,7 +23,7 @@ import { Settings } from '../../shared-types/settings';
 import { Session } from '../../shared-types/session-nextauth';
 import Button from '../../components/Button';
 import { CreateSectionData } from '../../shared-types/section';
-import { FetchResponseProject, Project } from '../../shared-types/project';
+import { Project } from '../../shared-types/project';
 
 export type SectionCreationTemplateProps = {
 	allSettings?: Settings[];
@@ -381,6 +381,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 									label="give a little resume about yourself"
 									value={bios}
 									onInputChange={(v) => setBios(v)}
+									icon={<TextFields />}
 									maxLength={1000}
 									required={true}
 									as="textarea"
@@ -445,6 +446,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 											label="inform a resume about the course"
 											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "title", v, setEducationData)}
 											as="textarea"
+											icon={<TextFields />}
 											maxLength={250}
 											required={true}
 										/>
@@ -518,6 +520,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 												label={`describe your job at ${work.employer}`}
 												onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "jobDescription", v, setWorkData)}
 												required={true}
+												icon={<TextFields />}
 											/>
 											<TextInput
 												name={`workStartIn_${index}`}
@@ -581,6 +584,8 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 													label={`describe the way you this tech`}
 													onInputChange={(v) => handleChangeElementInArray<TechObject>(tech, "techDescription", v, setTechData)}
 													required={true}
+													as="textarea"
+													icon={<TextFields />}
 												/>
 											</Styled.ContainerDynamicInputSections>
 										))

@@ -2,7 +2,7 @@
 import ProjectTemplate from "../../templates/Project";
 
 // types
-import { FetchResponseProject, Project } from "../../shared-types/project";
+import { Project } from "../../shared-types/project";
 import { GetServerSideProps } from "next";
 import ProjectController from "../../api/controller/project";
 export type ProjectPageProps = {

@@ -1,4 +1,3 @@
-import { FormHTMLAttributes } from "react";
 import { FetchResponseProject, Project } from "../../../shared-types/project";
 import CreateFetch from "../../../utils/createFetch";
 

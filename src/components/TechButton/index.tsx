@@ -1,5 +1,5 @@
 // styles
-import { ButtonHTMLAttributes, MouseEventHandler, useState } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import Button from '../Button';
 import * as Styled from './styles';
 

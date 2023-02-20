@@ -1,5 +1,5 @@
 // hooks
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 // components
 import Header from "../../components/Header";

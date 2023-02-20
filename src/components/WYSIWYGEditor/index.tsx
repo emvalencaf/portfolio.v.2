@@ -1,5 +1,5 @@
 // hooks
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 // component
 import JoditEditor from 'jodit-react';

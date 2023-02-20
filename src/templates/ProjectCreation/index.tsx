@@ -5,7 +5,7 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
 
 // components
-import Form, { FormProps } from '../../components/Form';
+import Form from '../../components/Form';
 import Header from '../../components/Header';
 import Heading from '../../components/Heading';
 import ImageInput from '../../components/ImageInput';
@@ -24,11 +24,6 @@ import { Session } from '../../shared-types/session-nextauth';
 // types
 import ProjectController from '../../api/controller/project';
 import React from 'react';
-import { FetchResponseProject, Project } from '../../shared-types/project';
-type SetSuccessMessagesParams = {
-	message: string;
-	link: string;
-}
 
 const CreateProjectTemplate = React.forwardRef(() => {
 

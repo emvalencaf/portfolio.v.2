@@ -1,5 +1,5 @@
 // hooks
-import { ChangeEvent, InputHTMLAttributes, useRef, useState } from 'react';
+import { InputHTMLAttributes, useRef, useState } from 'react';
 
 // icons
 import { PhotoAlbum } from '@styled-icons/material-outlined';

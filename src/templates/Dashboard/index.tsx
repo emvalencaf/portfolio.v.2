@@ -1,7 +1,7 @@
 // hooks
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 // components
 import Heading from '../../components/Heading';
@@ -45,7 +45,7 @@ const DashboardTemplate = () => {
 			});
 		}
 	}
-	
+
 	return (
 		<Styled.Wrapper>
 			<Menu />

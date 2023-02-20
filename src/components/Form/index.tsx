@@ -1,19 +1,18 @@
 // hooks
-import { FormHTMLAttributes, MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, SyntheticEvent, useRef, useState } from 'react';
 
 // components
 import Button from '../Button';
 import Link from 'next/link';
 
 // icons
-import { Close, Save, Timer } from "@styled-icons/material-outlined";
+import { Close } from "@styled-icons/material-outlined";
 
 // styles
 import * as Styled from './styles';
 
 // types
 import { SuccessState } from '../../shared-types/async-success-error';
-import { Portfolio } from '../../shared-types/section';
 import { ProjectControllerCreate } from '../../shared-types/project';
 import { SettingsControllerCreate } from '../../api/controller/settings';
 

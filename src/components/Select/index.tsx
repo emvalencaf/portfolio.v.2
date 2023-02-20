@@ -1,5 +1,4 @@
 // styles
-import { Home } from '@styled-icons/material-outlined';
 import { SelectHTMLAttributes, useRef } from 'react';
 import * as Styled from './styles';
 

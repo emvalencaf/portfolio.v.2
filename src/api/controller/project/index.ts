@@ -1,9 +1,8 @@
 // service
-import { SuccessState } from "../../../shared-types/async-success-error";
-import { FetchResponseProject, Project, ProjectControllerCreate } from "../../../shared-types/project";
 import ProjectService from "../../services/project";
 
 // type
+import { Project, ProjectControllerCreate } from "../../../shared-types/project";
 type ProjectData = {
 	title: string;
 	resume: string;
@@ -15,7 +14,7 @@ type ProjectData = {
 };
 
 export default class ProjectController {
-	
+
 	static async create( dataProject: ProjectData, formData: FormData, token: string): Promise<ProjectControllerCreate> {
 
 		const {

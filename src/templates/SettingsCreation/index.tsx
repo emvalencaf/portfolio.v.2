@@ -1,8 +1,6 @@
 // hooks
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import PortfolioController from '../../api/controller/portfolio';
+import { MutableRefObject, useRef, useState } from 'react';
 
 // components
 import Form from '../../components/Form';

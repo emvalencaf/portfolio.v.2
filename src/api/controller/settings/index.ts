@@ -1,7 +1,5 @@
 // service
-import SocialMedia from "../../../components/SocialMedia";
 import { SuccessState } from "../../../shared-types/async-success-error";
-import { FetchResponseSettings } from "../../../shared-types/settings";
 import SettingsService from "../../services/settings";
 
 // type
