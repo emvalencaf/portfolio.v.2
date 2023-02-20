@@ -13,7 +13,7 @@ import * as Styled from './styles';
 
 // types
 import { SuccessState } from '../../shared-types/async-success-error';
-import { Portfolio } from '../../shared-types/portfolio';
+import { Portfolio } from '../../shared-types/section';
 import { ProjectControllerCreate } from '../../shared-types/project';
 import { SettingsControllerCreate } from '../../api/controller/settings';
 

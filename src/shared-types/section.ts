@@ -1,16 +1,25 @@
+import { SuccessState } from "./async-success-error";
 import { Project } from "./project";
 
 export type Portfolio = {
 
 }
 
+export type FetchResponseSection = CreateSectionData;
+
 export type Section = {
+	_id: string;
 	title: string;
     children?: string;
     background?: boolean;
     icon?: "home" | "about" | "skills" | "projects" | "other";
     color?: "primary" | "secondary" | "tertiary" | "quaternary" | "quinary" | "senary";
     backgroundImg?: string;
+}
+
+export type SectionControllerCreate = {
+	data: CreateSectionData;
+	successMessage: SuccessState;
 }
 
 export type CreateSectionData = Section & {

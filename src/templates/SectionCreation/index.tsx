@@ -22,7 +22,7 @@ import SectionController from '../../api/controller/section';
 import { Settings } from '../../shared-types/settings';
 import { Session } from '../../shared-types/session-nextauth';
 import Button from '../../components/Button';
-import { CreateSectionData } from '../../shared-types/portfolio';
+import { CreateSectionData } from '../../shared-types/section';
 import { FetchResponseProject, Project } from '../../shared-types/project';
 
 export type SectionCreationTemplateProps = {
@@ -450,7 +450,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 										/>
 										<TextInput
 											name={`startIn${index}`}
-											value={education.resume}
+											value={education.startIn}
 											label="inform when the course start"
 											onInputChange={(v) => handleChangeElementInArray<EducationObject>(education, "startIn", v, setEducationData)}
 											type="date"
@@ -533,7 +533,7 @@ const SectionCreationTemplate = ({ allSettings = [] }) => {
 												type="date"
 												label={`inform the date when you've started working at ${work.employer}`}
 												onInputChange={(v) => handleChangeElementInArray<WorkObject>(work, "startIn", v, setWorkData)}
-												required={true}
+												required={false}
 											/>
 										</Styled.ContainerDynamicInputSections>
 									))
