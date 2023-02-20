@@ -6,6 +6,8 @@ export const Wrapper = styled.div`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		min-height: 100vh;
+		height: 100%;
 		background-color: ${theme.colors.tertiary};
 		transition: all ${theme.transitions.slowest} ease-in-out;
 	`}
