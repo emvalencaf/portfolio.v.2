@@ -8,7 +8,7 @@ export type Portfolio = {
 export type FetchResponseSection = CreateSectionData;
 
 export type Section = {
-	_id: string;
+	_id?: string;
 	title: string;
     children?: string;
     background?: boolean;
