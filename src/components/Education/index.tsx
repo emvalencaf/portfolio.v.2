@@ -17,9 +17,9 @@ type Education = {
 	workTime: string | number;
 	institution: string;
 	resume?: string;
-	startIn: number | string | null;
-	endIn: number | string | null;
-	urlDownload: string;
+	startIn: number | string;
+	endIn?: number | string | null;
+	urlDownload?: string;
 }
 export type EducationProps = {
 	higherEducation: Education[];

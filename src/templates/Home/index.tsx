@@ -22,15 +22,8 @@ export type Sections = {
 };
 
 export type HomeProps = {
-	header: {
-		logo: LogoLinkProps;
-		menuLinks: MenuLinkProps[];
-	},
-	main: {
-		sections: Sections;
-		sideBar: SideBarProps;
-	},
-	footer: FooterProps;
+	settings: Settings;
+	content: PortfolioContent;
 }
 
 // styles
@@ -39,20 +32,23 @@ import * as Styled from "./styles";
 // mock
 import mock from "./mock";
 import Footer, { FooterProps } from "../../components/Footer";
+import { Settings } from "../../shared-types/settings";
+import { PortfolioContent } from "../../shared-types/portfolio";
 
-const HomeTemplate = ({ portfolio }) => {
+const HomeTemplate = ({ content, settings }: HomeProps) => {
 	// states
-	const [ lastScrollYCoords, setLastScrollYCoords ] = useState<number>(0);
-	const [ visibleHeader, setVisibleHeader] = useState<boolean>(true);
+	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
+	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
 
-	console.log(portfolio);
+	console.log(content);
+	console.log(settings);
 
 	// useEffect
 	useEffect(() => {
 
 		const handleHiddenHeader = () => {
 			lastScrollYCoords < window.scrollY ?
-				setVisibleHeader(false):
+				setVisibleHeader(false) :
 				setVisibleHeader(true);
 
 			setLastScrollYCoords(window.scrollY);
@@ -69,10 +65,48 @@ const HomeTemplate = ({ portfolio }) => {
 	return (
 		<Styled.Wrapper>
 			<GoTop />
-			<Header {...mock.header} visible={visibleHeader} />
-			<SideBar {...mock.main.sideBar} sizes="big" />
-			<SectionHome {...mock.main.sections.home} />
-			<SectionAbout {...mock.main.sections.about} />
+			{
+				settings && (
+					<>
+						<Header logo={settings.logo} menuLinks={settings.menu.map((menuLink) => ({
+							...menuLink,
+							link: `#${menuLink.link === "home" ? "" : `${menuLink.link}`}`,
+						}))} visible={visibleHeader} />
+
+						<SideBar {...settings.socialMedia} sizes="big" />
+					</>
+				)
+			}
+			{
+				content.sections.length >= 1 && content.sections.map((section) => {
+
+					if (section.title === "home") return (
+						<SectionHome
+							id="#"
+							backgroundImg={section.backgroundImg}
+							ownerName={section.owner}
+							mainStack={section.mainStack}
+							ocupation={section.ocupation}
+							icon={section.icon}
+						/>
+					);
+
+					if (section.title === "about") return (
+						<SectionAbout
+							id="about"
+							biosData={section.biosData}
+							workData={
+								section.workData
+							}
+							educationData={
+								section.educationData
+							}
+							urlDownload={section.urlDownload}
+						/>
+					)
+
+				})
+			}
 			<SectionSkills {...mock.main.sections.skills} />
 			<SectionProject {...mock.main.sections.projects} />
 			<Footer {...mock.footer} />

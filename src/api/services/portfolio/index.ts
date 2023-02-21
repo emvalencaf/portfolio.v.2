@@ -1,4 +1,5 @@
 import { Create } from "@styled-icons/material-outlined";
+import { FetchResponsePortfolio } from "../../../shared-types/portfolio";
 import CreateFetch from "../../../utils/createFetch";
 
 // config
@@ -14,7 +15,7 @@ export default class PortfolioService{
 		return await CreateFetch.dispatch(url);
 	}
 
-	static async get(){
+	static async get(): Promise<FetchResponsePortfolio>{
 
 		const options = {
 			method: "GET",

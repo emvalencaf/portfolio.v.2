@@ -266,4 +266,4 @@ export default {
 		ownerName: "Tício",
 		year: "2023",
 	},
-} as HomeProps;
+};

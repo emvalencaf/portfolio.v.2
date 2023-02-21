@@ -1,9 +1,4 @@
 import { SuccessState } from "./async-success-error";
-import { Project } from "./project";
-
-export type Portfolio = {
-
-}
 
 export type FetchResponseSection = CreateSectionData;
 
@@ -43,8 +38,8 @@ export interface Work {
     employer: string;
     ocupation: string;
     jobDescription: string;
-    startIn: Date | string;
-    endIn: Date | string;
+    startIn: string | number;
+    endIn:  string | number;
     showData?: boolean;
 }
 
@@ -57,8 +52,8 @@ export interface Education {
     workTime: string | number;
     institution: string;
     resume?: string;
-    startIn: Date | string;
-    endIn?: Date | string;
+    startIn: string | number;
+    endIn?: string | number | null;
     urlDownload?: string;
 }
 
