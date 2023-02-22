@@ -140,19 +140,11 @@ const CreateProjectTemplate = React.forwardRef(() => {
 					icon={<Movie />}
 					required={false}
 				/>
-				<TextInput
-					type="text"
-					name="mainLang"
-					label="Main programming or development language"
-					onInputChange={(v) => setMainLang(v)}
-					value={mainLang}
-					icon={<Code />}
-					required={false}
-				/>
 				<Select
 					name="mainLang"
 					onChange={(v) => setMainLang(v)}
 					placeholder="Main programming or development language"
+					value={mainLang}
 
 				>
 					<option value="javascript">
@@ -202,14 +194,6 @@ const CreateProjectTemplate = React.forwardRef(() => {
 					icon={<PhotoAlbum />}
 					required={false}
 				/>
-				<TextInput
-					name="description"
-					label="Description"
-					value={description}
-					onInputChange={(v) => setDescription(v)}
-					required={false}
-				/>
-
 				<WYSIWYGEditor
 					content={description}
 					onChange={(v) => setDescription(v)}

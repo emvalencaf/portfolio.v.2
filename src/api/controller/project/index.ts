@@ -62,6 +62,8 @@ export default class ProjectController {
 				mainLang !== "php"
 			) throw new Error("you cannot choose a different language")
 
+			formData.set("description", description);
+
 			const response = await ProjectService.create(formData, token);
 
 			const { project } = response;

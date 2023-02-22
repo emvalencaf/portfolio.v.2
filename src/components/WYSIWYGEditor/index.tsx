@@ -1,5 +1,5 @@
 // hooks
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 // component
 import JoditEditor from 'jodit-react';
@@ -26,6 +26,13 @@ const WYSIWYGEditor = ({ content, placeholder, onChange }: WYSIWYGEditorProps) =
 		placeholder: placeholder || "Start typing..."
 	}), [placeholder]);
 
+
+	// effect
+	useEffect(() => {
+
+		return editorRef.current.removeEventListener("blur", handleUpdate);
+	}, []);
+
 	// handle synthetic event
 	const handleUpdate = () => {
 
@@ -43,7 +50,7 @@ const WYSIWYGEditor = ({ content, placeholder, onChange }: WYSIWYGEditorProps) =
 				ref={editorRef}
 				value={content}
 				config={config}
-				onBlur={() => handleUpdate()}
+				onBlur={handleUpdate}
 			/>
 		</Styled.Wrapper>
 	);
