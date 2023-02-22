@@ -1,4 +1,5 @@
 // components
+import GithubHoverCard from '../GithubHoverCard';
 import Heading from '../Heading';
 import Section, { SectionProps } from '../Section';
 
@@ -13,35 +14,40 @@ export type SectionHomeProps = {
 } & SectionProps;
 
 const SectionHome = ({
-		id,
-		background,
-		color,
-		ownerName,
-		ocupation,
-		mainStack = [],
-		backgroundImg = ""
-	}: SectionHomeProps) => {
+	id,
+	background,
+	color,
+	ownerName,
+	ocupation,
+	mainStack = [],
+	backgroundImg = ""
+}: SectionHomeProps) => {
 	return (
 		<Section id={id} background={background} color={color} backgroundImg={backgroundImg}>
 			<Styled.Wrapper>
-				<p>
-					Olá, seja bem-vindo ao meu portfólio.
-				</p>
-				{ownerName && (
-					<Heading as="h1" size="big" color="secondary">
-						{ownerName}.
-					</Heading>
-				)}
-				{ocupation && (
-					<Heading as="h2" size="big" color="senary">
-						{ocupation}.
-					</Heading>
-				)}
-				{mainStack.length > 0 && (
-					<Heading as="h2" size="medium">
-						{mainStack.join(" | ")}
-					</Heading>
-				)}
+				<Styled.IntroContainer>
+					<p>
+						Olá, seja bem-vindo ao meu portfólio.
+					</p>
+					{ownerName && (
+						<Heading as="h1" size="big" color="secondary">
+							{ownerName}.
+						</Heading>
+					)}
+					{ocupation && (
+						<Heading as="h2" size="big" color="senary">
+							{ocupation}.
+						</Heading>
+					)}
+					{mainStack.length > 0 && (
+						<Heading as="h2" size="medium">
+							{mainStack.join(" | ")}
+						</Heading>
+					)}
+				</Styled.IntroContainer>
+				<Styled.GithubContainer>
+					<GithubHoverCard />
+				</Styled.GithubContainer>
 			</Styled.Wrapper>
 		</Section>
 	);

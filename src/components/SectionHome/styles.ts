@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 import { Title as HeadingContainer } from '../Heading/styles';
+
 export const Wrapper = styled.div`
 	${({ theme }) => css`
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-evenly;
 		height: 600px;
 		width: 100%;
 		margin: 0px auto;
@@ -34,6 +35,30 @@ export const Wrapper = styled.div`
 		}
 		& ${HeadingContainer}::after {
 			content: none;
+		}
+	`}
+`;
+
+export const IntroContainer = styled.div`
+	${({ theme }) => css`
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+	`}
+`;
+
+export const GithubContainer = styled.div`
+	${({ theme }) => css`
+		@media ${theme.media.lteMedium} {
+			display: none;
+		}
+		display: flex;
+		flex-direction: column;
+		max-width: 300px;
+		& ${HeadingContainer} {
+			margin: 0px;
 		}
 	`}
 `;

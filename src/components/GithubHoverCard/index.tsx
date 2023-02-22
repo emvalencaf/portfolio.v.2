@@ -1,4 +1,5 @@
 // react
+import { useEffect, useState } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 
 // components
@@ -7,10 +8,50 @@ import Heading from '../Heading';
 // styles
 import * as Styled from "./styles";
 
+// graphql
+import { GraphQLClient } from "graphql-request";
+import { GRAPHQL_QUERIES } from '../../graphql/queries';
+
+const client = new GraphQLClient(`https://api.github.com/graphql`, {
+	headers: {
+		Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+	}
+})
+
+console.log(process.env.GITHUB_TOKEN);
+console.log(process.env.GITHUB_USERNAME);
 
 const GithubHoverCard = () => {
 
 	const [data, status, error] = useFetch(`https://api.github.com/users/emvalencaf`);
+	const [repoPrivate, setRepoPrivate] = useState();
+	const [commitsContributions, setCommitsContributions] = useState();
+	useEffect(() => {
+		const loadGithub = async () => {
+
+			try {
+				const data = await client.request(
+					GRAPHQL_QUERIES,
+					{
+						username: process.env.GITHUB_USERNAME,
+					},
+				);
+				const {
+					totalRepositoryContributions,
+					totalCommitContributions,
+				} = data.user.contributionsCollection;
+
+				setRepoPrivate((s) => totalRepositoryContributions);
+				setCommitsContributions((s) => totalCommitContributions)
+
+			} catch (err) {
+				console.log(err);
+			}
+
+		}
+
+		loadGithub();
+	}, []);
 
 	if (status === "idle") return;
 
@@ -18,14 +59,48 @@ const GithubHoverCard = () => {
 
 	if (status === "loading") return <p>Carregando...</p>
 
-	if(status === "success") return (
+	if (status === "success") return (
 		<Styled.Wrapper>
-			<Heading as="h2" size="huge" color="primary">
-				Repositórios Públicos
-			</Heading>
-			<Heading as="h3" size="huge" color="secondary">
-				{data && data?.public_repos}
-			</Heading>
+			<Styled.DisplayerContainer>
+				<Styled.HeadingDisplayContainer>
+					<Heading as="h2" size="small" color="secondary">
+						Repos. total
+					</Heading>
+				</Styled.HeadingDisplayContainer>
+				<Heading as="h3" size="small" color="secondary">
+					{!!repoPrivate && repoPrivate}
+				</Heading>
+			</Styled.DisplayerContainer>
+			<Styled.DisplayerContainer>
+				<Styled.HeadingDisplayContainer>
+					<Heading as="h2" size="small" color="secondary">
+						Repos. Públicos
+					</Heading>
+				</Styled.HeadingDisplayContainer>
+				<Heading as="h3" size="small" color="secondary">
+					{data && data?.public_repos}
+				</Heading>
+			</Styled.DisplayerContainer>
+			<Styled.DisplayerContainer>
+				<Styled.HeadingDisplayContainer>
+					<Heading as="h2" size="small" color="secondary">
+						Commits
+					</Heading>
+				</Styled.HeadingDisplayContainer>
+				<Heading as="h3" size="small" color="secondary">
+					{!!commitsContributions && commitsContributions}
+				</Heading>
+			</Styled.DisplayerContainer>
+			<Styled.DisplayerContainer>
+				<Styled.HeadingDisplayContainer>
+					<Heading as="h2" size="small" color="secondary">
+						Followers
+					</Heading>
+				</Styled.HeadingDisplayContainer>
+				<Heading as="h3" size="small" color="secondary">
+					{data && data?.followers}
+				</Heading>
+			</Styled.DisplayerContainer>
 		</Styled.Wrapper>
 	);
 };
