@@ -105,11 +105,32 @@ const HomeTemplate = ({ content, settings }: HomeProps) => {
 						/>
 					)
 
+					if (section.title === "skills") return (
+
+						<SectionSkills
+							id="skills"
+							techs={section.techs}
+						/>
+					)
+
+					if (section.title === "projects") return (
+						<SectionProject
+							id="projects"
+							projects={section.projects}
+						/>
+					)
+
 				})
 			}
-			<SectionSkills {...mock.main.sections.skills} />
-			<SectionProject {...mock.main.sections.projects} />
-			<Footer {...mock.footer} />
+			{
+				settings &&
+				<Footer
+					{...settings.socialMedia}
+					ownerName={settings.owner.name}
+					year={settings.createdAt.toString()}
+					sizes="big"
+				/>
+			}
 		</Styled.Wrapper>
 	);
 };

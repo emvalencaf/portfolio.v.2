@@ -13,8 +13,8 @@ export type Settings = {
 	owner: BackendUser;
     websiteName: string;
     favIcon: string;
-    createdAt: Date;
-    updatedAt?: Date;
+    createdAt: Date | number | string;
+    updatedAt?: Date | number | string | null;
     logo: {
         srcImg?: string;
         altText: string;

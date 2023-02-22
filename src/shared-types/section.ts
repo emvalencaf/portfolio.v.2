@@ -1,4 +1,5 @@
 import { SuccessState } from "./async-success-error";
+import { Project } from "./project";
 
 export type FetchResponseSection = CreateSectionData;
 
