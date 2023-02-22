@@ -1,32 +1,38 @@
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 // hooks
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
 
 // components
-import Form from '../../components/Form';
-import Header from '../../components/Header';
-import Heading from '../../components/Heading';
-import ImageInput from '../../components/ImageInput';
-import TextInput from '../../components/TextInput';
-import Select from '../../components/Select';
-const WYSIWYGEditor = dynamic(() => import('../../components/WYSIWYGEditor'), { ssr: false });
-
+import Form from "../../components/Form";
+import Header from "../../components/Header";
+import Heading from "../../components/Heading";
+import ImageInput from "../../components/ImageInput";
+import TextInput from "../../components/TextInput";
+import Select from "../../components/Select";
+const WYSIWYGEditor = dynamic(() => import("../../components/WYSIWYGEditor"), {
+	ssr: false,
+});
 
 // icons
-import { Cases, Code, Link as LinkIcon, Movie, PhotoAlbum } from "@styled-icons/material-outlined";
+import {
+	Cases,
+	Link as LinkIcon,
+	Movie,
+	PhotoAlbum,
+} from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from './styles';
-import { Session } from '../../shared-types/session-nextauth';
+import * as Styled from "./styles";
+import { Session } from "../../shared-types/session-nextauth";
 
 // types
-import ProjectController from '../../api/controller/project';
-import React from 'react';
+import ProjectController from "../../api/controller/project";
+import React from "react";
 
+// eslint-disable-next-line react/display-name
 const CreateProjectTemplate = React.forwardRef(() => {
-
 	// states
 	// session data
 	const { data } = useSession();
@@ -51,11 +57,10 @@ const CreateProjectTemplate = React.forwardRef(() => {
 
 	// useEffect for showing header
 	useEffect(() => {
-
 		const handleHiddenHeader = () => {
-			lastScrollYCoords < window.scrollY ?
-				setVisibleHeader(false) :
-				setVisibleHeader(true);
+			lastScrollYCoords < window.scrollY
+				? setVisibleHeader(false)
+				: setVisibleHeader(true);
 
 			setLastScrollYCoords(window.scrollY);
 		};
@@ -65,12 +70,12 @@ const CreateProjectTemplate = React.forwardRef(() => {
 		return () => {
 			window.removeEventListener("scroll", handleHiddenHeader);
 		};
-
 	}, [lastScrollYCoords]);
 
 	// handle onSubmit
-	const handleCreateProject = async (ref: MutableRefObject<HTMLFormElement>) => {
-
+	const handleCreateProject = async (
+		ref: MutableRefObject<HTMLFormElement>
+	) => {
 		// if (WYSIWYGEditorRef.current === null ) return;
 
 		const dataProject = {
@@ -80,7 +85,7 @@ const CreateProjectTemplate = React.forwardRef(() => {
 			urlRepository,
 			urlDemo,
 			picture,
-			description
+			description,
 		};
 
 		const formData: FormData = new FormData(ref.current);
@@ -88,31 +93,28 @@ const CreateProjectTemplate = React.forwardRef(() => {
 		return await ProjectController.create(
 			dataProject,
 			formData,
-			session?.accessToken,
+			session?.accessToken
 		);
 	};
 
 	return (
 		<Styled.Wrapper>
-			<Header menuLinks={[]} logo={{
-				altText: "dashboard",
-				link: "/admin/"
-			}} visible={visibleHeader} />
-			<Heading
-				as="h1"
-				size="big"
-				color="quaternary"
-				uppercase
-			>
+			<Header
+				menuLinks={[]}
+				logo={{
+					altText: "dashboard",
+					link: "/admin/",
+				}}
+				visible={visibleHeader}
+			/>
+			<Heading as="h1" size="big" color="quaternary" uppercase>
 				Projeto
 			</Heading>
 			<p>
-				Bem-vindo à seção para adicionar os seus projetos ao seu portfólio.
+				Bem-vindo à seção para adicionar os seus projetos ao seu
+				portfólio.
 			</p>
-			<Form
-				onSubmit={handleCreateProject}
-				reference={formRef.current}
-			>
+			<Form onSubmit={handleCreateProject} reference={formRef.current}>
 				<TextInput
 					type="text"
 					name="title"
@@ -145,38 +147,17 @@ const CreateProjectTemplate = React.forwardRef(() => {
 					onChange={(v) => setMainLang(v)}
 					placeholder="Main programming or development language"
 					value={mainLang}
-
 				>
-					<option value="javascript">
-						javascript
-					</option>
-					<option value="java">
-						java
-					</option>
-					<option value="typescript">
-						typescript
-					</option>
-					<option value="html">
-						html
-					</option>
-					<option value="css">
-						css
-					</option>
-					<option value="python">
-						python
-					</option>
-					<option value="java">
-						java
-					</option>
-					<option value="cplus">
-						cplus
-					</option>
-					<option value="charp">
-						csharp
-					</option>
-					<option value="php">
-						php
-					</option>
+					<option value="javascript">javascript</option>
+					<option value="java">java</option>
+					<option value="typescript">typescript</option>
+					<option value="html">html</option>
+					<option value="css">css</option>
+					<option value="python">python</option>
+					<option value="java">java</option>
+					<option value="cplus">cplus</option>
+					<option value="charp">csharp</option>
+					<option value="php">php</option>
 				</Select>
 				<TextInput
 					name="resume"

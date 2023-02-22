@@ -1,9 +1,9 @@
 // components
-import LogoLink, { LogoLinkProps } from '../LogoLink';
-import Menu, { MenuProps } from '../Menu';
+import LogoLink, { LogoLinkProps } from "../LogoLink";
+import Menu, { MenuProps } from "../Menu";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type HeaderProps = MenuProps & {

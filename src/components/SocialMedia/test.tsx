@@ -1,16 +1,16 @@
-import { screen } from '@testing-library/react';
-import { renderTheme } from '../../styles/render-theme';
+import { screen } from "@testing-library/react";
+import { renderTheme } from "../../styles/render-theme";
 
 // theme
-import { theme } from '../../styles/theme';
+import { theme } from "../../styles/theme";
 
 // react component to be test
-import SocialMedia from '.';
+import SocialMedia from ".";
 
 // mock
 import mock from "./mock";
 
-describe('<SocialMedia />', () => {
+describe("<SocialMedia />", () => {
 	it("should render all social media in SocialMedia component", () => {
 		renderTheme(<SocialMedia {...mock} />);
 
@@ -22,7 +22,6 @@ describe('<SocialMedia />', () => {
 
 		expect(screen.queryAllByRole("link")).toHaveLength(0);
 	});
-
 
 	it("should rend SocialMedia component with sizes small", () => {
 		renderTheme(<SocialMedia githubURL={mock.githubURL} sizes="small" />);
@@ -49,12 +48,9 @@ describe('<SocialMedia />', () => {
 		});
 	});
 
-
 	it("should match a snapshot", () => {
-		const { container } = renderTheme(<SocialMedia {...mock} />)
+		const { container } = renderTheme(<SocialMedia {...mock} />);
 
 		expect(container).toMatchSnapshot();
 	});
 });
-
-

@@ -1,14 +1,14 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { renderTheme } from '../../styles/render-theme';
+import { fireEvent, screen } from "@testing-library/react";
+import { renderTheme } from "../../styles/render-theme";
 
 // react component to be test
-import Menu from '.';
+import Menu from ".";
 
 // mock
-import mock from './mock';
-import { theme } from '../../styles/theme';
+import mock from "./mock";
+import { theme } from "../../styles/theme";
 
-describe('<Menu />', () => {
+describe("<Menu />", () => {
 	it("should render a Menu component with mock MenuLinks", () => {
 		renderTheme(<Menu {...mock} />);
 
@@ -16,7 +16,7 @@ describe('<Menu />', () => {
 	});
 
 	it("should render a Menu component without any props", () => {
-		const { container } = renderTheme(<Menu />);
+		renderTheme(<Menu />);
 
 		expect(screen.getByRole("link")).toHaveAttribute("href", "#");
 	});
@@ -31,7 +31,7 @@ describe('<Menu />', () => {
 			display: "none",
 			appearance: "none",
 			opacity: 0,
-		})
+		});
 		expect(button).toHaveStyleRule("display", "flex", {
 			media: theme.media.lteMedium,
 		});
@@ -60,5 +60,5 @@ describe('<Menu />', () => {
 		const { container } = renderTheme(<Menu {...mock} />);
 
 		expect(container).toMatchSnapshot();
-	})
+	});
 });

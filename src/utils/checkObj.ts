@@ -1,5 +1,5 @@
-export default class CheckObj{
-	static isObjectEqual(objA: any, objB: any) {
+export default class CheckObj {
+	static isObjectEqual(objA: unknown, objB: unknown) {
 		return JSON.stringify(objA) === JSON.stringify(objB);
 	}
 }

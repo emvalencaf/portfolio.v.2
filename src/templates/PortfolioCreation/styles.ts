@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Title as HeadingContainer } from '../../components/Heading/styles';
+import styled, { css } from "styled-components";
+import { Title as HeadingContainer } from "../../components/Heading/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
@@ -27,12 +27,11 @@ export const ContainerContent = styled.div`
 
 		box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
 		backdrop-filter: blur(5px);
-		-webkit-backdrop-filter: blur()(4px);
+		-webkit-backdrop-filter: blur() (4px);
 
 		& ${HeadingContainer} {
 			margin: 0px;
 			color: ${theme.colors.tertiary};
-
 		}
 	`}
 `;
@@ -57,7 +56,6 @@ export const ContainerButtons = styled.div`
 		align-items: center;
 		width: 100%;
 		justify-content: space-between;
-
 
 		> a {
 			text-decoration: none;

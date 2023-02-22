@@ -1,10 +1,10 @@
 // components
-import GithubHoverCard from '../GithubHoverCard';
-import Heading from '../Heading';
-import Section, { SectionProps } from '../Section';
+import GithubHoverCard from "../GithubHoverCard";
+import Heading from "../Heading";
+import Section, { SectionProps } from "../Section";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type SectionHomeProps = {
@@ -20,15 +20,18 @@ const SectionHome = ({
 	ownerName,
 	ocupation,
 	mainStack = [],
-	backgroundImg = ""
+	backgroundImg = "",
 }: SectionHomeProps) => {
 	return (
-		<Section id={id} background={background} color={color} backgroundImg={backgroundImg}>
+		<Section
+			id={id}
+			background={background}
+			color={color}
+			backgroundImg={backgroundImg}
+		>
 			<Styled.Wrapper>
 				<Styled.IntroContainer>
-					<p>
-						Olá, seja bem-vindo ao meu portfólio.
-					</p>
+					<p>Olá, seja bem-vindo ao meu portfólio.</p>
 					{ownerName && (
 						<Heading as="h1" size="big" color="secondary">
 							{ownerName}.

@@ -1,9 +1,9 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import ProfilePhoto, { ProfilePhotoProps } from '.';
-import mock from './mock';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import ProfilePhoto, { ProfilePhotoProps } from ".";
+import mock from "./mock";
 
 export default {
-	title: 'ProfilePhoto',
+	title: "ProfilePhoto",
 	component: ProfilePhoto,
 	args: mock,
 	argTypes: {

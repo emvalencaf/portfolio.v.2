@@ -1,8 +1,8 @@
 // hooks
-import { InputHTMLAttributes, useRef } from 'react';
+import { InputHTMLAttributes, useRef } from "react";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type TextInputProps = {
@@ -19,29 +19,28 @@ export type TextInputProps = {
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const TextInput = ({
-		label,
-		name,
-		type = "text",
-		onInputChange,
-		disabled = false,
-		errorMessage = "",
-		value = "",
-		icon,
-		as = "input",
-		maxLength = 524288,
-		reference = null,
-		required = false,
-	}: TextInputProps) => {
-		// states
-		const inputRef = useRef(reference);
+	label,
+	name,
+	type = "text",
+	onInputChange,
+	disabled = false,
+	errorMessage = "",
+	value = "",
+	icon,
+	as = "input",
+	maxLength = 524288,
+	reference = null,
+	required = false,
+}: TextInputProps) => {
+	// states
+	const inputRef = useRef(reference);
 
-		// synthetic event handler
-		const handleChange = () => {
-			const value = inputRef.current.value;
+	// synthetic event handler
+	const handleChange = () => {
+		const value = inputRef.current.value;
 
-			if (onInputChange) onInputChange(value);
-		};
-
+		if (onInputChange) onInputChange(value);
+	};
 
 	return (
 		<Styled.Wrapper>

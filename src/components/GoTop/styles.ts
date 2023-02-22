@@ -1,7 +1,6 @@
 import styled, { css, DefaultTheme } from "styled-components";
 import { GoTopProps } from ".";
 
-
 const goTopSizes = {
 	small: (theme: DefaultTheme) => css`
 		height: ${theme.fonts.sizes.large};
@@ -18,7 +17,7 @@ const goTopSizes = {
 };
 
 export const Container = styled.a<GoTopProps>`
-	${({ theme, sizes}) => css`
+	${({ theme, sizes }) => css`
 		position: fixed;
 		background: ${theme.colors.quaternary};
 		color: ${theme.colors.secondary};

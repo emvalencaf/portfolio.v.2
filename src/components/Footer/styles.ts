@@ -1,11 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 import { Wrapper as SocialMediaContainer } from "../SocialMedia/styles";
 
 export const Wrapper = styled.footer`
 	${({ theme }) => css`
 		@media ${theme.media.lteSmall} {
 			& ${SocialMediaContainer} {
-				& svg, & a {
+				& svg,
+				& a {
 					height: ${theme.fonts.sizes.medium};
 					width: ${theme.fonts.sizes.medium};
 				}
@@ -19,11 +20,15 @@ export const Wrapper = styled.footer`
 		margin-top: ${theme.spacings.medium};
 		// background-color: ${theme.colors.quaternary};
 		padding: ${theme.spacings.medium};
-		background-image: linear-gradient(to bottom, transparent 5%, ${theme.colors.quaternary});
+		background-image: linear-gradient(
+			to bottom,
+			transparent 5%,
+			${theme.colors.quaternary}
+		);
 		& p {
 			margin: 0;
 			padding: 0;
-		};
+		}
 
 		& ${SocialMediaContainer} {
 			display: flex;

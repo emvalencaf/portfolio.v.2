@@ -4,15 +4,21 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 // icons
-import { Home, Login, Menu as MenuIcon, Logout, Cases } from "@styled-icons/material-outlined";
+import {
+	Home,
+	Login,
+	Menu as MenuIcon,
+	Logout,
+	Cases,
+} from "@styled-icons/material-outlined";
 import { Close as CloseIcon } from "@styled-icons/material-outlined";
 import { Dashboard as Admin } from "@styled-icons/material-outlined";
 import { Edit as EditPage } from "@styled-icons/material-outlined";
 // components
-import MenuLink, { MenuLinkProps } from '../MenuLink';
+import MenuLink, { MenuLinkProps } from "../MenuLink";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 import { Session } from "../../shared-types/session-nextauth";
@@ -50,14 +56,21 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 			</Styled.Button>
 			<Styled.Nav onClick={() => setVisible(false)} visible={visible}>
 				<ul>
-					{menuLinks.length >= 1 ? menuLinks.map((link) => (
-						<li key={link.link}>
-							<MenuLink link={link.link} newTab={link.newTab} icon={link.icon}>{link.children}</MenuLink>
-						</li>
-					)) : (
+					{menuLinks.length >= 1 ? (
+						menuLinks.map((link) => (
+							<li key={link.link}>
+								<MenuLink
+									link={link.link}
+									newTab={link.newTab}
+									icon={link.icon}
+								>
+									{link.children}
+								</MenuLink>
+							</li>
+						))
+					) : (
 						<li>
-							<MenuLink link={"/"
-							} icon={<Home />}>
+							<MenuLink link={"/"} icon={<Home />}>
 								Home
 							</MenuLink>
 						</li>
@@ -94,24 +107,26 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 										</MenuLink>
 									</li>
 									<li>
-										<Styled.LogoutButton onClick={handleLogout}>
+										<Styled.LogoutButton
+											onClick={handleLogout}
+										>
 											<Logout />
-											<span>
-												logout
-											</span>
+											<span>logout</span>
 										</Styled.LogoutButton>
 									</li>
 								</>
 							)}
 						</>
 					)}
-					{(router.pathname.match(/admin/) && !!session === false) && (
+					{router.pathname.match(/admin/) && !!session === false && (
 						<li>
 							<MenuLink
 								icon={<Login />}
 								newTab={false}
 								link={`/admin/login`}
-							>Login</MenuLink>
+							>
+								Login
+							</MenuLink>
 						</li>
 					)}
 				</ul>

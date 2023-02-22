@@ -1,19 +1,21 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import FormLogin, { FormLoginProps } from '.';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import FormLogin, { FormLoginProps } from ".";
 
 export default {
-	title: 'FormLogin',
+	title: "FormLogin",
 	component: FormLogin,
 	parameters: {
 		layout: "fullscreen",
 	},
 	decorators: [
 		(Story) => {
-			return <div style={{padding: "4rem"}}>
-				<Story />
-			</div>;
-		}
-	]
+			return (
+				<div style={{ padding: "4rem" }}>
+					<Story />
+				</div>
+			);
+		},
+	],
 } as Meta<FormLoginProps>;
 
 export const Template: Story<FormLoginProps> = (args) => {
@@ -34,4 +36,4 @@ export const TemplateWithError: Story<FormLoginProps> = (args) => {
 
 TemplateWithError.args = {
 	errorMessage: "este é o erro",
-}
+};

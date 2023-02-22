@@ -1,5 +1,5 @@
-import { Button } from '../../components/Button/styles';
-import styled, { css, DefaultTheme } from 'styled-components';
+import { Button } from "../../components/Button/styles";
+import styled, { css, DefaultTheme } from "styled-components";
 
 type AlertProps = {
 	theme: DefaultTheme;
@@ -18,8 +18,6 @@ export const Wrapper = styled.div`
 		& textarea {
 			resize: none;
 		}
-
-
 	`}
 `;
 
@@ -33,7 +31,9 @@ export const Alert = styled.div<AlertProps>`
 		align-items: center;
 		justify-content: center;
 		color: ${theme.colors.quaternary};
-		background-color: ${isSuccess? theme.colors.success: theme.colors.warning};
+		background-color: ${isSuccess
+			? theme.colors.success
+			: theme.colors.warning};
 		padding: ${theme.spacings.small};
 		border-radius: 0 0 0.4rem 0.4rem;
 		z-index: ${theme.layers.layer7};
@@ -51,7 +51,7 @@ export const Alert = styled.div<AlertProps>`
 			margin: 0px;
 			top: 0.2rem;
 			right: 0.2rem;
-			>svg {
+			> svg {
 				width: 2rem;
 				height: 2rem;
 			}

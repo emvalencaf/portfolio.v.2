@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Button, ButtonLabel } from '../Button/styles';
+import styled, { css } from "styled-components";
+import { Button, ButtonLabel } from "../Button/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`

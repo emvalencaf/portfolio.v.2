@@ -1,14 +1,13 @@
-import { screen } from '@testing-library/react';
-import { renderTheme } from '../../styles/render-theme';
+import { screen } from "@testing-library/react";
+import { renderTheme } from "../../styles/render-theme";
 
 // react component to be test
 import Footer from ".";
 import mock from "./mock";
-import { theme } from '../../styles/theme';
 
-describe('<Footer />', () => {
-	it('should render Footer component with all social media and with user and date', () => {
-		renderTheme(<Footer {...mock}/>);
+describe("<Footer />", () => {
+	it("should render Footer component with all social media and with user and date", () => {
+		renderTheme(<Footer {...mock} />);
 
 		expect(screen.getAllByRole("link")).toHaveLength(8);
 		expect(screen.getByLabelText("year")).toBeInTheDocument();

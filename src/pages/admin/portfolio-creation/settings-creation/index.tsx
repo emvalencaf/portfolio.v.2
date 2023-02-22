@@ -10,15 +10,14 @@ import { GetServerSideProps } from "next/types";
 // utils
 import { privateServerSideProps } from "../../../../utils/private-serverside-props";
 
-export default function SettingsCreationPage(){
+export default function SettingsCreationPage() {
 	return (
 		<PrivateComponent>
 			<SettingsCreationTemplate />
 		</PrivateComponent>
-	)
+	);
 }
-
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	return privateServerSideProps(ctx);
-}
+};

@@ -10,7 +10,6 @@ export type PrivateComponentProps = {
 // utils
 import { clientSideRedirect } from "../../utils/frontend-redirect";
 
-
 const PrivateComponent = ({ children }: PrivateComponentProps) => {
 	// states
 	const { data, status } = useSession();
@@ -19,7 +18,8 @@ const PrivateComponent = ({ children }: PrivateComponentProps) => {
 	// check session state
 	if (typeof window !== "undefined" && status === "loading") return null;
 
-	if (!session && (!status || status === "unauthenticated")) return clientSideRedirect();
+	if (!session && (!status || status === "unauthenticated"))
+		return clientSideRedirect();
 
 	return children;
 };

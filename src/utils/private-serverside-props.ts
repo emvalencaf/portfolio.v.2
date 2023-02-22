@@ -8,7 +8,10 @@ import { Session } from "../shared-types/session-nextauth";
 // utils
 import { serverSideRedirect } from "./backend-redirect";
 
-export const privateServerSideProps = async <T>(ctx: GetServerSidePropsContext, callbackFn?: (session: Session) => Promise<T>) => {
+export const privateServerSideProps = async <T>(
+	ctx: GetServerSidePropsContext,
+	callbackFn?: (session: Session) => Promise<T>
+) => {
 	const session: Session = await getSession(ctx);
 
 	if (!session) return serverSideRedirect(ctx);
@@ -17,7 +20,6 @@ export const privateServerSideProps = async <T>(ctx: GetServerSidePropsContext, 
 		try {
 			const result = await callbackFn(session);
 			return result;
-
 		} catch (e) {
 			console.log(e);
 			return serverSideRedirect(ctx);

@@ -11,5 +11,5 @@ export default {
 			`,
 			showData: false,
 		},
-	]
+	],
 } as WorkExperienceProps;

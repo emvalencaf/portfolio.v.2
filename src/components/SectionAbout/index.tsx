@@ -1,19 +1,23 @@
 // hooks
-import { useState } from 'react';
+import { useState } from "react";
 
 // components
-import Bios, { BiosProps } from '../Bios';
-import Button from '../Button';
-import Heading from '../Heading';
-import Section, { SectionProps } from '../Section';
-import Education, { EducationProps } from '../Education';
-import WorkExperience, { WorkExperienceProps } from '../WorkExperience';
+import Bios, { BiosProps } from "../Bios";
+import Button from "../Button";
+import Heading from "../Heading";
+import Section, { SectionProps } from "../Section";
+import Education, { EducationProps } from "../Education";
+import WorkExperience, { WorkExperienceProps } from "../WorkExperience";
 
 // icons
-import { Person3, WorkHistory, LibraryBooks } from '@styled-icons/material-outlined';
+import {
+	Person3,
+	WorkHistory,
+	LibraryBooks,
+} from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type SectionAboutProps = {
@@ -24,14 +28,14 @@ export type SectionAboutProps = {
 } & SectionProps;
 
 const SectionAbout = ({
-		id,
-		biosData,
-		urlDownload,
-		workData,
-		educationData,
-		background,
-		color
-	}: SectionAboutProps) => {
+	id,
+	biosData,
+	urlDownload,
+	workData,
+	educationData,
+	background,
+	color,
+}: SectionAboutProps) => {
 	// states
 	const [inBios, setInBios] = useState(true);
 	const [inWorkExperiences, setInWorkExperiences] = useState(false);
@@ -55,10 +59,10 @@ const SectionAbout = ({
 	};
 	const handleClickDownloadButton = () => {
 		window.open(urlDownload);
-	}
+	};
 	return (
 		<Section id={id} background={background} color={color}>
-			<Heading as='h2' size='big'>
+			<Heading as="h2" size="big">
 				Sobre
 			</Heading>
 			<Styled.Wrapper>
@@ -85,17 +89,15 @@ const SectionAbout = ({
 						Academics
 					</Button>
 				</Styled.SectionInnerMenu>
-				{inBios &&
-					<Bios  {...biosData} />
-				}
-				{inWorkExperiences &&
-					<WorkExperience {...workData} />
-				}
-				{inAcademics &&
+				{inBios && <Bios {...biosData} />}
+				{inWorkExperiences && <WorkExperience {...workData} />}
+				{inAcademics && (
 					//<AcademicHistory academicData={academicData} />
 					<Education {...educationData} />
-				}
-				<Button type="submit" onClick={handleClickDownloadButton}>Download Curriculum</Button>
+				)}
+				<Button type="submit" onClick={handleClickDownloadButton}>
+					Download Curriculum
+				</Button>
 			</Styled.Wrapper>
 		</Section>
 	);

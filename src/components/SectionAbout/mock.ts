@@ -69,7 +69,8 @@ export default {
 				workTime: "",
 				startIn: 1,
 				endIn: 2,
-				urlDownload: "https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
+				urlDownload:
+					"https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
 			},
 		],
 		courses: [
@@ -79,8 +80,9 @@ export default {
 				workTime: "",
 				startIn: 1,
 				endIn: 2,
-				urlDownload: "https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
+				urlDownload:
+					"https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
 			},
 		],
-	}
+	},
 } as SectionAboutProps;

@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Form } from '../../components/FormLogin/styles';
+import styled, { css } from "styled-components";
+import { Form } from "../../components/FormLogin/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const Link = styled.a`
 	${({ theme }) => css`
@@ -20,7 +20,11 @@ export const Logo = styled.div`
 		text-transform: uppercase;
 		font-size: ${theme.fonts.sizes.large};
 		font-weight: bolder;
-		background-image: linear-gradient(to top, ${theme.colors.secondary} 5%, ${theme.colors.senary});
+		background-image: linear-gradient(
+			to top,
+			${theme.colors.secondary} 5%,
+			${theme.colors.senary}
+		);
 		text-shadow: 0px 0px 15px ${theme.colors.tertiary};
 		align-items: center;
 		justify-content: center;
@@ -33,11 +37,11 @@ export const Logo = styled.div`
 			width: 4rem;
 			align-self: center;
 			justify-content: center;
-			filter: brightness(120%) drop-shadow(0 0 0.9rem ${theme.colors.tertiary});;
+			filter: brightness(120%)
+				drop-shadow(0 0 0.9rem ${theme.colors.tertiary});
 		}
-		>svg:first-child {
+		> svg:first-child {
 			transform: rotate(180deg);
-
 		}
 	`}
-`
+`;

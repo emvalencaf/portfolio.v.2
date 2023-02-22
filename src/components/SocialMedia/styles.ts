@@ -1,5 +1,5 @@
-import styled, { css, DefaultTheme } from 'styled-components';
-import { SocialMediaProps } from '.';
+import styled, { css, DefaultTheme } from "styled-components";
+import { SocialMediaProps } from ".";
 
 const logoSizes = {
 	small: (theme: DefaultTheme) => css`
@@ -18,15 +18,16 @@ const logoSizes = {
 
 export const Wrapper = styled.div<SocialMediaProps>`
 	${({ theme, sizes }) => css`
-		& svg, & a {
+		& svg,
+		& a {
 			color: ${theme.colors.primary};
 			${logoSizes[sizes](theme)}
 			transition: all ${theme.transitions.fast} ease-in-out;
 		}
 
-		&  svg:hover {
+		& svg:hover {
 			transform: scale(1.2);
-			color:${theme.colors.deepWhite};
+			color: ${theme.colors.deepWhite};
 			opacity: 0.8;
 			filter: drop-shadow(0 0 0.75rem ${theme.colors.tertiary});
 		}
@@ -34,7 +35,7 @@ export const Wrapper = styled.div<SocialMediaProps>`
 `;
 
 export const SocialMediaLink = styled.a`
-	${( {theme} ) => css`
+	${({ theme }) => css`
 		color: ${theme.colors.primary};
 	`}
 `;

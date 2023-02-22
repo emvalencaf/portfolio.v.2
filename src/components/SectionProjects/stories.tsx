@@ -1,11 +1,11 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import SectionProject, { SectionProjectProps } from '.';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import SectionProject, { SectionProjectProps } from ".";
 
 // mock
-import mock from './mock';
+import mock from "./mock";
 
 export default {
-	title: 'SectionProject',
+	title: "SectionProject",
 	component: SectionProject,
 	args: mock,
 } as Meta<SectionProjectProps>;

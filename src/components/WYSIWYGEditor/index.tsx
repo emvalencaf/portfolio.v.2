@@ -1,11 +1,11 @@
 // hooks
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
 // component
-import JoditEditor from 'jodit-react';
+import JoditEditor from "jodit-react";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type WYSIWYGEditorProps = {
@@ -15,34 +15,36 @@ export type WYSIWYGEditorProps = {
 	reference?: unknown;
 };
 
-const WYSIWYGEditor = ({ content, placeholder, onChange }: WYSIWYGEditorProps) => {
-
+const WYSIWYGEditor = ({
+	content,
+	placeholder,
+	onChange,
+}: WYSIWYGEditorProps) => {
 	// states
 	const editorRef = useRef(null);
 
-	const config = useMemo( () => ({
-		readonly: false,
-		height: 500,
-		placeholder: placeholder || "Start typing..."
-	}), [placeholder]);
+	const config = useMemo(
+		() => ({
+			readonly: false,
+			height: 500,
+			placeholder: placeholder || "Start typing...",
+		}),
+		[placeholder]
+	);
 
+	// handle synthetic event
+	const handleUpdate = useCallback(() => {
+		if (editorRef.current === null) return;
+
+		const editorContent = editorRef.current.value;
+
+		if (onChange) onChange(editorContent);
+	}, [onChange]);
 
 	// effect
 	useEffect(() => {
-
 		return editorRef.current.removeEventListener("blur", handleUpdate);
-	}, []);
-
-	// handle synthetic event
-	const handleUpdate = () => {
-
-		if (editorRef.current === null) return;
-
-		const editorContent = editorRef.current.value
-
-		if (onChange) onChange(editorContent);
-
-	}
+	}, [handleUpdate]);
 
 	return (
 		<Styled.Wrapper>

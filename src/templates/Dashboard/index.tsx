@@ -1,16 +1,16 @@
 // hooks
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
-import { useEffect } from 'react';
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useEffect } from "react";
 
 // components
-import Heading from '../../components/Heading';
-import Menu from '../../components/Menu';
-import Section from '../../components/Section';
-import { Sections } from '../Home';
+import Heading from "../../components/Heading";
+import Menu from "../../components/Menu";
+import Section from "../../components/Section";
+import { Sections } from "../Home";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type DashboardProps = {
@@ -33,11 +33,10 @@ const DashboardTemplate = () => {
 	const btnArray: BtnArrSections = [];
 
 	useEffect(() => {
-		console.log("dashboard was rendered")
-	}, [])
+		console.log("dashboard was rendered");
+	}, []);
 
 	if (Object.keys(sections).length >= 1) {
-
 		for (const prop in sections) {
 			btnArray.push({
 				id: sections[prop].id,
@@ -53,11 +52,10 @@ const DashboardTemplate = () => {
 				Dashboard
 			</Heading>
 			<p>
-				Bem-vindo, {!!session && session.user.name + ", "} ao painel de controle do seu portfólio!
+				Bem-vindo, {!!session && session.user.name + ", "} ao painel de
+				controle do seu portfólio!
 			</p>
-			<Section
-				id="portfolio-sections"
-			>
+			<Section id="portfolio-sections">
 				<Heading as="h2" size="big" color="secondary">
 					Seções do seu portfólio
 				</Heading>
@@ -66,19 +64,28 @@ const DashboardTemplate = () => {
 				</p>
 				<Styled.ContainerButtonsSections>
 					<Styled.ListButtonsSections>
-
-						{
-							btnArray.map((btnSection, index) => (
-								<li key={`${index} - ${btnSection.id}`}>
-									<Link href={`/${btnSection.id === "#" ? "#" : `#${btnSection.id}`}`} passHref legacyBehavior>
-										<Styled.Link target="_self" rel="internal">
-											{btnSection.icon}
-											<span>{btnSection.id === "#" ? "home" : btnSection.id}</span>
-										</Styled.Link>
-									</Link>
-								</li>
-							))
-						}
+						{btnArray.map((btnSection, index) => (
+							<li key={`${index} - ${btnSection.id}`}>
+								<Link
+									href={`/${
+										btnSection.id === "#"
+											? "#"
+											: `#${btnSection.id}`
+									}`}
+									passHref
+									legacyBehavior
+								>
+									<Styled.Link target="_self" rel="internal">
+										{btnSection.icon}
+										<span>
+											{btnSection.id === "#"
+												? "home"
+												: btnSection.id}
+										</span>
+									</Styled.Link>
+								</Link>
+							</li>
+						))}
 					</Styled.ListButtonsSections>
 				</Styled.ContainerButtonsSections>
 			</Section>

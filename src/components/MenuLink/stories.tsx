@@ -1,8 +1,8 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import MenuLink, { MenuLinkProps } from '.';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import MenuLink, { MenuLinkProps } from ".";
 
 export default {
-	title: 'MenuLink',
+	title: "MenuLink",
 	component: MenuLink,
 	args: {
 		link: "/",
@@ -10,10 +10,10 @@ export default {
 		newTab: false,
 	},
 	argTypes: {
-		link: {type: "string"},
-		text: {type: "string"},
-		newTab: {type: "boolean"},
-	}
+		link: { type: "string" },
+		text: { type: "string" },
+		newTab: { type: "boolean" },
+	},
 } as Meta<MenuLinkProps>;
 
 export const Template: Story<MenuLinkProps> = (args) => {

@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
-import { Title as HeadingContainer } from '../Heading/styles';
+import styled, { css } from "styled-components";
+import { Title as HeadingContainer } from "../Heading/styles";
 export const Wrapper = styled.div`
-	${({ theme }) => css`
+	${() => css`
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -26,7 +26,7 @@ export const DisplayerContainer = styled.div`
 `;
 
 export const HeadingDisplayContainer = styled.div`
-	${({ theme }) => css`
+	${() => css`
 		margin: 0px;
 		height: 90px;
 		text-align: justify;

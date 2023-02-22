@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Button } from '../Button/styles';
+import { Button } from "../Button/styles";
 import { Title as HeadingContainer } from "../Heading/styles";
 
 export const Wrapper = styled.div`
@@ -33,7 +33,6 @@ export const OrderList = styled.ol`
 			& ${HeadingContainer} {
 				color: ${theme.colors.deepWhite};
 				margin: 0 ${theme.spacings.small};
-
 			}
 			> li {
 				display: flex;
@@ -53,7 +52,8 @@ export const OrderList = styled.ol`
 					> li {
 						border-radius: 0%;
 					}
-					> li, button {
+					> li,
+					button {
 						background-color: transparent;
 					}
 					& ${Button} {
@@ -81,13 +81,11 @@ export const OrderList = styled.ol`
 			background-color: ${theme.colors.primary};
 		}
 
-
 		> li:has(> button:disabled) {
 			color: ${theme.colors.deepWhite};
 			background-color: ${theme.colors.tertiary};
 			border: none;
 			outline: none;
-
 		}
 		& ${Button} {
 			align-items: flex-start;
@@ -101,9 +99,7 @@ export const OrderList = styled.ol`
 			width: 100%;
 		}
 
-		& ${Button}:active,
-		& ${Button}:focus,
-		& ${Button}:hover {
+		& ${Button}:active, & ${Button}:focus, & ${Button}:hover {
 			box-shadow: none;
 		}
 
@@ -111,13 +107,11 @@ export const OrderList = styled.ol`
 			margin: ${theme.spacings.tiny};
 			width: 200px;
 		}
-
 	`}
 `;
 
 export const Content = styled.div`
 	${({ theme }) => css`
-
 		display: flex;
 		flex-direction: column;
 		align-items: center;

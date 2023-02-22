@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Title as HeadingContainer } from '../Heading/styles';
+import styled, { css } from "styled-components";
+import { Title as HeadingContainer } from "../Heading/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
@@ -18,7 +18,8 @@ export const Wrapper = styled.div`
 		&:focus,
 		&:hover {
 			opacity: 1;
-			box-shadow: 0 0 ${theme.spacings.medium} ${theme.spacings.tiny} ${theme.colors.gray6};
+			box-shadow: 0 0 ${theme.spacings.medium} ${theme.spacings.tiny}
+				${theme.colors.gray6};
 			filter: brightness(110%);
 		}
 	`}
@@ -90,7 +91,7 @@ export const ContentContainer = styled.div`
 				width: 2rem;
 				height: 2rem;
 				margin-left: 1rem;
-				margin-right:1rem;
+				margin-right: 1rem;
 			}
 
 			&:focus {
@@ -178,7 +179,7 @@ export const ButtonsContainer = styled.div`
 				width: 2rem;
 				height: 2rem;
 				margin-left: 1rem;
-				margin-right:1rem;
+				margin-right: 1rem;
 			}
 
 			&:focus {

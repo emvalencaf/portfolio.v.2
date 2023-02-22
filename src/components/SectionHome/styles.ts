@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Title as HeadingContainer } from '../Heading/styles';
+import styled, { css } from "styled-components";
+import { Title as HeadingContainer } from "../Heading/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
@@ -24,7 +24,6 @@ export const Wrapper = styled.div`
 
 		& ${HeadingContainer}:first-child {
 			text-shadow: 0px 0px 20px ${theme.colors.quaternary};
-
 		}
 
 		& ${HeadingContainer} {
@@ -40,12 +39,11 @@ export const Wrapper = styled.div`
 `;
 
 export const IntroContainer = styled.div`
-	${({ theme }) => css`
+	${() => css`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-
 	`}
 `;
 

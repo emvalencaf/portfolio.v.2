@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Button as ButtonContainer } from '../Button/styles';
+import styled, { css } from "styled-components";
+import { Button as ButtonContainer } from "../Button/styles";
 
 export const Form = styled.form`
 	${({ theme }) => css`
@@ -10,8 +10,7 @@ export const Form = styled.form`
 `;
 
 export const ButtonWrapper = styled.div`
-	${({ theme }) => css`
-
+	${() => css`
 		& ${ButtonContainer} {
 			width: 100%;
 		}

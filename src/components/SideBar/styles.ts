@@ -1,5 +1,5 @@
-import styled, { css, DefaultTheme } from 'styled-components';
-import { SideBarProps } from '.';
+import styled, { css, DefaultTheme } from "styled-components";
+import { SideBarProps } from ".";
 
 const logoSizes = {
 	small: (theme: DefaultTheme) => css`
@@ -15,7 +15,6 @@ const logoSizes = {
 		width: ${theme.fonts.sizes.xlarge};
 	`,
 };
-
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
@@ -39,13 +38,14 @@ export const SocialMediaLink = styled.a<SideBarProps>`
 	${({ theme, sizes }) => css`
 		color: ${theme.colors.secondary};
 
-		& svg, & {
+		& svg,
+		& {
 			color: ${theme.colors.secondary};
 			${logoSizes[sizes](theme)}
 			transition: all ${theme.transitions.fast} ease-in-out;
 		}
 
-		&  svg:hover {
+		& svg:hover {
 			color: ${theme.colors.deepWhite};
 			transform: scale(1.2);
 

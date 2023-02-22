@@ -1,11 +1,11 @@
 import { Project } from "./project";
-import { BiosData, CreateSectionData, EducationData, Tech, WorkData } from "./section";
-import { Settings } from "./settings"
+import { BiosData, EducationData, Tech, WorkData } from "./section";
+import { Settings } from "./settings";
 
 export type Portfolio = {
 	settings: Settings;
 	content: PortfolioContent;
-}
+};
 
 export type PortfolioContent = {
 	sections: {
@@ -14,7 +14,13 @@ export type PortfolioContent = {
 		children?: string;
 		background?: boolean;
 		icon?: "home" | "about" | "skills" | "projects" | "other";
-		color?: "primary" | "secondary" | "tertiary" | "quaternary" | "quinary" | "senary";
+		color?:
+			| "primary"
+			| "secondary"
+			| "tertiary"
+			| "quaternary"
+			| "quinary"
+			| "senary";
 		backgroundImg?: string;
 		owner?: string;
 		techs?: Tech[];
@@ -25,8 +31,8 @@ export type PortfolioContent = {
 		educationData?: EducationData;
 		projects?: Project[];
 		urlDownload?: string;
-	}[]
-}
+	}[];
+};
 
 export type FetchResponsePortfolio = {
 	portfolio: Portfolio;

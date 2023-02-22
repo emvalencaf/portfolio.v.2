@@ -1,18 +1,18 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import LogoLink, { LogoLinkProps } from '.';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import LogoLink, { LogoLinkProps } from ".";
 
 // mock
-import mock from './mock';
+import mock from "./mock";
 
 export default {
-	title: 'LogoLink',
+	title: "LogoLink",
 	component: LogoLink,
 	args: mock,
 	argTypes: {
 		srcImg: { type: "string" },
 		link: { type: "string" },
 		altText: { type: "string" },
-		newTab: { type: "boolean"},
+		newTab: { type: "boolean" },
 	},
 } as Meta<LogoLinkProps>;
 

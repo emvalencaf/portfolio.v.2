@@ -1,14 +1,20 @@
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from "react";
 export type ButtonProps = {
 	icon?: React.ReactNode;
 	children?: React.ReactNode;
 	disabled?: boolean;
 	onClick?: () => void;
-	color?: "primary" | "secondary" | "tertiary" | "quaternary" | "quinary" | "senary";
+	color?:
+		| "primary"
+		| "secondary"
+		| "tertiary"
+		| "quaternary"
+		| "quinary"
+		| "senary";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
@@ -21,7 +27,6 @@ const Button = ({
 }: ButtonProps) => {
 	const handleClick = () => {
 		if (onClick) onClick();
-
 	};
 
 	return (
@@ -32,11 +37,7 @@ const Button = ({
 			type={type}
 		>
 			{icon}
-			{!!children && (
-				<Styled.ButtonLabel>
-					{children}
-				</Styled.ButtonLabel>
-			)}
+			{!!children && <Styled.ButtonLabel>{children}</Styled.ButtonLabel>}
 		</Styled.Button>
 	);
 };

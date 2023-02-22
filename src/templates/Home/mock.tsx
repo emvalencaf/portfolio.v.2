@@ -1,17 +1,30 @@
 // icons
-import { Css3, Git, Html5, Javascript, Mongodb, Nodejs, ReactLogo, Typescript } from "@styled-icons/boxicons-logos";
-import { Cases, Code, Home, Person3, Portrait } from "@styled-icons/material-outlined";
+import {
+	Css3,
+	Git,
+	Html5,
+	Javascript,
+	Mongodb,
+	Nodejs,
+	ReactLogo,
+	Typescript,
+} from "@styled-icons/boxicons-logos";
+import {
+	Cases,
+	Code,
+	Home,
+	Person3,
+	Portrait,
+} from "@styled-icons/material-outlined";
 
 // type
-import { HomeProps } from ".";
-
 
 export default {
 	header: {
 		logo: {
 			srcImg: "",
 			altText: "<<Logo>>",
-			link: "#"
+			link: "#",
 		},
 		menuLinks: [
 			{
@@ -43,8 +56,8 @@ export default {
 				icon: <Portrait />,
 				link: "#curriculo",
 				newTab: false,
-			}
-		]
+			},
+		],
 	},
 	main: {
 		sections: {
@@ -52,12 +65,8 @@ export default {
 				id: "#",
 				ownerName: "Tício de Souza e Silva",
 				ocupation: "Desenvolvedor WEB Júnior",
-				mainStack: [
-					"Javascript",
-					"NodeJS",
-					"React",
-				],
-				backgroundImg: "assets/images/background-home.jpg"
+				mainStack: ["Javascript", "NodeJS", "React"],
+				backgroundImg: "assets/images/background-home.jpg",
 			},
 			about: {
 				id: "about",
@@ -129,7 +138,8 @@ export default {
 							startIn: 1,
 							endIn: 2,
 							resume: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates enim odit omnis perferendis fugiat laboriosam ipsum voluptatem itaque dolorem recusandae, consequuntur dicta voluptatibus saepe, aspernatur amet accusantium quo. Suscipit, blanditiis?",
-							urlDownload: "https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
+							urlDownload:
+								"https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
 						},
 					],
 					courses: [
@@ -139,10 +149,11 @@ export default {
 							workTime: "",
 							startIn: 1,
 							endIn: 2,
-							urlDownload: "https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
+							urlDownload:
+								"https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
 						},
 					],
-				}
+				},
 			},
 			skills: {
 				id: "skills",
@@ -211,7 +222,7 @@ export default {
 						`,
 						showTechDescription: false,
 					},
-				]
+				],
 			},
 			projects: {
 				id: "projects",
@@ -219,39 +230,39 @@ export default {
 					{
 						title: "projeto 1",
 						urlDemo: "http://localhost:3233",
-						urlRepository: "http://localhost:434343"
+						urlRepository: "http://localhost:434343",
 					},
 					{
 						title: "projeto 2",
 						urlDemo: "http://localhost:3233",
-						urlRepository: "http://localhost:434343"
+						urlRepository: "http://localhost:434343",
 					},
 					{
 						title: "projeto 3",
 						urlDemo: "http://localhost:3233",
-						urlRepository: "http://localhost:434343"
+						urlRepository: "http://localhost:434343",
 					},
 					{
 						title: "projeto 1",
 						urlDemo: "http://localhost:3233",
-						urlRepository: "http://localhost:434343"
+						urlRepository: "http://localhost:434343",
 					},
 					{
 						title: "projeto 2",
 						urlDemo: "http://localhost:3233",
-						urlRepository: "http://localhost:434343"
+						urlRepository: "http://localhost:434343",
 					},
 					{
 						title: "projeto 3",
 						urlDemo: "http://localhost:3233",
-						urlRepository: "http://localhost:434343"
-					}
-				]
+						urlRepository: "http://localhost:434343",
+					},
+				],
 			},
 		},
 		sideBar: {
 			githubURL: "http://www.github.com/",
-			linkedinURL: "http://www.linkedin.com/in/"
+			linkedinURL: "http://www.linkedin.com/in/",
 		},
 	},
 	footer: {

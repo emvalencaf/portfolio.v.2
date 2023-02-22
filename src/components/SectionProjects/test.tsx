@@ -1,14 +1,13 @@
-import { screen } from '@testing-library/react';
-import { renderTheme } from '../../styles/render-theme';
+import { renderTheme } from "../../styles/render-theme";
 
 // react component to be test
-import SectionProject, { SectionProjectProps } from '.';
+import SectionProject from ".";
 
 // mock
 import mock from "./mock";
 
-describe('<SectionProject />', () => {
-	it('should match snapshot', () => {
+describe("<SectionProject />", () => {
+	it("should match snapshot", () => {
 		const { container } = renderTheme(<SectionProject {...mock} />);
 
 		expect(container).toMatchSnapshot();

@@ -1,14 +1,13 @@
 // service
 import { SuccessState } from "../../../shared-types/async-success-error";
+import { Settings } from "../../../shared-types/settings";
 import SettingsService from "../../services/settings";
 
 // type
 export type SettingsControllerCreate = {
-	data: {
-
-	},
+	data: Settings;
 	successMessage: SuccessState;
-}
+};
 type SettingsData = {
 	websiteName: string;
 	logo: {
@@ -16,7 +15,7 @@ type SettingsData = {
 		altText: string;
 		link: string;
 		newTab?: boolean;
-	},
+	};
 	socialMedia?: {
 		instaURL?: string;
 		linkedinURL?: string;
@@ -26,15 +25,18 @@ type SettingsData = {
 		githubURL?: string;
 		youtubeURL?: string;
 		tiktokURL?: string;
-	},
-}
-
+	};
+};
 
 export default class SettingsController {
-	static async create(data: SettingsData, formData: FormData, token: string): Promise<SettingsControllerCreate>{
-		try{
-
-			if (!data.logo || !data.logo?.altText || !data.logo?.link ) throw new Error(`you fill the logo fields incorrectly`);
+	static async create(
+		data: SettingsData,
+		formData: FormData,
+		token: string
+	): Promise<SettingsControllerCreate> {
+		try {
+			if (!data.logo || !data.logo?.altText || !data.logo?.link)
+				throw new Error(`you fill the logo fields incorrectly`);
 
 			formData.delete("logoAlt");
 			formData.delete("instaURL");
@@ -48,9 +50,13 @@ export default class SettingsController {
 
 			formData.append("logo", JSON.stringify(data.logo));
 
-			if(data.socialMedia) formData.append("socialMedia", JSON.stringify(data.socialMedia));
+			if (data.socialMedia)
+				formData.append(
+					"socialMedia",
+					JSON.stringify(data.socialMedia)
+				);
 
-			const response =  await SettingsService.create(formData, token);
+			const response = await SettingsService.create(formData, token);
 
 			console.log(response);
 
@@ -58,15 +64,14 @@ export default class SettingsController {
 				data: response,
 				successMessage: {
 					message: `settings was successfully created`,
-				}
+				},
 			};
-
 		} catch (err) {
 			throw new Error(err.message);
 		}
 	}
 
-	static async getAll<FetchResponseSettings>(token: string){
+	static async getAll(token: string) {
 		return await SettingsService.getAll(token);
 	}
 }

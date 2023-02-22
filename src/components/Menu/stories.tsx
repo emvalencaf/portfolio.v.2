@@ -1,9 +1,9 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import Menu, { MenuProps } from '.';
-import mock from './mock';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import Menu, { MenuProps } from ".";
+import mock from "./mock";
 
 export default {
-	title: 'Menu',
+	title: "Menu",
 	component: Menu,
 	args: mock,
 	parameters: {

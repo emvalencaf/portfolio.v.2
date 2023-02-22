@@ -1,8 +1,16 @@
 // icons
-import { FacebookCircle, Github, InstagramAlt, Linkedin, Tiktok, Twitter, Youtube } from "@styled-icons/boxicons-logos";
-import { PersonPin } from "@styled-icons/material-outlined"
+import {
+	FacebookCircle,
+	Github,
+	InstagramAlt,
+	Linkedin,
+	Tiktok,
+	Twitter,
+	Youtube,
+} from "@styled-icons/boxicons-logos";
+import { PersonPin } from "@styled-icons/material-outlined";
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type SocialMediaProps = {
@@ -14,7 +22,7 @@ export type SocialMediaProps = {
 	githubURL?: string;
 	youtubeURL?: string;
 	tiktokURL?: string;
-	sizes?: "small" | "medium" | "big"
+	sizes?: "small" | "medium" | "big";
 };
 
 const urlPattern = {
@@ -27,14 +35,31 @@ const urlPattern = {
 	tiktok: "tiktok.com/",
 };
 
-const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepageURL = "", twitterURL = "", githubURL = "", youtubeURL = "", tiktokURL = "", sizes = "medium" }: SocialMediaProps) => {
+const SocialMedia = ({
+	instaURL = "",
+	linkedinURL = "",
+	facebookURL = "",
+	homepageURL = "",
+	twitterURL = "",
+	githubURL = "",
+	youtubeURL = "",
+	tiktokURL = "",
+	sizes = "medium",
+}: SocialMediaProps) => {
 	return (
 		<Styled.Wrapper sizes={sizes}>
 			{facebookURL && facebookURL.includes(urlPattern.facebook) ? (
-				<Styled.SocialMediaLink rel="external" target="_blank" href={facebookURL} aria-label="facebook profile">
+				<Styled.SocialMediaLink
+					rel="external"
+					target="_blank"
+					href={facebookURL}
+					aria-label="facebook profile"
+				>
 					<FacebookCircle />
 				</Styled.SocialMediaLink>
-			) : ""}
+			) : (
+				""
+			)}
 			{instaURL && instaURL.includes(urlPattern.instagram) ? (
 				<Styled.SocialMediaLink
 					rel="external"
@@ -44,7 +69,9 @@ const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepa
 				>
 					<InstagramAlt />
 				</Styled.SocialMediaLink>
-			) : ""}
+			) : (
+				""
+			)}
 			{linkedinURL && linkedinURL.includes(urlPattern.linkedin) ? (
 				<Styled.SocialMediaLink
 					rel="external"
@@ -54,7 +81,9 @@ const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepa
 				>
 					<Linkedin />
 				</Styled.SocialMediaLink>
-			) : ""}
+			) : (
+				""
+			)}
 			{githubURL && githubURL.includes(urlPattern.github) ? (
 				<Styled.SocialMediaLink
 					rel="external"
@@ -64,7 +93,9 @@ const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepa
 				>
 					<Github />
 				</Styled.SocialMediaLink>
-			) : ""}
+			) : (
+				""
+			)}
 			{twitterURL && twitterURL.includes(urlPattern.twitter) ? (
 				<Styled.SocialMediaLink
 					rel="external"
@@ -74,7 +105,9 @@ const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepa
 				>
 					<Twitter />
 				</Styled.SocialMediaLink>
-			) : ""}
+			) : (
+				""
+			)}
 			{youtubeURL && youtubeURL.includes(urlPattern.youtube) ? (
 				<Styled.SocialMediaLink
 					rel="external"
@@ -84,7 +117,9 @@ const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepa
 				>
 					<Youtube />
 				</Styled.SocialMediaLink>
-			) : ""}
+			) : (
+				""
+			)}
 			{tiktokURL && tiktokURL.includes(urlPattern.tiktok) ? (
 				<Styled.SocialMediaLink
 					rel="external"
@@ -94,8 +129,10 @@ const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepa
 				>
 					<Tiktok />
 				</Styled.SocialMediaLink>
-			) : ""}
-			{homepageURL? (
+			) : (
+				""
+			)}
+			{homepageURL ? (
 				<Styled.SocialMediaLink
 					rel="external"
 					target="_blank"
@@ -104,7 +141,9 @@ const SocialMedia = ({ instaURL = "", linkedinURL = "", facebookURL = "", homepa
 				>
 					<PersonPin />
 				</Styled.SocialMediaLink>
-			): ""}
+			) : (
+				""
+			)}
 		</Styled.Wrapper>
 	);
 };

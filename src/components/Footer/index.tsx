@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 import SocialMedia, { SocialMediaProps } from "../SocialMedia";
-import DateStringFormating from '../../utils/dateString';
+import DateStringFormating from "../../utils/dateString";
 export type FooterProps = SocialMediaProps & {
 	year?: string;
 	ownerName?: string;
@@ -28,7 +28,19 @@ const Footer = ({
 
 	return (
 		<Styled.Wrapper>
-			<p>&#169;{ year &&<span aria-label="year">{DateStringFormating.getFullYear(year)}</span>} all right reserved{ ownerName && <span aria-label="owner name"> to {ownerName}</span>}.</p>
+			<p>
+				&#169;
+				{year && (
+					<span aria-label="year">
+						{DateStringFormating.getFullYear(year)}
+					</span>
+				)}{" "}
+				all right reserved
+				{ownerName && (
+					<span aria-label="owner name"> to {ownerName}</span>
+				)}
+				.
+			</p>
 			<SocialMedia
 				instaURL={instaURL}
 				linkedinURL={linkedinURL}
@@ -45,4 +57,3 @@ const Footer = ({
 };
 
 export default Footer;
-

@@ -1,8 +1,8 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import Section, { SectionProps } from '.';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import Section, { SectionProps } from ".";
 
 export default {
-	title: 'Section',
+	title: "Section",
 	component: Section,
 	args: {
 		children: "<h1> Olá </h1>",

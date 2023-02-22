@@ -1,5 +1,11 @@
 // icons
-import { Home, Person3, Code, Cases, Portrait } from "@styled-icons/material-outlined";
+import {
+	Home,
+	Person3,
+	Code,
+	Cases,
+	Portrait,
+} from "@styled-icons/material-outlined";
 // types
 import { MenuProps } from ".";
 
@@ -34,6 +40,6 @@ export default {
 			icon: <Portrait />,
 			link: "#curriculo",
 			newTab: false,
-		}
-	]
+		},
+	],
 } as MenuProps;

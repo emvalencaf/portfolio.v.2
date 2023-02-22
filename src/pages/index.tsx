@@ -12,23 +12,27 @@ type IndexProps = {
 };
 
 export default function Index({ portfolio }: IndexProps) {
-	
-	return <HomeTemplate settings={portfolio?.settings} content={portfolio?.content}  />;
-};
+	return (
+		<HomeTemplate
+			settings={portfolio?.settings}
+			content={portfolio?.content}
+		/>
+	);
+}
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-
+export const getServerSideProps: GetServerSideProps = async () => {
 	const response = await PortfolioController.get();
 
-	if (!response) return {
-		notFound: true,
-	}
+	if (!response)
+		return {
+			notFound: true,
+		};
 
 	const { portfolio } = response;
 
 	return {
 		props: {
 			portfolio,
-		}
-	}
-}
+		},
+	};
+};

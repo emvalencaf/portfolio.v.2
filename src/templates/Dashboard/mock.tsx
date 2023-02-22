@@ -22,5 +22,5 @@ export default {
 			id: "projects",
 			icon: <Cases />,
 		},
-	}
+	},
 } as DashboardProps;

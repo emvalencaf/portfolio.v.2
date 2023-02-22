@@ -16,8 +16,8 @@ export default function DashboardPage() {
 			<DashboardTemplate />
 		</PrivateComponent>
 	);
-};
+}
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	return privateServerSideProps(ctx);
-}
+};

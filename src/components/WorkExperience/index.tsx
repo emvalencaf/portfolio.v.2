@@ -1,12 +1,12 @@
 // hooks
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 // components
-import Heading from '../Heading';
-import Button from '../Button';
+import Heading from "../Heading";
+import Button from "../Button";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 type Work = {
@@ -21,29 +21,33 @@ export type WorkExperienceProps = {
 	workExperience: Work[];
 };
 // utils
-import DateStringFormating from '../../utils/dateString';
+import DateStringFormating from "../../utils/dateString";
 
 const WorkExperience = ({ workExperience = [] }: WorkExperienceProps) => {
-
 	// state
-	const [stateWorkExperience, setStateWorkExperience] = useState(workExperience);
+	const [stateWorkExperience, setStateWorkExperience] =
+		useState(workExperience);
 	const [content, setContent] = useState<Work>();
 
 	// useEffect
 	useEffect(() => {
 		setContent(() => stateWorkExperience[0]);
-		setStateWorkExperience((s) => s.map((work, index) => {
-			if (index === 0) return {
-				...work,
-				showData: true,
-			};
+		setStateWorkExperience((s) =>
+			s.map((work, index) => {
+				if (index === 0)
+					return {
+						...work,
+						showData: true,
+					};
 
-			return {
-				...work,
-				showData: false,
-			};
-		}));
-	}, []);
+				return {
+					...work,
+					showData: false,
+				};
+			})
+		);
+	}, [stateWorkExperience]);
+
 	return (
 		<Styled.Wrapper>
 			<Styled.OrderList>
@@ -52,28 +56,41 @@ const WorkExperience = ({ workExperience = [] }: WorkExperienceProps) => {
 						Experiência de trabalho
 					</Heading>
 					<Styled.OrderList>
-						{stateWorkExperience.length >= 1 && stateWorkExperience.map((work, index) => (
-							<li key={` ${index} - ${work.startIn} - ${work.employer} - ${work.ocupation}`}>
-								<Button
-									onClick={() => {
-										setStateWorkExperience((prevState) => prevState.map((stateWork) => {
-											if (stateWork === work) return {
-												...stateWork,
-												showData: !stateWork.showData,
-											};
-
-											return {
-												...stateWork,
-												showData: false,
-											};
-										}))
-									}}
-									disabled={work.showData}
+						{stateWorkExperience.length >= 1 &&
+							stateWorkExperience.map((work, index) => (
+								<li
+									key={` ${index} - ${work.startIn} - ${work.employer} - ${work.ocupation}`}
 								>
-									{work.employer}
-								</Button>
-							</li>
-						))}
+									<Button
+										onClick={() => {
+											setStateWorkExperience(
+												(prevState) =>
+													prevState.map(
+														(stateWork) => {
+															if (
+																stateWork ===
+																work
+															)
+																return {
+																	...stateWork,
+																	showData:
+																		!stateWork.showData,
+																};
+
+															return {
+																...stateWork,
+																showData: false,
+															};
+														}
+													)
+											);
+										}}
+										disabled={work.showData}
+									>
+										{work.employer}
+									</Button>
+								</li>
+							))}
 					</Styled.OrderList>
 				</li>
 			</Styled.OrderList>
@@ -82,15 +99,19 @@ const WorkExperience = ({ workExperience = [] }: WorkExperienceProps) => {
 					<Heading as="h4" size="small">
 						{content.employer}
 					</Heading>
+					<p>Cargo: {content.ocupation}</p>
 					<p>
-						Cargo: {content.ocupation}
+						Período:{" "}
+						{DateStringFormating.getMonthAndFullYear(
+							content.startIn
+						)}
+						{content.endIn
+							? ` / ${DateStringFormating.getMonthAndFullYear(
+									content.endIn
+							  )}`
+							: " - Atualmente"}
 					</p>
-					<p>
-						Período: {DateStringFormating.getMonthAndFullYear(content.startIn)}{!!content.endIn ? ` / ${DateStringFormating.getMonthAndFullYear(content.endIn)}` : " - Atualmente"}
-					</p>
-					<p>
-						{content.jobDescription}
-					</p>
+					<p>{content.jobDescription}</p>
 				</Styled.Content>
 			)}
 		</Styled.Wrapper>

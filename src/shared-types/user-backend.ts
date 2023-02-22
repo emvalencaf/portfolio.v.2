@@ -7,4 +7,4 @@ export type BackendUser = {
 	createdAt: string | number;
 	updatedAt: string | number | null;
 	projects: Project[];
-}
+};

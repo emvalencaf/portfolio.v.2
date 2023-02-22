@@ -1,5 +1,3 @@
 import { TextInputProps } from ".";
 
-export default {
-
-} as TextInputProps;
+export default {} as TextInputProps;

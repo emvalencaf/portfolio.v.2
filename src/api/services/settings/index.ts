@@ -1,4 +1,3 @@
-
 // types
 import { FetchResponseSettings } from "../../../shared-types/settings";
 
@@ -8,9 +7,11 @@ import CreateFetch from "../../../utils/createFetch";
 // config
 const url = `${process.env.NEXT_PUBLIC_API_URL}/api/settings`;
 
-export default class SettingsService{
-	static async create(formData: FormData, token: string): Promise<FetchResponseSettings>{
-
+export default class SettingsService {
+	static async create(
+		formData: FormData,
+		token: string
+	): Promise<FetchResponseSettings> {
 		const options = {
 			method: "POST",
 			headers: {
@@ -22,14 +23,16 @@ export default class SettingsService{
 		return await CreateFetch.dispatch<FetchResponseSettings>(url, options);
 	}
 	static async getAll(token: string) {
-
 		const options = {
 			method: "GET",
 			headers: {
 				Authorization: `Bearer ${token}`,
-			}
-		}
+			},
+		};
 
-		return await CreateFetch.dispatch<FetchResponseSettings[]>(url, options);
+		return await CreateFetch.dispatch<FetchResponseSettings[]>(
+			url,
+			options
+		);
 	}
 }

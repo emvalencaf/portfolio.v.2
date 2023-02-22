@@ -4,16 +4,16 @@ export type Post = {
 		title: string;
 		content: string;
 		createdAt: string;
-	}
-}
+	};
+};
 export type StrapiPost = {
 	post: {
-		data: Post,
-	}
+		data: Post;
+	};
 };
 
 export type StrapiPosts = {
 	posts: {
-		data: Post[],
-	}
-}
+		data: Post[];
+	};
+};

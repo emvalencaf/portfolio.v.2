@@ -1,14 +1,14 @@
 // component
-import Education, { EducationProps } from '.';
+import Education, { EducationProps } from ".";
 
 // types
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from "@storybook/react/types-6-0";
 
 // mock
-import mock from './mock';
+import mock from "./mock";
 
 export default {
-	title: 'Education',
+	title: "Education",
 	component: Education,
 	args: mock,
 } as Meta<EducationProps>;

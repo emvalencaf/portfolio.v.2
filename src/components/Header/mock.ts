@@ -4,7 +4,7 @@ export default {
 	logo: {
 		srcImg: "assets/images/logo.png",
 		altText: "logo",
-		link: "#"
+		link: "#",
 	},
 	menuLinks: [
 		{
@@ -31,6 +31,6 @@ export default {
 			children: "curriculo",
 			link: "/curriculo",
 			newTab: false,
-		}
-	]
+		},
+	],
 } as HeaderProps;

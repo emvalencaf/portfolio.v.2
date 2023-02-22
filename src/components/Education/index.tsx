@@ -1,15 +1,15 @@
 // hooks
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 // components
-import Button from '../Button';
-import Heading from '../Heading';
+import Button from "../Button";
+import Heading from "../Heading";
 
 // icons
 import { Link } from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 type Education = {
@@ -20,14 +20,14 @@ type Education = {
 	startIn: number | string;
 	endIn?: number | string | null;
 	urlDownload?: string;
-}
+};
 export type EducationProps = {
 	higherEducation: Education[];
 	courses: Education[];
 };
 
 // utils
-import DateStringFormating from '../../utils/dateString';
+import DateStringFormating from "../../utils/dateString";
 
 const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 	// type states
@@ -42,48 +42,62 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 	});
 
 	// states
-	const [stateHigherEducation, setStateHigherEducation] = useState<StateEducation[]>(higherEducation.map(mapData));
-	const [stateCourses, setStateCourses] = useState<StateEducation[]>(courses.map(mapData));
+	const [stateHigherEducation, setStateHigherEducation] = useState<
+		StateEducation[]
+	>(higherEducation.map(mapData));
+	const [stateCourses, setStateCourses] = useState<StateEducation[]>(
+		courses.map(mapData)
+	);
 	const [content, setContent] = useState<Education>();
 
 	// callback setState
-	const callbackSetState = (prevState: StateEducation[], actualState: StateEducation, education: "higherEducation" | "courses"): StateEducation[] => {
-
+	const callbackSetState = (
+		prevState: StateEducation[],
+		actualState: StateEducation,
+		education: "higherEducation" | "courses"
+	): StateEducation[] => {
 		const setInFocusFalse = (course: StateEducation): StateEducation => ({
 			...course,
-			inFocus: false
+			inFocus: false,
 		});
 
-		if (education === "higherEducation") setStateCourses((s) => s.map((course) => setInFocusFalse(course)));
+		if (education === "higherEducation")
+			setStateCourses((s) => s.map((course) => setInFocusFalse(course)));
 
-		if (education === "courses") setStateHigherEducation((s) => s.map((course) => setInFocusFalse(course)));
+		if (education === "courses")
+			setStateHigherEducation((s) =>
+				s.map((course) => setInFocusFalse(course))
+			);
 
 		return prevState.map((state) => {
-
-			if (state === actualState) return {
-				...state,
-				inFocus: !state.inFocus,
-			};
+			if (state === actualState)
+				return {
+					...state,
+					inFocus: !state.inFocus,
+				};
 
 			return setInFocusFalse(state);
 		});
-	}
+	};
 
 	// effect
 	useEffect(() => {
 		setContent(higherEducation[0]);
-		setStateHigherEducation((prevState) => prevState.map((course, index) => {
-			if (index === 0) return {
-				...course,
-				inFocus: true,
-			};
+		setStateHigherEducation((prevState) =>
+			prevState.map((course, index) => {
+				if (index === 0)
+					return {
+						...course,
+						inFocus: true,
+					};
 
-			return {
-				...course,
-				inFocus: false,
-			}
-		}))
-	}, []);
+				return {
+					...course,
+					inFocus: false,
+				};
+			})
+		);
+	}, [higherEducation]);
 
 	// handle click
 	const handleClick = () => {
@@ -95,16 +109,25 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 			<Styled.OrderList>
 				{higherEducation.length >= 1 && (
 					<li>
-						<Heading as="h4" size='small'>
+						<Heading as="h4" size="small">
 							Ensino Superior
 						</Heading>
 						<Styled.OrderList>
 							{stateHigherEducation.map((course, index) => (
-								<li key={`${index} - ${course.title} - ${course.startIn}`}>
+								<li
+									key={`${index} - ${course.title} - ${course.startIn}`}
+								>
 									<Button
 										onClick={() => {
 											setContent(course);
-											setStateHigherEducation((prevState) => callbackSetState(prevState, course, "higherEducation"));
+											setStateHigherEducation(
+												(prevState) =>
+													callbackSetState(
+														prevState,
+														course,
+														"higherEducation"
+													)
+											);
 										}}
 										disabled={course.inFocus}
 									>
@@ -117,16 +140,24 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 				)}
 				{courses.length >= 1 && (
 					<li>
-						<Heading as="h4" size='small'>
+						<Heading as="h4" size="small">
 							Cursos
 						</Heading>
 						<Styled.OrderList>
 							{stateCourses.map((course, index) => (
-								<li key={`${index} - ${course.title} - ${course.startIn}`}>
+								<li
+									key={`${index} - ${course.title} - ${course.startIn}`}
+								>
 									<Button
 										onClick={() => {
 											setContent(course);
-											setStateCourses((prevState) => callbackSetState(prevState, course, "courses"));
+											setStateCourses((prevState) =>
+												callbackSetState(
+													prevState,
+													course,
+													"courses"
+												)
+											);
 										}}
 										disabled={course.inFocus}
 									>
@@ -141,34 +172,36 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 			<Styled.Content>
 				{content && (
 					<>
-						<Heading as="h4" size='small' >
+						<Heading as="h4" size="small">
 							{content.title}
 						</Heading>
+						<p>Instituição: {content.institution}</p>
 						<p>
-							Instituição: {content.institution}
+							Período:{" "}
+							{DateStringFormating.getMonthAndFullYear(
+								content.startIn
+							)}
+							{content.endIn
+								? ` / ${DateStringFormating.getMonthAndFullYear(
+										content.endIn
+								  )}`
+								: " - Atualmente"}
 						</p>
-						<p>
-							Período: {DateStringFormating.getMonthAndFullYear(content.startIn)}{!!content.endIn ? ` / ${DateStringFormating.getMonthAndFullYear(content.endIn)}` : " - Atualmente"}
-						</p>
-						<p>
-							Carga Horária: {content.workTime}
-						</p>
+						<p>Carga Horária: {content.workTime}</p>
 						{!!content.resume && (
 							<>
-								<p>
-									Breve resumo do curso
-								</p>
-								<p>
-									{content.resume}
-								</p>
+								<p>Breve resumo do curso</p>
+								<p>{content.resume}</p>
 							</>
 						)}
 						<Button
 							onClick={() => handleClick()}
-							disabled={!!content.urlDownload ? false : true}
+							disabled={content.urlDownload ? false : true}
 							icon={<Link />}
 						>
-							{!!content.urlDownload ? "Veja Certificado" : "Em andamento"}
+							{content.urlDownload
+								? "Veja Certificado"
+								: "Em andamento"}
 						</Button>
 					</>
 				)}

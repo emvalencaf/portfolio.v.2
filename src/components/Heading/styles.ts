@@ -34,15 +34,15 @@ const mediaFont = (theme: DefaultTheme, size: string) => {
 			medium: theme.fonts.sizes.medium,
 			small: theme.fonts.sizes.small,
 		},
-	}
+	};
 	return css`
-	@media ${theme.media.lteSmall} {
-		font-size: ${fontSize.lteSmall[size]};
-	}
-	@media ${theme.media.lteMedium} {
-		font-size: ${fontSize.lteMedium[size]};
-	}
-`
+		@media ${theme.media.lteSmall} {
+			font-size: ${fontSize.lteSmall[size]};
+		}
+		@media ${theme.media.lteMedium} {
+			font-size: ${fontSize.lteMedium[size]};
+		}
+	`;
 };
 
 const titleCase = (uppercase: boolean) => css`

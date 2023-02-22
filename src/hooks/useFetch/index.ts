@@ -1,35 +1,37 @@
 // hooks
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from "react";
 
 // type
 type UseFetchState<T> = {
 	status: "idle" | "loading" | "error" | "success";
 	data: null | T;
 	error: null | Error;
-}
+};
 
 // utils
-import CreateFetch from '../../utils/createFetch';
+import CreateFetch from "../../utils/createFetch";
 // will check if object A's props values are equalas to object B's props values. That will be used to compare the url and options params to they refs
-import CheckObj from '../../utils/checkObj';
-
+import CheckObj from "../../utils/checkObj";
 
 // hook
-export const useFetch = <T>(url: string, options?: RequestInit) => {
+export const useFetch = <T>(
+	url: string,
+	options?: RequestInit
+): UseFetchState<T> => {
 	// states
-	const [ fetchState, setFetchState ] = useState<UseFetchState<T>>({
+	const [fetchState, setFetchState] = useState<UseFetchState<T>>({
 		status: "idle",
 		data: null,
 		error: null,
 	});
-	const [ shouldLoad, setShouldLoad ] = useState<boolean>(false);
+	const [shouldLoad, setShouldLoad] = useState<boolean>(false);
 
 	// refs
 	const urlRef = useRef(url);
 	const optionsRef = useRef(options);
 
 	useEffect(() => {
-		let changed: boolean = false;
+		let changed = false;
 
 		if (!CheckObj.isObjectEqual(url, urlRef.current)) {
 			urlRef.current = url;
@@ -42,12 +44,11 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 		}
 
 		if (changed) setShouldLoad((s) => !s);
-
 	}, [url, options]);
 
 	useEffect(() => {
 		// flag to clean up useFetch
-		let wait = false
+		let wait = false;
 		// if no url in the ref it will do nothing.
 		if (!urlRef.current) return;
 
@@ -56,21 +57,20 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 		const signal = controller.signal;
 
 		const fetchData = async () => {
-			console.log("dentro do fetchData")
-			try{
-
+			console.log("dentro do fetchData");
+			try {
 				// it will flag a loading for our fetch data
 				setFetchState((currentData) => ({
 					...currentData,
 					state: "loading",
 				}));
 				console.log(fetchState);
-				const json = await CreateFetch.dispatch<T>(urlRef.current,{
+				const json = await CreateFetch.dispatch<T>(urlRef.current, {
 					signal,
 					...optionsRef.current,
 				});
 				console.log(json);
-/*
+				/*
 				if (!response.ok) return setFetchState({
 					data: null,
 					status: "error",
@@ -79,24 +79,24 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 
 				// const json = await response.json();
 
-				if (!wait) setFetchState({
-					data: json,
-					status: "success",
-					error: null,
-				})
-
+				if (!wait)
+					setFetchState({
+						data: json,
+						status: "success",
+						error: null,
+					});
 			} catch (err) {
 				console.log(err);
 
-				if (!wait) setFetchState({
-					data: null,
-					status: "error",
-					error: err.message,
-				});
+				if (!wait)
+					setFetchState({
+						data: null,
+						status: "error",
+						error: err.message,
+					});
 
 				throw err;
 			}
-
 		};
 
 		// it will only start fetchData if the component is mounted
@@ -107,11 +107,10 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
 		return () => {
 			wait = true;
 			controller.abort();
-		}
-
-	}, [ shouldLoad ]);
+		};
+	}, [fetchState, shouldLoad]);
 
 	const { data, status, error } = fetchState;
 
-	return [data, status, error ];
-}
+	return { data, status, error };
+};

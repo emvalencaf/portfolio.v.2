@@ -4,7 +4,6 @@ import PrivateComponent from "../../../components/PrivateComponent";
 // templates
 import PortfolioCreationTemplate from "../../../templates/PortfolioCreation";
 
-
 // types
 import { GetServerSideProps } from "next/types";
 
@@ -16,9 +15,9 @@ export default function PortfolioCreationPage() {
 		<PrivateComponent>
 			<PortfolioCreationTemplate />
 		</PrivateComponent>
-	)
+	);
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	return privateServerSideProps(ctx);
-}
+};

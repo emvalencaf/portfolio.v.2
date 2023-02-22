@@ -1,5 +1,5 @@
-import styled, { css, DefaultTheme } from 'styled-components';
-import { Button } from '../Button/styles';
+import styled, { css, DefaultTheme } from "styled-components";
+import { Button } from "../Button/styles";
 
 type AlertProps = {
 	theme: DefaultTheme;
@@ -23,7 +23,7 @@ export const Form = styled.form`
 `;
 
 export const ContainerButton = styled.div`
-	${({ theme }) => css`
+	${() => css`
 		align-self: flex-end;
 	`}
 `;
@@ -38,7 +38,9 @@ export const Alert = styled.div<AlertProps>`
 		align-items: center;
 		justify-content: center;
 		color: ${theme.colors.quaternary};
-		background-color: ${isSuccess? theme.colors.success: theme.colors.warning};
+		background-color: ${isSuccess
+			? theme.colors.success
+			: theme.colors.warning};
 		padding: ${theme.spacings.small};
 		border-radius: 0 0 0.4rem 0.4rem;
 		z-index: ${theme.layers.layer7};
@@ -61,7 +63,7 @@ export const Alert = styled.div<AlertProps>`
 			margin: 0px;
 			top: 0.2rem;
 			right: 0.2rem;
-			>svg {
+			> svg {
 				width: 2rem;
 				height: 2rem;
 			}
@@ -78,10 +80,10 @@ export const CloseButton = styled.span`
 		top: 0.2rem;
 		right: 0.2rem;
 		background-color: ${theme.colors.quaternary};
-		>svg {
+		> svg {
 			width: 2rem;
 			height: 2rem;
-			color: ${theme.colors.secondary}
+			color: ${theme.colors.secondary};
 		}
 	`}
 `;

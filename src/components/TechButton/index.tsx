@@ -1,7 +1,7 @@
 // styles
-import { ButtonHTMLAttributes } from 'react';
-import Button from '../Button';
-import * as Styled from './styles';
+import { ButtonHTMLAttributes } from "react";
+import Button from "../Button";
+import * as Styled from "./styles";
 
 // types
 export type TechButtonProps = {
@@ -9,10 +9,14 @@ export type TechButtonProps = {
 	icon?: React.ReactNode;
 	onClick?: () => void;
 	showTechDescription?: boolean;
-} & ButtonHTMLAttributes<HTMLButtonElement>;;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const TechButton = ({ techName, icon, onClick, showTechDescription = false }: TechButtonProps) => {
-
+const TechButton = ({
+	techName,
+	icon,
+	onClick,
+	showTechDescription = false,
+}: TechButtonProps) => {
 	// handle synthetic events
 	const handleClick = () => {
 		if (onClick) onClick();
@@ -20,7 +24,11 @@ const TechButton = ({ techName, icon, onClick, showTechDescription = false }: Te
 
 	return (
 		<Styled.Wrapper>
-			<Button onClick={handleClick} icon={!!icon && icon} disabled={showTechDescription}>
+			<Button
+				onClick={handleClick}
+				icon={!!icon && icon}
+				disabled={showTechDescription}
+			>
 				{techName}
 			</Button>
 		</Styled.Wrapper>

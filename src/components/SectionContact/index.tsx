@@ -1,9 +1,9 @@
 // components
-import Heading from '../Heading';
-import Section from '../Section';
+import Heading from "../Heading";
+import Section from "../Section";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type SectionContactProps = {
@@ -16,8 +16,7 @@ const SectionContact = ({ id }: SectionContactProps) => {
 			<Heading as="h2" size="big">
 				Contato
 			</Heading>
-			<Styled.Wrapper>
-			</Styled.Wrapper>
+			<Styled.Wrapper></Styled.Wrapper>
 		</Section>
 	);
 };

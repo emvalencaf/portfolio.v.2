@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { css, DefaultTheme } from "styled-components";
 
 // imported styled-components
 import { Link as LogoLinkContainer } from "../LogoLink/styles";
@@ -6,7 +6,7 @@ import { Link as LogoLinkContainer } from "../LogoLink/styles";
 // types
 type ContainerProps = {
 	visible: boolean;
-}
+};
 
 // function
 const visibileMenu = (theme: DefaultTheme) => css`
@@ -48,7 +48,11 @@ export const Wrapper = styled.header<ContainerProps>`
 		//background-color: ${theme.colors.quaternary};
 		border: 1px solid ${theme.colors.primary};
 		z-index: ${theme.layers.layer6};
-		background-image: linear-gradient(to top, transparent 20%, ${theme.colors.quaternary});
+		background-image: linear-gradient(
+			to top,
+			transparent 20%,
+			${theme.colors.quaternary}
+		);
 		border: none;
 		opacity: 0.6;
 		& ul {

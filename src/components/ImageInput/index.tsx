@@ -1,11 +1,11 @@
 // hooks
-import { InputHTMLAttributes, useRef, useState } from 'react';
+import { InputHTMLAttributes, useRef, useState } from "react";
 
 // icons
-import { PhotoAlbum } from '@styled-icons/material-outlined';
+import { PhotoAlbum } from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type ImageInputProps = {
@@ -45,22 +45,18 @@ const ImageInput = ({
 			onInputFile(value);
 			const srcImg = URL.createObjectURL(value);
 			setPreviewPicture(srcImg);
-		};
+		}
 	};
-
 
 	return (
 		<Styled.Wrapper>
 			<Styled.PictureGallery>
 				<div>
-					{
-						value ?
-							<img
-								src={previewPicture}
-								alt="preview image"
-							/>
-							: <PhotoAlbum />
-					}
+					{value ? (
+						<img src={previewPicture} alt="preview image" />
+					) : (
+						<PhotoAlbum />
+					)}
 				</div>
 				<figcaption>
 					Preview of the cover image of the project

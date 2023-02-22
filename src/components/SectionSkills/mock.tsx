@@ -1,5 +1,14 @@
 // icons
-import { Html5, Javascript, Nodejs, Typescript, ReactLogo, Git, Mongodb, Css3 } from "@styled-icons/boxicons-logos";
+import {
+	Html5,
+	Javascript,
+	Nodejs,
+	Typescript,
+	ReactLogo,
+	Git,
+	Mongodb,
+	Css3,
+} from "@styled-icons/boxicons-logos";
 // types
 import { SectionSkillsProps } from ".";
 
@@ -70,5 +79,5 @@ export default {
 			`,
 			showTechDescription: false,
 		},
-	]
+	],
 } as SectionSkillsProps;

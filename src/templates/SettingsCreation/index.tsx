@@ -1,23 +1,35 @@
 // hooks
-import { useSession } from 'next-auth/react';
-import { MutableRefObject, useRef, useState } from 'react';
+import { useSession } from "next-auth/react";
+import { MutableRefObject, useRef, useState } from "react";
 
 // components
-import Form from '../../components/Form';
-import Header from '../../components/Header';
-import Heading from '../../components/Heading';
-import ImageInput from '../../components/ImageInput';
-import TextInput from '../../components/TextInput';
-import { Session } from '../../shared-types/session-nextauth';
+import Form from "../../components/Form";
+import Heading from "../../components/Heading";
+import ImageInput from "../../components/ImageInput";
+import TextInput from "../../components/TextInput";
+import { Session } from "../../shared-types/session-nextauth";
 
 // icons
-import { Facebook, Github, Instagram, Linkedin, Tiktok, Twitter, Youtube } from '@styled-icons/boxicons-logos';
-import { LogoDev, PersonPin, Subtitles, Web } from '@styled-icons/material-outlined';
+import {
+	Facebook,
+	Github,
+	Instagram,
+	Linkedin,
+	Tiktok,
+	Twitter,
+	Youtube,
+} from "@styled-icons/boxicons-logos";
+import {
+	LogoDev,
+	PersonPin,
+	Subtitles,
+	Web,
+} from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from './styles';
-import SettingsController from '../../api/controller/settings';
-import { Icon } from '@styled-icons/simple-icons';
+import * as Styled from "./styles";
+import SettingsController from "../../api/controller/settings";
+import { Icon } from "@styled-icons/simple-icons";
 
 // types
 export type SettingsCreationTemplateProps = {
@@ -33,7 +45,7 @@ const SettingsCreationTemplate = () => {
 	const [websiteName, setWebsiteName] = useState("");
 	const [logoImg, setLogoImg] = useState(null);
 	const [logoAlt, setLogoAlt] = useState("");
-	const [ favIcon, setFavIcon ] = useState(null);
+	const [favIcon, setFavIcon] = useState(null);
 	// Social Media URL
 	const [linkedInURL, setLinkedInURL] = useState("");
 	const [githubURL, setGithubURL] = useState("");
@@ -46,11 +58,10 @@ const SettingsCreationTemplate = () => {
 	// refs
 	const formRef = useRef<HTMLFormElement | null>(null);
 
-
-
 	// onSubmit
-	const handleSettingsCreation = async (ref: MutableRefObject<HTMLFormElement>) => {
-
+	const handleSettingsCreation = async (
+		ref: MutableRefObject<HTMLFormElement>
+	) => {
 		const data = {
 			websiteName,
 			logo: {
@@ -73,15 +84,16 @@ const SettingsCreationTemplate = () => {
 		console.log(data);
 		const formData: FormData = new FormData(ref.current);
 
-		return await SettingsController.create(data, formData, session?.accessToken);
+		return await SettingsController.create(
+			data,
+			formData,
+			session?.accessToken
+		);
 	};
 
 	return (
 		<Styled.Wrapper>
-			<Form
-				onSubmit={handleSettingsCreation}
-				reference={formRef.current}
-			>
+			<Form onSubmit={handleSettingsCreation} reference={formRef.current}>
 				<Heading as="h2" size="medium" color="quaternary">
 					Your portfolio settings
 				</Heading>

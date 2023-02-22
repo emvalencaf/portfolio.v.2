@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { ButtonProps } from '.';
+import styled, { css } from "styled-components";
+import { ButtonProps } from ".";
 
 export const Button = styled.button<Pick<ButtonProps, "color">>`
 	${({ theme, color }) => css`
@@ -34,12 +34,11 @@ export const Button = styled.button<Pick<ButtonProps, "color">>`
 			width: 2rem;
 			height: 2rem;
 			margin-left: 1rem;
-			margin-right:1rem;
+			margin-right: 1rem;
 		}
 	`}
 `;
 
 export const ButtonLabel = styled.span`
-	${({ theme }) => css`
-	`}
+	${() => css``}
 `;

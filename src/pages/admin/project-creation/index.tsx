@@ -15,9 +15,9 @@ export default function CreateProjectPage() {
 		<PrivateComponent>
 			<CreateProjectTemplate />
 		</PrivateComponent>
-	)
+	);
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	return privateServerSideProps(ctx);
-}
+};

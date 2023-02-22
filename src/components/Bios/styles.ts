@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 export const Wrapper = styled.div`
-	${({theme}) => css`
+	${({ theme }) => css`
 		@media ${theme.media.lteMedium} {
 			flex-direction: column;
 		}
@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-	${({ theme }) => css`
+	${() => css`
 		max-height: 350px;
 		overflow-y: auto;
 	`}

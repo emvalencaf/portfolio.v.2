@@ -1,5 +1,3 @@
 import { SectionAboutProps } from "../SectionAbout";
 
-export default {
-
-} as SectionAboutProps;
+export default {} as SectionAboutProps;

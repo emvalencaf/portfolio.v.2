@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Wrapper as SectionWrapper } from '../../components/Section/styles';
+import styled, { css } from "styled-components";
+import { Wrapper as SectionWrapper } from "../../components/Section/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
@@ -29,8 +29,8 @@ export const ContainerButtonsSections = styled.div`
 		&::-webkit-scrollbar {
 			border-radius: 2rem;
 		}
-		`}
-		`;
+	`}
+`;
 
 export const ListButtonsSections = styled.ul`
 	${({ theme }) => css`

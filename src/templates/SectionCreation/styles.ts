@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Button as ButtonContainer } from '../../components/Button/styles';
+import styled, { css } from "styled-components";
+import { Button as ButtonContainer } from "../../components/Button/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
@@ -62,7 +62,7 @@ export const DisplayProjectSelection = styled.div`
 	${({ theme }) => css`
 		> ul {
 			display: flex;
-			flex-direction:column;
+			flex-direction: column;
 			align-items: center;
 
 			padding: ${theme.spacings.mediumLarge};

@@ -1,34 +1,37 @@
 // hooks
-import { MutableRefObject, SyntheticEvent, useRef, useState } from 'react';
+import { MutableRefObject, SyntheticEvent, useRef, useState } from "react";
 
 // components
-import Button from '../Button';
-import Link from 'next/link';
+import Button from "../Button";
+import Link from "next/link";
 
 // icons
 import { Close } from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
-import { SuccessState } from '../../shared-types/async-success-error';
-import { ProjectControllerCreate } from '../../shared-types/project';
-import { SettingsControllerCreate } from '../../api/controller/settings';
+import { SuccessState } from "../../shared-types/async-success-error";
+import { ProjectControllerCreate } from "../../shared-types/project";
+import { SettingsControllerCreate } from "../../api/controller/settings";
+import { SectionControllerCreate } from "../../shared-types/section";
 
 export type FormProps = {
 	children: React.ReactNode;
-	onSubmit?: (form: MutableRefObject<HTMLFormElement>) => Promise<ProjectControllerCreate | SettingsControllerCreate>;
+	onSubmit?: (
+		form: MutableRefObject<HTMLFormElement>
+	) => Promise<
+		| ProjectControllerCreate
+		| SettingsControllerCreate
+		| SectionControllerCreate
+	>;
 	errorMessage?: string;
 	successMessage?: SuccessState;
 	reference?: HTMLFormElement;
 };
 
-type handleSubmit = <T>(evnt: SyntheticEvent) => Promise<T>;
-
-const Form = ({ children, onSubmit,
-	reference = null }: FormProps) => {
-
+const Form = ({ children, onSubmit, reference = null }: FormProps) => {
 	// ref
 	const formRef = useRef<HTMLFormElement | null>(reference);
 
@@ -43,18 +46,16 @@ const Form = ({ children, onSubmit,
 		event.preventDefault();
 
 		if (onSubmit) {
-
 			setSaving(true);
 
 			try {
-				console.log("aqui")
+				console.log("aqui");
 				const response = await onSubmit(formRef);
 
 				const { data, successMessage } = response;
 
 				if (data) setSuccessMessage(successMessage);
 				setVisible(true);
-
 			} catch (err) {
 				setErrorMessage(err.message);
 				setVisible(true);
@@ -64,38 +65,41 @@ const Form = ({ children, onSubmit,
 	};
 
 	return (
-		<Styled.Form onSubmit={(event: SyntheticEvent) => handleSubmit(event)} ref={formRef}>
+		<Styled.Form
+			onSubmit={(event: SyntheticEvent) => handleSubmit(event)}
+			ref={formRef}
+		>
 			{children}
 			<Styled.ContainerButton>
 				<Styled.Alert visible={visible} isSuccess={!!successMessage}>
 					{
 						<span>
-							{!!successMessage ?
-								(
-									<>
-										{successMessage.message}
-										{
-											successMessage.link && (
-												<Link href={successMessage.link} passHref legacyBehavior>
-													<a rel="internal" target="_self">
-														click here
-													</a>
-												</Link>
-											)
-										}
-									</>
-								)
-								: (
-									!!errorMessage && errorMessage
-								)
-							}
+							{successMessage ? (
+								<>
+									{successMessage.message}
+									{successMessage.link && (
+										<Link
+											href={successMessage.link}
+											passHref
+											legacyBehavior
+										>
+											<a rel="internal" target="_self">
+												click here
+											</a>
+										</Link>
+									)}
+								</>
+							) : (
+								!!errorMessage && errorMessage
+							)}
 						</span>
 					}
-					<Styled.CloseButton onClick={() => setVisible(false)}> {<Close />}</Styled.CloseButton>
+					<Styled.CloseButton onClick={() => setVisible(false)}>
+						{" "}
+						{<Close />}
+					</Styled.CloseButton>
 				</Styled.Alert>
-				<Button
-					disabled={saving}
-				>
+				<Button disabled={saving}>
 					{saving ? "salvando..." : "Salvar"}
 				</Button>
 			</Styled.ContainerButton>

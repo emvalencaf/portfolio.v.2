@@ -6,7 +6,16 @@ export type Project = {
 	title: string;
 	resume: string;
 	description: string;
-	mainLang: "javascript" | "typescript" | "html" | "css" | "python" | "java" | "cplus" | "csharp" | "php";
+	mainLang:
+		| "javascript"
+		| "typescript"
+		| "html"
+		| "css"
+		| "python"
+		| "java"
+		| "cplus"
+		| "csharp"
+		| "php";
 	srcImg?: string;
 	urlDemo: string;
 	urlRepository: string;
@@ -22,4 +31,4 @@ export type FetchResponseProject = {
 export type ProjectControllerCreate = {
 	data: Project;
 	successMessage: SuccessState;
-}
+};

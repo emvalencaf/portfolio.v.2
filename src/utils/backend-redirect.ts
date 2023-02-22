@@ -1,7 +1,10 @@
 // types
 import { GetServerSidePropsContext } from "next";
 
-export const serverSideRedirect = (ctx: GetServerSidePropsContext, redirectTo?: string) => {
+export const serverSideRedirect = (
+	ctx: GetServerSidePropsContext,
+	redirectTo?: string
+) => {
 	const newPath = redirectTo || encodeURI(ctx.resolvedUrl);
 
 	return {
@@ -9,6 +12,6 @@ export const serverSideRedirect = (ctx: GetServerSidePropsContext, redirectTo?: 
 		redirect: {
 			destination: `${process.env.NEXT_PUBLIC_LOGIN_URI}/?redirect=${newPath}`,
 			permanent: false,
-		}
+		},
 	};
 };

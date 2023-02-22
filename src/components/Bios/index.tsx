@@ -20,9 +20,7 @@ const Bios = ({ bios, profilePhoto }: BiosProps) => {
 			<Styled.ContentContainer>
 				<HtmlComponent html={bios} />
 			</Styled.ContentContainer>
-			{profilePhoto && (
-				<ProfilePhoto {...profilePhoto} />
-			)}
+			{profilePhoto && <ProfilePhoto {...profilePhoto} />}
 		</Styled.Wrapper>
 	);
 };

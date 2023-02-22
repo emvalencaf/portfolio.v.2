@@ -1,8 +1,8 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import GithubHoverCard from './';
+import { Meta, Story } from "@storybook/react/types-6-0";
+import GithubHoverCard from "./";
 
 export default {
-	title: 'GithubHoverCard',
+	title: "GithubHoverCard",
 	component: GithubHoverCard,
 } as Meta;
 

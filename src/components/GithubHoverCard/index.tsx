@@ -1,54 +1,51 @@
-// react
-import { useEffect, useState } from 'react';
-import { useFetch } from '../../hooks/useFetch';
+import { useEffect, useState } from "react";
+import { useFetch } from "../../hooks/useFetch";
 
 // components
-import Heading from '../Heading';
+import Heading from "../Heading";
 
 // styles
 import * as Styled from "./styles";
 
+// types
+type DataFecthedGithubAPI = {
+	public_repos: string | number;
+	followers: string | number;
+};
+
 // graphql
 import { GraphQLClient } from "graphql-request";
-import { GRAPHQL_QUERIES } from '../../graphql/queries';
+import { GRAPHQL_QUERIES } from "../../graphql/queries";
 
 const client = new GraphQLClient(`https://api.github.com/graphql`, {
 	headers: {
 		Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-	}
-})
-
-console.log(process.env.GITHUB_TOKEN);
-console.log(process.env.GITHUB_USERNAME);
+	},
+});
 
 const GithubHoverCard = () => {
-
-	const [data, status, error] = useFetch(`https://api.github.com/users/emvalencaf`);
+	const { data, status } = useFetch<DataFecthedGithubAPI>(
+		`https://api.github.com/users/emvalencaf`
+	);
 	const [repoPrivate, setRepoPrivate] = useState();
 	const [commitsContributions, setCommitsContributions] = useState();
 	useEffect(() => {
 		const loadGithub = async () => {
-
 			try {
-				const data = await client.request(
-					GRAPHQL_QUERIES,
-					{
-						username: process.env.GITHUB_USERNAME,
-					},
-				);
+				const data = await client.request(GRAPHQL_QUERIES, {
+					username: process.env.GITHUB_USERNAME,
+				});
 				const {
 					totalRepositoryContributions,
 					totalCommitContributions,
 				} = data.user.contributionsCollection;
 
-				setRepoPrivate((s) => totalRepositoryContributions);
-				setCommitsContributions((s) => totalCommitContributions)
-
+				setRepoPrivate(() => totalRepositoryContributions);
+				setCommitsContributions(() => totalCommitContributions);
 			} catch (err) {
 				console.log(err);
 			}
-
-		}
+		};
 
 		loadGithub();
 	}, []);
@@ -57,52 +54,53 @@ const GithubHoverCard = () => {
 
 	if (status === "error") return;
 
-	if (status === "loading") return <p>Carregando...</p>
+	if (status === "loading") return <p>Carregando...</p>;
 
-	if (status === "success") return (
-		<Styled.Wrapper>
-			<Styled.DisplayerContainer>
-				<Styled.HeadingDisplayContainer>
-					<Heading as="h2" size="small" color="secondary">
-						Repos. total
+	if (status === "success")
+		return (
+			<Styled.Wrapper>
+				<Styled.DisplayerContainer>
+					<Styled.HeadingDisplayContainer>
+						<Heading as="h2" size="small" color="secondary">
+							Repos. total
+						</Heading>
+					</Styled.HeadingDisplayContainer>
+					<Heading as="h3" size="small" color="secondary">
+						{!!repoPrivate && repoPrivate}
 					</Heading>
-				</Styled.HeadingDisplayContainer>
-				<Heading as="h3" size="small" color="secondary">
-					{!!repoPrivate && repoPrivate}
-				</Heading>
-			</Styled.DisplayerContainer>
-			<Styled.DisplayerContainer>
-				<Styled.HeadingDisplayContainer>
-					<Heading as="h2" size="small" color="secondary">
-						Repos. Públicos
+				</Styled.DisplayerContainer>
+				<Styled.DisplayerContainer>
+					<Styled.HeadingDisplayContainer>
+						<Heading as="h2" size="small" color="secondary">
+							Repos. Públicos
+						</Heading>
+					</Styled.HeadingDisplayContainer>
+					<Heading as="h3" size="small" color="secondary">
+						{data && data?.public_repos}
 					</Heading>
-				</Styled.HeadingDisplayContainer>
-				<Heading as="h3" size="small" color="secondary">
-					{data && data?.public_repos}
-				</Heading>
-			</Styled.DisplayerContainer>
-			<Styled.DisplayerContainer>
-				<Styled.HeadingDisplayContainer>
-					<Heading as="h2" size="small" color="secondary">
-						Commits
+				</Styled.DisplayerContainer>
+				<Styled.DisplayerContainer>
+					<Styled.HeadingDisplayContainer>
+						<Heading as="h2" size="small" color="secondary">
+							Commits
+						</Heading>
+					</Styled.HeadingDisplayContainer>
+					<Heading as="h3" size="small" color="secondary">
+						{!!commitsContributions && commitsContributions}
 					</Heading>
-				</Styled.HeadingDisplayContainer>
-				<Heading as="h3" size="small" color="secondary">
-					{!!commitsContributions && commitsContributions}
-				</Heading>
-			</Styled.DisplayerContainer>
-			<Styled.DisplayerContainer>
-				<Styled.HeadingDisplayContainer>
-					<Heading as="h2" size="small" color="secondary">
-						Followers
+				</Styled.DisplayerContainer>
+				<Styled.DisplayerContainer>
+					<Styled.HeadingDisplayContainer>
+						<Heading as="h2" size="small" color="secondary">
+							Followers
+						</Heading>
+					</Styled.HeadingDisplayContainer>
+					<Heading as="h3" size="small" color="secondary">
+						{data && data?.followers}
 					</Heading>
-				</Styled.HeadingDisplayContainer>
-				<Heading as="h3" size="small" color="secondary">
-					{data && data?.followers}
-				</Heading>
-			</Styled.DisplayerContainer>
-		</Styled.Wrapper>
-	);
+				</Styled.DisplayerContainer>
+			</Styled.Wrapper>
+		);
 };
 
 export default GithubHoverCard;

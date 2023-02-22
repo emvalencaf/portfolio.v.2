@@ -1,15 +1,20 @@
 // hooks
-import { useState } from 'react';
+import { useState } from "react";
 
 // components
-import TextInput from '../TextInput';
-import Button from '../Button';
+import TextInput from "../TextInput";
+import Button from "../Button";
 
 // icons
-import { Login, Password, Person3, Timer } from '@styled-icons/material-outlined';
+import {
+	Login,
+	Password,
+	Person3,
+	Timer,
+} from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
 // types
 export type FormLoginProps = {
@@ -17,29 +22,24 @@ export type FormLoginProps = {
 	handleLogin?: (username: string, password: string) => Promise<void>;
 };
 
-const FormLogin = ({
-		errorMessage = "",
-		handleLogin,
-	}: FormLoginProps) => {
-		// states
-		const [ username, setUsername ] = useState("");
-		const [ password, setPassword ] = useState("");
-		const [ loading, setLoading ] = useState(false);
+const FormLogin = ({ errorMessage = "", handleLogin }: FormLoginProps) => {
+	// states
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [loading, setLoading] = useState(false);
 
-		// synthetic event handler
-		const handleSubmit = async (event: React.FormEvent) => {
+	// synthetic event handler
+	const handleSubmit = async (event: React.FormEvent) => {
+		event.preventDefault();
+		setLoading(true);
 
-			event.preventDefault();
-			setLoading(true);
-			
-			console.log("username: ", username);
-			console.log("password: ", password);
+		console.log("username: ", username);
+		console.log("password: ", password);
 
-			if (handleLogin) await handleLogin(username, password);
+		if (handleLogin) await handleLogin(username, password);
 
-			setLoading(false);
-
-		};
+		setLoading(false);
+	};
 
 	return (
 		<Styled.Form onSubmit={handleSubmit}>
@@ -61,27 +61,17 @@ const FormLogin = ({
 			/>
 
 			{!!errorMessage && (
-				<Styled.ErrorMessage>
-					{errorMessage}
-				</Styled.ErrorMessage>
+				<Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
 			)}
 
 			<Styled.ButtonWrapper>
 				<Button
 					disabled={loading}
-					icon={loading?
-							<Timer />
-							: <Login />
-					}
+					icon={loading ? <Timer /> : <Login />}
 				>
-					{
-						loading?
-							"Aguarde..."
-							: "Entrar"
-					}
+					{loading ? "Aguarde..." : "Entrar"}
 				</Button>
 			</Styled.ButtonWrapper>
-
 		</Styled.Form>
 	);
 };

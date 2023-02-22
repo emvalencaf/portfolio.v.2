@@ -1,6 +1,6 @@
 // styles
-import { SelectHTMLAttributes, useRef } from 'react';
-import * as Styled from './styles';
+import { SelectHTMLAttributes, useRef } from "react";
+import * as Styled from "./styles";
 
 // types
 export type SelectProps = {
@@ -15,27 +15,25 @@ export type SelectProps = {
 } & SelectHTMLAttributes<HTMLSelectElement>;
 
 const Select = ({
-		children,
-		name,
-		placeholder,
-		onChange,
-		value = "",
-		icon,
-		reference = null,
-		required = false,
+	children,
+	name,
+	placeholder,
+	onChange,
+	value = "",
+	icon,
+	reference = null,
+	required = false,
 }: SelectProps) => {
-
 	// states
 	const selectRef = useRef(reference);
 
 	const handleChange = () => {
-
 		if (selectRef.current === null) return;
 
 		const v = selectRef.current.value;
 
 		if (onChange) onChange(v);
-	}
+	};
 
 	return (
 		<Styled.Wrapper>
@@ -48,7 +46,7 @@ const Select = ({
 				ref={selectRef}
 			>
 				<option value="">
-					{placeholder}
+					{placeholder} {!!icon && icon}
 				</option>
 				{children}
 			</Styled.Select>

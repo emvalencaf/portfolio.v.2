@@ -4,9 +4,11 @@ import CreateFetch from "../../../utils/createFetch";
 // config
 const url = `${process.env.NEXT_PUBLIC_API_URL}/api/projects`;
 
-export default class ProjectService{
-	static async create(formData: FormData, token: string): Promise<FetchResponseProject>{
-
+export default class ProjectService {
+	static async create(
+		formData: FormData,
+		token: string
+	): Promise<FetchResponseProject> {
 		const options = {
 			method: "POST",
 			headers: {
@@ -15,7 +17,10 @@ export default class ProjectService{
 			body: formData,
 		};
 
-		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/`, options);
+		return await CreateFetch.dispatch<FetchResponseProject>(
+			`${url}/`,
+			options
+		);
 	}
 
 	static async getAll(token: string) {
@@ -30,6 +35,6 @@ export default class ProjectService{
 	}
 
 	static async getById(id: string | string[]): Promise<FetchResponseProject> {
-		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/${id}`)
+		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/${id}`);
 	}
 }
