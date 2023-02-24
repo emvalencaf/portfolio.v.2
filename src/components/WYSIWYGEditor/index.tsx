@@ -13,12 +13,14 @@ export type WYSIWYGEditorProps = {
 	placeholder?: string;
 	onChange: (content: string) => void;
 	reference?: unknown;
+	maxLength?: string | number;
 };
 
 const WYSIWYGEditor = ({
 	content,
 	placeholder,
 	onChange,
+	maxLength,
 }: WYSIWYGEditorProps) => {
 	// states
 	const editorRef = useRef(null);
@@ -28,8 +30,12 @@ const WYSIWYGEditor = ({
 			readonly: false,
 			height: 500,
 			placeholder: placeholder || "Start typing...",
+			history: {
+				enable: !!maxLength,
+				maxHistoryLength: Number(maxLength),
+			},
 		}),
-		[placeholder]
+		[maxLength, placeholder]
 	);
 
 	// handle synthetic event

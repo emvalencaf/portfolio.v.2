@@ -41,6 +41,7 @@ import Button from "../../components/Button";
 import { CreateSectionData } from "../../shared-types/section";
 import { Project } from "../../shared-types/project";
 import CharacterCounter from "../../components/CharacterCounter";
+import WYSIWYGEditor from "../../components/WYSIWYGEditor";
 
 export type SectionCreationTemplateProps = {
 	allSettings?: Settings[];
@@ -129,6 +130,7 @@ const SectionCreationTemplate = ({
 
 	// ref
 	const formRef = useRef<HTMLFormElement | null>(null);
+	const WYSIWYGEditorRef = useRef(null);
 
 	// handleGetAllProjects
 	const handleGetAllProjects = useCallback(async () => {
@@ -442,6 +444,12 @@ const SectionCreationTemplate = ({
 								required={true}
 								as="textarea"
 							/>
+							<WYSIWYGEditor
+								content={bios}
+								onChange={(v) => setBios(v)}
+								reference={WYSIWYGEditorRef}
+								maxLength={1000}
+							/>
 							<ImageInput
 								name="picture"
 								label="upload a good picture of yourself"
@@ -546,23 +554,6 @@ const SectionCreationTemplate = ({
 												education.institution.length
 											}
 										/>
-										<TextInput
-											name={`resume${index}`}
-											value={education.resume}
-											label="inform a resume about the course"
-											onInputChange={(v) =>
-												handleChangeElementInArray<EducationObject>(
-													education,
-													"title",
-													v,
-													setEducationData
-												)
-											}
-											as="textarea"
-											icon={<TextFields />}
-											maxLength={250}
-											required={true}
-										/>
 										<CharacterCounter
 											maxLeng={250}
 											currentLeng={
@@ -611,6 +602,23 @@ const SectionCreationTemplate = ({
 												)
 											}
 											required={false}
+										/>
+										<TextInput
+											name={`resume${index}`}
+											value={education.resume}
+											label="inform a resume about the course"
+											onInputChange={(v) =>
+												handleChangeElementInArray<EducationObject>(
+													education,
+													"title",
+													v,
+													setEducationData
+												)
+											}
+											as="textarea"
+											icon={<TextFields />}
+											maxLength={250}
+											required={true}
 										/>
 									</Styled.ContainerDynamicInputSections>
 								))}
