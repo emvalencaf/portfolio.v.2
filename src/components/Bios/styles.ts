@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 		justify-content: space-between;
 		align-items: center;
 		gap: ${theme.spacings.xhero};
+		text-align: justify;
 		& p {
 			text-align: justify;
 			padding: ${theme.spacings.small};

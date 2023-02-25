@@ -17,8 +17,6 @@ const client = new GraphQLClient(`https://api.github.com/graphql`, {
 
 export default class GithubDataService {
 	static async loadGithubGraphQL() {
-		console.log(process.env.NEXT_PUBLIC_API_GITHUB_USERNAME);
-		console.log(process.env.NEXT_PUBLIC_API_GITHUB_TOKEN);
 		return await client.request(GRAPHQL_QUERIES, {
 			username: process.env.NEXT_PUBLIC_API_GITHUB_USERNAME,
 		});

@@ -41,7 +41,6 @@ import Button from "../../components/Button";
 import { CreateSectionData } from "../../shared-types/section";
 import { Project } from "../../shared-types/project";
 import CharacterCounter from "../../components/CharacterCounter";
-import WYSIWYGEditor from "../../components/WYSIWYGEditor";
 
 export type SectionCreationTemplateProps = {
 	allSettings?: Settings[];
@@ -130,7 +129,6 @@ const SectionCreationTemplate = ({
 
 	// ref
 	const formRef = useRef<HTMLFormElement | null>(null);
-	const WYSIWYGEditorRef = useRef(null);
 
 	// handleGetAllProjects
 	const handleGetAllProjects = useCallback(async () => {
@@ -443,12 +441,6 @@ const SectionCreationTemplate = ({
 								maxLength={1000}
 								required={true}
 								as="textarea"
-							/>
-							<WYSIWYGEditor
-								content={bios}
-								onChange={(v) => setBios(v)}
-								reference={WYSIWYGEditorRef}
-								maxLength={1000}
 							/>
 							<ImageInput
 								name="picture"
