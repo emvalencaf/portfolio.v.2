@@ -34,12 +34,12 @@ const SectionHome = ({
 					<p>Olá, seja bem-vindo ao meu portfólio.</p>
 					{ownerName && (
 						<Heading as="h1" size="big" color="secondary">
-							{ownerName}.
+							{ownerName}
 						</Heading>
 					)}
 					{ocupation && (
 						<Heading as="h2" size="big" color="senary">
-							{ocupation}.
+							{ocupation}
 						</Heading>
 					)}
 					{mainStack.length > 0 && (

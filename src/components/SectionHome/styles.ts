@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		height: 600px;
 		width: 100%;
 		margin: 0px auto;
@@ -54,6 +54,8 @@ export const GithubContainer = styled.div`
 		}
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 		max-width: 300px;
 		& ${HeadingContainer} {
 			margin: 0px;

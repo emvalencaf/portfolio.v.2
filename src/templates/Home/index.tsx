@@ -41,9 +41,6 @@ const HomeTemplate = ({ content, settings }: HomeProps) => {
 	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
 	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
 
-	console.log(content);
-	console.log(settings);
-
 	// useEffect
 	useEffect(() => {
 		const handleHiddenHeader = () => {
