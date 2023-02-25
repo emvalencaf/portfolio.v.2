@@ -64,6 +64,7 @@ const TextInput = ({
 					{label}
 				</Styled.Label>
 				{!!icon && as !== "textarea" && icon}
+				{maxLength !== 524288}
 			</Styled.InputWrapper>
 
 			{!!errorMessage && (

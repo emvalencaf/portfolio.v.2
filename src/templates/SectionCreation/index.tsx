@@ -446,7 +446,7 @@ const SectionCreationTemplate = ({
 								name="picture"
 								label="upload a good picture of yourself"
 								value={picture}
-								onChange={(v) => setPicture(v)}
+								onInputFile={(v) => setPicture(v)}
 								icon={<Photo />}
 								required={true}
 							/>
@@ -546,12 +546,6 @@ const SectionCreationTemplate = ({
 												education.institution.length
 											}
 										/>
-										<CharacterCounter
-											maxLeng={250}
-											currentLeng={
-												education.resume.length
-											}
-										/>
 										<TextInput
 											name={`startIn${index}`}
 											value={education.startIn}
@@ -611,6 +605,12 @@ const SectionCreationTemplate = ({
 											icon={<TextFields />}
 											maxLength={250}
 											required={true}
+										/>
+										<CharacterCounter
+											maxLeng={250}
+											currentLeng={
+												education.resume.length
+											}
 										/>
 									</Styled.ContainerDynamicInputSections>
 								))}
