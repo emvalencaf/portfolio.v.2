@@ -40,7 +40,6 @@ import { Session } from "../../shared-types/session-nextauth";
 import Button from "../../components/Button";
 import { CreateSectionData } from "../../shared-types/section";
 import { Project } from "../../shared-types/project";
-import CharacterCounter from "../../components/CharacterCounter";
 
 export type SectionCreationTemplateProps = {
 	allSettings?: Settings[];
@@ -521,10 +520,6 @@ const SectionCreationTemplate = ({
 											maxLength={50}
 											required={true}
 										/>
-										<CharacterCounter
-											maxLeng={50}
-											currentLeng={education.title.length}
-										/>
 										<TextInput
 											name={`institution${index}`}
 											value={education.institution}
@@ -539,12 +534,6 @@ const SectionCreationTemplate = ({
 											}
 											maxLength={50}
 											required={true}
-										/>
-										<CharacterCounter
-											maxLeng={50}
-											currentLeng={
-												education.institution.length
-											}
 										/>
 										<TextInput
 											name={`startIn${index}`}
@@ -606,12 +595,6 @@ const SectionCreationTemplate = ({
 											maxLength={250}
 											required={true}
 										/>
-										<CharacterCounter
-											maxLeng={250}
-											currentLeng={
-												education.resume.length
-											}
-										/>
 									</Styled.ContainerDynamicInputSections>
 								))}
 							<Button
@@ -666,10 +649,6 @@ const SectionCreationTemplate = ({
 											required={true}
 											maxLength={50}
 										/>
-										<CharacterCounter
-											maxLeng={50}
-											currentLeng={work.employer.length}
-										/>
 										<TextInput
 											name={`workOcupation_${index}`}
 											value={work.ocupation}
@@ -684,10 +663,6 @@ const SectionCreationTemplate = ({
 											}
 											required={true}
 											maxLength={50}
-										/>
-										<CharacterCounter
-											maxLeng={50}
-											currentLeng={work.ocupation.length}
 										/>
 										<TextInput
 											name={`workJobDescription_${index}`}
@@ -705,12 +680,6 @@ const SectionCreationTemplate = ({
 											as="textarea"
 											icon={<TextFields />}
 											maxLength={250}
-										/>
-										<CharacterCounter
-											maxLeng={250}
-											currentLeng={
-												work.jobDescription.length
-											}
 										/>
 										<TextInput
 											name={`workStartIn_${index}`}

@@ -1,5 +1,6 @@
 // hooks
-import { InputHTMLAttributes, useRef } from "react";
+import { InputHTMLAttributes, useRef, useState } from "react";
+import CharacterCounter from "../CharacterCounter";
 
 // styles
 import * as Styled from "./styles";
@@ -33,13 +34,18 @@ const TextInput = ({
 	required = false,
 }: TextInputProps) => {
 	// states
+	const [counter, setCounter] = useState(0);
+
 	const inputRef = useRef(reference);
 
 	// synthetic event handler
 	const handleChange = () => {
 		const value = inputRef.current.value;
 
-		if (onInputChange) onInputChange(value);
+		if (onInputChange) {
+			onInputChange(value);
+			setCounter(value.length);
+		}
 	};
 
 	return (
@@ -59,12 +65,16 @@ const TextInput = ({
 					required={required}
 					maxLength={maxLength ? maxLength : 524288}
 				/>
-
 				<Styled.Label htmlFor={name} element={as}>
 					{label}
 				</Styled.Label>
 				{!!icon && as !== "textarea" && icon}
-				{maxLength !== 524288}
+				{maxLength !== 524288 && (
+					<CharacterCounter
+						currentLeng={counter}
+						maxLeng={maxLength}
+					/>
+				)}
 			</Styled.InputWrapper>
 
 			{!!errorMessage && (

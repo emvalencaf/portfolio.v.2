@@ -1,5 +1,6 @@
 import styled, { css, DefaultTheme } from "styled-components";
 import { TextInputProps } from ".";
+import { Wrapper as ContainerCharacterCounter } from "../CharacterCounter/styles";
 
 const onInputError = (theme: DefaultTheme, errorMessage: string) => css`
 	border: ${theme.spacings.xxtiny} solid ${theme.colors.warning};
@@ -50,6 +51,11 @@ export const InputWrapper = styled.div<Pick<TextInputProps, "errorMessage">>`
 		}
 		*:disabled ~ svg {
 			color: ${theme.colors.gray3};
+		}
+		& ${ContainerCharacterCounter} {
+			position: absolute;
+			top: 20;
+			right: 0;
 		}
 	`}
 `;
