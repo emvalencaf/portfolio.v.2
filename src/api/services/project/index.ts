@@ -23,12 +23,9 @@ export default class ProjectService {
 		);
 	}
 
-	static async getAll(token: string) {
+	static async getAll() {
 		const options = {
 			method: "GET",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
 		};
 
 		return await CreateFetch.dispatch<Project[]>(`${url}/`, options);
