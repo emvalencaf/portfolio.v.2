@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	if (responseGithubAPI) {
 		const { public_repos } = responseGithubAPI;
-		githubData.public_repo = public_repos;
+		githubData.public_repos = public_repos;
 	}
 
 	console.log("github data profile: ", githubData);
