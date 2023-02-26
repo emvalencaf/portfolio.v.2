@@ -40,7 +40,7 @@ const HomeTemplate = ({ content, settings }: HomeProps) => {
 	// states
 	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
 	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
-
+	console.log(content);
 	// useEffect
 	useEffect(() => {
 		const handleHiddenHeader = () => {
@@ -84,6 +84,7 @@ const HomeTemplate = ({ content, settings }: HomeProps) => {
 					if (section.title === "home")
 						return (
 							<SectionHome
+								key={section._id}
 								id="#"
 								backgroundImg={section.backgroundImg}
 								ownerName={section.owner}
@@ -96,6 +97,7 @@ const HomeTemplate = ({ content, settings }: HomeProps) => {
 					if (section.title === "about")
 						return (
 							<SectionAbout
+								key={section._id}
 								id="about"
 								biosData={section.biosData}
 								workData={section.workData}
@@ -106,12 +108,17 @@ const HomeTemplate = ({ content, settings }: HomeProps) => {
 
 					if (section.title === "skills")
 						return (
-							<SectionSkills id="skills" techs={section.techs} />
+							<SectionSkills
+								key={section._id}
+								id="skills"
+								techs={section.techs}
+							/>
 						);
 
 					if (section.title === "projects")
 						return (
 							<SectionProject
+								key={section._id}
 								id="projects"
 								projects={section.projects}
 							/>

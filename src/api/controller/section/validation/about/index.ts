@@ -105,7 +105,7 @@ export default class SectionValidationAbout {
 
 		if (course.title.length > 50)
 			throw new Error(
-				"one of your courses title has more than 150 characters"
+				"one of your courses title has more than 50 characters"
 			);
 
 		if (!course.institution)
@@ -115,7 +115,7 @@ export default class SectionValidationAbout {
 
 		if (course.institution.length > 50)
 			throw new Error(
-				`your ${course.title} course institution name has more than 150 characters`
+				`your ${course.title} course institution name has more than 50 characters`
 			);
 
 		if (!course.resume)

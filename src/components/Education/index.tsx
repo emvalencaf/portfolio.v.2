@@ -194,15 +194,17 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 								<p>{content.resume}</p>
 							</>
 						)}
-						<Button
-							onClick={() => handleClick()}
-							disabled={content.urlDownload ? false : true}
-							icon={<Link />}
-						>
-							{content.urlDownload
-								? "Veja Certificado"
-								: "Em andamento"}
-						</Button>
+						{!!content.endIn && (
+							<Button
+								onClick={() => handleClick()}
+								disabled={content.urlDownload ? false : true}
+								icon={<Link />}
+							>
+								{content.urlDownload
+									? "Veja Certificado"
+									: "Não disponível"}
+							</Button>
+						)}
 					</>
 				)}
 			</Styled.Content>
