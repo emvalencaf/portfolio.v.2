@@ -111,12 +111,18 @@ export default class ProjectController {
 	}
 
 	static async getById(id: string | string[]): Promise<Project> {
-		if (!id) return;
+		try {
+			if (!id) throw new Error("must inform an id");
 
-		const response = await ProjectService.getById(id);
+			const response = await ProjectService.getById(id);
 
-		const { project } = response;
+			if (!response) throw new Error("not found it");
 
-		return project;
+			const { project } = response;
+
+			return project;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 }

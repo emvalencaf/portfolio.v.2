@@ -98,4 +98,19 @@ export default class SectionController {
 			throw new Error(err.message);
 		}
 	}
+
+	static async getById(id: string | string[], token: string) {
+		try {
+			if (!id) throw new Error("you must inform an id");
+			if (!token) throw new Error("you must be login");
+
+			const response = await SectionService.getById(id, token);
+
+			if (!response) throw new Error("error not found it");
+
+			return response;
+		} catch (err) {
+			console.log(err);
+		}
+	}
 }
