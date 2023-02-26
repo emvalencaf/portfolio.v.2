@@ -7,7 +7,7 @@ import PortfolioController from "../api/controller/portfolio";
 // types
 import { GetStaticProps } from "next";
 import { Portfolio } from "../shared-types/portfolio";
-import GithubDataController from "../api/controller/githubData";
+// import GithubDataController from "../api/controller/githubData";
 import { GithubHoverCardProps } from "../components/GithubHoverCard";
 type IndexProps = {
 	portfolio: Portfolio;
