@@ -3,7 +3,7 @@ import ProjectTemplate from "../../templates/Project";
 
 // types
 import { Project } from "../../shared-types/project";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import ProjectController from "../../api/controller/project";
 export type ProjectPageProps = {
 	project: Project;

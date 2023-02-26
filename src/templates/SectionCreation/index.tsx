@@ -136,15 +136,13 @@ const SectionCreationTemplate = ({
 
 		setLoadingFetchedProjects(true);
 		try {
-			const projects = await ProjectController.getAll(
-				session.accessToken
-			);
+			const projects = await ProjectController.getAll();
 			setFetchedProjects(() => [...projects]);
 		} catch (err) {
 			setErrorMessageFetchedProjects(err.message);
 		}
 		setLoadingFetchedProjects(false);
-	}, [fetchedProjects.length, session.accessToken]);
+	}, [fetchedProjects.length]);
 
 	// handleClick button education and work
 	const handleClick = (typeData: string) => {
