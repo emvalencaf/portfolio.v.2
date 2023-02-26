@@ -292,6 +292,8 @@ const SectionCreationTemplate = ({
 			});
 		}
 
+		console.log(data);
+
 		const formData = new FormData(ref.current);
 
 		return await SectionController.create(
@@ -536,6 +538,9 @@ const SectionCreationTemplate = ({
 											required={true}
 										/>
 										<TextInput
+											
+										/>
+										<TextInput
 											name={`startIn${index}`}
 											value={education.startIn}
 											label="inform when the course start"
@@ -585,7 +590,7 @@ const SectionCreationTemplate = ({
 											onInputChange={(v) =>
 												handleChangeElementInArray<EducationObject>(
 													education,
-													"title",
+													"resume",
 													v,
 													setEducationData
 												)
