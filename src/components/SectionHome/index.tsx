@@ -11,7 +11,7 @@ export type SectionHomeProps = {
 	ownerName?: string;
 	ocupation?: string;
 	mainStack?: string[];
-	githubData: GithubHoverCardProps;
+	githubData?: GithubHoverCardProps;
 } & SectionProps;
 
 const SectionHome = ({

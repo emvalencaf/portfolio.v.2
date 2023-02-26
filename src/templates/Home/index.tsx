@@ -27,7 +27,7 @@ export type Sections = {
 export type HomeProps = {
 	settings: Settings;
 	content: PortfolioContent;
-	githubData: GithubHoverCardProps;
+	githubData?: GithubHoverCardProps;
 };
 
 // styles
