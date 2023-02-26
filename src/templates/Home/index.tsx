@@ -27,6 +27,7 @@ export type Sections = {
 export type HomeProps = {
 	settings: Settings;
 	content: PortfolioContent;
+	githubData: GithubHoverCardProps;
 };
 
 // styles
@@ -35,12 +36,14 @@ import * as Styled from "./styles";
 // types
 import { Settings } from "../../shared-types/settings";
 import { PortfolioContent } from "../../shared-types/portfolio";
+import { GithubHoverCardProps } from "../../components/GithubHoverCard";
 
-const HomeTemplate = ({ content, settings }: HomeProps) => {
+const HomeTemplate = ({ content, settings, githubData }: HomeProps) => {
 	// states
 	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
 	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
 	console.log(content);
+	console.log(githubData);
 	// useEffect
 	useEffect(() => {
 		const handleHiddenHeader = () => {
@@ -91,6 +94,7 @@ const HomeTemplate = ({ content, settings }: HomeProps) => {
 								mainStack={section.mainStack}
 								ocupation={section.ocupation}
 								icon={section.icon}
+								githubData={githubData}
 							/>
 						);
 

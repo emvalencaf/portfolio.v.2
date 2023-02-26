@@ -5,22 +5,26 @@ import HomeTemplate from "../templates/Home";
 import PortfolioController from "../api/controller/portfolio";
 
 // types
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { Portfolio } from "../shared-types/portfolio";
+import GithubDataController from "../api/controller/githubData";
+import { GithubHoverCardProps } from "../components/GithubHoverCard";
 type IndexProps = {
 	portfolio: Portfolio;
+	githubData: GithubHoverCardProps;
 };
 
-export default function Index({ portfolio }: IndexProps) {
+export default function Index({ portfolio, githubData }: IndexProps) {
 	return (
 		<HomeTemplate
 			settings={portfolio?.settings}
 			content={portfolio?.content}
+			githubData={githubData}
 		/>
 	);
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 	const response = await PortfolioController.get();
 
 	if (!response)
@@ -30,9 +34,25 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 	const { portfolio } = response;
 
+	const responseGithubGraphQL =
+		await GithubDataController.loadGithubGraphQL();
+	const responseGithubAPI = await GithubDataController.loadGithubAPI();
+
+	const { totalCommitContributions, totalRepositoryContributions } =
+		responseGithubGraphQL;
+
+	const { public_repos } = responseGithubAPI;
+	console.log(responseGithubAPI);
+	console.log(responseGithubGraphQL);
 	return {
 		props: {
 			portfolio,
+			githubData: {
+				totalCommitContributions,
+				totalRepositoryContributions,
+				public_repos,
+			},
 		},
+		revalidate: 72000, // it will re-render once each 20 hours
 	};
 };

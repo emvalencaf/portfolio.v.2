@@ -11,7 +11,7 @@ import CreateFetch from "../../../utils/createFetch";
 
 const client = new GraphQLClient(`https://api.github.com/graphql`, {
 	headers: {
-		Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_GITHUB_TOKEN}`,
+		Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
 	},
 });
 

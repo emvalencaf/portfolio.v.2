@@ -1,5 +1,5 @@
 // components
-import GithubHoverCard from "../GithubHoverCard";
+import GithubHoverCard, { GithubHoverCardProps } from "../GithubHoverCard";
 import Heading from "../Heading";
 import Section, { SectionProps } from "../Section";
 
@@ -11,6 +11,7 @@ export type SectionHomeProps = {
 	ownerName?: string;
 	ocupation?: string;
 	mainStack?: string[];
+	githubData: GithubHoverCardProps;
 } & SectionProps;
 
 const SectionHome = ({
@@ -21,6 +22,7 @@ const SectionHome = ({
 	ocupation,
 	mainStack = [],
 	backgroundImg = "",
+	githubData,
 }: SectionHomeProps) => {
 	return (
 		<Section
@@ -48,9 +50,13 @@ const SectionHome = ({
 						</Heading>
 					)}
 				</Styled.IntroContainer>
-				<Styled.GithubContainer>
-					<GithubHoverCard />
-				</Styled.GithubContainer>
+				{(githubData.totalCommitContributions ||
+					githubData.totalRepositoryContributions ||
+					githubData.public_repos) && (
+					<Styled.GithubContainer>
+						<GithubHoverCard {...githubData} />
+					</Styled.GithubContainer>
+				)}
 			</Styled.Wrapper>
 		</Section>
 	);

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 // controller
-import GithubDataController from "../../api/controller/githubData";
+// import GithubDataController from "../../api/controller/githubData";
 
 // components
 import Heading from "../Heading";
@@ -9,7 +9,19 @@ import Heading from "../Heading";
 // styles
 import * as Styled from "./styles";
 
-const GithubHoverCard = () => {
+// types
+export type GithubHoverCardProps = {
+	public_repos: number | string;
+	totalCommitContributions: number | string;
+	totalRepositoryContributions: number | string;
+};
+
+const GithubHoverCard = ({
+	totalRepositoryContributions,
+	totalCommitContributions,
+	public_repos,
+}: GithubHoverCardProps) => {
+	/*
 	const [repoPrivate, setRepoPrivate] = useState(0);
 	const [commitsContributions, setCommitsContributions] = useState(0);
 	const [repoPublic, setRepoPublic] = useState(0);
@@ -33,6 +45,8 @@ const GithubHoverCard = () => {
 
 		fetchData();
 	}, []);
+	*/
+	console.log();
 	return (
 		<Styled.Wrapper>
 			<Styled.DisplayerContainer>
@@ -42,7 +56,8 @@ const GithubHoverCard = () => {
 					</Heading>
 				</Styled.HeadingDisplayContainer>
 				<Heading as="h3" size="small" color="secondary">
-					{!!repoPrivate && repoPrivate}
+					{!!totalRepositoryContributions &&
+						totalRepositoryContributions}
 				</Heading>
 			</Styled.DisplayerContainer>
 			<Styled.DisplayerContainer>
@@ -52,7 +67,7 @@ const GithubHoverCard = () => {
 					</Heading>
 				</Styled.HeadingDisplayContainer>
 				<Heading as="h3" size="small" color="secondary">
-					{repoPublic && repoPublic}
+					{public_repos && public_repos}
 				</Heading>
 			</Styled.DisplayerContainer>
 			<Styled.DisplayerContainer>
@@ -62,7 +77,7 @@ const GithubHoverCard = () => {
 					</Heading>
 				</Styled.HeadingDisplayContainer>
 				<Heading as="h3" size="small" color="secondary">
-					{!!commitsContributions && commitsContributions}
+					{!!totalCommitContributions && totalCommitContributions}
 				</Heading>
 			</Styled.DisplayerContainer>
 		</Styled.Wrapper>
