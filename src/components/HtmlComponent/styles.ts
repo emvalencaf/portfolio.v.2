@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Container = styled.div`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			font-size: 2rem;
 
 			.image-style-side {

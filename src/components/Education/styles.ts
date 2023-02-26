@@ -4,7 +4,7 @@ import { Title as HeadingContainer } from "../Heading/styles";
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			display: flex;
 			flex-direction: column;
 			gap: ${theme.spacings.tiny};
@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 
 export const OrderList = styled.ol`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			display: flex;
 			flex-wrap: wrap;
 			height: auto;

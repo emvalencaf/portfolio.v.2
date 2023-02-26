@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 export const Wrapper = styled.div`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			flex-direction: column;
 		}
 

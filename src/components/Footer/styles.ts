@@ -3,7 +3,7 @@ import { Wrapper as SocialMediaContainer } from "../SocialMedia/styles";
 
 export const Wrapper = styled.footer`
 	${({ theme }) => css`
-		@media ${theme.media.lteSmall} {
+		@media ${theme.media.lteOrEqSmall} {
 			& ${SocialMediaContainer} {
 				& svg,
 				& a {

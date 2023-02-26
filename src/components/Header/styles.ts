@@ -10,7 +10,7 @@ type ContainerProps = {
 
 // function
 const visibileMenu = (theme: DefaultTheme) => css`
-	@media ${theme.media.lteMedium} {
+	@media ${theme.media.lteOrEqMedium} {
 		opacity: 1;
 		visibility: visible;
 		appearance: inherit;
@@ -24,7 +24,7 @@ const visibileMenu = (theme: DefaultTheme) => css`
 
 export const Wrapper = styled.header<ContainerProps>`
 	${({ theme, visible }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			display: block;
 			background-color: transparent;
 			border: none;

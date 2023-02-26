@@ -14,7 +14,7 @@ const setBackgroundColor = (color: string) => css`
 
 export const Wrapper = styled.section<WrapperProps>`
 	${({ theme, background, color, backgroundImg }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			padding: 0px ${theme.spacings.small};
 
 			& > ${HeadingContainer}::after {

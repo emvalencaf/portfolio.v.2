@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
 
 export const SectionInnerMenu = styled.div`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			& ${ButtonLabel} {
 				appearance: none;
 				opacity: 0;

@@ -18,7 +18,7 @@ const logoSizes = {
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			display: none;
 			appearance: none;
 			opacity: 0;

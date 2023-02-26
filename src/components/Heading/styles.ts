@@ -36,10 +36,10 @@ const mediaFont = (theme: DefaultTheme, size: string) => {
 		},
 	};
 	return css`
-		@media ${theme.media.lteSmall} {
+		@media ${theme.media.lteOrEqMedium} {
 			font-size: ${fontSize.lteSmall[size]};
 		}
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			font-size: ${fontSize.lteMedium[size]};
 		}
 	`;

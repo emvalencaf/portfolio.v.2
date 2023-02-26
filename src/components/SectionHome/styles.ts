@@ -49,16 +49,16 @@ export const IntroContainer = styled.div`
 
 export const GithubContainer = styled.div`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
-			display: none;
+		@media ${theme.media.gteOrEqLarge} {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			max-width: 300px;
+			& ${HeadingContainer} {
+				margin: 0px;
+			}
 		}
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		max-width: 300px;
-		& ${HeadingContainer} {
-			margin: 0px;
-		}
+		display: none;
 	`}
 `;

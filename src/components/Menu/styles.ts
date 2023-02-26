@@ -13,7 +13,7 @@ const menuVisible = () => css`
 
 export const Nav = styled.nav<MenuStyled>`
 	${({ theme, visible }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			position: fixed;
 			//			height: 100%;
 			width: 100%;
@@ -131,7 +131,7 @@ export const Nav = styled.nav<MenuStyled>`
 
 export const Button = styled.button<MenuStyled>`
 	${({ theme, visible }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			display: flex;
 			align-items: center;
 			justify-content: center;

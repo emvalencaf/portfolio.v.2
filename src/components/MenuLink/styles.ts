@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Link = styled.a`
 	${({ theme }) => css`
-		@media ${theme.media.lteMedium} {
+		@media ${theme.media.lteOrEqMedium} {
 			& span {
 				display: none;
 			}
