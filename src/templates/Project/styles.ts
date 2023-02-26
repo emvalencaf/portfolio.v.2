@@ -70,3 +70,22 @@ export const ArticleContent = styled.div`
 		border-radius: 0rem 0rem 2rem;
 	`}
 `;
+
+export const PictureContainer = styled.picture`
+	${({ theme }) => css`
+		@media ${theme.media.lteOrEqSmall} {
+			display: none;
+		}
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+
+		> img {
+			max-width: 500px;
+			max-height: 500px;
+			border-radius: 20px 0rem 20px;
+		}
+	`}
+`;

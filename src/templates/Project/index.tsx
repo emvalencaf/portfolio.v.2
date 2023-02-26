@@ -28,6 +28,7 @@ export type ProjectTemplateProps = Project;
 const ProjectTemplate = ({
 	title,
 	resume,
+	srcImg,
 	description,
 	mainLang,
 	owner,
@@ -97,6 +98,15 @@ const ProjectTemplate = ({
 						<p>{resume}</p>
 					</Styled.ArticleHeader>
 					<Styled.ArticleContent>
+						{srcImg && (
+							<Styled.PictureContainer>
+								<img
+									src={`${srcImg}`}
+									alt={`project picture`}
+								/>
+								<figcaption>screenshot do projeto</figcaption>
+							</Styled.PictureContainer>
+						)}
 						<HtmlComponent html={description} />
 					</Styled.ArticleContent>
 					{updatedAt && (

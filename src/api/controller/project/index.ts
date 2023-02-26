@@ -116,7 +116,7 @@ export default class ProjectController {
 
 			const response = await ProjectService.getById(id);
 
-			if (!response) throw new Error("not found it");
+			if (!response) return;
 
 			const { project } = response;
 

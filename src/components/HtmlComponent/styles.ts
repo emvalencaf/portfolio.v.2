@@ -26,7 +26,7 @@ export const Container = styled.div`
 		a,
 		a:visited,
 		a:link {
-			color: ${theme.colors.secondary};
+			color: ${theme.colors.tertiary};
 			text-decoration: none;
 			transition: all ${theme.transitions.fast} ease-in-out;
 		}
