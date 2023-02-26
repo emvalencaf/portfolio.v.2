@@ -9,22 +9,21 @@ import { GraphQLClient } from "graphql-request";
 import { GRAPHQL_QUERIES } from "../../../graphql/queries";
 import CreateFetch from "../../../utils/createFetch";
 
-const client = new GraphQLClient(`https://api.github.com/graphql`, {
-	headers: {
-		Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-	},
-});
-
 export default class GithubDataService {
-	static async loadGithubGraphQL() {
+	static async loadGithubGraphQL(username: string, token: string) {
+		const client = new GraphQLClient(`https://api.github.com/graphql`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
 		return await client.request(GRAPHQL_QUERIES, {
-			username: process.env.NEXT_PUBLIC_API_GITHUB_USERNAME,
+			username,
 		});
 	}
 
-	static async loadGithubAPI() {
+	static async loadGithubAPI(username: string) {
 		return await CreateFetch.dispatch<DataFetchedGithub>(
-			`https://api.github.com/users/${process.env.NEXT_PUBLIC_API_GITHUB_USERNAME}`
+			`https://api.github.com/users/${username}`
 		);
 	}
 }
