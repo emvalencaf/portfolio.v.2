@@ -50,13 +50,14 @@ const SectionHome = ({
 						</Heading>
 					)}
 				</Styled.IntroContainer>
-				{(githubData.totalCommitContributions ||
-					githubData.totalRepositoryContributions ||
-					githubData.public_repos) && (
-					<Styled.GithubContainer>
-						<GithubHoverCard {...githubData} />
-					</Styled.GithubContainer>
-				)}
+				{githubData &&
+					(githubData.totalCommitContributions ||
+						githubData.totalRepositoryContributions ||
+						githubData.public_repos) && (
+						<Styled.GithubContainer>
+							<GithubHoverCard {...githubData} />
+						</Styled.GithubContainer>
+					)}
 			</Styled.Wrapper>
 		</Section>
 	);
