@@ -21,64 +21,44 @@ const GithubHoverCard = ({
 	totalCommitContributions,
 	public_repos,
 }: GithubHoverCardProps) => {
-	/*
-	const [repoPrivate, setRepoPrivate] = useState(0);
-	const [commitsContributions, setCommitsContributions] = useState(0);
-	const [repoPublic, setRepoPublic] = useState(0);
-
-	// fetch
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const data = await GithubDataController.loadGithubGraphQL();
-
-				setRepoPrivate(() => data.totalRepositoryContributions);
-				setCommitsContributions(() => data.totalCommitContributions);
-
-				const dataFetched = await GithubDataController.loadGithubAPI();
-
-				setRepoPublic(dataFetched.public_repos);
-			} catch (err) {
-				console.log(err);
-			}
-		};
-
-		fetchData();
-	}, []);
-	*/
 	return (
 		<Styled.Wrapper>
-			<Styled.DisplayerContainer>
-				<Styled.HeadingDisplayContainer>
-					<Heading as="h2" size="small" color="secondary">
-						Repos. total
+			{!!totalRepositoryContributions && (
+				<Styled.DisplayerContainer>
+					<Styled.HeadingDisplayContainer>
+						<Heading as="h2" size="small" color="secondary">
+							Repos. total
+						</Heading>
+					</Styled.HeadingDisplayContainer>
+					<Heading as="h3" size="small" color="secondary">
+						{totalRepositoryContributions}
 					</Heading>
-				</Styled.HeadingDisplayContainer>
-				<Heading as="h3" size="small" color="secondary">
-					{!!totalRepositoryContributions &&
-						totalRepositoryContributions}
-				</Heading>
-			</Styled.DisplayerContainer>
-			<Styled.DisplayerContainer>
-				<Styled.HeadingDisplayContainer>
-					<Heading as="h2" size="small" color="secondary">
-						Repos. Públicos
+				</Styled.DisplayerContainer>
+			)}
+			{!!public_repos && (
+				<Styled.DisplayerContainer>
+					<Styled.HeadingDisplayContainer>
+						<Heading as="h2" size="small" color="secondary">
+							Repos. Públicos
+						</Heading>
+					</Styled.HeadingDisplayContainer>
+					<Heading as="h3" size="small" color="secondary">
+						{public_repos}
 					</Heading>
-				</Styled.HeadingDisplayContainer>
-				<Heading as="h3" size="small" color="secondary">
-					{public_repos && public_repos}
-				</Heading>
-			</Styled.DisplayerContainer>
-			<Styled.DisplayerContainer>
-				<Styled.HeadingDisplayContainer>
-					<Heading as="h2" size="small" color="secondary">
-						Commits
+				</Styled.DisplayerContainer>
+			)}
+			{!!totalCommitContributions && (
+				<Styled.DisplayerContainer>
+					<Styled.HeadingDisplayContainer>
+						<Heading as="h2" size="small" color="secondary">
+							Commits
+						</Heading>
+					</Styled.HeadingDisplayContainer>
+					<Heading as="h3" size="small" color="secondary">
+						{totalCommitContributions}
 					</Heading>
-				</Styled.HeadingDisplayContainer>
-				<Heading as="h3" size="small" color="secondary">
-					{!!totalCommitContributions && totalCommitContributions}
-				</Heading>
-			</Styled.DisplayerContainer>
+				</Styled.DisplayerContainer>
+			)}
 		</Styled.Wrapper>
 	);
 };
