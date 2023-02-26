@@ -27,6 +27,7 @@ export default function Index({ portfolio, githubData }: IndexProps) {
 export const getStaticProps: GetStaticProps = async () => {
 	const response = await PortfolioController.get();
 	console.log(process.env.NEXT_PUBLIC_API_GITHUB_USERNAME);
+	let githubData;
 	if (!response)
 		return {
 			notFound: true,
@@ -38,20 +39,25 @@ export const getStaticProps: GetStaticProps = async () => {
 		process.env.NEXT_PUBLIC_API_GITHUB_USERNAME,
 		process.env.GITHUB_TOKEN
 	);
+
 	const responseGithubAPI = await GithubDataController.loadGithubAPI(
 		process.env.NEXT_PUBLIC_API_GITHUB_USERNAME
 	);
 
-	const { totalCommitContributions, totalRepositoryContributions } =
-		responseGithubGraphQL;
+	if (responseGithubGraphQL) {
+		const { totalCommitContributions, totalRepositoryContributions } =
+			responseGithubGraphQL;
 
-	const { public_repos } = responseGithubAPI;
+		githubData = {
+			totalCommitContributions,
+			totalRepositoryContributions,
+		};
+	}
 
-	const githubData = {
-		totalCommitContributions,
-		totalRepositoryContributions,
-		public_repos,
-	};
+	if (responseGithubAPI) {
+		const { public_repos } = responseGithubAPI;
+		githubData.public_repo = public_repos;
+	}
 
 	console.log("github data profile: ", githubData);
 

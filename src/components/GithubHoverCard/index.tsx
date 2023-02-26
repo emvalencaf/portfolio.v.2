@@ -11,9 +11,9 @@ import * as Styled from "./styles";
 
 // types
 export type GithubHoverCardProps = {
-	public_repos: number | string;
-	totalCommitContributions: number | string;
-	totalRepositoryContributions: number | string;
+	public_repos?: number | string;
+	totalCommitContributions?: number | string;
+	totalRepositoryContributions?: number | string;
 };
 
 const GithubHoverCard = ({
