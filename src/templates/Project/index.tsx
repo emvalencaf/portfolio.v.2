@@ -12,6 +12,7 @@ import {
 	Java,
 	Php,
 	Python,
+	Typescript,
 } from "@styled-icons/boxicons-logos";
 import { Cplusplus, Csharp } from "@styled-icons/simple-icons";
 
@@ -58,6 +59,7 @@ const ProjectTemplate = ({
 	const pickUpLangIcon = {
 		javascript: <Javascript />,
 		java: <Java />,
+		typescript: <Typescript />,
 		php: <Php />,
 		csharp: <Csharp />,
 		css: <Css3 />,

@@ -123,6 +123,7 @@ const CreateProjectTemplate = React.forwardRef(() => {
 					value={projectTitle}
 					icon={<Cases />}
 					required={false}
+					maxLength={50}
 				/>
 				<TextInput
 					type="text"
@@ -166,6 +167,7 @@ const CreateProjectTemplate = React.forwardRef(() => {
 					value={resume}
 					onInputChange={(v) => setResume(v)}
 					required={false}
+					maxLength={250}
 				/>
 				<ImageInput
 					name="picture"

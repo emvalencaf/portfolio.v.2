@@ -76,6 +76,7 @@ export default class ProjectController {
 			if (
 				mainLang !== "java" &&
 				mainLang !== "javascript" &&
+				mainLang !== "typescript" &&
 				mainLang !== "python" &&
 				mainLang !== "csharp" &&
 				mainLang !== "cplus" &&
