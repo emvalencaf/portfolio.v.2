@@ -48,9 +48,10 @@ const SectionHome = ({
 						</Heading>
 					)}
 				</Styled.IntroContainer>
+				{/*
 				<Styled.GithubContainer>
 					<GithubHoverCard />
-				</Styled.GithubContainer>
+				</Styled.GithubContainer>*/}
 			</Styled.Wrapper>
 		</Section>
 	);
