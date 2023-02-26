@@ -46,7 +46,6 @@ const GithubHoverCard = ({
 		fetchData();
 	}, []);
 	*/
-	console.log();
 	return (
 		<Styled.Wrapper>
 			<Styled.DisplayerContainer>

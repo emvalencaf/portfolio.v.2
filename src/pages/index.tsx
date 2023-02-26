@@ -7,7 +7,7 @@ import PortfolioController from "../api/controller/portfolio";
 // types
 import { GetStaticProps } from "next";
 import { Portfolio } from "../shared-types/portfolio";
-// import GithubDataController from "../api/controller/githubData";
+import GithubDataController from "../api/controller/githubData";
 import { GithubHoverCardProps } from "../components/GithubHoverCard";
 type IndexProps = {
 	portfolio: Portfolio;
@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		};
 
 	const { portfolio } = response;
-	/*
+
 	const responseGithubGraphQL = await GithubDataController.loadGithubGraphQL(
 		process.env.NEXT_PUBLIC_API_GITHUB_USERNAME,
 		process.env.GITHUB_TOKEN
@@ -46,17 +46,19 @@ export const getStaticProps: GetStaticProps = async () => {
 		responseGithubGraphQL;
 
 	const { public_repos } = responseGithubAPI;
-	console.log(responseGithubAPI);
-	console.log(responseGithubGraphQL);*/
+
+	const githubData = {
+		totalCommitContributions,
+		totalRepositoryContributions,
+		public_repos,
+	};
+
+	console.log("github data profile: ", githubData);
 
 	return {
 		props: {
-			portfolio /*
-			githubData: {
-				totalCommitContributions,
-				totalRepositoryContributions,
-				public_repos,
-			},*/,
+			portfolio,
+			githubData,
 		},
 		revalidate: 72000, // it will re-render once each 20 hours
 	};
