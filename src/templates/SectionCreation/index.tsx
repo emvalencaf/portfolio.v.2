@@ -538,7 +538,18 @@ const SectionCreationTemplate = ({
 											required={true}
 										/>
 										<TextInput
-											
+											name={`title${index}`}
+											value={education.workTime}
+											label="inform the work time"
+											onInputChange={(v) =>
+												handleChangeElementInArray<EducationObject>(
+													education,
+													"workTime",
+													v,
+													setEducationData
+												)
+											}
+											required={false}
 										/>
 										<TextInput
 											name={`startIn${index}`}
