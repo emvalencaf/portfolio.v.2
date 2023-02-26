@@ -15,15 +15,11 @@ export default function ProjectPage({ project }: ProjectPageProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = [];
-
 	const projects = await ProjectController.getAll();
 
-	if (projects instanceof Array) {
-		projects.forEach((project) => {
-			paths.push({ params: { id: project._id } });
-		});
-	}
+	const paths = projects.map((project) => ({
+		params: { id: project._id },
+	}));
 
 	if (projects)
 		return {
@@ -35,12 +31,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
 	const { id } = ctx.params;
 
-	const project = await ProjectController.getById(id);
+	const response = await ProjectController.getById(id);
 
-	if (!project)
+	console.log(response);
+
+	if (!response)
 		return {
 			notFound: true,
 		};
+
+	const { project } = response;
 
 	return {
 		props: {

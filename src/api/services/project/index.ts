@@ -32,6 +32,12 @@ export default class ProjectService {
 	}
 
 	static async getById(id: string | string[]): Promise<FetchResponseProject> {
-		return await CreateFetch.dispatch<FetchResponseProject>(`${url}/${id}`);
+		const options = {
+			method: "GET",
+		};
+		return await CreateFetch.dispatch<FetchResponseProject>(
+			`${url}/${id}`,
+			options
+		);
 	}
 }

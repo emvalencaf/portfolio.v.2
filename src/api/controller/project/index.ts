@@ -2,10 +2,7 @@
 import ProjectService from "../../services/project";
 
 // type
-import {
-	Project,
-	ProjectControllerCreate,
-} from "../../../shared-types/project";
+import { ProjectControllerCreate } from "../../../shared-types/project";
 type ProjectData = {
 	title: string;
 	resume: string;
@@ -112,17 +109,11 @@ export default class ProjectController {
 		}
 	}
 
-	static async getById(id: string | string[]): Promise<Project> {
+	static async getById(id: string | string[]) {
 		try {
 			if (!id) throw new Error("must inform an id");
 
-			const response = await ProjectService.getById(id);
-
-			if (!response) return;
-
-			const { project } = response;
-
-			return project;
+			return await ProjectService.getById(id);
 		} catch (err) {
 			console.log(err);
 		}
