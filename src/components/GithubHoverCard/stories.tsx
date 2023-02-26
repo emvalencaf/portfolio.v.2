@@ -1,12 +1,16 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
-import GithubHoverCard from "./";
+import GithubHoverCard, { GithubHoverCardProps } from "./";
+
+// mock
+import mock from "./mock";
 
 export default {
 	title: "GithubHoverCard",
 	component: GithubHoverCard,
-} as Meta;
+	args: mock,
+} as Meta<GithubHoverCardProps>;
 
-export const Template: Story = (args) => {
+export const Template: Story<GithubHoverCardProps> = (args) => {
 	return (
 		<div>
 			<GithubHoverCard {...args} />
