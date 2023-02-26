@@ -22,8 +22,12 @@ export default class GithubDataService {
 	}
 
 	static async loadGithubAPI(username: string) {
+		const options = {
+			method: "GET",
+		};
 		return await CreateFetch.dispatch<DataFetchedGithub>(
-			`https://api.github.com/users/${username}`
+			`https://api.github.com/users/${username}`,
+			options
 		);
 	}
 }
