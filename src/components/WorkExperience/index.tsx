@@ -25,8 +25,9 @@ import DateStringFormating from "../../utils/dateString";
 
 const WorkExperience = ({ workExperience = [] }: WorkExperienceProps) => {
 	// state
-	const [stateWorkExperience, setStateWorkExperience] =
-		useState(workExperience);
+	const [stateWorkExperience, setStateWorkExperience] = useState(
+		workExperience.sort((a, b) => Number(a.startIn) - Number(b.startIn))
+	);
 	const [content, setContent] = useState<Work>();
 
 	// useEffect

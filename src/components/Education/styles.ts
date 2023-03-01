@@ -82,8 +82,14 @@ export const OrderList = styled.ol`
 		> li > ol {
 			overflow-y: auto;
 			max-height: 150px;
+			height: 80px;
 			background-color: ${theme.colors.primary};
 			border-radius: 0%;
+		}
+
+		> li > ol > li > span {
+			padding: ${theme.spacings.tiny};
+			text-align: center;
 		}
 
 		> li:has(> button:disabled) {
@@ -116,7 +122,7 @@ export const OrderList = styled.ol`
 `;
 
 export const Content = styled.div`
-	${() => css`
+	${({ theme }) => css`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -128,6 +134,7 @@ export const Content = styled.div`
 		max-height: 400px;
 		justify-self: center;
 		align-self: center;
+		padding: ${theme.spacings.medium};
 
 		${HeadingContainer} {
 			margin: 0px;

@@ -44,9 +44,15 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 	// states
 	const [stateHigherEducation, setStateHigherEducation] = useState<
 		StateEducation[]
-	>(higherEducation.map(mapData));
+	>(
+		higherEducation
+			.map(mapData)
+			.sort((a, b) => Number(a.startIn) - Number(b.startIn))
+	);
 	const [stateCourses, setStateCourses] = useState<StateEducation[]>(
-		courses.map(mapData)
+		courses
+			.map(mapData)
+			.sort((a, b) => Number(a.startIn) - Number(b.startIn))
 	);
 	const [content, setContent] = useState<Education>();
 

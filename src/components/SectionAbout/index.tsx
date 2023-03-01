@@ -91,10 +91,7 @@ const SectionAbout = ({
 				</Styled.SectionInnerMenu>
 				{inBios && <Bios {...biosData} />}
 				{inWorkExperiences && <WorkExperience {...workData} />}
-				{inAcademics && (
-					//<AcademicHistory academicData={academicData} />
-					<Education {...educationData} />
-				)}
+				{inAcademics && <Education {...educationData} />}
 				<Button type="submit" onClick={handleClickDownloadButton}>
 					Download Curriculum
 				</Button>

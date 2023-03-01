@@ -121,6 +121,7 @@ export const Content = styled.div`
 		max-width: 300px;
 		height: 400px;
 		max-height: 400px;
+		padding: ${theme.spacings.medium};
 		gap: ${theme.spacings.mediumLarge};
 
 		${HeadingContainer} {

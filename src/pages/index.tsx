@@ -1,3 +1,6 @@
+// components
+import Head from "next/head";
+
 // templates
 import HomeTemplate from "../templates/Home";
 
@@ -16,11 +19,16 @@ type IndexProps = {
 
 export default function Index({ portfolio, githubData }: IndexProps) {
 	return (
-		<HomeTemplate
-			settings={portfolio?.settings}
-			content={portfolio?.content}
-			githubData={githubData}
-		/>
+		<>
+			<Head>
+				<title>{portfolio.settings.websiteName}</title>
+			</Head>
+			<HomeTemplate
+				settings={portfolio?.settings}
+				content={portfolio?.content}
+				githubData={githubData}
+			/>
+		</>
 	);
 }
 
