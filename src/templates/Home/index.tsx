@@ -43,7 +43,6 @@ const HomeTemplate = ({ content, settings, githubData }: HomeProps) => {
 	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
 	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
 	console.log(content);
-	console.log(githubData);
 	// useEffect
 	useEffect(() => {
 		const handleHiddenHeader = () => {

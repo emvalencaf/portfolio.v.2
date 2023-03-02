@@ -123,7 +123,7 @@ export const Content = styled.div`
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		text-align: justify;
+		text-align: center;
 		width: 300px;
 		max-width: 300px;
 		height: 400px;

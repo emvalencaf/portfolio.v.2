@@ -16,6 +16,9 @@ class DateStringFormating {
 			day: "numeric",
 		});
 	}
+	static getTimeStamp(dateString: string | number) {
+		return new Date(dateString).getTime();
+	}
 }
 
 export default DateStringFormating;
