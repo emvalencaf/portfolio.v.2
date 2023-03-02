@@ -55,7 +55,6 @@ const Education = ({ higherEducation = [], courses = [] }: EducationProps) => {
 			.sort((a, b) => Number(a.startIn) - Number(b.startIn))
 	);
 	const [content, setContent] = useState<Education>();
-
 	// callback setState
 	const callbackSetState = (
 		prevState: StateEducation[],

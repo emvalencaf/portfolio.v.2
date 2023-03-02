@@ -67,8 +67,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		githubData.public_repos = public_repos;
 	}
 
-	console.log("github data profile: ", githubData);
-
 	return {
 		props: {
 			portfolio,

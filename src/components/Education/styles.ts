@@ -50,7 +50,7 @@ export const OrderList = styled.ol`
 					flex-wrap: nowrap;
 					background-color: ${theme.colors.primary};
 					overflow-x: auto;
-					height: ${theme.spacings.hero};
+					height: ${theme.spacings.xxhero};
 
 					gap: unset;
 					> li {
@@ -82,14 +82,8 @@ export const OrderList = styled.ol`
 		> li > ol {
 			overflow-y: auto;
 			max-height: 150px;
-			height: 80px;
 			background-color: ${theme.colors.primary};
 			border-radius: 0%;
-		}
-
-		> li > ol > li > span {
-			padding: ${theme.spacings.tiny};
-			text-align: center;
 		}
 
 		> li:has(> button:disabled) {
@@ -98,13 +92,15 @@ export const OrderList = styled.ol`
 			border: none;
 			outline: none;
 		}
+
 		& ${Button} {
 			align-items: flex-start;
 			justify-content: flex-start;
 			color: ${theme.colors.secondary};
 			background-color: transparent;
 			font-size: ${theme.fonts.sizes.small};
-			text-align: justify;
+			padding: ${theme.spacings.small} 0px;
+			text-align: center;
 			border: none;
 			outline: none;
 			width: 100%;
