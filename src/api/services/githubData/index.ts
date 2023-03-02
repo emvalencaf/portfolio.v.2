@@ -3,6 +3,17 @@ type DataFetchedGithub = {
 	public_repos: number;
 	followers: number;
 };
+type DataGraphQLGithub = {
+	user: {
+		contributionsCollection: ContributionsCollection;
+	};
+};
+
+type ContributionsCollection = {
+	contributionCalendar: unknown;
+	totalCommitContributions: number;
+	totalRepositoryContributions: number;
+};
 
 // utils
 import { GraphQLClient } from "graphql-request";
@@ -10,7 +21,10 @@ import { GRAPHQL_QUERIES } from "../../../graphql/queries";
 import CreateFetch from "../../../utils/createFetch";
 
 export default class GithubDataService {
-	static async loadGithubGraphQL(username: string, token: string) {
+	static async loadGithubGraphQL(
+		username: string,
+		token: string
+	): Promise<DataGraphQLGithub> {
 		const client = new GraphQLClient(`https://api.github.com/graphql`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
