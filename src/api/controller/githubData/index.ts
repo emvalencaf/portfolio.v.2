@@ -9,7 +9,7 @@ export default class GithubDataController {
 				token
 			);
 
-			if (!data) return console.log("no data was found it");
+			if (!data || !data.user) return console.log("no data was found it");
 
 			const { totalRepositoryContributions, totalCommitContributions } =
 				data.user.contributionsCollection;
