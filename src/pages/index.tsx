@@ -33,45 +33,52 @@ export default function Index({ portfolio, githubData }: IndexProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const response = await PortfolioController.get();
-	console.log(process.env.NEXT_PUBLIC_API_GITHUB_USERNAME);
-	let githubData;
-	if (!response)
+	try {
+		const response = await PortfolioController.get();
+		let githubData;
+
+		if (!response)
+			return {
+				notFound: true,
+			};
+
+		const { portfolio } = response;
+
+		const responseGithubGraphQL =
+			await GithubDataController.loadGithubGraphQL(
+				process.env.NEXT_PUBLIC_API_GITHUB_USERNAME,
+				process.env.GITHUB_TOKEN
+			);
+
+		const responseGithubAPI = await GithubDataController.loadGithubAPI(
+			process.env.NEXT_PUBLIC_API_GITHUB_USERNAME
+		);
+
+		if (responseGithubGraphQL) {
+			const { totalCommitContributions, totalRepositoryContributions } =
+				responseGithubGraphQL;
+
+			githubData = {
+				totalCommitContributions,
+				totalRepositoryContributions,
+			};
+		}
+
+		if (responseGithubAPI) {
+			const { public_repos } = responseGithubAPI;
+			githubData.public_repos = public_repos;
+		}
+		return {
+			props: {
+				portfolio,
+				githubData,
+			},
+			revalidate: 72000, // it will re-render once each 20 hours
+		};
+	} catch (err) {
+		console.log(err);
 		return {
 			notFound: true,
 		};
-
-	const { portfolio } = response;
-
-	const responseGithubGraphQL = await GithubDataController.loadGithubGraphQL(
-		process.env.NEXT_PUBLIC_API_GITHUB_USERNAME,
-		process.env.GITHUB_TOKEN
-	);
-
-	const responseGithubAPI = await GithubDataController.loadGithubAPI(
-		process.env.NEXT_PUBLIC_API_GITHUB_USERNAME
-	);
-
-	if (responseGithubGraphQL) {
-		const { totalCommitContributions, totalRepositoryContributions } =
-			responseGithubGraphQL;
-
-		githubData = {
-			totalCommitContributions,
-			totalRepositoryContributions,
-		};
 	}
-
-	if (responseGithubAPI) {
-		const { public_repos } = responseGithubAPI;
-		githubData.public_repos = public_repos;
-	}
-
-	return {
-		props: {
-			portfolio,
-			githubData,
-		},
-		revalidate: 72000, // it will re-render once each 20 hours
-	};
 };

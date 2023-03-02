@@ -9,7 +9,7 @@ export default class GithubDataController {
 				token
 			);
 
-			console.log(data);
+			console.log("in data github", data);
 
 			const { totalRepositoryContributions, totalCommitContributions } =
 				data.user.contributionsCollection;
