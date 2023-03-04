@@ -1,49 +1,66 @@
 // hooks
+import { Cases, Code, Home, Person3 } from "@styled-icons/material-outlined";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // components
 import Heading from "../../components/Heading";
 import Menu from "../../components/Menu";
 import Section from "../../components/Section";
-import { Sections } from "../Home";
+import { PortfolioContent } from "../../shared-types/portfolio";
 
 // styles
 import * as Styled from "./styles";
 
 // types
-export type DashboardProps = {
-	sections: Sections;
-};
+export type DashboardProps = Pick<PortfolioContent, "sections">;
 type BtnArrSections = {
-	id: string;
-	icon: React.ReactNode;
+	_id: string;
+	title: string;
+	icon: string;
 }[];
+type IconData = {
+	home: React.ReactNode;
+	skills: React.ReactNode;
+	projects: React.ReactNode;
+	about: React.ReactNode;
+};
 
-// mock
-import mock from "./mock";
+// data
+const iconData: IconData = {
+	home: <Home />,
+	skills: <Code />,
+	projects: <Cases />,
+	about: <Person3 />,
+};
 
-const { sections } = mock;
-
-const DashboardTemplate = () => {
+const DashboardTemplate = ({ sections = [] }: DashboardProps) => {
 	// states
 	const { data: session } = useSession();
-
-	const btnArray: BtnArrSections = [];
+	const [btnArray, setBtnArray] = useState<BtnArrSections>([]);
 
 	useEffect(() => {
-		console.log("dashboard was rendered");
-	}, []);
+		setBtnArray(() =>
+			sections.map((section) => ({
+				_id: section._id,
+				title: section.title,
+				icon: section.icon,
+			}))
+		);
 
+		return () => setBtnArray(() => []);
+	}, [sections]);
+
+	/*
 	if (Object.keys(sections).length >= 1) {
 		for (const prop in sections) {
 			btnArray.push({
-				id: sections[prop].id,
+				id: sections[prop]._id,
 				icon: sections[prop].icon,
 			});
 		}
-	}
+	}*/
 
 	return (
 		<Styled.Wrapper>
@@ -64,24 +81,21 @@ const DashboardTemplate = () => {
 				</p>
 				<Styled.ContainerButtonsSections>
 					<Styled.ListButtonsSections>
-						{btnArray.map((btnSection, index) => (
-							<li key={`${index} - ${btnSection.id}`}>
+						{btnArray.map((btnSection) => (
+							<li key={`${btnSection._id}`}>
 								<Link
 									href={`/${
-										btnSection.id === "#"
+										btnSection.title === "home"
 											? "#"
-											: `#${btnSection.id}`
+											: `#${btnSection.title}`
 									}`}
 									passHref
 									legacyBehavior
 								>
 									<Styled.Link target="_self" rel="internal">
-										{btnSection.icon}
-										<span>
-											{btnSection.id === "#"
-												? "home"
-												: btnSection.id}
-										</span>
+										{!!btnSection.icon &&
+											iconData[btnSection.icon]}
+										<span>{btnSection.title}</span>
 									</Styled.Link>
 								</Link>
 							</li>

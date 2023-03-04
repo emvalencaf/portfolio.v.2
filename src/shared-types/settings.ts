@@ -1,7 +1,9 @@
 import { SuccessState } from "./async-success-error";
 import { BackendUser } from "./user-backend";
 
-export type FetchResponseSettings = Settings;
+export type FetchResponseSettings = {
+	settings: Settings;
+};
 
 export type SettingsControllerCreate = {
 	data: FetchResponseSettings;

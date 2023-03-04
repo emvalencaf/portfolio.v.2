@@ -1,14 +1,16 @@
 // hooks
-import { useSession } from "next-auth/react";
 import { MutableRefObject, useRef, useState } from "react";
 
 // components
-import Form from "../../components/Form";
-import Heading from "../../components/Heading";
-import ImageInput from "../../components/ImageInput";
-import TextInput from "../../components/TextInput";
+import Heading from "../Heading";
+import Form from "../Form";
+import ImageInput from "../ImageInput";
+import TextInput from "../TextInput";
 
-// icons
+// styles
+import * as Styled from "./styles";
+
+// icon
 import {
 	Facebook,
 	Github,
@@ -26,37 +28,63 @@ import {
 } from "@styled-icons/material-outlined";
 import { Icon } from "@styled-icons/simple-icons";
 
-// styles
-import * as Styled from "./styles";
-import SettingsController from "../../api/controller/settings";
-
 // types
+import SettingsController from "../../api/controller/settings";
 import { Session } from "../../shared-types/session-nextauth";
+import { useSession } from "next-auth/react";
+export type SettingsFormProps = {
+	id?: string;
+	websiteNameProps?: string;
+	favIconProps?: string;
+	logo?: {
+		srcImg?: string;
+		altText: string;
+		link: string;
+		newTab?: boolean;
+	};
+	socialMedia?: {
+		instaURL?: string;
+		linkedinURL?: string;
+		facebookURL?: string;
+		homepageURL?: string;
+		twitterURL?: string;
+		githubURL?: string;
+		tiktokURL?: string;
+		youtubeURL?: string;
+	};
+	typeForm: "create" | "update";
+};
 
-const SettingsCreationTemplate = () => {
+const SettingsForm = ({
+	id = "",
+	websiteNameProps = "",
+	favIconProps = "",
+	logo,
+	socialMedia,
+	typeForm,
+}: SettingsFormProps) => {
 	// session
 	const { data } = useSession();
 	const session: Session = data;
 
 	// states
-	const [websiteName, setWebsiteName] = useState("");
+	const [websiteName, setWebsiteName] = useState(websiteNameProps);
 	const [logoImg, setLogoImg] = useState(null);
-	const [logoAlt, setLogoAlt] = useState("");
+	const [logoAlt, setLogoAlt] = useState(logo.altText);
 	const [favIcon, setFavIcon] = useState(null);
 	// Social Media URL
-	const [linkedInURL, setLinkedInURL] = useState("");
-	const [githubURL, setGithubURL] = useState("");
-	const [instaURL, setInstaURL] = useState("");
-	const [facebookURL, setFacebookURL] = useState("");
-	const [youtubeURL, setYoutubeURL] = useState("");
-	const [twitterURL, setTwitterURL] = useState("");
-	const [tiktokURL, setTiktokURL] = useState("");
-	const [homepageURL, setHomepageURL] = useState("");
+	const [linkedInURL, setLinkedInURL] = useState(socialMedia.linkedinURL);
+	const [githubURL, setGithubURL] = useState(socialMedia.githubURL);
+	const [instaURL, setInstaURL] = useState(socialMedia.instaURL);
+	const [facebookURL, setFacebookURL] = useState(socialMedia.facebookURL);
+	const [youtubeURL, setYoutubeURL] = useState(socialMedia.youtubeURL);
+	const [twitterURL, setTwitterURL] = useState(socialMedia.twitterURL);
+	const [tiktokURL, setTiktokURL] = useState(socialMedia.tiktokURL);
+	const [homepageURL, setHomepageURL] = useState(socialMedia.homepageURL);
 	// refs
 	const formRef = useRef<HTMLFormElement | null>(null);
 
-	// onSubmit
-	const handleSettingsCreation = async (
+	const handleSubmitFormSettings = async (
 		ref: MutableRefObject<HTMLFormElement>
 	) => {
 		const data = {
@@ -81,16 +109,26 @@ const SettingsCreationTemplate = () => {
 		console.log(data);
 		const formData: FormData = new FormData(ref.current);
 
-		return await SettingsController.create(
-			data,
-			formData,
-			session?.accessToken
-		);
+		return typeForm
+			? await SettingsController.create(
+					data,
+					formData,
+					session?.accessToken
+			  )
+			: await SettingsController.update(
+					id,
+					data,
+					formData,
+					session?.accessToken
+			  );
 	};
 
 	return (
 		<Styled.Wrapper>
-			<Form onSubmit={handleSettingsCreation} reference={formRef.current}>
+			<Form
+				onSubmit={handleSubmitFormSettings}
+				reference={formRef.current}
+			>
 				<Heading as="h2" size="medium" color="quaternary">
 					Your portfolio settings
 				</Heading>
@@ -108,6 +146,7 @@ const SettingsCreationTemplate = () => {
 					icon={<LogoDev />}
 					value={logoImg}
 					onInputFile={(v) => setLogoImg(v)}
+					previewImg={logo.srcImg}
 					required={false}
 				/>
 				<ImageInput
@@ -116,6 +155,7 @@ const SettingsCreationTemplate = () => {
 					icon={<Icon />}
 					value={favIcon}
 					onInputFile={(v) => setFavIcon(v)}
+					previewImg={favIconProps}
 					required={true}
 				/>
 				<TextInput
@@ -195,4 +235,4 @@ const SettingsCreationTemplate = () => {
 	);
 };
 
-export default SettingsCreationTemplate;
+export default SettingsForm;

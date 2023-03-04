@@ -14,7 +14,7 @@ const PrivateComponent = ({ children }: PrivateComponentProps) => {
 	// states
 	const { data, status } = useSession();
 	const session: Session = data;
-
+	console.log("session data in private component : ", session);
 	// check session state
 	if (typeof window !== "undefined" && status === "loading") return null;
 

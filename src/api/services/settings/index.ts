@@ -22,6 +22,7 @@ export default class SettingsService {
 
 		return await CreateFetch.dispatch<FetchResponseSettings>(url, options);
 	}
+
 	static async getAll(token: string) {
 		const options = {
 			method: "GET",
@@ -32,6 +33,39 @@ export default class SettingsService {
 
 		return await CreateFetch.dispatch<FetchResponseSettings[]>(
 			url,
+			options
+		);
+	}
+
+	static async getById(id: string | string[], token: string) {
+		const options = {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		return await CreateFetch.dispatch<FetchResponseSettings>(
+			`${url}/${id}`,
+			options
+		);
+	}
+
+	static async update(
+		id: string | string[],
+		formData: FormData,
+		token: string
+	): Promise<FetchResponseSettings> {
+		const options = {
+			method: "PUT",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			body: formData,
+		};
+
+		return await CreateFetch.dispatch<FetchResponseSettings>(
+			`${url}/${id}`,
 			options
 		);
 	}

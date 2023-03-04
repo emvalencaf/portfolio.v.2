@@ -56,6 +56,7 @@ export default class SectionController {
 	}
 
 	static async update(
+		id: string | string[],
 		data: CreateSectionData,
 		formData: FormData,
 		token: string,
@@ -66,6 +67,7 @@ export default class SectionController {
 			if (!settings) throw new Error("you must choose an settings");
 
 			formData.set("settings", settings);
+			formData.append("typeSection", typeSection);
 
 			if (typeSection === "home")
 				SectionValidateHome.validate(data, formData);
@@ -81,16 +83,12 @@ export default class SectionController {
 			if (typeSection === "skills")
 				SectionValidationSkills.validate(data, formData);
 
-			const section = await SectionService.create(
-				formData,
-				token,
-				typeSection
-			);
+			const section = await SectionService.update(id, formData, token);
 
 			return {
 				data: section,
 				successMessage: {
-					message: `${typeSection} was successfully created`,
+					message: `${typeSection} was successfully updated`,
 					link: `/`,
 				},
 			};

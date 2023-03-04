@@ -19,6 +19,7 @@ export type ImageInputProps = {
 	icon?: React.ReactNode;
 	as?: "input" | "textarea";
 	reference?: HTMLInputElement;
+	previewImg?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const ImageInput = ({
@@ -32,11 +33,11 @@ const ImageInput = ({
 	icon,
 	as = "input",
 	reference = null,
+	previewImg = "",
 }: ImageInputProps) => {
 	// states
 	const inputRef = useRef(reference);
-	const [previewPicture, setPreviewPicture] = useState("");
-
+	const [previewPicture, setPreviewPicture] = useState<string>(previewImg);
 	// synthetic event handler
 	const handleChange = () => {
 		const value = inputRef.current.files[0];
@@ -52,7 +53,7 @@ const ImageInput = ({
 		<Styled.Wrapper>
 			<Styled.PictureGallery>
 				<div>
-					{value ? (
+					{value || previewPicture ? (
 						<img src={previewPicture} alt="preview image" />
 					) : (
 						<PhotoAlbum />

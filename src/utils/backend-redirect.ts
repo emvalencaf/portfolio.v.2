@@ -6,7 +6,10 @@ export const serverSideRedirect = (
 	redirectTo?: string
 ) => {
 	const newPath = redirectTo || encodeURI(ctx.resolvedUrl);
-
+	console.log(
+		"redirectTo url: ",
+		`${process.env.NEXT_PUBLIC_LOGIN_URI}/?redirect=${newPath}`
+	);
 	return {
 		props: {},
 		redirect: {

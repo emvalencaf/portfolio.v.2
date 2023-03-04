@@ -35,7 +35,7 @@ export default function Index({ portfolio, githubData }: IndexProps) {
 export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const response = await PortfolioController.get();
-		let githubData;
+		let githubData: GithubHoverCardProps;
 
 		if (!response)
 			return {

@@ -21,6 +21,22 @@ export default class SectionService {
 		console.log(url + "/" + typeSection);
 		return await CreateFetch.dispatch(`${url}/${typeSection}`, options);
 	}
+
+	static async update(
+		id: string | string[],
+		formData: FormData,
+		token: string
+	): Promise<FetchResponseSection> {
+		const options = {
+			method: "PUT",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			body: formData,
+		};
+		return await CreateFetch.dispatch(`${url}/${id}`, options);
+	}
+
 	static async getById(
 		id: string | string[],
 		token: string

@@ -5,24 +5,13 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import SideBar from "../../components/SideBar";
-import SectionHome, { SectionHomeProps } from "../../components/SectionHome";
+import SectionHome from "../../components/SectionHome";
 import GoTop from "../../components/GoTop";
-import SectionAbout, { SectionAboutProps } from "../../components/SectionAbout";
-import SectionSkills, {
-	SectionSkillsProps,
-} from "../../components/SectionSkills";
-import SectionProject, {
-	SectionProjectProps,
-} from "../../components/SectionProjects";
+import SectionAbout from "../../components/SectionAbout";
+import SectionSkills from "../../components/SectionSkills";
+import SectionProject from "../../components/SectionProjects";
 
 // type
-
-export type Sections = {
-	home: SectionHomeProps;
-	about: SectionAboutProps;
-	skills: SectionSkillsProps;
-	projects: SectionProjectProps;
-};
 
 export type HomeProps = {
 	settings: Settings;

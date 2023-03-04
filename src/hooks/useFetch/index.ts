@@ -16,7 +16,8 @@ import CheckObj from "../../utils/checkObj";
 // hook
 export const useFetch = <T>(
 	url: string,
-	options?: RequestInit
+	options?: RequestInit,
+	cb?: <T>() => Promise<T>
 ): UseFetchState<T> => {
 	// states
 	const [fetchState, setFetchState] = useState<UseFetchState<T>>({
@@ -65,6 +66,18 @@ export const useFetch = <T>(
 					state: "loading",
 				}));
 				console.log(fetchState);
+
+				if (cb) {
+					const json = await cb<T>();
+					if (!wait)
+						setFetchState({
+							data: json,
+							status: "success",
+							error: null,
+						});
+					return;
+				}
+
 				const json = await CreateFetch.dispatch<T>(urlRef.current, {
 					signal,
 					...optionsRef.current,
@@ -108,7 +121,7 @@ export const useFetch = <T>(
 			wait = true;
 			controller.abort();
 		};
-	}, [fetchState, shouldLoad]);
+	}, [cb, fetchState, shouldLoad]);
 
 	const { data, status, error } = fetchState;
 
