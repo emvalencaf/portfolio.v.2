@@ -33,10 +33,11 @@ const FormLogin = ({ errorMessage = "", handleLogin }: FormLoginProps) => {
 		event.preventDefault();
 		setLoading(true);
 
-		console.log("username: ", username);
-		console.log("password: ", password);
-
-		if (handleLogin) await handleLogin(username, password);
+		try {
+			if (handleLogin) await handleLogin(username, password);
+		} catch (err) {
+			console.log(err);
+		}
 
 		setLoading(false);
 	};
