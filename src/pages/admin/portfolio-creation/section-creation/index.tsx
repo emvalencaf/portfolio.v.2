@@ -9,6 +9,8 @@ import SectionCreationTemplate from "../../../../templates/SectionCreation";
 import SettingsController from "../../../../api/controller/settings";
 
 // types
+import { Settings } from "../../../../shared-types/settings";
+import { Session } from "../../../../shared-types/session-nextauth";
 import { GetServerSideProps } from "next/types";
 type SectionCreationPage = {
 	settings: Settings[];
@@ -16,8 +18,6 @@ type SectionCreationPage = {
 
 // utils
 import { privateServerSideProps } from "../../../../utils/private-serverside-props";
-import { Settings } from "../../../../shared-types/settings";
-import { Session } from "../../../../shared-types/session-nextauth";
 
 export default function SectionCreationPage({
 	settings = [],

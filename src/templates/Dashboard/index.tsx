@@ -9,6 +9,7 @@ import Heading from "../../components/Heading";
 import Menu from "../../components/Menu";
 import Section from "../../components/Section";
 import { PortfolioContent } from "../../shared-types/portfolio";
+import { Session } from "../../shared-types/session-nextauth";
 
 // styles
 import * as Styled from "./styles";
@@ -36,18 +37,25 @@ const iconData: IconData = {
 };
 
 const DashboardTemplate = ({ sections = [] }: DashboardProps) => {
+	// session
+	const { data } = useSession();
+	const session: Session = data;
+
 	// states
-	const { data: session } = useSession();
 	const [btnArray, setBtnArray] = useState<BtnArrSections>([]);
 
 	useEffect(() => {
-		setBtnArray(() =>
-			sections.map((section) => ({
+		const arr: BtnArrSections = [];
+
+		sections.forEach((section) =>
+			arr.push({
 				_id: section._id,
 				title: section.title,
 				icon: section.icon,
-			}))
+			})
 		);
+
+		setBtnArray(() => [...arr]);
 
 		return () => setBtnArray(() => []);
 	}, [sections]);
