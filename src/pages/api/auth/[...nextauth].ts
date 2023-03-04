@@ -122,8 +122,6 @@ export default NextAuth({
 						password: credentials.password,
 					};
 
-					console.log(body);
-
 					const login = await fetch(
 						`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`,
 						{
@@ -134,8 +132,6 @@ export default NextAuth({
 							body: JSON.stringify(body),
 						}
 					).then((data) => data.json());
-
-					console.log(login);
 
 					if (!login) throw new Error("No login");
 
@@ -180,6 +176,4 @@ const setToken = (data: SetTokenParams, token: Token) => {
 	token.expiration = Math.floor(
 		actualDateInSeconds + tokenExpirationInSeconds
 	);
-
-	console.log("token :", token);
 };
