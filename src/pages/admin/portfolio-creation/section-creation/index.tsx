@@ -17,6 +17,7 @@ type SectionCreationPage = {
 // utils
 import { privateServerSideProps } from "../../../../utils/private-serverside-props";
 import { Settings } from "../../../../shared-types/settings";
+import { Session } from "../../../../shared-types/session-nextauth";
 
 export default function SectionCreationPage({
 	settings = [],
@@ -29,7 +30,7 @@ export default function SectionCreationPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	return privateServerSideProps(ctx, async (session) => {
+	return privateServerSideProps(ctx, async (session: Session) => {
 		const settings = await SettingsController.getAll(session.accessToken);
 
 		return {
