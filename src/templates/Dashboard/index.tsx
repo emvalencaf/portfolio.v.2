@@ -8,14 +8,46 @@ import { useEffect, useState } from "react";
 import Heading from "../../components/Heading";
 import Menu from "../../components/Menu";
 import Section from "../../components/Section";
-import { PortfolioContent } from "../../shared-types/portfolio";
+
+import { Project } from "../../shared-types/project";
+import {
+	BiosData,
+	EducationData,
+	Tech,
+	WorkData,
+} from "../../shared-types/section";
 import { Session } from "../../shared-types/session-nextauth";
 
 // styles
 import * as Styled from "./styles";
 
 // types
-export type DashboardProps = Pick<PortfolioContent, "sections">;
+export type DashboardProps = {
+	sections: {
+		_id?: string;
+		title: string;
+		children?: string;
+		background?: boolean;
+		icon?: "home" | "about" | "skills" | "projects" | "other";
+		color?:
+			| "primary"
+			| "secondary"
+			| "tertiary"
+			| "quaternary"
+			| "quinary"
+			| "senary";
+		backgroundImg?: string;
+		owner?: string;
+		techs?: Tech[];
+		ocupation?: string;
+		mainStack?: string[];
+		biosData?: BiosData;
+		workData?: WorkData;
+		educationData?: EducationData;
+		projects?: Project[];
+		urlDownload?: string;
+	}[];
+};
 type BtnArrSections = {
 	_id: string;
 	title: string;
@@ -43,6 +75,7 @@ const DashboardTemplate = ({ sections = [] }: DashboardProps) => {
 
 	// states
 	const [btnArray, setBtnArray] = useState<BtnArrSections>([]);
+	console.log(sections);
 
 	useEffect(() => {
 		const arr: BtnArrSections = [];
