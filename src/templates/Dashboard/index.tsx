@@ -1,5 +1,12 @@
 // hooks
-import { Cases, Code, Home, Person3 } from "@styled-icons/material-outlined";
+import {
+	AdminPanelSettings,
+	Cases,
+	Code,
+	Edit,
+	Home,
+	Person3,
+} from "@styled-icons/material-outlined";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -93,16 +100,6 @@ const DashboardTemplate = ({ sections = [] }: DashboardProps) => {
 		return () => setBtnArray(() => []);
 	}, [sections]);
 
-	/*
-	if (Object.keys(sections).length >= 1) {
-		for (const prop in sections) {
-			btnArray.push({
-				id: sections[prop]._id,
-				icon: sections[prop].icon,
-			});
-		}
-	}*/
-
 	return (
 		<Styled.Wrapper>
 			<Menu />
@@ -141,6 +138,55 @@ const DashboardTemplate = ({ sections = [] }: DashboardProps) => {
 								</Link>
 							</li>
 						))}
+					</Styled.ListButtonsSections>
+				</Styled.ContainerButtonsSections>
+			</Section>
+			<Section id="portfolio-controllers">
+				<Heading as="h2" size="big" color="secondary">
+					Crie o seu portfólio
+				</Heading>
+				<p>
+					Clique nos ícones abaixo para ir a página correspondente ao
+					conteúdo que você quer editar ou criar em seu portfólio
+				</p>
+				<Styled.ContainerButtonsSections>
+					<Styled.ListButtonsSections>
+						<li>
+							<Link
+								href={`/admin/portfolio-creation`}
+								passHref
+								legacyBehavior
+							>
+								<Styled.Link target="_self" rel="internal">
+									<Edit />
+									<span>Criar portfólio</span>
+								</Styled.Link>
+							</Link>
+						</li>
+						<li>
+							<Link
+								href={`/admin/projects`}
+								passHref
+								legacyBehavior
+							>
+								<Styled.Link target="_self" rel="internal">
+									<Cases />
+									<span>Projetos</span>
+								</Styled.Link>
+							</Link>
+						</li>
+						<li>
+							<Link
+								href={`/admin/settings`}
+								passHref
+								legacyBehavior
+							>
+								<Styled.Link target="_self" rel="internal">
+									<AdminPanelSettings />
+									<span>Settings</span>
+								</Styled.Link>
+							</Link>
+						</li>
 					</Styled.ListButtonsSections>
 				</Styled.ContainerButtonsSections>
 			</Section>

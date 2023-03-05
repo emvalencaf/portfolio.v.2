@@ -1,10 +1,12 @@
+// controllers
+import ProjectController from "../../api/controller/project";
+
 // template
 import ProjectTemplate from "../../templates/Project";
 
 // types
 import { Project } from "../../shared-types/project";
-import { GetStaticPaths, GetStaticProps } from "next";
-import ProjectController from "../../api/controller/project";
+import { GetServerSideProps } from "next";
 export type ProjectPageProps = {
 	project: Project;
 };
@@ -14,21 +16,7 @@ export default function ProjectPage({ project }: ProjectPageProps) {
 	return <ProjectTemplate {...project} />;
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const projects = await ProjectController.getAll();
-
-	const paths = projects.map((project) => ({
-		params: { id: project._id },
-	}));
-
-	if (projects)
-		return {
-			paths,
-			fallback: false,
-		};
-};
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { id } = ctx.params;
 
 	const response = await ProjectController.getById(id);
@@ -46,6 +34,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 		props: {
 			project,
 		},
-		revalidate: 72000, // it will re-render once each 20 hours
 	};
 };

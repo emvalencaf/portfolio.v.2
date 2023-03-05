@@ -23,6 +23,25 @@ export default class ProjectService {
 		);
 	}
 
+	static async update(
+		id: string | string[],
+		formData: FormData,
+		token: string
+	) {
+		const options = {
+			method: "PUT",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			body: formData,
+		};
+
+		return await CreateFetch.dispatch<FetchResponseProject>(
+			`${url}/${id}`,
+			options
+		);
+	}
+
 	static async getAll() {
 		const options = {
 			method: "GET",
@@ -39,5 +58,15 @@ export default class ProjectService {
 			`${url}/${id}`,
 			options
 		);
+	}
+
+	static async delete(id: string | string[], token: string) {
+		const options = {
+			method: "DELETE",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		return await CreateFetch.dispatch(`${url}/${id}`, options);
 	}
 }

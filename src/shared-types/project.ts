@@ -28,6 +28,10 @@ export type FetchResponseProject = {
 	project: Project;
 };
 
+export type FetchResponseProjects = {
+	projects: Project[];
+};
+
 export type ProjectControllerCreate = {
 	data: Project;
 	successMessage: SuccessState;

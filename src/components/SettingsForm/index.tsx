@@ -109,7 +109,7 @@ const SettingsForm = ({
 		console.log(data);
 		const formData: FormData = new FormData(ref.current);
 
-		return typeForm
+		return typeForm === "create"
 			? await SettingsController.create(
 					data,
 					formData,
@@ -156,7 +156,7 @@ const SettingsForm = ({
 					value={favIcon}
 					onInputFile={(v) => setFavIcon(v)}
 					previewImg={favIconProps}
-					required={true}
+					required={typeForm === "create" ? true : false}
 				/>
 				<TextInput
 					name="logoAlt"

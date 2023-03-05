@@ -14,7 +14,8 @@ export type ButtonProps = {
 		| "tertiary"
 		| "quaternary"
 		| "quinary"
-		| "senary";
+		| "senary"
+		| "warning";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
