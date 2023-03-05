@@ -23,6 +23,7 @@ const Select = ({
 	icon,
 	reference = null,
 	required = false,
+	disabled = false,
 }: SelectProps) => {
 	// states
 	const selectRef = useRef(reference);
@@ -44,6 +45,7 @@ const Select = ({
 				onChange={handleChange}
 				required={required}
 				ref={selectRef}
+				disabled={disabled}
 			>
 				<option value="">
 					{placeholder} {!!icon && icon}

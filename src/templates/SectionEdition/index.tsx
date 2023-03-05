@@ -45,6 +45,8 @@ const SectionEditionTemplate = ({ section }: SectionEditioTemplateProps) => {
 	return (
 		<SectionForm
 			formType="update"
+			disabledSelectSettings={true}
+			disabledSelectTypeSection={true}
 			typeSectionProps={section.icon}
 			settingsIdProps={section.settings && section.settings}
 			backgroundImgProps={section.background && section.backgroundImg}

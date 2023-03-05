@@ -98,6 +98,8 @@ export type SectionFormProps = {
 	// projects
 	projectsProps?: ProjectAttached[];
 	formType?: "create" | "update";
+	disabledSelectTypeSection?: boolean;
+	disabledSelectSettings?: boolean;
 };
 
 const SectionForm = ({
@@ -116,6 +118,8 @@ const SectionForm = ({
 	urlDownloadProps = "",
 	// projects section
 	projectsProps = [],
+	disabledSelectSettings = false,
+	disabledSelectTypeSection = false,
 	formType = "create",
 }: SectionFormProps) => {
 	const { data } = useSession();
@@ -392,7 +396,7 @@ const SectionForm = ({
 						placeholder="choose a portfolio"
 						value={selectedSettings}
 						onChange={(v) => setSelectedSettings(v)}
-						disabled={settingsIdProps ? true : false}
+						disabled={disabledSelectSettings}
 					>
 						{allSettings.length >= 1 &&
 							allSettings.map((settings) => (
@@ -412,7 +416,7 @@ const SectionForm = ({
 							onChange={(v) => {
 								setTypeSection(v);
 							}}
-							disabled={typeSectionProps ? true : false}
+							disabled={disabledSelectTypeSection}
 						>
 							<option value="home">home</option>
 							<option value="about">about</option>
