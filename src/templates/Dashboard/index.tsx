@@ -48,7 +48,7 @@ export type DashboardProps = {
 		urlDownload?: string;
 	}[];
 };
-type BtnArrSections = {
+export type BtnArrSections = {
 	_id: string;
 	title: string;
 	icon: string;
