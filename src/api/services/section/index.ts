@@ -49,4 +49,14 @@ export default class SectionService {
 		};
 		return await CreateFetch.dispatch(`${url}/${id}`, options);
 	}
+
+	static async getAll(token: string) {
+		const options = {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		return await CreateFetch.dispatch(`${url}`, options);
+	}
 }

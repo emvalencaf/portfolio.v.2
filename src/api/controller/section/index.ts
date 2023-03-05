@@ -102,11 +102,25 @@ export default class SectionController {
 			if (!id) throw new Error("you must inform an id");
 			if (!token) throw new Error("you must be login");
 
-			const response = await SectionService.getById(id, token);
+			const section = await SectionService.getById(id, token);
 
-			if (!response) throw new Error("error not found it");
+			if (!section) throw new Error("section not found it");
 
-			return response;
+			return section;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	static async getAll(token: string) {
+		try {
+			if (!token) throw new Error("you must be login");
+
+			const sections = SectionService.getAll(token);
+
+			if (!sections) throw new Error("no section were found it");
+
+			return sections;
 		} catch (err) {
 			console.log(err);
 		}

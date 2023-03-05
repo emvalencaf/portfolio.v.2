@@ -1,6 +1,17 @@
 import { SuccessState } from "./async-success-error";
+import { Project } from "./project";
 
-export type FetchResponseSection = CreateSectionData;
+export type FetchResponseSection = Section & {
+	owner?: string;
+	techs?: Tech[];
+	ocupation?: string;
+	mainStack?: string[];
+	biosData?: BiosData;
+	workData?: WorkData;
+	educationData?: EducationData;
+	projects?: Project[];
+	urlDownload?: string;
+};
 
 export type Section = {
 	_id?: string;
@@ -16,10 +27,11 @@ export type Section = {
 		| "quinary"
 		| "senary";
 	backgroundImg?: string;
+	settings?: string;
 };
 
 export type SectionControllerCreate = {
-	data: CreateSectionData;
+	data: FetchResponseSection;
 	successMessage: SuccessState;
 };
 

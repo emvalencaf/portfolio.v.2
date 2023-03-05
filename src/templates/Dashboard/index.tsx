@@ -187,6 +187,17 @@ const DashboardTemplate = ({ sections = [] }: DashboardProps) => {
 								</Styled.Link>
 							</Link>
 						</li>
+						<li>
+							<Link
+								href={`/admin/sections`}
+								passHref
+								legacyBehavior
+							>
+								<Styled.Link target="_self" rel="internal">
+									<span>Section</span>
+								</Styled.Link>
+							</Link>
+						</li>
 					</Styled.ListButtonsSections>
 				</Styled.ContainerButtonsSections>
 			</Section>
