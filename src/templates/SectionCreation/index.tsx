@@ -136,7 +136,8 @@ const SectionCreationTemplate = ({
 
 		setLoadingFetchedProjects(true);
 		try {
-			const projects = await ProjectController.getAll();
+			const response = await ProjectController.getAll();
+			const { projects } = response;
 			setFetchedProjects(() => [...projects]);
 		} catch (err) {
 			setErrorMessageFetchedProjects(err.message);

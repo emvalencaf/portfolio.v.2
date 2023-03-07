@@ -1,4 +1,7 @@
-import { FetchResponseProject, Project } from "../../../shared-types/project";
+import {
+	FetchResponseProject,
+	FetchResponseProjects,
+} from "../../../shared-types/project";
 import CreateFetch from "../../../utils/createFetch";
 
 // config
@@ -47,7 +50,10 @@ export default class ProjectService {
 			method: "GET",
 		};
 
-		return await CreateFetch.dispatch<Project[]>(`${url}/`, options);
+		return await CreateFetch.dispatch<FetchResponseProjects>(
+			`${url}/`,
+			options
+		);
 	}
 
 	static async getById(id: string | string[]): Promise<FetchResponseProject> {
