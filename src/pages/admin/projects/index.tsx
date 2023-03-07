@@ -28,7 +28,9 @@ export default function ProjectAdminPage({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	return privateServerSideProps(ctx, async (session: Session) => {
-		const projects = await ProjectController.getAll();
+		const response = await ProjectController.getAll();
+		const { projects } = response;
+
 		if (!projects)
 			return {
 				props: null,
