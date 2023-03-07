@@ -125,7 +125,7 @@ export default class SectionValidationAbout {
 
 		if (course.resume.length > 250)
 			throw new Error(
-				`your ${course.resume} course has more than 250 characters`
+				`your ${course.resume} course resume has more than 250 characters`
 			);
 
 		if (!course.startIn)
@@ -138,9 +138,9 @@ export default class SectionValidationAbout {
 				`your ${course.title} course dosen't have a work time`
 			);
 
-		if (typeof course.workTime === "string")
+		if (typeof course.workTime === "string" && course.workTime.length > 50)
 			throw new Error(
-				`your ${course.title} course has more than 50 characters`
+				`your ${course.title} course work time has more than 50 characters`
 			);
 	}
 }
