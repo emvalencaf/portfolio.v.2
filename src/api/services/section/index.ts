@@ -34,6 +34,7 @@ export default class SectionService {
 			},
 			body: formData,
 		};
+		console.log(`${url}/${id}`);
 		return await CreateFetch.dispatch(`${url}/${id}`, options);
 	}
 

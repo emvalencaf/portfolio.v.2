@@ -44,6 +44,7 @@ const SectionEditionTemplate = ({ section }: SectionEditioTemplateProps) => {
 
 	return (
 		<SectionForm
+			id={section._id}
 			formType="update"
 			disabledSelectSettings={true}
 			disabledSelectTypeSection={true}

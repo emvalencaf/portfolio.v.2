@@ -131,7 +131,7 @@ const SectionForm = ({
 	const [typeSection, setTypeSection] = useState<
 		"home" | "about" | "skills" | "projects" | "other" | undefined
 	>(typeSectionProps);
-
+	console.log("component id ", id);
 	// form states
 	//home section
 	const [ocupation, setOcupation] = useState(ocupationProps);
