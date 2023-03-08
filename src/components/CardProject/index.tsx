@@ -61,7 +61,12 @@ const CardProject = ({
 		<Styled.Wrapper>
 			<Styled.HeaderCardContainer>
 				{langIcons[`${mainLang}`]}
-				<Heading as="h3" size="small" uppercase={true}>
+				<Heading
+					as="h3"
+					size="small"
+					uppercase={true}
+					color="quaternary"
+				>
 					{title}
 				</Heading>
 				<span>

@@ -70,6 +70,7 @@ export const ContentContainer = styled.div`
 				transform: scale(1);
 			}
 		}
+		color: ${theme.colors.quaternary};
 		transform: scale(0);
 		transition: all ${theme.transitions.normal} ease-in-out;
 		animation: content ${theme.transitions.slowest};
