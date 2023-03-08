@@ -49,7 +49,6 @@ const Form = ({ children, onSubmit, reference = null }: FormProps) => {
 			setSaving(true);
 
 			try {
-				console.log("aqui");
 				const response = await onSubmit(formRef);
 
 				const { data, successMessage } = response;

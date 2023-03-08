@@ -23,6 +23,8 @@ export default class SectionController {
 
 			formData.set("settings", settings);
 
+			console.log(data);
+
 			if (typeSection === "home")
 				SectionValidateHome.validate(data, formData);
 
@@ -83,7 +85,11 @@ export default class SectionController {
 			if (typeSection === "skills")
 				SectionValidationSkills.validate(data, formData);
 
+			console.log(formData.get("typeSection"));
+
 			const section = await SectionService.update(id, formData, token);
+
+			console.log(section);
 
 			return {
 				data: section,

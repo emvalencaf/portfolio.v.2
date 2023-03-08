@@ -313,7 +313,7 @@ const SectionForm = ({
 			});
 		}
 
-		console.log(data);
+		console.log("data in section form", data);
 
 		const formData = new FormData(ref.current);
 
