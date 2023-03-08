@@ -47,8 +47,8 @@ const CardProject = ({
 	mainLang = "javascript",
 	srcImg = "",
 	resume = "",
-	urlDemo,
-	urlRepository,
+	urlDemo = "",
+	urlRepository = "",
 }: CardProjectProps) => {
 	// states
 	const [showResume, setShowResume] = useState(false);
