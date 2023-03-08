@@ -23,31 +23,20 @@ import * as Styled from "./styles";
 // types
 import { useEffect, useState } from "react";
 import DateStringFormating from "../../utils/dateString";
+import { Settings } from "../../shared-types/settings";
+import Section from "../../components/Section";
+import SideBar from "../../components/SideBar";
+import { Project } from "../../shared-types/project";
 export type ProjectTemplateProps = {
-	title?: string;
-	resume?: string;
-	srcImg?: string;
-	description?: string;
-	mainLang?: string;
-	owner?: string;
-	createdAt?: string | number;
-	updatedAt?: string | number;
+	settings: Settings;
+	content?: Project;
 };
 
-const ProjectTemplate = ({
-	title = "",
-	resume = "",
-	srcImg = "",
-	description = "",
-	mainLang = "",
-	owner = "",
-	createdAt = "",
-	updatedAt = "",
-}: ProjectTemplateProps) => {
+const ProjectTemplate = ({ settings, content }: ProjectTemplateProps) => {
 	// states
 	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
 	const [visibleHeader, setVisibleHeader] = useState<boolean>(true);
-
+	const [hostname] = useState<string>(process.env.NEXT_PUBLIC_FRONTEND_URL);
 	// useEffect
 	useEffect(() => {
 		const handleHiddenHeader = () => {
@@ -81,61 +70,78 @@ const ProjectTemplate = ({
 	return (
 		<Styled.Wrapper>
 			<GoTop />
-			<Header
-				menuLinks={[]}
-				logo={{
-					altText: "dashboard",
-					link: "/admin/",
-				}}
-				visible={visibleHeader}
-			/>
-			<section>
-				<article>
+			{settings && (
+				<>
+					<Header
+						logo={settings.logo}
+						menuLinks={settings.menu.map((menuLink) => ({
+							...menuLink,
+							link: `${hostname}/${
+								menuLink.link === "home"
+									? `#`
+									: `#${menuLink.link}`
+							}`,
+						}))}
+						visible={visibleHeader}
+						colorIcon="secondary"
+					/>
+
+					<SideBar
+						{...settings.socialMedia}
+						sizes="big"
+						color="quaternary"
+					/>
+				</>
+			)}
+			{content && (
+				<>
 					<Styled.ArticleHeader>
 						<Heading as="h1" size="big" uppercase>
-							{title}
+							{content.title}
 						</Heading>
 						<Styled.ArticleMeta>
-							<span>{owner}</span>
+							<span>{content.owner.name}</span>
 							<span>
 								{DateStringFormating.getFullDateString(
-									createdAt
+									content.createdAt
 								)}
 							</span>
 						</Styled.ArticleMeta>
-						{mainLang && pickUpLangIcon[mainLang]}
-						<p>{resume}</p>
+						{content.mainLang && pickUpLangIcon[content.mainLang]}
+						<p>{content.resume}</p>
 					</Styled.ArticleHeader>
-					<Styled.ArticleContent>
-						{srcImg && (
-							<Styled.PictureContainer>
-								{srcImg ? (
-									<img
-										src={`${srcImg}`}
-										alt={`project picture`}
-									/>
-								) : (
-									<Photo />
-								)}
-								<figcaption>
-									Uma screenshot do projeto
-								</figcaption>
-							</Styled.PictureContainer>
+					<Section id={content.title}>
+						<Styled.ArticleContent>
+							{content.srcImg && (
+								<Styled.PictureContainer>
+									{content.srcImg ? (
+										<img
+											src={`${content.srcImg}`}
+											alt={`project picture`}
+										/>
+									) : (
+										<Photo />
+									)}
+									<figcaption>
+										Uma screenshot do projeto
+									</figcaption>
+								</Styled.PictureContainer>
+							)}
+							<HtmlComponent html={content.description} />
+						</Styled.ArticleContent>
+						{content.updatedAt && (
+							<Styled.ArticleFooter>
+								<p>
+									Last update at
+									{DateStringFormating.getFullDateString(
+										content.updatedAt
+									)}
+								</p>
+							</Styled.ArticleFooter>
 						)}
-						<HtmlComponent html={description} />
-					</Styled.ArticleContent>
-					{updatedAt && (
-						<Styled.ArticleFooter>
-							<p>
-								Last update at
-								{DateStringFormating.getFullDateString(
-									updatedAt
-								)}
-							</p>
-						</Styled.ArticleFooter>
-					)}
-				</article>
-			</section>
+					</Section>
+				</>
+			)}
 		</Styled.Wrapper>
 	);
 };

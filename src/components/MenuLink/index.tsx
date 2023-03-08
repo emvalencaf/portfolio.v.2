@@ -30,7 +30,7 @@ const iconData: IconData = {
 
 const MenuLink = ({ children, link, icon, newTab = false }: MenuLinkProps) => {
 	const target = newTab ? "_blank" : "_self";
-	const hostname = process.env.NEXTAUTH_URL;
+	const hostname = process.env.NEXT_PUBLIC_FRONTEND_URL;
 	const rel =
 		// eslint-disable-next-line no-useless-escape
 		link.includes(hostname) || link.match(/^[\/#]/)

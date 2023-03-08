@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Title as HeadingContainer } from "../../components/Heading/styles";
+import { Wrapper as WrapperHeader } from "../../components/Header/styles";
 export const Wrapper = styled.div`
 	${({ theme }) => css`
 		display: flex;
@@ -7,6 +8,15 @@ export const Wrapper = styled.div`
 		justify-content: space-between;
 		color: ${theme.colors.secondary};
 		height: 100vh;
+
+		& ${WrapperHeader} {
+			opacity: 1;
+			background-image: linear-gradient(
+				to top,
+				transparent 1%,
+				${theme.colors.quaternary}
+			);
+		}
 	`}
 `;
 

@@ -9,6 +9,13 @@ export type SideBarProps = {
 	githubURL?: string;
 	linkedinURL?: string;
 	sizes?: "small" | "medium" | "big";
+	color?:
+		| "primary"
+		| "secondary"
+		| "tertiary"
+		| "quaternary"
+		| "quinary"
+		| "senary";
 };
 
 const urlPattern = {
@@ -20,9 +27,10 @@ const SideBar = ({
 	githubURL = "",
 	linkedinURL = "",
 	sizes = "medium",
+	color = "secondary",
 }: SideBarProps) => {
 	return (
-		<Styled.Wrapper>
+		<Styled.Wrapper color={color}>
 			{githubURL && githubURL.includes(urlPattern.github) ? (
 				<Styled.SocialMediaLink
 					rel="external"
@@ -30,6 +38,7 @@ const SideBar = ({
 					href={githubURL}
 					aria-label="github profile"
 					sizes={sizes}
+					color={color}
 				>
 					<Github />
 				</Styled.SocialMediaLink>
@@ -43,6 +52,7 @@ const SideBar = ({
 					href={linkedinURL}
 					aria-label="linkedin profile"
 					sizes={sizes}
+					color={color}
 				>
 					<Linkedin />
 				</Styled.SocialMediaLink>

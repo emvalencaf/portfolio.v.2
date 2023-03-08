@@ -1,53 +1,46 @@
-// hooks
-import { useRouter } from "next/router";
-import { useGetProject } from "../../hooks/useGetProject";
+// controllers
+import PortfolioController from "../../api/controller/portfolio";
+import ProjectController from "../../api/controller/project";
 
 // template
-import ProjectTemplate from "../../templates/Project";
-// types
-import { Project } from "../../shared-types/project";
+import ProjectTemplate, { ProjectTemplateProps } from "../../templates/Project";
 
-export type ProjectPageProps = {
-	project: Project;
+// types
+import { GetStaticPaths, GetStaticProps } from "next";
+
+export default function ProjectPage({
+	settings,
+	content,
+}: ProjectTemplateProps) {
+	return <ProjectTemplate settings={settings} content={content} />;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	return {
+		paths: [],
+		fallback: "blocking",
+	};
 };
 
-export default function ProjectPage() {
-	// router
-	const router = useRouter();
-	const { id } = router.query;
-
-	// states
-	const { project, isLoading } = useGetProject(id ? id : null);
-
-	if (isLoading) return <p>Is loading...</p>;
-
-	return <ProjectTemplate {...project} owner={project?.owner?.name} />;
-}
-
-/*
-export default function ProjectPage({ project }: ProjectPageProps) {
-	console.log(project);
-	return <ProjectTemplate {...project} />;
-}
-/*
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
 	const { id } = ctx.params;
+	try {
+		const responsePortfolio = await PortfolioController.get();
+		const responseProject = await ProjectController.getById(id);
 
-	const response = await ProjectController.getById(id);
+		const { portfolio } = responsePortfolio;
+		const { project } = responseProject;
 
-	console.log(response);
-
-	if (!response)
+		return {
+			props: {
+				settings: portfolio.settings,
+				content: project,
+			},
+		};
+	} catch (err) {
+		console.log(err);
 		return {
 			notFound: true,
 		};
-
-	const { project } = response;
-
-	return {
-		props: {
-			project,
-		},
-	};
+	}
 };
-*/

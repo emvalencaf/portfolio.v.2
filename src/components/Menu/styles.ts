@@ -4,6 +4,13 @@ import { Link as MenuLinkStyled } from "../MenuLink/styles";
 type MenuStyled = {
 	theme?: DefaultTheme;
 	visible: boolean;
+	colorIcon?:
+		| "primary"
+		| "secondary"
+		| "tertiary"
+		| "quaternary"
+		| "quinary"
+		| "senary";
 };
 
 const menuVisible = () => css`
@@ -12,7 +19,7 @@ const menuVisible = () => css`
 `;
 
 export const Nav = styled.nav<MenuStyled>`
-	${({ theme, visible }) => css`
+	${({ theme, visible, colorIcon }) => css`
 		@media ${theme.media.lteOrEqMedium} {
 			position: fixed;
 			//			height: 100%;
@@ -125,12 +132,13 @@ export const Nav = styled.nav<MenuStyled>`
 				${theme.transitions.slowest};
 			transform: scale(0);
 			animation-fill-mode: forwards;
+			color: ${theme.colors[colorIcon]};
 		}
 	`}
 `;
 
 export const Button = styled.button<MenuStyled>`
-	${({ theme, visible }) => css`
+	${({ theme, visible, colorIcon }) => css`
 		@media ${theme.media.lteOrEqMedium} {
 			display: flex;
 			align-items: center;
@@ -156,6 +164,7 @@ export const Button = styled.button<MenuStyled>`
 		> svg {
 			width: ${theme.fonts.sizes.medium};
 			height: ${theme.fonts.sizes.medium};
+			color: ${theme.colors[colorIcon]};
 		}
 	`}
 `;

@@ -17,7 +17,7 @@ const logoSizes = {
 };
 
 export const Wrapper = styled.div`
-	${({ theme }) => css`
+	${({ theme, color }) => css`
 		@media ${theme.media.lteOrEqMedium} {
 			display: none;
 			appearance: none;
@@ -32,21 +32,26 @@ export const Wrapper = styled.div`
 		bottom: 25rem;
 		left: 2rem;
 		z-index: ${theme.layers.layer6};
+		& ${VerticalLine} {
+			border-color: ${theme.colors[color]};
+		}
 	`}
 `;
 export const SocialMediaLink = styled.a<SideBarProps>`
-	${({ theme, sizes }) => css`
+	${({ theme, sizes, color = "secondary" }) => css`
 		color: ${theme.colors.secondary};
 
 		& svg,
 		& {
-			color: ${theme.colors.secondary};
+			color: ${theme.colors[color]};
 			${logoSizes[sizes](theme)}
 			transition: all ${theme.transitions.fast} ease-in-out;
 		}
 
 		& svg:hover {
-			color: ${theme.colors.deepWhite};
+			color: ${color === "secondary"
+				? `${theme.colors.deepWhite}`
+				: `${theme.colors.tertiary}`};
 			transform: scale(1.2);
 
 			filter: drop-shadow(0 0 0.75rem ${theme.colors.tertiary});
@@ -55,11 +60,11 @@ export const SocialMediaLink = styled.a<SideBarProps>`
 `;
 
 export const VerticalLine = styled.div`
-	${({ theme }) => css`
+	${() => css`
 		content: "";
 		width: 1px;
 		height: 100px;
-		border: 1px solid ${theme.colors.secondary};
+		border: 1px solid;
 		margin: 20px;
 		display: inline-block;
 	`}

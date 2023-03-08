@@ -9,13 +9,25 @@ import * as Styled from "./styles";
 export type HeaderProps = MenuProps & {
 	logo: LogoLinkProps;
 	visible?: boolean;
+	colorIcon?:
+		| "primary"
+		| "secondary"
+		| "tertiary"
+		| "quaternary"
+		| "quinary"
+		| "senary";
 };
 
-const Header = ({ menuLinks = [], logo, visible = true }: HeaderProps) => {
+const Header = ({
+	menuLinks = [],
+	logo,
+	visible = true,
+	colorIcon = "secondary",
+}: HeaderProps) => {
 	return (
 		<Styled.Wrapper visible={visible}>
 			<LogoLink {...logo} />
-			<Menu menuLinks={menuLinks} />
+			<Menu menuLinks={menuLinks} colorIcon={colorIcon} />
 		</Styled.Wrapper>
 	);
 };

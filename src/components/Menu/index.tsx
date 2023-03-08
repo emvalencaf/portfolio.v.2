@@ -24,9 +24,16 @@ import * as Styled from "./styles";
 import { Session } from "../../shared-types/session-nextauth";
 export type MenuProps = {
 	menuLinks?: MenuLinkProps[];
+	colorIcon?:
+		| "primary"
+		| "secondary"
+		| "tertiary"
+		| "quaternary"
+		| "quinary"
+		| "senary";
 };
 
-const Menu = ({ menuLinks = [] }: MenuProps) => {
+const Menu = ({ menuLinks = [], colorIcon = "secondary" }: MenuProps) => {
 	// router
 	const router = useRouter();
 
@@ -47,6 +54,7 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 				onClick={() => setVisible(true)}
 				visible={visible}
 				aria-label="Open/Close menu"
+				colorIcon={colorIcon}
 			>
 				{visible ? (
 					<CloseIcon aria-label="Close menu" />
@@ -54,7 +62,11 @@ const Menu = ({ menuLinks = [] }: MenuProps) => {
 					<MenuIcon aria-label="Open menu" />
 				)}
 			</Styled.Button>
-			<Styled.Nav onClick={() => setVisible(false)} visible={visible}>
+			<Styled.Nav
+				onClick={() => setVisible(false)}
+				visible={visible}
+				colorIcon={colorIcon}
+			>
 				<ul>
 					{menuLinks.length >= 1 ? (
 						menuLinks.map((link) => (
