@@ -7,9 +7,7 @@ import {
 	EducationData,
 	FetchResponseSection,
 } from "../../shared-types/section";
-export type SectionEditioTemplateProps = {
-	section: FetchResponseSection;
-};
+export type SectionEditioTemplateProps = Pick<FetchResponseSection, "section">;
 
 const SectionEditionTemplate = ({ section }: SectionEditioTemplateProps) => {
 	const filterEducationData = (educationData: EducationData) => {

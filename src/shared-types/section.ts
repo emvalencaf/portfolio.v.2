@@ -1,16 +1,33 @@
 import { SuccessState } from "./async-success-error";
 import { Project } from "./project";
 
-export type FetchResponseSection = Section & {
-	owner?: string;
-	techs?: Tech[];
-	ocupation?: string;
-	mainStack?: string[];
-	biosData?: BiosData;
-	workData?: WorkData;
-	educationData?: EducationData;
-	projects?: Project[];
-	urlDownload?: string;
+export type FetchResponseSection = {
+	section: Section & {
+		owner?: string;
+		techs?: Tech[];
+		ocupation?: string;
+		mainStack?: string[];
+		biosData?: BiosData;
+		workData?: WorkData;
+		educationData?: EducationData;
+		projects?: Project[];
+		urlDownload?: string;
+	};
+};
+
+export type FetchResponseSections = {
+	sections: Section &
+		{
+			owner?: string;
+			techs?: Tech[];
+			ocupation?: string;
+			mainStack?: string[];
+			biosData?: BiosData;
+			workData?: WorkData;
+			educationData?: EducationData;
+			projects?: Project[];
+			urlDownload?: string;
+		}[];
 };
 
 export type Section = {

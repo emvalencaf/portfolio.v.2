@@ -5,6 +5,10 @@ export type FetchResponseSettings = {
 	settings: Settings;
 };
 
+export type FetchResponseAllSettings = {
+	settings: Settings[];
+};
+
 export type SettingsControllerCreate = {
 	data: FetchResponseSettings;
 	successMessage: SuccessState;

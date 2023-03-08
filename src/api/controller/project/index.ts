@@ -183,6 +183,7 @@ export default class ProjectController {
 			return await ProjectService.getAll();
 		} catch (err) {
 			console.log(err);
+			throw new Error(err.message);
 		}
 	}
 
@@ -193,6 +194,7 @@ export default class ProjectController {
 			return await ProjectService.getById(id);
 		} catch (err) {
 			console.log(err);
+			throw new Error(err.message);
 		}
 	}
 

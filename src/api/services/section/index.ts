@@ -1,5 +1,8 @@
 // utils
-import { FetchResponseSection } from "../../../shared-types/section";
+import {
+	FetchResponseSections,
+	FetchResponseSection,
+} from "../../../shared-types/section";
 import CreateFetch from "../../../utils/createFetch";
 
 // configs
@@ -51,7 +54,7 @@ export default class SectionService {
 		return await CreateFetch.dispatch(`${url}/${id}`, options);
 	}
 
-	static async getAll(token: string) {
+	static async getAll(token: string): Promise<FetchResponseSections> {
 		const options = {
 			method: "GET",
 			headers: {

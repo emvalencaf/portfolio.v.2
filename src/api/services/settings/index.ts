@@ -1,7 +1,7 @@
 // types
 import {
+	FetchResponseAllSettings,
 	FetchResponseSettings,
-	Settings,
 } from "../../../shared-types/settings";
 
 // utils
@@ -34,7 +34,10 @@ export default class SettingsService {
 			},
 		};
 
-		return await CreateFetch.dispatch<Settings[]>(url, options);
+		return await CreateFetch.dispatch<FetchResponseAllSettings>(
+			url,
+			options
+		);
 	}
 
 	static async getById(id: string | string[], token: string) {
