@@ -76,7 +76,7 @@ const CardProject = ({
 			{showResume ? (
 				<Styled.ContentContainer>
 					<p>{resume}</p>
-					<Link href={`/project/${_id}`} passHref legacyBehavior>
+					<Link href={`/projects/${_id}`} passHref legacyBehavior>
 						<a target="_self" rel="internal">
 							<LinkIcon />
 							Veja os detalhes
