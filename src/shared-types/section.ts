@@ -16,18 +16,17 @@ export type FetchResponseSection = {
 };
 
 export type FetchResponseSections = {
-	sections: Section &
-		{
-			owner?: string;
-			techs?: Tech[];
-			ocupation?: string;
-			mainStack?: string[];
-			biosData?: BiosData;
-			workData?: WorkData;
-			educationData?: EducationData;
-			projects?: Project[];
-			urlDownload?: string;
-		}[];
+	sections: (Section & {
+		owner?: string;
+		techs?: Tech[];
+		ocupation?: string;
+		mainStack?: string[];
+		biosData?: BiosData;
+		workData?: WorkData;
+		educationData?: EducationData;
+		projects?: Project[];
+		urlDownload?: string;
+	})[];
 };
 
 export type Section = {

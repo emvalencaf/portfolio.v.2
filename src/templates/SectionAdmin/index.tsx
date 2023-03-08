@@ -10,12 +10,10 @@ import { Delete, Edit } from "@styled-icons/material-outlined";
 import * as Styled from "./styles";
 
 // types
-import { FetchResponseSection } from "../../shared-types/section";
-export type SectionAdminTemplateProps = {
-	sections: FetchResponseSection[];
-};
+import { FetchResponseSections } from "../../shared-types/section";
+export type SectionAdminTemplateProps = Pick<FetchResponseSections, "sections">;
 
-const SectionAdminTemplate = ({ sections = [] }: SectionAdminTemplateProps) => {
+const SectionAdminTemplate = ({ sections }: SectionAdminTemplateProps) => {
 	return (
 		<Styled.Wrapper>
 			<Heading as="h1" size="big">
