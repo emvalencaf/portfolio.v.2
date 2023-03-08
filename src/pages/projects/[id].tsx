@@ -1,7 +1,9 @@
+// hooks
+import { useRouter } from "next/router";
+import { useGetProject } from "../../hooks/useGetProject";
+
 // controllers
 import PortfolioController from "../../api/controller/portfolio";
-import ProjectController from "../../api/controller/project";
-
 // template
 import ProjectTemplate, { ProjectTemplateProps } from "../../templates/Project";
 
@@ -10,9 +12,24 @@ import { GetStaticPaths, GetStaticProps } from "next";
 
 export default function ProjectPage({
 	settings,
-	content,
-}: ProjectTemplateProps) {
-	return <ProjectTemplate settings={settings} content={content} />;
+}: Pick<ProjectTemplateProps, "settings">) {
+	// params
+	const router = useRouter();
+	const { id } = router.query;
+	// states
+	const {
+		project,
+		isLoading: isLoadingProject,
+		isError: isErrorProject,
+	} = useGetProject(id);
+
+	if (isLoadingProject) return <p>is loading...</p>;
+
+	if (isErrorProject) return <p>{isErrorProject.message}</p>;
+
+	if (!project) return <p> page not found it</p>;
+
+	return <ProjectTemplate settings={settings} content={project} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -22,19 +39,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	};
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-	const { id } = ctx.params;
+export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const responsePortfolio = await PortfolioController.get();
-		const responseProject = await ProjectController.getById(id);
 
 		const { portfolio } = responsePortfolio;
-		const { project } = responseProject;
 
 		return {
 			props: {
 				settings: portfolio.settings,
-				content: project,
 			},
 		};
 	} catch (err) {
