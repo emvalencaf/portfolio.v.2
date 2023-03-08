@@ -1,22 +1,38 @@
+// hooks
+import { useGetSection } from "../../../hooks/useGetSection";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+
 // components
 import PrivateComponent from "../../../components/PrivateComponent";
 
 // template
+import SectionEditionTemplate from "../../../templates/SectionEdition";
+
 // types
 import { privateServerSideProps } from "../../../utils/private-serverside-props";
+import { Session } from "../../../shared-types/session-nextauth";
 
 // utils
 import { GetServerSideProps } from "next";
-import SectionController from "../../../api/controller/section";
 
-import { Session } from "../../../shared-types/session-nextauth";
-import SectionEditionTemplate, {
-	SectionEditioTemplateProps,
-} from "../../../templates/SectionEdition";
+export default function EditionSettingsPage() {
+	// params
+	const router = useRouter();
+	const { id } = router.query;
+	// session
+	const { data } = useSession();
+	const session: Session = data;
+	// state
+	const { section, isLoading, isError } = useGetSection(
+		id,
+		session.accessToken
+	);
 
-export default function EditionSettingsPage({
-	section,
-}: SectionEditioTemplateProps) {
+	if (isLoading) return <p>Is loading...</p>;
+
+	if (isError) return <p>{isError.message}</p>;
+
 	return (
 		<PrivateComponent>
 			<SectionEditionTemplate section={section} />
@@ -25,23 +41,5 @@ export default function EditionSettingsPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	return privateServerSideProps(ctx, async (session: Session) => {
-		const { id } = ctx.params;
-		const section = await SectionController.getById(
-			id,
-			session.accessToken
-		);
-
-		if (!section)
-			return {
-				notFound: true,
-			};
-
-		return {
-			props: {
-				session,
-				section,
-			},
-		};
-	});
+	return privateServerSideProps(ctx);
 };

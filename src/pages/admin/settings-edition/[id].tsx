@@ -1,23 +1,38 @@
+// hooks
+import { useSession } from "next-auth/react";
+import { useGetSettings } from "../../../hooks/useGetSettings";
+import { useRouter } from "next/router";
+
 // components
 import PrivateComponent from "../../../components/PrivateComponent";
 
 // template
-import SettingsEditionTemplate, {
-	SettingsEditionTemplateProps,
-} from "../../../templates/SettingsEdition";
+import SettingsEditionTemplate from "../../../templates/SettingsEdition";
 
 // types
+import { Session } from "../../../shared-types/session-nextauth";
 import { privateServerSideProps } from "../../../utils/private-serverside-props";
 
 // utils
 import { GetServerSideProps } from "next";
-import SettingsController from "../../../api/controller/settings";
 
-import { Session } from "../../../shared-types/session-nextauth";
+export default function EditionSettingsPage() {
+	const router = useRouter();
+	const { id } = router.query;
+	// session data
+	const { data } = useSession();
+	const session: Session = data;
 
-export default function EditionSettingsPage({
-	settings,
-}: SettingsEditionTemplateProps) {
+	// states
+	const { settings, isLoading, isError } = useGetSettings(
+		id,
+		session.accessToken
+	);
+
+	if (isLoading) return <p>Is loading...</p>;
+
+	if (isError) return <p>{isError.message}</p>;
+
 	return (
 		<PrivateComponent>
 			<SettingsEditionTemplate settings={settings} />
@@ -26,25 +41,5 @@ export default function EditionSettingsPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	return privateServerSideProps(ctx, async (session: Session) => {
-		const { id } = ctx.params;
-		const response = await SettingsController.getById(
-			id,
-			session.accessToken
-		);
-
-		const { settings } = response;
-
-		if (!settings)
-			return {
-				notFound: true,
-			};
-
-		return {
-			props: {
-				session,
-				settings,
-			},
-		};
-	});
+	return privateServerSideProps(ctx);
 };

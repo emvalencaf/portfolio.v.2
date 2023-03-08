@@ -1,24 +1,36 @@
+// hooks
+import { useRouter } from "next/router";
+import { useGetProject } from "../../../hooks/useGetProject";
+
 // components
 import PrivateComponent from "../../../components/PrivateComponent";
 
-// controller
-import ProjectController from "../../../api/controller/project";
-
 // template
-import ProjectEditionTemplate, {
-	ProjectEditionTemplateProps,
-} from "../../../templates/ProjectEdition";
+import ProjectEditionTemplate from "../../../templates/ProjectEdition";
 
 // types
 import { privateServerSideProps } from "../../../utils/private-serverside-props";
-import { Session } from "../../../shared-types/session-nextauth";
 
 // utils
 import { GetServerSideProps } from "next";
 
-export default function EditionProjectPage({
-	project,
-}: ProjectEditionTemplateProps) {
+export default function EditionProjectPage() {
+	// params
+	const router = useRouter();
+	const { id } = router.query;
+	// states
+	const {
+		project,
+		isLoading: isLoadingProject,
+		isError: isErrorProject,
+	} = useGetProject(id);
+
+	if (isLoadingProject) return <p>is loading...</p>;
+
+	if (isErrorProject) return <p>{isErrorProject.message}</p>;
+
+	if (!project) return <p> page not found it</p>;
+
 	return (
 		<PrivateComponent>
 			<ProjectEditionTemplate project={project} />
@@ -27,22 +39,5 @@ export default function EditionProjectPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	return privateServerSideProps(ctx, async (session: Session) => {
-		const { id } = ctx.params;
-		const response = await ProjectController.getById(id);
-
-		const { project } = response;
-
-		if (!project)
-			return {
-				notFound: true,
-			};
-
-		return {
-			props: {
-				session,
-				project,
-			},
-		};
-	});
+	return privateServerSideProps(ctx);
 };

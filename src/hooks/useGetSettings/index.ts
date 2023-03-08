@@ -13,13 +13,14 @@ type ResponseUseGetAllSettings = {
 };
 
 export const useGetSettings = (
-	id: string | string[]
+	id: string | string[],
+	token: string
 ): ResponseUseGetAllSettings => {
 	// fetcher
 	const fetcher = SettingsController.getById;
 	// states
 	const { data, isLoading, error } = useSWR<FetchResponseSettings>(
-		id,
+		{ id, token },
 		fetcher
 	);
 	if (isLoading)
