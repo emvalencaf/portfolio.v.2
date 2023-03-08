@@ -15,25 +15,34 @@ import {
 	Typescript,
 } from "@styled-icons/boxicons-logos";
 import { Cplusplus, Csharp } from "@styled-icons/simple-icons";
+import { Photo } from "@styled-icons/material-outlined";
 
 // styles
 import * as Styled from "./styles";
 
 // types
-import { Project } from "../../shared-types/project";
 import { useEffect, useState } from "react";
 import DateStringFormating from "../../utils/dateString";
-export type ProjectTemplateProps = Project;
+export type ProjectTemplateProps = {
+	title?: string;
+	resume?: string;
+	srcImg?: string;
+	description?: string;
+	mainLang?: string;
+	owner?: string;
+	createdAt?: string | number;
+	updatedAt?: string | number;
+};
 
 const ProjectTemplate = ({
-	title,
-	resume,
-	srcImg,
-	description,
-	mainLang,
-	owner,
-	createdAt,
-	updatedAt,
+	title = "",
+	resume = "",
+	srcImg = "",
+	description = "",
+	mainLang = "",
+	owner = "",
+	createdAt = "",
+	updatedAt = "",
 }: ProjectTemplateProps) => {
 	// states
 	const [lastScrollYCoords, setLastScrollYCoords] = useState<number>(0);
@@ -87,7 +96,7 @@ const ProjectTemplate = ({
 							{title}
 						</Heading>
 						<Styled.ArticleMeta>
-							<span>{owner.name}</span>
+							<span>{owner}</span>
 							<span>
 								{DateStringFormating.getFullDateString(
 									createdAt
@@ -100,11 +109,17 @@ const ProjectTemplate = ({
 					<Styled.ArticleContent>
 						{srcImg && (
 							<Styled.PictureContainer>
-								<img
-									src={`${srcImg}`}
-									alt={`project picture`}
-								/>
-								<figcaption>screenshot do projeto</figcaption>
+								{srcImg ? (
+									<img
+										src={`${srcImg}`}
+										alt={`project picture`}
+									/>
+								) : (
+									<Photo />
+								)}
+								<figcaption>
+									Uma screenshot do projeto
+								</figcaption>
 							</Styled.PictureContainer>
 						)}
 						<HtmlComponent html={description} />
@@ -112,7 +127,7 @@ const ProjectTemplate = ({
 					{updatedAt && (
 						<Styled.ArticleFooter>
 							<p>
-								Last update at{" "}
+								Last update at
 								{DateStringFormating.getFullDateString(
 									updatedAt
 								)}

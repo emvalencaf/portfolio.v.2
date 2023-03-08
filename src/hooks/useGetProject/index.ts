@@ -34,6 +34,13 @@ export const useGetProject = (id: string | string[]): ResponseUseGetProject => {
 			isError: error,
 		};
 
+	if (!data)
+		return {
+			project: null,
+			isLoading: false,
+			isError: null,
+		};
+
 	return {
 		project: data.project,
 		isLoading,

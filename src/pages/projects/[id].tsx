@@ -1,11 +1,11 @@
-// template
-import NotFound from "../NotFound";
-import ProjectTemplate from "../../templates/Project";
+// hooks
+import { useRouter } from "next/router";
+import { useGetProject } from "../../hooks/useGetProject";
 
+// template
+import ProjectTemplate from "../../templates/Project";
 // types
 import { Project } from "../../shared-types/project";
-import { useGetProject } from "../../hooks/useGetProject";
-import { useRouter } from "next/router";
 
 export type ProjectPageProps = {
 	project: Project;
@@ -17,33 +17,12 @@ export default function ProjectPage() {
 	const { id } = router.query;
 
 	// states
-	const { project, isLoading } = useGetProject(id);
+	const { project, isLoading } = useGetProject(id ? id : null);
 
-	if (isLoading) return <p> is loading...</p>;
+	if (isLoading) return <p>Is loading...</p>;
 
-	if (!project) return <NotFound />;
-
-	return <ProjectTemplate {...project} />;
+	return <ProjectTemplate {...project} owner={project?.owner?.name} />;
 }
-/*
-export const getStaticProps: GetStaticProps = async (ctx) => {
-	try {
-		const { id } = ctx.params;
-		const { project } = await ProjectController.getById(id);
-
-		return {
-			props: {
-				fallback: {
-					[`${id}`]: project,
-				},
-			},
-		};
-	} catch (err) {
-		return {
-			notFound: true,
-		};
-	}
-};*/
 
 /*
 export default function ProjectPage({ project }: ProjectPageProps) {
