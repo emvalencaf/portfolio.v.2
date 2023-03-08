@@ -2,43 +2,35 @@
 import PrivateComponent from "../../components/PrivateComponent";
 
 // template
-import DashboardTemplate, { DashboardProps } from "../../templates/Dashboard";
+import DashboardTemplate from "../../templates/Dashboard";
 
 // type
 import { GetServerSideProps } from "next";
-import { Session } from "next-auth";
+// import { Session } from "next-auth";
 
 // utils
 import { privateServerSideProps } from "../../utils/private-serverside-props";
-import PortfolioController from "../../api/controller/portfolio";
+// import PortfolioController from "../../api/controller/portfolio";
+import { useGetPortfolio } from "../../hooks/useGetPortfolio";
 
-export default function DashboardPage({ sections = [] }: DashboardProps) {
+export default function DashboardPage() {
+	const {
+		portfolio,
+		isLoading: isLoadingPortfolio,
+		isError: isErrorPortfolio,
+	} = useGetPortfolio();
+
+	if (isLoadingPortfolio) return <p>is loading...</p>;
+
+	if (isErrorPortfolio) return <p>{isErrorPortfolio.message}</p>;
+
 	return (
 		<PrivateComponent>
-			<DashboardTemplate sections={sections} />
+			<DashboardTemplate sections={portfolio.content.sections} />
 		</PrivateComponent>
 	);
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	return privateServerSideProps(ctx, async (session: Session) => {
-		const response = await PortfolioController.get();
-
-		if (!response)
-			return {
-				props: null,
-				notFound: true,
-			};
-
-		const { portfolio } = response;
-
-		const { sections } = portfolio.content;
-		return {
-			props: {
-				session,
-				sections,
-			},
-			notFound: false,
-		};
-	});
+	return privateServerSideProps(ctx);
 };

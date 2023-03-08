@@ -1,13 +1,12 @@
-// controller
-import SectionController from "../../../api/controller/section";
+// hooks
+import { useGetAllSections } from "../../../hooks/useGetAllSections";
+import { useSession } from "next-auth/react";
 
 // components
 import PrivateComponent from "../../../components/PrivateComponent";
 
 // template
-import SectionAdminTemplate, {
-	SectionAdminTemplateProps,
-} from "../../../templates/SectionAdmin";
+import SectionAdminTemplate from "../../../templates/SectionAdmin";
 
 // type
 import { GetServerSideProps } from "next";
@@ -16,9 +15,19 @@ import { Session } from "../../../shared-types/session-nextauth";
 // utils
 import { privateServerSideProps } from "../../../utils/private-serverside-props";
 
-export default function ProjectAdminPage({
-	sections = [],
-}: SectionAdminTemplateProps) {
+export default function ProjectAdminPage() {
+	// session
+	const { data } = useSession();
+	const session: Session = data;
+	// states
+	const { sections, isLoading, isError } = useGetAllSections(
+		session.accessToken
+	);
+
+	if (isLoading) return <p>is loading...</p>;
+
+	if (isError) return <p>{isError.message}</p>;
+
 	return (
 		<PrivateComponent>
 			<SectionAdminTemplate sections={sections} />
@@ -27,19 +36,5 @@ export default function ProjectAdminPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	return privateServerSideProps(ctx, async (session: Session) => {
-		const sections = await SectionController.getAll(session.accessToken);
-		if (!sections)
-			return {
-				props: null,
-				notFound: true,
-			};
-		return {
-			props: {
-				session,
-				sections,
-			},
-			notFound: false,
-		};
-	});
+	return privateServerSideProps(ctx);
 };

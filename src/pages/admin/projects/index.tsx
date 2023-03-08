@@ -1,5 +1,5 @@
-// controller
-import ProjectController from "../../../api/controller/project";
+// hooks
+import { useGetAllProjects } from "../../../hooks/useGetAllProjects";
 
 // components
 import PrivateComponent from "../../../components/PrivateComponent";
@@ -8,17 +8,19 @@ import PrivateComponent from "../../../components/PrivateComponent";
 
 // type
 import { GetServerSideProps } from "next";
-import { Session } from "next-auth";
 
 // utils
 import { privateServerSideProps } from "../../../utils/private-serverside-props";
-import ProjectAdminTemplate, {
-	ProjectAdminTemplateProps,
-} from "../../../templates/ProjectAdmin";
+import ProjectAdminTemplate from "../../../templates/ProjectAdmin";
 
-export default function ProjectAdminPage({
-	projects = [],
-}: ProjectAdminTemplateProps) {
+export default function ProjectAdminPage() {
+	// states
+	const { projects, isLoading, isError } = useGetAllProjects();
+
+	if (isLoading) return <p>Is loading...</p>;
+
+	if (isError) return <p>{isError.message}</p>;
+
 	return (
 		<PrivateComponent>
 			<ProjectAdminTemplate projects={projects} />
@@ -27,22 +29,5 @@ export default function ProjectAdminPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	return privateServerSideProps(ctx, async (session: Session) => {
-		const response = await ProjectController.getAll();
-		const { projects } = response;
-
-		if (!projects)
-			return {
-				props: null,
-				notFound: true,
-			};
-
-		return {
-			props: {
-				session,
-				projects,
-			},
-			notFound: false,
-		};
-	});
+	return privateServerSideProps(ctx);
 };

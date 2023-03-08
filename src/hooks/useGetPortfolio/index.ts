@@ -16,7 +16,7 @@ export const useGetPortfolio = (): ResponseUseGetProject => {
 	const fetcher = PortfolioController.get;
 	// states
 	const { data, error, isLoading } = useSWR<FetchResponsePortfolio>(
-		"",
+		" ",
 		fetcher
 	);
 
