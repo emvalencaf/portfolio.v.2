@@ -1,5 +1,8 @@
-import dynamic from "next/dynamic";
+// component
+import ProjectForm from "../../components/ProjectForm";
 
+/*
+import dynamic from "next/dynamic";
 // hooks
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -24,14 +27,15 @@ import {
 } from "@styled-icons/material-outlined";
 
 // styles
-import * as Styled from "./styles";
-import { Session } from "../../shared-types/session-nextauth";
+// import * as Styled from "./styles";
+// import { Session } from "../../shared-types/session-nextauth";
 
 // types
-import ProjectController from "../../api/controller/project";
+// import ProjectController from "../../api/controller/project";
 import React from "react";
+import ProjectForm from "../../components/ProjectForm";
 
-// eslint-disable-next-line react/display-name
+/*
 const CreateProjectTemplate = React.forwardRef(() => {
 	// states
 	// session data
@@ -186,5 +190,9 @@ const CreateProjectTemplate = React.forwardRef(() => {
 		</Styled.Wrapper>
 	);
 });
+*/
+const CreateProjectTemplate = () => {
+	return <ProjectForm />;
+};
 
 export default CreateProjectTemplate;

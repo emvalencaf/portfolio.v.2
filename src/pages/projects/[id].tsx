@@ -1,53 +1,52 @@
-// hooks
-import { useRouter } from "next/router";
-import { useGetProject } from "../../hooks/useGetProject";
-
 // controllers
 import PortfolioController from "../../api/controller/portfolio";
+import ProjectController from "../../api/controller/project";
 // template
-import ProjectTemplate, { ProjectTemplateProps } from "../../templates/Project";
+import ProjectTemplate from "../../templates/Project";
 
 // types
 import { GetStaticPaths, GetStaticProps } from "next";
+import { Settings } from "../../shared-types/settings";
+import { Project } from "../../shared-types/project";
 
-export default function ProjectPage({
-	settings,
-}: Pick<ProjectTemplateProps, "settings">) {
-	// params
-	const router = useRouter();
-	const { id } = router.query;
-	// states
-	const {
-		project,
-		isLoading: isLoadingProject,
-		isError: isErrorProject,
-	} = useGetProject(id);
+type ProjectPageProps = {
+	settings: Settings;
+	project: Project;
+};
 
-	if (isLoadingProject) return <p>is loading...</p>;
-
-	if (isErrorProject) return <p>{isErrorProject.message}</p>;
-
-	if (!project) return <p> page not found it</p>;
-
+export default function ProjectPage({ settings, project }: ProjectPageProps) {
 	return <ProjectTemplate settings={settings} content={project} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+	const paths = [];
+
+	const responseProjects = await ProjectController.getAll();
+	const { projects } = responseProjects;
+
+	projects.forEach((project) => {
+		paths.push({ params: { id: project._id } });
+	});
+
 	return {
-		paths: [],
-		fallback: "blocking",
+		paths,
+		fallback: false,
 	};
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
+	const { id } = ctx.params;
+
 	try {
 		const responsePortfolio = await PortfolioController.get();
+		const responseProject = await ProjectController.getById(id);
 
 		const { portfolio } = responsePortfolio;
-
+		const { project } = responseProject;
 		return {
 			props: {
 				settings: portfolio.settings,
+				project: project,
 			},
 		};
 	} catch (err) {

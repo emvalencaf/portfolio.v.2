@@ -31,11 +31,12 @@ import { Session } from "../../shared-types/session-nextauth";
 // types
 import ProjectController from "../../api/controller/project";
 type ProjectFormProps = {
-	id: string;
-	titleProps: string;
-	resumeProps: string;
-	descriptionProps: string;
-	mainLangProps:
+	id?: string;
+	titleProps?: string;
+	resumeProps?: string;
+	descriptionProps?: string;
+	mainLangProps?:
+		| ""
 		| "javascript"
 		| "typescript"
 		| "html"
@@ -46,23 +47,23 @@ type ProjectFormProps = {
 		| "csharp"
 		| "php";
 	srcImgProps?: string;
-	urlDemoProps: string;
-	urlRepositoryProps: string;
-	typeForm: "update" | "create";
+	urlDemoProps?: string;
+	urlRepositoryProps?: string;
+	typeForm?: "update" | "create";
 };
 
 // eslint-disable-next-line react/display-name
 const ProjectForm = React.forwardRef(
 	({
-		id,
-		titleProps,
-		resumeProps,
-		descriptionProps,
-		mainLangProps,
-		srcImgProps,
-		urlDemoProps,
-		urlRepositoryProps,
-		typeForm,
+		id = "",
+		titleProps = "",
+		resumeProps = "",
+		descriptionProps = "",
+		mainLangProps = "",
+		srcImgProps = "",
+		urlDemoProps = "",
+		urlRepositoryProps = "",
+		typeForm = "create",
 	}: ProjectFormProps) => {
 		// states
 		// session data

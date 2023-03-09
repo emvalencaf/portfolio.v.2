@@ -38,8 +38,12 @@ import SectionController from "../../api/controller/section";
 import { Settings } from "../../shared-types/settings";
 import { Session } from "../../shared-types/session-nextauth";
 import Button from "../../components/Button";
-import { BiosData, CreateSectionData } from "../../shared-types/section";
+import { CreateSectionData } from "../../shared-types/section";
 import { Project } from "../../shared-types/project";
+
+export type SectionCreationTemplateProps = {
+	allSettings?: Settings[];
+};
 
 export type EducationObject = {
 	courseType: string;
@@ -78,81 +82,40 @@ type ProjectAttached = {
 	title: string;
 };
 
-// types
-export type SectionFormProps = {
-	allSettings?: Settings[];
-	id?: string;
-	typeSectionProps?: "home" | "about" | "skills" | "projects" | "other";
-	settingsIdProps?: string;
-	// home
-	ocupationProps?: string;
-	mainStackProps?: string[];
-	backgroundImgProps?: string;
-	// about
-	biosDataProps?: BiosData;
-	workDataProps?: WorkObject[];
-	educationDataProps?: EducationObject[];
-	urlDownloadProps?: string;
-	// tech
-	techsProps?: TechObject[];
-	// projects
-	projectsProps?: ProjectAttached[];
-	formType?: "create" | "update";
-	disabledSelectTypeSection?: boolean;
-	disabledSelectSettings?: boolean;
-};
-
-const SectionForm = ({
-	id = "",
+const SectionCreationTemplate = ({
 	allSettings = [],
-	typeSectionProps = undefined,
-	settingsIdProps = "",
-	// home section
-	ocupationProps = "",
-	backgroundImgProps = "",
-	mainStackProps = [],
-	// about section
-	biosDataProps,
-	workDataProps = [],
-	educationDataProps = [],
-	urlDownloadProps = "",
-	// projects section
-	projectsProps = [],
-	disabledSelectSettings = false,
-	disabledSelectTypeSection = false,
-	formType = "create",
-}: SectionFormProps) => {
+}: SectionCreationTemplateProps) => {
 	const { data } = useSession();
 	const session: Session = data;
 
 	// states
 	// base states to control what type of form it'll be choose by the client
-	const [selectedSettings, setSelectedSettings] = useState(settingsIdProps);
+	const [selectedSettings, setSelectedSettings] = useState("");
 	const [typeSection, setTypeSection] = useState<
 		"home" | "about" | "skills" | "projects" | "other" | undefined
-	>(typeSectionProps);
-	console.log("component id ", id);
+	>(undefined);
+
 	// form states
 	//home section
-	const [ocupation, setOcupation] = useState(ocupationProps);
-	const [mainStack, setMainStack] = useState(mainStackProps.join(" "));
+	const [ocupation, setOcupation] = useState("");
+	const [mainStack, setMainStack] = useState("");
 	const [backgroundImg, setBackgroundImg] = useState(null);
 	// about section
-	const [bios, setBios] = useState(biosDataProps ? biosDataProps.bios : "");
+	const [bios, setBios] = useState("");
 	const [picture, setPicture] = useState(null);
-	const [urlDownload, setUrlDownload] = useState(urlDownloadProps);
+	const [urlDownload, setUrlDownload] = useState("");
 	// education data
-	const [educationData, setEducationData] =
-		useState<EducationObject[]>(educationDataProps);
+	const [educationData, setEducationData] = useState<EducationObject[]>([]);
 	// work experience data
-	const [workData, setWorkData] = useState<WorkObject[]>(workDataProps);
+	const [workData, setWorkData] = useState<WorkObject[]>([]);
 	// project section
 	const [listSelectProjects, setListSelectProjects] = useState<
 		ProjectAttached[]
 	>([]);
 	const [selectedProject, setSelectedProject] = useState<string>("");
-	const [projectsAttached, setProjectsAttched] =
-		useState<ProjectAttached[]>(projectsProps);
+	const [projectsAttached, setProjectsAttched] = useState<ProjectAttached[]>(
+		[]
+	);
 	// skills section
 	const [techData, setTechData] = useState<TechObject[]>([]);
 
@@ -229,6 +192,21 @@ const SectionForm = ({
 				...prevState,
 				JSON.parse(selectedProject),
 			]);
+			/*
+			setProjectsAttched((prevState) => [...prevState, JSON.parse(selectedProject)]);
+			// filter the list of projects to exclude the project that already were selected
+			setFetchedProjects((prevState) => [...prevState.filter((fetchedProject) => {
+
+				let projectSelected: boolean;
+
+				projectsAttached.forEach((projectAttached) => {
+					if (projectAttached._id === fetchedProject._id) projectSelected = true;
+				});
+
+				if (projectSelected) console.log(`${fetchedProject.title} - ${fetchedProject._id} was exclude`);
+
+				return projectSelected? false: true;
+			})])*/
 		}
 	};
 
@@ -313,26 +291,17 @@ const SectionForm = ({
 			});
 		}
 
-		console.log("data in section form", data);
+		console.log(data);
 
 		const formData = new FormData(ref.current);
 
-		return formType === "create"
-			? await SectionController.create(
-					data,
-					formData,
-					session.accessToken,
-					typeSection,
-					selectedSettings
-			  )
-			: await SectionController.update(
-					id,
-					data,
-					formData,
-					session.accessToken,
-					typeSection,
-					selectedSettings
-			  );
+		return await SectionController.create(
+			data,
+			formData,
+			session.accessToken,
+			typeSection,
+			selectedSettings
+		);
 	};
 
 	// handleChange
@@ -397,7 +366,6 @@ const SectionForm = ({
 						placeholder="choose a portfolio"
 						value={selectedSettings}
 						onChange={(v) => setSelectedSettings(v)}
-						disabled={disabledSelectSettings}
 					>
 						{allSettings.length >= 1 &&
 							allSettings.map((settings) => (
@@ -417,7 +385,6 @@ const SectionForm = ({
 							onChange={(v) => {
 								setTypeSection(v);
 							}}
-							disabled={disabledSelectTypeSection}
 						>
 							<option value="home">home</option>
 							<option value="about">about</option>
@@ -452,7 +419,6 @@ const SectionForm = ({
 								onInputFile={(v) => setBackgroundImg(v)}
 								value={backgroundImg}
 								icon={<Wallpaper />}
-								previewImg={backgroundImgProps}
 							/>
 						</>
 					)}
@@ -482,8 +448,7 @@ const SectionForm = ({
 								value={picture}
 								onInputFile={(v) => setPicture(v)}
 								icon={<Photo />}
-								previewImg={biosDataProps.profilePhoto.srcImg}
-								required={formType === "create" ? true : false}
+								required={true}
 							/>
 							{educationData &&
 								educationData.length >= 1 &&
@@ -931,4 +896,4 @@ const SectionForm = ({
 	);
 };
 
-export default SectionForm;
+export default SectionCreationTemplate;
