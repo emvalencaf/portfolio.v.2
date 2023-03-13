@@ -117,7 +117,7 @@ export const HeaderCardContainer = styled.div`
 		width: 100%;
 		background-color: ${theme.colors.gray4};
 		border-radius: 2rem;
-		opacity: 0.7;
+		opacity: 0.9;
 		z-index: ${theme.layers.layer3};
 
 		& ${HeadingContainer} {
@@ -133,8 +133,9 @@ export const HeaderCardContainer = styled.div`
 			width: ${theme.fonts.sizes.medium};
 			transition: all ${theme.transitions.normal} ease-in-out;
 			margin: ${theme.spacings.small};
+			color: ${theme.colors.primary};
 			&:hover {
-				color: ${theme.colors.primary};
+				color: ${theme.colors.senary};
 			}
 		}
 

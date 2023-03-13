@@ -34,7 +34,7 @@ const TextInput = ({
 	required = false,
 }: TextInputProps) => {
 	// states
-	const [counter, setCounter] = useState(0);
+	const [counter, setCounter] = useState(value.length);
 
 	const inputRef = useRef(reference);
 
